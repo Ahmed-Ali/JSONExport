@@ -36,8 +36,15 @@ import Cocoa
 
 
 
-class ViewController: NSViewController, NSUserNotificationCenterDelegate {
+class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTableViewDelegate, NSTableViewDataSource, NSTextViewDelegate {
 
+    @IBOutlet weak var tableView: NSTableView!
+    
+    
+    @IBOutlet weak var statusTextField: NSTextField!
+    
+    @IBOutlet weak var saveButton: NSButton!
+    
     let preDefinedLanguages = [
         "Swift-Class"
     ]
@@ -47,7 +54,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate {
     
     var files : [FileRepresenter] = [FileRepresenter]()
     
-    @IBOutlet weak var indicator: NSProgressIndicator!
+    
     
     @IBOutlet var sourceText: NSTextView!
     
@@ -57,10 +64,49 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate {
     
     @IBOutlet weak var classNameField: NSTextFieldCell!
     
+    @IBOutlet weak var classPrefixField: NSTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        saveButton.enabled = false
         setPreDefinedData()
     }
+    
+    //MARK: - Handlind events
+    
+    @IBAction func toggleConstructors(sender: AnyObject)
+    {
+        
+        generateClasses()
+    }
+    
+    
+    
+    
+    @IBAction func toggleUtilities(sender: AnyObject)
+    {
+        generateClasses()
+    }
+    
+    @IBAction func rootClassNameChanged(sender: AnyObject) {
+        generateClasses()
+    }
+    
+    
+    @IBAction func classPrefixChanged(sender: AnyObject)
+    {
+        generateClasses()
+    }
+    
+    
+    //MARK: - NSTextDelegate
+    
+    func textDidChange(notification: NSNotification) {
+        generateClasses()
+    }
+    
+    
+
     
     //MARK: - Handling pre defined languages
     func setPreDefinedData()
@@ -131,7 +177,6 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate {
             }
         }
         
-       
         
         return langData
     }
@@ -147,47 +192,35 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate {
     //MARK: - Showing the open panel and save files
     @IBAction func saveFiles(sender: AnyObject)
     {
-        let str = sourceText.string! as NSString
-        let rootClassName = classNameField.stringValue
-        if countElements(rootClassName) == 0{
-            showError("Please enter the class name")
-            return
-        }
-        if str.length == 0{
-            showError("Please enter your JSON model data")
-            return
-        }
-        showSavePanel()
-    }
-
-    
-    func showSavePanel()
-    {
         let openPanel = NSOpenPanel()
         openPanel.allowsOtherFileTypes = false
         openPanel.treatsFilePackagesAsDirectories = false
         openPanel.canChooseFiles = false
         openPanel.canChooseDirectories = true
         openPanel.canCreateDirectories = true
+        openPanel.prompt = "Choose"
         openPanel.beginSheetModalForWindow(self.view.window!, completionHandler: { (button : Int) -> Void in
             if button == NSFileHandlingPanelOKButton{
-                self.indicator.startAnimation(nil)
-                self.generateClasses()
+                
+                //                self.generateClasses()
                 self.saveToPath(openPanel.URL!.path!)
-                self.indicator.stopAnimation(nil)
+                
                 self.showDoneSuccessfully()
             }
         })
     }
+
+    
     
     func saveToPath(path : String)
     {
         let fileManager = NSFileManager.defaultManager()
         var error : NSError?
-        let includeConstructs = generateConstructors.state == NSOnState
-        let includeUtilities = generateUtilityMethods.state == NSOnState
+        
         for file in files{
-            let fileContent = file.toString(includeConstructors: includeConstructs, includeUtilities: includeUtilities)
+//            file.includeConstructors = includeConstructs
+//            file.includeUtilities = includeUtilities
+            let fileContent = file.stringContent
             let filePath = "\(path)/\(file.className).\(selectedLang.fileExtension)"
             
             fileContent.writeToFile(filePath, atomically: false, encoding: NSUTF8StringEncoding, error: &error)
@@ -222,44 +255,74 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate {
         alert.runModal()
     }
     
-    func showError(errorMessage: String)
+    func showErrorStatus(errorMessage: String)
     {
-        let alert = NSAlert()
-        alert.addButtonWithTitle("Ok")
-        alert.messageText = "Error Occurred"
-        alert.informativeText = errorMessage
-        alert.alertStyle = NSAlertStyle.WarningAlertStyle
-        alert.runModal()
-        
+//        let alert = NSAlert()
+//        alert.addButtonWithTitle("Ok")
+//        alert.messageText = "Error Occurred"
+//        alert.informativeText = errorMessage
+//        alert.alertStyle = NSAlertStyle.WarningAlertStyle
+//        alert.runModal()
+        statusTextField.textColor = NSColor.redColor()
+        statusTextField.stringValue = errorMessage
     }
     
-    //MARK: - Generating files content
+    func showSuccessStatus(successMessage: String)
+    {
+        //        let alert = NSAlert()
+        //        alert.addButtonWithTitle("Ok")
+        //        alert.messageText = "Error Occurred"
+        //        alert.informativeText = errorMessage
+        //        alert.alertStyle = NSAlertStyle.WarningAlertStyle
+        //        alert.runModal()
+        statusTextField.textColor = NSColor.greenColor()
+        statusTextField.stringValue = successMessage
+    }
+    
+    //MARK: - Generate files content
     func generateClasses()
     {
+        saveButton.enabled = false
         let str = sourceText.string! as NSString
-        let rootClassName = classNameField.stringValue
+        var rootClassName = classNameField.stringValue
+        let prefix = classPrefixField.stringValue
+        if countElements(rootClassName) == 0{
+            rootClassName = "RootClass"
+        }
         
-        
+    
         if let data = str.dataUsingEncoding(NSUTF8StringEncoding){
             var error : NSError?
             if let json = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error: &error) as? [String : AnyObject]{
                 loadSelectedLanguageModel()
+                files.removeAll(keepCapacity: false)
                 addFileWithName(rootClassName, jsonObject:json)
-               
+                showSuccessStatus("Valid JSON structure")
+                saveButton.enabled = true
+                files = reverse(files)
+                tableView.reloadData()
             }else{
+                saveButton.enabled = false
                 if error != nil{
-                    showError(error!)
-                }else{
-                    showError("Error while parsing the json")
+                    println(error)
                 }
+                showErrorStatus("It seems your JSON object is not valid!")
+                
             }
         }
     }
     
     
     
-    func addFileWithName(className: String, jsonObject: NSDictionary){
+    func addFileWithName(var className: String, jsonObject: NSDictionary){
         var properties = [Property]()
+        let prefix = classPrefixField.stringValue
+        if countElements(prefix) > 0{
+            if !className.hasPrefix(prefix){
+                className = "\(prefix)\(className)"
+            }
+        }
+        
         var jsonProperties = sorted(jsonObject.allKeys as [String])
         
         for jsonPropertyName in jsonProperties{
@@ -298,7 +361,12 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate {
             
         }
         
-        files.append(FileRepresenter(className: className, properties: properties, lang:selectedLang))
+        let includeConstructs = generateConstructors.state == NSOnState
+        let includeUtilities = generateUtilityMethods.state == NSOnState
+        let file = FileRepresenter(className: className, properties: properties, lang:selectedLang)
+        file.includeUtilities = includeUtilities
+        file.includeConstructors = includeConstructs
+        files.append(file)
     }
     
     
@@ -333,9 +401,14 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate {
     
     
     func classNameForPropertyName(propertyName : String) -> String{
-        var swiftClassName = underscoresToCamelCaseForString(propertyName, startFromFirstChar: true)
-        
-        return swiftClassName.toSingular()
+        var swiftClassName = underscoresToCamelCaseForString(propertyName, startFromFirstChar: true).toSingular()
+        let prefix = classPrefixField.stringValue
+        if countElements(prefix) > 0{
+            if !swiftClassName.hasPrefix(prefix){
+                swiftClassName = "\(prefix)\(swiftClassName)"
+            }
+        }
+        return swiftClassName
     }
     
     func propertyTypeName(value : AnyObject) -> String
@@ -409,7 +482,22 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate {
     }
     
     
+    //MARK: - NSTableViewDataSource
+    func numberOfRowsInTableView(tableView: NSTableView) -> Int
+    {
+        return files.count
+    }
     
+    
+    //MARK: - NSTableViewDelegate
+    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView
+    {
+        let cell = tableView.makeViewWithIdentifier("fileCell", owner: self) as FilePreviewCell
+        let file = files[row]
+        cell.file = file
+        
+        return cell
+    }
    
 
 }

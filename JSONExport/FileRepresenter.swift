@@ -38,7 +38,8 @@ class FileRepresenter{
     var properties : [Property]
     var lang : LangModel
     var stringContent = ""
-    
+    var includeConstructors = true
+    var includeUtilities = true
     
     init(className: String, properties: [Property], lang: LangModel)
     {
@@ -47,7 +48,8 @@ class FileRepresenter{
         self.lang = lang
     }
     
-    func toString(#includeConstructors: Bool, includeUtilities: Bool) -> String{
+    func toString() -> String{
+        stringContent = ""
         appendCopyrights()
         if lang.staticImports != nil{
             stringContent += lang.staticImports
@@ -66,9 +68,6 @@ class FileRepresenter{
         if includeUtilities{
             appendUtilityMethods()
         }
-        
-        
-        
         stringContent += lang.modelEnd
         return stringContent
     }
