@@ -1,8 +1,13 @@
+//
+//	Constructor.swift
+//
+//	Create by Ahmed Ali on 10/11/2014
+//	Copyright (c) 2014 Mobile Developer. All rights reserved.
+//
+
 import Foundation
 
-
 class Constructor{
-
 
 	var bodyEnd : String!
 	var bodyStart : String!
@@ -11,6 +16,7 @@ class Constructor{
 	var fetchBasicTypePropertyFromMap : String!
 	var fetchCustomTypePropertyFromMap : String!
 	var signature : String!
+
 
 	/**
 	 * Instantiate the instance using the passed dictionary values to set the properties values

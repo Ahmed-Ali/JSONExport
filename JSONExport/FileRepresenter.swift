@@ -31,13 +31,13 @@
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import Foundation
-
+import AddressBook
 
 class FileRepresenter{
     var className : String
     var properties : [Property]
     var lang : LangModel
-    var str = ""
+    var stringContent = ""
     
     
     init(className: String, properties: [Property], lang: LangModel)
@@ -48,13 +48,14 @@ class FileRepresenter{
     }
     
     func toString(#includeConstructors: Bool, includeUtilities: Bool) -> String{
+        appendCopyrights()
         if lang.staticImports != nil{
-            str += lang.staticImports
-            str += "\n\n"
+            stringContent += lang.staticImports
+            stringContent += "\n"
         }
-        str += lang.modelDefinition.stringByReplacingOccurrencesOfString(modelName, withString: className)
+        stringContent += lang.modelDefinition.stringByReplacingOccurrencesOfString(modelName, withString: className)
         
-        str += "\(lang.modelStart)\n"
+        stringContent += "\(lang.modelStart)"
         
         appendCustomImports()
         appendProperties()
@@ -68,17 +69,42 @@ class FileRepresenter{
         
         
         
-        str += lang.modelEnd
-        return str
+        stringContent += lang.modelEnd
+        return stringContent
     }
     
-   
+    func appendCopyrights()
+    {
+        let book = ABAddressBook.sharedAddressBook()
+        let me : ABPerson = book.me()
+        stringContent += "//\n//\t\(className).\(lang.fileExtension)\n"
+        stringContent += "//\n//\tCreate by "
+        stringContent += me.valueForProperty(kABFirstNameProperty as String) as String
+        stringContent += " "
+        stringContent += me.valueForProperty(kABLastNameProperty as String) as String
+        stringContent += " on \(getTodayFormattedDay())\n//\tCopyright (c) \(getYear()) "
+        stringContent += me.valueForProperty(kABOrganizationProperty as String) as String
+        stringContent += ". All rights reserved.\n//\n\n"
+    }
+    
+    func getYear() -> String
+    {
+        return "\(NSCalendar.currentCalendar().component(.CalendarUnitYear, fromDate: NSDate()))"
+    }
+    
+    func getTodayFormattedDay() -> String
+    {
+        let components = NSCalendar.currentCalendar().components(.CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear, fromDate: NSDate())
+        return "\(components.day)/\(components.month)/\(components.year)"
+    }
+
+    
     func appendCustomImports()
     {
         if lang.importForEachCustomType != nil{
             for property in properties{
                 if property.isCustomClass{
-                    str += lang.importForEachCustomType.stringByReplacingOccurrencesOfString(modelName, withString: property.type)
+                    stringContent += lang.importForEachCustomType.stringByReplacingOccurrencesOfString(modelName, withString: property.type)
                 }
             }
         }
@@ -86,15 +112,15 @@ class FileRepresenter{
     
     func appendProperties()
     {
-        str += "\n"
+        stringContent += "\n"
         for property in properties{
-            str += property.stringPresentation()
+            stringContent += property.stringPresentation()
         }
     }
     
     func appendSettersAndGetters()
     {
-        str += "\n"
+        stringContent += "\n"
         for property in properties{
             let capVarName = property.nativeName.capitalizedString
             if lang.setter != nil{
@@ -103,7 +129,7 @@ class FileRepresenter{
                 set = set.stringByReplacingOccurrencesOfString(capitalizedVarName, withString: capVarName)
                 set = set.stringByReplacingOccurrencesOfString(varName, withString: property.nativeName)
                 set = set.stringByReplacingOccurrencesOfString(varType, withString: property.type)
-                str += set
+                stringContent += set
             }
             
             var get : String!
@@ -123,21 +149,21 @@ class FileRepresenter{
                 get = get.stringByReplacingOccurrencesOfString(capitalizedVarName, withString: capVarName)
                 get = get.stringByReplacingOccurrencesOfString(varName, withString: property.nativeName)
                 get = get.stringByReplacingOccurrencesOfString(varType, withString: property.type)
-                str += get
+                stringContent += get
             }
         }
     }
     
     func appendInitializers()
     {
-        str += "\n"
+        stringContent += "\n"
         for constructor in lang.constructors{
             if constructor.comment != nil{
-                str += constructor.comment
+                stringContent += constructor.comment
             }
             
-            str += constructor.signature
-            str += constructor.bodyStart
+            stringContent += constructor.signature
+            stringContent += constructor.bodyStart
             for property in properties{
                 var propertyStr = ""
                 if property.isCustomClass{
@@ -166,23 +192,23 @@ class FileRepresenter{
                 let capVarName = property.nativeName.capitalizedString
                 propertyStr = propertyStr.stringByReplacingOccurrencesOfString(capitalizedVarName, withString: capVarName)
                 
-                str += propertyStr
+                stringContent += propertyStr
             }
             
-            str += constructor.bodyEnd
+            stringContent += constructor.bodyEnd
         }
     }
     
     func appendUtilityMethods()
     {
-        str += "\n"
+        stringContent += "\n"
         for method in lang.utilityMethods{
             if method.comment != nil{
-                str += method.comment
+                stringContent += method.comment
             }
-            str += method.signature
-            str += method.bodyStart
-            str += method.body
+            stringContent += method.signature
+            stringContent += method.bodyStart
+            stringContent += method.body
             for property in properties{
                 var propertyHandlingStr = ""
                 if property.isArray{
@@ -202,10 +228,10 @@ class FileRepresenter{
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(varType, withString:property.type)
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(jsonKeyName, withString:property.jsonName)
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(additionalCustomTypeProperty, withString:"")
-                str += propertyHandlingStr
+                stringContent += propertyHandlingStr
             }
-            str += method.returnStatement
-            str += method.bodyEnd
+            stringContent += method.returnStatement
+            stringContent += method.bodyEnd
         }
         
         

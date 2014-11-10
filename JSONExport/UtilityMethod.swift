@@ -1,8 +1,13 @@
+//
+//	UtilityMethod.swift
+//
+//	Create by Ahmed Ali on 10/11/2014
+//	Copyright (c) 2014 Mobile Developer. All rights reserved.
+//
+
 import Foundation
 
-
 class UtilityMethod{
-
 
 	var additionalyForEachCustomTypeProperty : String!
 	var body : String!
@@ -13,6 +18,7 @@ class UtilityMethod{
 	var forEachProperty : String!
 	var returnStatement : String!
 	var signature : String!
+
 
 	/**
 	 * Instantiate the instance using the passed dictionary values to set the properties values

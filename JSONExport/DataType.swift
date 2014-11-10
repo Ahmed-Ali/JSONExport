@@ -1,8 +1,13 @@
+//
+//	DataType.swift
+//
+//	Create by Ahmed Ali on 10/11/2014
+//	Copyright (c) 2014 Mobile Developer. All rights reserved.
+//
+
 import Foundation
 
-
 class DataType{
-
 
 	var boolType : String!
 	var characterType : String!
@@ -11,6 +16,7 @@ class DataType{
 	var intType : String!
 	var longType : String!
 	var stringType : String!
+
 
 	/**
 	 * Instantiate the instance using the passed dictionary values to set the properties values
