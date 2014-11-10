@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E20A0DAD1A1170F1003B3D62 /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = E20A0DAA1A1170F1003B3D62 /* NoodleLineNumberMarker.m */; };
+		E20A0DAE1A1170F1003B3D62 /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = E20A0DAC1A1170F1003B3D62 /* NoodleLineNumberView.m */; };
 		E21292581A0C58CF0015027D /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21292571A0C58CF0015027D /* SharedConstants.swift */; };
 		E2197C5D1A0EAEB900549D03 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2197C5C1A0EAEB900549D03 /* StringExtension.swift */; };
 		E230BA2C1A113F8C00AE2054 /* FilePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E230BA2B1A113F8C00AE2054 /* FilePreviewCell.swift */; };
@@ -24,6 +26,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E20A0DA81A1170F1003B3D62 /* JSONExport-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JSONExport-Bridging-Header.h"; sourceTree = "<group>"; };
+		E20A0DA91A1170F1003B3D62 /* NoodleLineNumberMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberMarker.h; sourceTree = "<group>"; };
+		E20A0DAA1A1170F1003B3D62 /* NoodleLineNumberMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoodleLineNumberMarker.m; sourceTree = "<group>"; };
+		E20A0DAB1A1170F1003B3D62 /* NoodleLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberView.h; sourceTree = "<group>"; };
+		E20A0DAC1A1170F1003B3D62 /* NoodleLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoodleLineNumberView.m; sourceTree = "<group>"; };
 		E21292571A0C58CF0015027D /* SharedConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
 		E2197C5C1A0EAEB900549D03 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E230BA2B1A113F8C00AE2054 /* FilePreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePreviewCell.swift; sourceTree = "<group>"; };
@@ -53,6 +60,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E20A0DA41A117096003B3D62 /* File content generator */ = {
+			isa = PBXGroup;
+			children = (
+				E2FA87D71A05C16300648EB6 /* FileRepresenter.swift */,
+				E2FA87D91A05C1BE00648EB6 /* Property.swift */,
+				E21292571A0C58CF0015027D /* SharedConstants.swift */,
+			);
+			name = "File content generator";
+			sourceTree = "<group>";
+		};
+		E20A0DA51A1170B6003B3D62 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				E2197C5C1A0EAEB900549D03 /* StringExtension.swift */,
+				E230BA2B1A113F8C00AE2054 /* FilePreviewCell.swift */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
+		E20A0DA61A1170C3003B3D62 /* Third party libraries */ = {
+			isa = PBXGroup;
+			children = (
+				E20A0DA71A1170E0003B3D62 /* Noodle Line Number */,
+			);
+			name = "Third party libraries";
+			sourceTree = "<group>";
+		};
+		E20A0DA71A1170E0003B3D62 /* Noodle Line Number */ = {
+			isa = PBXGroup;
+			children = (
+				E20A0DA91A1170F1003B3D62 /* NoodleLineNumberMarker.h */,
+				E20A0DAA1A1170F1003B3D62 /* NoodleLineNumberMarker.m */,
+				E20A0DAB1A1170F1003B3D62 /* NoodleLineNumberView.h */,
+				E20A0DAC1A1170F1003B3D62 /* NoodleLineNumberView.m */,
+				E20A0DA81A1170F1003B3D62 /* JSONExport-Bridging-Header.h */,
+			);
+			name = "Noodle Line Number";
+			sourceTree = "<group>";
+		};
 		E2F07E8A1A0B3192004A1DAA /* Pre-supported languages */ = {
 			isa = PBXGroup;
 			children = (
@@ -91,15 +137,13 @@
 		E2FA87B71A059AC100648EB6 /* JSONExport */ = {
 			isa = PBXGroup;
 			children = (
+				E20A0DA61A1170C3003B3D62 /* Third party libraries */,
+				E20A0DA51A1170B6003B3D62 /* Misc */,
+				E20A0DA41A117096003B3D62 /* File content generator */,
 				E2F07E8F1A0B37F4004A1DAA /* Lang Data Models */,
 				E2F07E8A1A0B3192004A1DAA /* Pre-supported languages */,
 				E2FA87BA1A059AC100648EB6 /* AppDelegate.swift */,
 				E2FA87BC1A059AC100648EB6 /* ViewController.swift */,
-				E2FA87D71A05C16300648EB6 /* FileRepresenter.swift */,
-				E2FA87D91A05C1BE00648EB6 /* Property.swift */,
-				E21292571A0C58CF0015027D /* SharedConstants.swift */,
-				E2197C5C1A0EAEB900549D03 /* StringExtension.swift */,
-				E230BA2B1A113F8C00AE2054 /* FilePreviewCell.swift */,
 				E2FA87BE1A059AC100648EB6 /* Images.xcassets */,
 				E2FA87C01A059AC100648EB6 /* Main.storyboard */,
 				E2FA87B81A059AC100648EB6 /* Supporting Files */,
@@ -192,10 +236,12 @@
 				E27394C11A110213008E8254 /* Constructor.swift in Sources */,
 				E27394C21A110213008E8254 /* DataType.swift in Sources */,
 				E2FA87BB1A059AC100648EB6 /* AppDelegate.swift in Sources */,
+				E20A0DAE1A1170F1003B3D62 /* NoodleLineNumberView.m in Sources */,
 				E27394C41A110213008E8254 /* UtilityMethod.swift in Sources */,
 				E2FA87DA1A05C1BE00648EB6 /* Property.swift in Sources */,
 				E230BA2C1A113F8C00AE2054 /* FilePreviewCell.swift in Sources */,
 				E27394C31A110213008E8254 /* LangModel.swift in Sources */,
+				E20A0DAD1A1170F1003B3D62 /* NoodleLineNumberMarker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,10 +340,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = JSONExport/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "JSONExport/JSONExport-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -305,10 +354,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = JSONExport/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "JSONExport/JSONExport-Bridging-Header.h";
 			};
 			name = Release;
 		};

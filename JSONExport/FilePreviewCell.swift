@@ -13,12 +13,7 @@ class FilePreviewCell: NSTableCellView, NSTextViewDelegate {
     
     @IBOutlet weak var classNameLabel: NSTextFieldCell!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        if textView != nil{
-            textView.delegate = self
-        }
-    }
+    
     
     var file: FileRepresenter!{
         didSet{
@@ -45,6 +40,28 @@ class FilePreviewCell: NSTableCellView, NSTextViewDelegate {
     
     @IBOutlet weak var utilities: NSButton!
     @IBOutlet var textView: NSTextView!
+    
+    
+    @IBOutlet weak var scrollView: NSScrollView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        if textView != nil{
+            textView.delegate = self
+            setupNumberedTextView()
+        }
+    }
+    
+    func setupNumberedTextView()
+    {
+        let lineNumberView = NoodleLineNumberView(scrollView: scrollView)
+        scrollView.hasHorizontalRuler = false
+        scrollView.hasVerticalRuler = true
+        scrollView.verticalRulerView = lineNumberView
+        scrollView.rulersVisible = true
+        textView.font = NSFont.userFixedPitchFontOfSize(NSFont.smallSystemFontSize())
+        
+    }
     
     @IBAction func toggleConstructors(sender: NSButtonCell)
     {

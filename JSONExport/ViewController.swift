@@ -41,9 +41,21 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     @IBOutlet weak var tableView: NSTableView!
     
     
+    
     @IBOutlet weak var statusTextField: NSTextField!
     
     @IBOutlet weak var saveButton: NSButton!
+    @IBOutlet var sourceText: NSTextView!
+    
+    @IBOutlet weak var scrollView: NSScrollView!
+    @IBOutlet weak var generateConstructors: NSButtonCell!
+    
+    @IBOutlet weak var generateUtilityMethods: NSButtonCell!
+    
+    @IBOutlet weak var classNameField: NSTextFieldCell!
+    
+    @IBOutlet weak var classPrefixField: NSTextField!
+    
     
     let preDefinedLanguages = [
         "Swift-Class"
@@ -56,20 +68,24 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     
     
-    @IBOutlet var sourceText: NSTextView!
-    
-    @IBOutlet weak var generateConstructors: NSButtonCell!
-    
-    @IBOutlet weak var generateUtilityMethods: NSButtonCell!
-    
-    @IBOutlet weak var classNameField: NSTextFieldCell!
-    
-    @IBOutlet weak var classPrefixField: NSTextField!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         saveButton.enabled = false
         setPreDefinedData()
+        setupNumberedTextView()
+    }
+    
+    func setupNumberedTextView()
+    {
+        let lineNumberView = NoodleLineNumberView(scrollView: scrollView)
+        scrollView.hasHorizontalRuler = false
+        scrollView.hasVerticalRuler = true
+        scrollView.verticalRulerView = lineNumberView
+        scrollView.rulersVisible = true
+        sourceText.font = NSFont.userFixedPitchFontOfSize(NSFont.smallSystemFontSize())
+        
     }
     
     //MARK: - Handlind events
@@ -79,8 +95,6 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         
         generateClasses()
     }
-    
-    
     
     
     @IBAction func toggleUtilities(sender: AnyObject)
@@ -202,7 +216,6 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         openPanel.beginSheetModalForWindow(self.view.window!, completionHandler: { (button : Int) -> Void in
             if button == NSFileHandlingPanelOKButton{
                 
-                //                self.generateClasses()
                 self.saveToPath(openPanel.URL!.path!)
                 
                 self.showDoneSuccessfully()
@@ -218,8 +231,6 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         var error : NSError?
         
         for file in files{
-//            file.includeConstructors = includeConstructs
-//            file.includeUtilities = includeUtilities
             let fileContent = file.stringContent
             let filePath = "\(path)/\(file.className).\(selectedLang.fileExtension)"
             
@@ -240,8 +251,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         notification.informativeText = "Your \(selectedLang.langName) model files have been generated successfully."
         notification.identifier = "\(selectedLang.langName)Files"
         notification.deliveryDate = NSDate()
-//        NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
-        //scheduleNotification
+
         let center = NSUserNotificationCenter.defaultUserNotificationCenter()
         center.delegate = self
         center.deliverNotification(notification)
@@ -257,24 +267,14 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     func showErrorStatus(errorMessage: String)
     {
-//        let alert = NSAlert()
-//        alert.addButtonWithTitle("Ok")
-//        alert.messageText = "Error Occurred"
-//        alert.informativeText = errorMessage
-//        alert.alertStyle = NSAlertStyle.WarningAlertStyle
-//        alert.runModal()
+
         statusTextField.textColor = NSColor.redColor()
         statusTextField.stringValue = errorMessage
     }
     
     func showSuccessStatus(successMessage: String)
     {
-        //        let alert = NSAlert()
-        //        alert.addButtonWithTitle("Ok")
-        //        alert.messageText = "Error Occurred"
-        //        alert.informativeText = errorMessage
-        //        alert.alertStyle = NSAlertStyle.WarningAlertStyle
-        //        alert.runModal()
+        
         statusTextField.textColor = NSColor.greenColor()
         statusTextField.stringValue = successMessage
     }

@@ -854,6 +854,7 @@
                                                             <connections>
                                                                 <outlet property="classNameLabel" destination="beq-qg-Ubv" id="60n-PO-3HZ"/>
                                                                 <outlet property="constructors" destination="rVb-pV-yiX" id="Tcw-df-mqS"/>
+                                                                <outlet property="scrollView" destination="9bP-ub-2Qt" id="mEH-Og-vp3"/>
                                                                 <outlet property="textView" destination="CaK-6u-fNX" id="9O0-gE-2gI"/>
                                                                 <outlet property="utilities" destination="cxL-A9-zfY" id="Jdr-MI-rYf"/>
                                                             </connections>
@@ -890,7 +891,7 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="kMM-hs-pvU">
-                                <rect key="frame" x="674" y="343" width="42" height="17"/>
+                                <rect key="frame" x="712" y="343" width="4" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="z6q-uh-hCp">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -949,6 +950,7 @@
                         <outlet property="generateConstructors" destination="51T-Ee-Xao" id="h3s-fh-iVz"/>
                         <outlet property="generateUtilityMethods" destination="WVX-MK-qtI" id="Us8-ji-GW0"/>
                         <outlet property="saveButton" destination="JzR-I4-tfP" id="lnZ-uV-vx1"/>
+                        <outlet property="scrollView" destination="77U-Y7-rpY" id="wUm-Lz-RUg"/>
                         <outlet property="sourceText" destination="GOY-cO-0Ne" id="lHr-7P-KDN"/>
                         <outlet property="statusTextField" destination="kMM-hs-pvU" id="BcZ-Mp-Rhd"/>
                         <outlet property="tableView" destination="ae9-ko-B7k" id="QFz-bo-p47"/>
