@@ -1,6 +1,6 @@
 {
     "langName": "Swift",
-    "displayLangName": "Swift - Structures",
+    "displayLangName": "Swift - Classes",
     "fileExtension": "swift",
     "genericType": "AnyObject",
     "arrayType": "[<!ElementType!>]",
@@ -13,6 +13,7 @@
         "doubleType": "Double",
         "stringType": "String"
     },
+    "supportsFirstLineStatement" : "false",
     "staticImports": "import Foundation",
     "importForEachCustomType": "",
     "modelDefinition": "\nclass <!ModelName!>",

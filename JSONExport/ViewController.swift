@@ -58,7 +58,8 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     
     let preDefinedLanguages = [
-        "Swift-Class"
+        "Swift-Class",
+        "Android-Java"
     ]
     
 
@@ -161,7 +162,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     //MARK: - Language selection handling
     func loadSelectedLanguageModel()
     {
-        let selectedLanguage = "Swift-Class"
+        let selectedLanguage = "Android-Java"
         if let langData = langDataForLangName(selectedLanguage){
             selectedLang = LangModel(fromDictionary: langData)
         }
@@ -419,7 +420,13 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         }else if value is NSNumber{
             name = typeForNumber(value as NSNumber)
         }else if value is NSString{
-            name = selectedLang.dataTypes.stringType
+            let booleans : [String] = ["True", "true", "TRUE", "False", "false", "FALSE"]
+            if find(booleans, value as String) != nil{
+                name = selectedLang.dataTypes.boolType
+            }else{
+                name = selectedLang.dataTypes.stringType
+            }
+            
         }
         
         return name

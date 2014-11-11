@@ -51,15 +51,17 @@ class FileRepresenter{
     func toString() -> String{
         stringContent = ""
         appendCopyrights()
+        
         if lang.staticImports != nil{
             stringContent += lang.staticImports
             stringContent += "\n"
         }
+        appendCustomImports()
         stringContent += lang.modelDefinition.stringByReplacingOccurrencesOfString(modelName, withString: className)
         
         stringContent += "\(lang.modelStart)"
         
-        appendCustomImports()
+        
         appendProperties()
         appendSettersAndGetters()
         if includeConstructors{
@@ -189,12 +191,14 @@ class FileRepresenter{
                 propertyStr = propertyStr.stringByReplacingOccurrencesOfString(jsonKeyName, withString: property.jsonName)
                 propertyStr = propertyStr.stringByReplacingOccurrencesOfString(varType, withString: property.type)
                 let capVarName = property.nativeName.capitalizedString
+                let capVarType = property.type.capitalizedString;
                 propertyStr = propertyStr.stringByReplacingOccurrencesOfString(capitalizedVarName, withString: capVarName)
-                
+                propertyStr = propertyStr.stringByReplacingOccurrencesOfString(capitalizedVarType, withString: capVarType)
                 stringContent += propertyStr
             }
             
             stringContent += constructor.bodyEnd
+            stringContent = stringContent.stringByReplacingOccurrencesOfString(modelName, withString: className)
         }
     }
     

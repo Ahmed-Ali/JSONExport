@@ -27,7 +27,7 @@ class LangModel{
 	var staticImports : String!
 	var utilityMethods : [UtilityMethod]!
 	var wordsToRemoveToGetArrayElementsType : [String]!
-
+    var supportsFirstLineStatement : Bool!
 
 	/**
 	 * Instantiate the instance using the passed dictionary values to set the properties values
@@ -65,6 +65,7 @@ class LangModel{
 			}
 		}
 		wordsToRemoveToGetArrayElementsType = dictionary["wordsToRemoveToGetArrayElementsType"] as? [String]
+        supportsFirstLineStatement = dictionary["supportsFirstLineStatement"] as? Bool
 	}
 
 	/**
@@ -135,6 +136,9 @@ class LangModel{
 		if wordsToRemoveToGetArrayElementsType != nil{
 			dictionary["wordsToRemoveToGetArrayElementsType"] = wordsToRemoveToGetArrayElementsType
 		}
+        if supportsFirstLineStatement != nil{
+            dictionary["supportsFirstLineStatement"] = supportsFirstLineStatement
+        }
 		return dictionary
 	}
 
