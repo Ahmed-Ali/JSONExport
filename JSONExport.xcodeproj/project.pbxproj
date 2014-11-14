@@ -10,7 +10,7 @@
 		E20A0DAD1A1170F1003B3D62 /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = E20A0DAA1A1170F1003B3D62 /* NoodleLineNumberMarker.m */; };
 		E20A0DAE1A1170F1003B3D62 /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = E20A0DAC1A1170F1003B3D62 /* NoodleLineNumberView.m */; };
 		E21292581A0C58CF0015027D /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21292571A0C58CF0015027D /* SharedConstants.swift */; };
-		E2193D061A1292A200138A29 /* Android-Java.json in Resources */ = {isa = PBXBuildFile; fileRef = E2193D051A1292A200138A29 /* Android-Java.json */; };
+		E2193D061A1292A200138A29 /* Java-Android.json in Resources */ = {isa = PBXBuildFile; fileRef = E2193D051A1292A200138A29 /* Java-Android.json */; };
 		E2197C5D1A0EAEB900549D03 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2197C5C1A0EAEB900549D03 /* StringExtension.swift */; };
 		E230BA2C1A113F8C00AE2054 /* FilePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E230BA2B1A113F8C00AE2054 /* FilePreviewCell.swift */; };
 		E27394C11A110213008E8254 /* Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27394BD1A110213008E8254 /* Constructor.swift */; };
@@ -33,14 +33,14 @@
 		E20A0DAB1A1170F1003B3D62 /* NoodleLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberView.h; sourceTree = "<group>"; };
 		E20A0DAC1A1170F1003B3D62 /* NoodleLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoodleLineNumberView.m; sourceTree = "<group>"; };
 		E21292571A0C58CF0015027D /* SharedConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
-		E2193D051A1292A200138A29 /* Android-Java.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Android-Java.json"; sourceTree = "<group>"; };
+		E2193D051A1292A200138A29 /* Java-Android.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Java-Android.json"; path = "PredefinedLanguages/Java-Android.json"; sourceTree = "<group>"; };
 		E2197C5C1A0EAEB900549D03 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E230BA2B1A113F8C00AE2054 /* FilePreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePreviewCell.swift; sourceTree = "<group>"; };
 		E27394BD1A110213008E8254 /* Constructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constructor.swift; sourceTree = "<group>"; };
 		E27394BE1A110213008E8254 /* DataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
 		E27394BF1A110213008E8254 /* LangModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LangModel.swift; sourceTree = "<group>"; };
 		E27394C01A110213008E8254 /* UtilityMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityMethod.swift; sourceTree = "<group>"; };
-		E2F07E8B1A0B31C3004A1DAA /* Swift-Class.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Swift-Class.json"; sourceTree = "<group>"; };
+		E2F07E8B1A0B31C3004A1DAA /* Swift-Class.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-Class.json"; path = "PredefinedLanguages/Swift-Class.json"; sourceTree = "<group>"; };
 		E2FA87B51A059AC100648EB6 /* JSONExport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSONExport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2FA87B91A059AC100648EB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2FA87BA1A059AC100648EB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				E2F07E8B1A0B31C3004A1DAA /* Swift-Class.json */,
-				E2193D051A1292A200138A29 /* Android-Java.json */,
+				E2193D051A1292A200138A29 /* Java-Android.json */,
 			);
 			name = "Pre-supported languages";
 			sourceTree = "<group>";
@@ -222,7 +222,7 @@
 				E2FA87BF1A059AC100648EB6 /* Images.xcassets in Resources */,
 				E2F07E8C1A0B31C3004A1DAA /* Swift-Class.json in Resources */,
 				E2FA87C21A059AC100648EB6 /* Main.storyboard in Resources */,
-				E2193D061A1292A200138A29 /* Android-Java.json in Resources */,
+				E2193D061A1292A200138A29 /* Java-Android.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

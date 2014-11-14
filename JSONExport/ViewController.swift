@@ -34,7 +34,9 @@
 import Cocoa
 
 
-
+let supportedLanguagesKeyForUserDefaults = "supportedLangs"
+let langNameKey = "langName"
+let langContentKey = "langContent"
 
 class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTableViewDelegate, NSTableViewDataSource, NSTextViewDelegate {
 
@@ -57,16 +59,20 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     @IBOutlet weak var classPrefixField: NSTextField!
     
     
-    let preDefinedLanguages = [
-        "Swift-Class",
-        "Android-Java"
-    ]
+    @IBOutlet weak var firstLineField: NSTextField!
     
+   
 
     var selectedLang : LangModel!
+    var selectedLanguageName : String
+        {
+        return languagesPopup.titleOfSelectedItem!
+    }
+    var langs : [NSDictionary] = [NSDictionary]()
+    @IBOutlet weak var languagesPopup: NSPopUpButton!
+    
     
     var files : [FileRepresenter] = [FileRepresenter]()
-    
     
     
    
@@ -76,6 +82,22 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         saveButton.enabled = false
         setPreDefinedData()
         setupNumberedTextView()
+        setLanguagesSelection()
+        updateUIFieldsForSelectedLanguage()
+    }
+    
+    
+    func setLanguagesSelection()
+    {
+        langs = NSUserDefaults.standardUserDefaults().arrayForKey(supportedLanguagesKeyForUserDefaults) as [NSDictionary]
+        var langNames = [String]()
+        for lang in langs{
+            let langName = lang[langNameKey] as String
+            langNames.append(langName)
+        }
+        languagesPopup.removeAllItems()
+        languagesPopup.addItemsWithTitles(langNames)
+        
     }
     
     func setupNumberedTextView()
@@ -89,11 +111,64 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         
     }
     
+    func updateUIFieldsForSelectedLanguage()
+    {
+        loadSelectedLanguageModel()
+        if selectedLang.supportsFirstLineStatement != nil && selectedLang.supportsFirstLineStatement!.boolValue{
+            firstLineField.hidden = true
+            firstLineField.placeholderString = selectedLang.firstLineHint
+        }else{
+            firstLineField.hidden = true
+        }
+    }
+    
+    //MARK: - Handling pre defined languages
+    func setPreDefinedData()
+    {
+        if isFirstTypeTheAppRun(){
+            loadPreDefinedData()
+            markTheAppAsRunBefore()
+        }
+    }
+    
+    func isFirstTypeTheAppRun() -> Bool
+    {
+        return true//!NSUserDefaults.standardUserDefaults().boolForKey("appFirstRun")
+    }
+    
+    func markTheAppAsRunBefore()
+    {
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "appFirstRun")
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
+    
+    func loadPreDefinedData()
+    {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        var loadedLangs = [NSDictionary]()
+        if let langFiles = NSBundle.mainBundle().URLsForResourcesWithExtension("json", subdirectory: nil) as? [NSURL]{
+            for langFile in langFiles{
+                if let langContent = String(contentsOfURL: langFile, encoding: NSUTF8StringEncoding, error: nil){
+                    if let langDictionary = NSJSONSerialization.JSONObjectWithData(langContent.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!, options: .allZeros, error: nil) as? NSDictionary{
+                        let lang = LangModel(fromDictionary: langDictionary)
+                        langs.append([langNameKey : lang.displayLangName, langContentKey : langDictionary])
+                        println("successfully added lang: \(lang.displayLangName)")
+                    }
+                    
+                }
+                
+            }
+        }
+        
+        defaults.setObject(langs, forKey:supportedLanguagesKeyForUserDefaults)
+        defaults.synchronize()
+    }
+    
+    
     //MARK: - Handlind events
     
     @IBAction func toggleConstructors(sender: AnyObject)
     {
-        
         generateClasses()
     }
     
@@ -114,6 +189,15 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     }
     
     
+    @IBAction func selectedLanguageChanged(sender: AnyObject)
+    {
+        generateClasses();
+    }
+    
+    
+    @IBAction func firstLineChanged(sender: AnyObject) {
+    }
+    
     //MARK: - NSTextDelegate
     
     func textDidChange(notification: NSNotification) {
@@ -123,47 +207,13 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
 
     
-    //MARK: - Handling pre defined languages
-    func setPreDefinedData()
-    {
-        if isFirstTypeTheAppRun(){
-            loadPreDefinedData()
-            markTheAppAsRunBefore()
-        }
-    }
     
-    func isFirstTypeTheAppRun() -> Bool
-    {
-        return true //!NSUserDefaults.standardUserDefaults().boolForKey("appFirstRun")
-    }
-    
-    func markTheAppAsRunBefore()
-    {
-//        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "appFirstRun")
-//        NSUserDefaults.standardUserDefaults().synchronize()
-    }
-    
-    func loadPreDefinedData()
-    {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        var langs = [NSDictionary]()
-        for langName in preDefinedLanguages
-        {
-            let langFilePath = NSBundle.mainBundle().pathForResource(langName, ofType: "json")!
-            let langBody = NSString(contentsOfFile:langFilePath, encoding:NSUTF8StringEncoding, error:nil)
-            langs.append([langName : langBody!])
-        }
-        
-        defaults.setObject(langs, forKey:"supportedLangs")
-        defaults.synchronize()
-    }
     
     
     //MARK: - Language selection handling
     func loadSelectedLanguageModel()
     {
-        let selectedLanguage = "Android-Java"
-        if let langData = langDataForLangName(selectedLanguage){
+        if let langData = langDataForLangName(selectedLanguageName){
             selectedLang = LangModel(fromDictionary: langData)
         }
         
@@ -172,28 +222,19 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     func langDataForLangName(langName: String) -> NSDictionary?
     {
-        let langs = NSUserDefaults.standardUserDefaults().arrayForKey("supportedLangs") as [NSDictionary]
-        var langData : NSDictionary!
-        var langStr : String!
         for data in langs{
-            langStr = data[langName] as? String
-            if langStr != nil{
-                var error : NSError?
-                if let data = langStr.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true){
-                    langData = NSJSONSerialization.JSONObjectWithData(data, options:.allZeros, error: &error) as? NSDictionary
-                    if langData == nil{
-                        showError(error)
-                    }
-                    
-                    break;
+            let loadedLangName = data[langNameKey] as String
+            if loadedLangName == langName{
+                if let langData = data[langContentKey] as? NSDictionary{
+                    return langData
                 }
-
                
             }
+           
         }
         
         
-        return langData
+        return nil
     }
     
     
@@ -284,7 +325,11 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     func generateClasses()
     {
         saveButton.enabled = false
-        let str = sourceText.string! as NSString
+        let str = sourceText.string!
+        if countElements(str) == 0{
+            //Nothing to do
+            return;
+        }
         var rootClassName = classNameField.stringValue
         let prefix = classPrefixField.stringValue
         if countElements(rootClassName) == 0{
@@ -294,7 +339,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
         if let data = str.dataUsingEncoding(NSUTF8StringEncoding){
             var error : NSError?
-            if let json = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error: &error) as? [String : AnyObject]{
+            if let json = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error: &error) as? NSDictionary{
                 loadSelectedLanguageModel()
                 files.removeAll(keepCapacity: false)
                 addFileWithName(rootClassName, jsonObject:json)
@@ -337,7 +382,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
             var isDictionary = false
             var isArray = false
             
-            if value is NSDictionary{
+            if value is NSDictionary {
                 let leafClassName = classNameForPropertyName(jsonPropertyName)
                 addFileWithName(leafClassName, jsonObject: value as NSDictionary)
                 type = leafClassName
