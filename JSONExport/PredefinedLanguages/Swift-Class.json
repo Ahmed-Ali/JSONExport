@@ -1,11 +1,11 @@
 {
     "langName": "Swift",
     "displayLangName": "Swift - Class",
+    "briefDescription" : "Defines how your JSON objects can be mapped to Swift classes using the built-in NSJSONSerialization class",
     "fileExtension": "swift",
     "genericType": "AnyObject",
     "arrayType": "[<!ElementType!>]",
     "dataTypes": {
-        
         "intType" : "Int",
         "boolType": "Bool",
         "characterType": "Character",

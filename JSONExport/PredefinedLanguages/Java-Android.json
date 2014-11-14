@@ -1,6 +1,7 @@
 {
     "langName": "Java",
     "displayLangName": "Java for Android",
+    "briefDescription" : "Defines how your JSON objects can be mapped to Java classes using Android's org.json JSONObject.",
     "fileExtension": "java",
     "genericType": "Object",
     "arrayType": "<!ElementType!>[]",

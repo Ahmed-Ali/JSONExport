@@ -345,7 +345,10 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
             if let json = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error: &error) as? NSDictionary{
                 loadSelectedLanguageModel()
                 files.removeAll(keepCapacity: false)
-                addFileWithName(rootClassName, jsonObject:json)
+                let fileGenerator = prepareAndGetFileGenerator()
+                fileGenerator.addFileWithName(rootClassName, jsonObject: json, files: &files)
+                
+                
                 showSuccessStatus("Valid JSON structure")
                 saveButton.enabled = true
                 files = reverse(files)
@@ -361,185 +364,18 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         }
     }
     
-    
-    
-    func addFileWithName(var className: String, jsonObject: NSDictionary){
-        var properties = [Property]()
-        let prefix = classPrefixField.stringValue
-        if countElements(prefix) > 0{
-            if !className.hasPrefix(prefix){
-                className = "\(prefix)\(className)"
-            }
-        }
-        
-        var jsonProperties = sorted(jsonObject.allKeys as [String])
-        
-        for jsonPropertyName in jsonProperties{
-            
-            let swiftPropertyName = propertySwiftName(jsonPropertyName)
-            
-            let value : AnyObject = jsonObject[jsonPropertyName]!
-            
-            var type = propertyTypeName(value)
-            
-            var isDictionary = false
-            var isArray = false
-            
-            if value is NSDictionary {
-                let leafClassName = classNameForPropertyName(jsonPropertyName)
-                addFileWithName(leafClassName, jsonObject: value as NSDictionary)
-                type = leafClassName
-                properties.append(Property(jsonName: jsonPropertyName, nativeName: swiftPropertyName, type: type, isArray: false, isCustomClass: true, lang:selectedLang))
-            }else if value is NSArray{
-                //we need to check its elements...
-                let array = value as NSArray
-                if let dic = array.firstObject? as? NSDictionary{
-                    //wow complicated
-                    let leafClassName = classNameForPropertyName(jsonPropertyName)
-                    addFileWithName(leafClassName, jsonObject: dic)
-                    type = selectedLang.arrayType.stringByReplacingOccurrencesOfString(elementType, withString: leafClassName)
-                    
-                    properties.append(Property(jsonName: jsonPropertyName, nativeName: swiftPropertyName, type: type, isArray: true, isCustomClass: false, lang:selectedLang))
-                }else{
-                    properties.append(Property(jsonName: jsonPropertyName, nativeName: swiftPropertyName, type: type, isArray: true, isCustomClass: false, lang:selectedLang))
-                }
-            }else{
-                properties.append(Property(jsonName: jsonPropertyName, nativeName: swiftPropertyName, type: type, lang:selectedLang))
-            }
-            
-            
-        }
-        
-        let includeConstructs = generateConstructors.state == NSOnState
-        let includeUtilities = generateUtilityMethods.state == NSOnState
-        let file = FileRepresenter(className: className, properties: properties, lang:selectedLang)
-        file.includeUtilities = includeUtilities
-        file.includeConstructors = includeConstructs
-        if selectedLang.supportsFirstLineStatement != nil && selectedLang.supportsFirstLineStatement!{
-            file.firstLine = firstLineField.stringValue
-        }else{
-            file.firstLine = ""
-        }
-        files.append(file)
-    }
-    
-    
-    func propertySwiftName(jsonName : String) -> String
+    func prepareAndGetFileGenerator() -> FileGenerator
     {
-        return underscoresToCamelCaseForString(jsonName, startFromFirstChar: false)
-    }
-    
-    func underscoresToCamelCaseForString(input: String, startFromFirstChar: Bool) -> String
-    {
-        var str = input.stringByReplacingOccurrencesOfString(" ", withString: "")
-        
-        str = str.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        var output = ""
-        var makeNextCharUpperCase = startFromFirstChar
-        for char in input{
-            if char == "_" {
-                makeNextCharUpperCase = true
-            }else if makeNextCharUpperCase{
-                let upperChar = String(char).uppercaseString
-                output += upperChar
-                makeNextCharUpperCase = false
-            }else{
-                makeNextCharUpperCase = false
-                output += String(char)
-            }
-        }
-        
-        return output
+        let fileGenerator = FileGenerator.instance
+        fileGenerator.includeConstructs = (generateConstructors.state == NSOnState)
+        fileGenerator.includeUtilities = (generateUtilityMethods.state == NSOnState)
+        fileGenerator.firstLine = firstLineField.stringValue
+        fileGenerator.lang = selectedLang
+        fileGenerator.classPrefix = classPrefixField.stringValue
+        return fileGenerator
     }
     
     
-    
-    func classNameForPropertyName(propertyName : String) -> String{
-        var swiftClassName = underscoresToCamelCaseForString(propertyName, startFromFirstChar: true).toSingular()
-        let prefix = classPrefixField.stringValue
-        if countElements(prefix) > 0{
-            if !swiftClassName.hasPrefix(prefix){
-                swiftClassName = "\(prefix)\(swiftClassName)"
-            }
-        }
-        return swiftClassName
-    }
-    
-    func propertyTypeName(value : AnyObject) -> String
-    {
-        var name = ""
-        if value is NSArray{
-            name = typeNameForArrayElements(value as NSArray)
-        }else if value is NSNumber{
-            name = typeForNumber(value as NSNumber)
-        }else if value is NSString{
-            let booleans : [String] = ["True", "true", "TRUE", "False", "false", "FALSE"]
-            if find(booleans, value as String) != nil{
-                name = selectedLang.dataTypes.boolType
-            }else{
-                name = selectedLang.dataTypes.stringType
-            }
-            
-        }
-        
-        return name
-    }
-    
-    
-    func typeNameForArrayElements(elements: NSArray) -> String{
-        var typeName : String!
-        let genericType = selectedLang.arrayType.stringByReplacingOccurrencesOfString(elementType, withString: selectedLang.genericType)
-        if elements.count == 0{
-            typeName = genericType
-            
-        }
-        for element in elements{
-            let currElementTypeName = propertyTypeName(element)
-            
-            let arrayTypeName = selectedLang.arrayType.stringByReplacingOccurrencesOfString(elementType, withString: currElementTypeName)
-            
-            if typeName == nil{
-                typeName = arrayTypeName
-                
-            }else{
-                if typeName != arrayTypeName{
-                    typeName = genericType
-                    break
-                }
-            }
-        }
-        
-        return typeName
-    }
-    
-    
-    func typeForNumber(number : NSNumber) -> NSString
-    {
-        let numberType = CFNumberGetType(number as CFNumberRef)
-        
-        var typeName : String!
-        switch numberType{
-        case .CharType:
-            if (number.intValue == 0 || number.intValue == 1){
-                //it seems to be boolean
-                typeName = selectedLang.dataTypes.boolType
-            }else{
-                typeName = selectedLang.dataTypes.characterType
-            }
-        case .ShortType, .IntType:
-            typeName = selectedLang.dataTypes.intType
-        case .FloatType:
-            typeName = selectedLang.dataTypes.floatType
-        case .DoubleType:
-            typeName = selectedLang.dataTypes.doubleType
-        case .LongType, .LongLongType:
-            typeName = selectedLang.dataTypes.longType
-        default:
-            typeName = selectedLang.dataTypes.intType
-        }
-        
-        return typeName
-    }
     
     
     //MARK: - NSTableViewDataSource

@@ -79,16 +79,18 @@ class FileRepresenter{
     
     func appendCopyrights()
     {
-        let book = ABAddressBook.sharedAddressBook()
-        let me : ABPerson = book.me()
-        stringContent += "//\n//\t\(className).\(lang.fileExtension)\n"
-        stringContent += "//\n//\tCreate by "
-        stringContent += me.valueForProperty(kABFirstNameProperty as String) as String
-        stringContent += " "
-        stringContent += me.valueForProperty(kABLastNameProperty as String) as String
-        stringContent += " on \(getTodayFormattedDay())\n//\tCopyright (c) \(getYear()) "
-        stringContent += me.valueForProperty(kABOrganizationProperty as String) as String
-        stringContent += ". All rights reserved.\n//\n\n"
+        if let book = ABAddressBook.sharedAddressBook(){
+            let me : ABPerson = book.me()
+            stringContent += "//\n//\t\(className).\(lang.fileExtension)\n"
+            stringContent += "//\n//\tCreate by "
+            stringContent += me.valueForProperty(kABFirstNameProperty as String) as String
+            stringContent += " "
+            stringContent += me.valueForProperty(kABLastNameProperty as String) as String
+            stringContent += " on \(getTodayFormattedDay())\n//\tCopyright (c) \(getYear()) "
+            stringContent += me.valueForProperty(kABOrganizationProperty as String) as String
+            stringContent += ". All rights reserved.\n//\n\n"
+        }
+        
     }
     
     func getYear() -> String

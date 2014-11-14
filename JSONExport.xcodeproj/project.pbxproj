@@ -12,6 +12,7 @@
 		E21292581A0C58CF0015027D /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21292571A0C58CF0015027D /* SharedConstants.swift */; };
 		E2193D061A1292A200138A29 /* Java-Android.json in Resources */ = {isa = PBXBuildFile; fileRef = E2193D051A1292A200138A29 /* Java-Android.json */; };
 		E2197C5D1A0EAEB900549D03 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2197C5C1A0EAEB900549D03 /* StringExtension.swift */; };
+		E22BA2C51A162B54005CE143 /* FileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22BA2C41A162B54005CE143 /* FileGenerator.swift */; };
 		E230BA2C1A113F8C00AE2054 /* FilePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E230BA2B1A113F8C00AE2054 /* FilePreviewCell.swift */; };
 		E28631521A158CFA0041B178 /* Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286314E1A158CFA0041B178 /* Constructor.swift */; };
 		E28631531A158CFA0041B178 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286314F1A158CFA0041B178 /* DataType.swift */; };
@@ -35,6 +36,7 @@
 		E21292571A0C58CF0015027D /* SharedConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
 		E2193D051A1292A200138A29 /* Java-Android.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Java-Android.json"; path = "PredefinedLanguages/Java-Android.json"; sourceTree = "<group>"; };
 		E2197C5C1A0EAEB900549D03 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		E22BA2C41A162B54005CE143 /* FileGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileGenerator.swift; sourceTree = "<group>"; };
 		E230BA2B1A113F8C00AE2054 /* FilePreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePreviewCell.swift; sourceTree = "<group>"; };
 		E286314E1A158CFA0041B178 /* Constructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constructor.swift; sourceTree = "<group>"; };
 		E286314F1A158CFA0041B178 /* DataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				E2FA87D71A05C16300648EB6 /* FileRepresenter.swift */,
 				E2FA87D91A05C1BE00648EB6 /* Property.swift */,
 				E21292571A0C58CF0015027D /* SharedConstants.swift */,
+				E22BA2C41A162B54005CE143 /* FileGenerator.swift */,
 			);
 			name = "File content generators";
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E28631521A158CFA0041B178 /* Constructor.swift in Sources */,
+				E22BA2C51A162B54005CE143 /* FileGenerator.swift in Sources */,
 				E2FA87D81A05C16300648EB6 /* FileRepresenter.swift in Sources */,
 				E21292581A0C58CF0015027D /* SharedConstants.swift in Sources */,
 				E2197C5D1A0EAEB900549D03 /* StringExtension.swift in Sources */,

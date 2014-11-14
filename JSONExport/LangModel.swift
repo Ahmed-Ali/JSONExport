@@ -12,7 +12,8 @@ class LangModel{
 	var arrayType : String!
 	var basicTypesWithSpecialFetchingNeeds : [String]!
 	var booleanGetter : String!
-	var constructors : [Constructor]!
+    var briefDescription : String!
+    var constructors : [Constructor]!
 	var dataTypes : DataType!
 	var displayLangName : String!
 	var fileExtension : String!
@@ -30,7 +31,7 @@ class LangModel{
     var firstLineHint : String!
 	var utilityMethods : [UtilityMethod]!
 	var wordsToRemoveToGetArrayElementsType : [String]!
-
+    
 
 	/**
 	 * Instantiate the instance using the passed dictionary values to set the properties values
@@ -39,6 +40,7 @@ class LangModel{
 		arrayType = dictionary["arrayType"] as? String
 		basicTypesWithSpecialFetchingNeeds = dictionary["basicTypesWithSpecialFetchingNeeds"] as? [String]
 		booleanGetter = dictionary["booleanGetter"] as? String
+        briefDescription = dictionary["briefDescription"] as? String
 		constructors = [Constructor]()
 		if let constructorsArray = dictionary["constructors"] as? [NSDictionary]{
 			 for dic in constructorsArray{
@@ -88,6 +90,9 @@ class LangModel{
 		if booleanGetter != nil{
 			dictionary["booleanGetter"] = booleanGetter
 		}
+        if briefDescription != nil{
+            dictionary["briefDescription"] = briefDescription
+        }
 		if constructors != nil{
 			var dictionaryElements = [NSDictionary]()
 			for constructorsElement in constructors {
