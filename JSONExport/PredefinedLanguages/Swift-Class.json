@@ -13,11 +13,6 @@
         "longType": "Double",
         "doubleType": "Double",
         "stringType": "String"
-        "typesNeedSpecialFetchingMechanism" : [
-            "Int", "Bool", "Character", "Float", "Double"
-        ]
-        
-        
     },
     "supportsFirstLineStatement" : "false",
     "staticImports": "import Foundation",
@@ -34,6 +29,9 @@
                                             "[",
                                             "]"
                                             ],
+    "basicTypesWithSpecialFetchingNeeds" : [
+                                            "Int", "Bool", "Character", "Float", "Double"
+                                            ],
     "constructors": [
                      {
                      "comment": "\t/**\n\t * Instantiate the instance using the passed dictionary values to set the properties values\n\t */\n",
@@ -41,7 +39,7 @@
                      "bodyStart": "{\n",
                      "bodyEnd": "\t}\n",
                      "fetchBasicTypePropertyFromMap": "\t\t<!VarName!> = dictionary[\"<!JsonKeyName!>\"] as? <!VarType!>\n",
-                     "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\t<!VarName!> = (dictionary[\"<!JsonKeyName!>\"] as? NSString)?.<!LowerCaseVarType!>Value\n",
+                    "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\t<!VarName!> = (dictionary[\"<!JsonKeyName!>\"] as? NSString)?.<!LowerCaseVarType!>Value\n",
                      "fetchCustomTypePropertyFromMap": "\t\tif let <!VarName!>Data = dictionary[\"<!JsonKeyName!>\"] as? NSDictionary{\n\t\t\t\t<!VarName!> = <!VarType!>(fromDictionary: <!VarName!>Data)\n\t\t\t}\n",
                      "fetchArrayOfCustomTypePropertyFromMap": "\t\t<!VarName!> = <!VarType!>()\n\t\tif let <!VarName!>Array = dictionary[\"<!JsonKeyName!>\"] as? [NSDictionary]{\n\t\t\t for dic in <!VarName!>Array{\n\t\t\t\tlet value = <!ElementType!>(fromDictionary: dic)\n\t\t\t\t<!VarName!>.append(value)\n\t\t\t}\n\t\t}\n"
                      }

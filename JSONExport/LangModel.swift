@@ -29,7 +29,7 @@ class LangModel{
 	var wordsToRemoveToGetArrayElementsType : [String]!
     var supportsFirstLineStatement : Bool!
     var firstLineHint : String!
-    
+    var basicTypesWithSpecialFetchingNeeds : [String]!
     
 	/**
 	 * Instantiate the instance using the passed dictionary values to set the properties values
@@ -70,6 +70,8 @@ class LangModel{
         var s = dictionary["supportsFirstLineStatement"] as String
         supportsFirstLineStatement = (dictionary["supportsFirstLineStatement"] as? NSString)?.boolValue
         firstLineHint = dictionary["firstLineHint"] as? String
+        basicTypesWithSpecialFetchingNeeds = dictionary["basicTypesWithSpecialFetchingNeeds"] as? [String]
+        
 	}
 
 	/**
@@ -144,9 +146,16 @@ class LangModel{
             dictionary["supportsFirstLineStatement"] = supportsFirstLineStatement
         }
         
+        
+        
         if firstLineHint != nil{
             dictionary["firstLineHint"] = firstLineHint
         }
+        
+        if basicTypesWithSpecialFetchingNeeds != nil{
+            dictionary["basicTypesWithSpecialFetchingNeeds"] = basicTypesWithSpecialFetchingNeeds
+        }
+        
 		return dictionary
 	}
 

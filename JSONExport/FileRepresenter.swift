@@ -183,7 +183,16 @@ class FileRepresenter{
                         
                     }
                 }else {
-                    propertyStr = constructor.fetchBasicTypePropertyFromMap
+                    if lang.basicTypesWithSpecialFetchingNeeds != nil && find(lang.basicTypesWithSpecialFetchingNeeds, property.type) != nil{
+                        
+                        propertyStr = constructor.fetchBasicTypeWithSpecialNeedsPropertyFromMap
+                        let lowerCaseType = property.type.lowercaseString
+                        propertyStr = propertyStr.stringByReplacingOccurrencesOfString(lowerCaseVarType, withString: lowerCaseType)
+                        
+                    }else{
+                        propertyStr = constructor.fetchBasicTypePropertyFromMap
+                    }
+                    
                     
                 }
                 
