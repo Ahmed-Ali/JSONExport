@@ -1,7 +1,7 @@
 //
 //	LangModel.swift
 //
-//	Create by Ahmed Ali on 10/11/2014
+//	Create by Ahmed Ali on 14/11/2014
 //	Copyright (c) 2014 Mobile Developer. All rights reserved.
 //
 
@@ -10,6 +10,7 @@ import Foundation
 class LangModel{
 
 	var arrayType : String!
+	var basicTypesWithSpecialFetchingNeeds : [String]!
 	var booleanGetter : String!
 	var constructors : [Constructor]!
 	var dataTypes : DataType!
@@ -25,17 +26,18 @@ class LangModel{
 	var modelStart : String!
 	var setter : String!
 	var staticImports : String!
+	var supportsFirstLineStatement : Bool!
+    var firstLineHint : String!
 	var utilityMethods : [UtilityMethod]!
 	var wordsToRemoveToGetArrayElementsType : [String]!
-    var supportsFirstLineStatement : Bool!
-    var firstLineHint : String!
-    var basicTypesWithSpecialFetchingNeeds : [String]!
-    
+
+
 	/**
 	 * Instantiate the instance using the passed dictionary values to set the properties values
 	 */
 	init(fromDictionary dictionary: NSDictionary){
 		arrayType = dictionary["arrayType"] as? String
+		basicTypesWithSpecialFetchingNeeds = dictionary["basicTypesWithSpecialFetchingNeeds"] as? [String]
 		booleanGetter = dictionary["booleanGetter"] as? String
 		constructors = [Constructor]()
 		if let constructorsArray = dictionary["constructors"] as? [NSDictionary]{
@@ -59,6 +61,8 @@ class LangModel{
 		modelStart = dictionary["modelStart"] as? String
 		setter = dictionary["setter"] as? String
 		staticImports = dictionary["staticImports"] as? String
+		supportsFirstLineStatement = (dictionary["supportsFirstLineStatement"] as? NSString)?.boolValue
+        firstLineHint = dictionary["firstLineHint"] as? String
 		utilityMethods = [UtilityMethod]()
 		if let utilityMethodsArray = dictionary["utilityMethods"] as? [NSDictionary]{
 			 for dic in utilityMethodsArray{
@@ -67,11 +71,6 @@ class LangModel{
 			}
 		}
 		wordsToRemoveToGetArrayElementsType = dictionary["wordsToRemoveToGetArrayElementsType"] as? [String]
-        var s = dictionary["supportsFirstLineStatement"] as String
-        supportsFirstLineStatement = (dictionary["supportsFirstLineStatement"] as? NSString)?.boolValue
-        firstLineHint = dictionary["firstLineHint"] as? String
-        basicTypesWithSpecialFetchingNeeds = dictionary["basicTypesWithSpecialFetchingNeeds"] as? [String]
-        
 	}
 
 	/**
@@ -82,6 +81,9 @@ class LangModel{
 		var dictionary = NSMutableDictionary()
 		if arrayType != nil{
 			dictionary["arrayType"] = arrayType
+		}
+		if basicTypesWithSpecialFetchingNeeds != nil{
+			dictionary["basicTypesWithSpecialFetchingNeeds"] = basicTypesWithSpecialFetchingNeeds
 		}
 		if booleanGetter != nil{
 			dictionary["booleanGetter"] = booleanGetter
@@ -132,6 +134,12 @@ class LangModel{
 		if staticImports != nil{
 			dictionary["staticImports"] = staticImports
 		}
+		if supportsFirstLineStatement != nil{
+			dictionary["supportsFirstLineStatement"] = supportsFirstLineStatement
+		}
+        if firstLineHint != nil{
+            dictionary["firstLineHint"] = firstLineHint
+        }
 		if utilityMethods != nil{
 			var dictionaryElements = [NSDictionary]()
 			for utilityMethodsElement in utilityMethods {
@@ -142,20 +150,6 @@ class LangModel{
 		if wordsToRemoveToGetArrayElementsType != nil{
 			dictionary["wordsToRemoveToGetArrayElementsType"] = wordsToRemoveToGetArrayElementsType
 		}
-        if supportsFirstLineStatement != nil{
-            dictionary["supportsFirstLineStatement"] = supportsFirstLineStatement
-        }
-        
-        
-        
-        if firstLineHint != nil{
-            dictionary["firstLineHint"] = firstLineHint
-        }
-        
-        if basicTypesWithSpecialFetchingNeeds != nil{
-            dictionary["basicTypesWithSpecialFetchingNeeds"] = basicTypesWithSpecialFetchingNeeds
-        }
-        
 		return dictionary
 	}
 

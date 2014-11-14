@@ -13,10 +13,10 @@
 		E2193D061A1292A200138A29 /* Java-Android.json in Resources */ = {isa = PBXBuildFile; fileRef = E2193D051A1292A200138A29 /* Java-Android.json */; };
 		E2197C5D1A0EAEB900549D03 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2197C5C1A0EAEB900549D03 /* StringExtension.swift */; };
 		E230BA2C1A113F8C00AE2054 /* FilePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E230BA2B1A113F8C00AE2054 /* FilePreviewCell.swift */; };
-		E27394C11A110213008E8254 /* Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27394BD1A110213008E8254 /* Constructor.swift */; };
-		E27394C21A110213008E8254 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27394BE1A110213008E8254 /* DataType.swift */; };
-		E27394C31A110213008E8254 /* LangModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27394BF1A110213008E8254 /* LangModel.swift */; };
-		E27394C41A110213008E8254 /* UtilityMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27394C01A110213008E8254 /* UtilityMethod.swift */; };
+		E28631521A158CFA0041B178 /* Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286314E1A158CFA0041B178 /* Constructor.swift */; };
+		E28631531A158CFA0041B178 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286314F1A158CFA0041B178 /* DataType.swift */; };
+		E28631541A158CFA0041B178 /* LangModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28631501A158CFA0041B178 /* LangModel.swift */; };
+		E28631551A158CFA0041B178 /* UtilityMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28631511A158CFA0041B178 /* UtilityMethod.swift */; };
 		E2F07E8C1A0B31C3004A1DAA /* Swift-Class.json in Resources */ = {isa = PBXBuildFile; fileRef = E2F07E8B1A0B31C3004A1DAA /* Swift-Class.json */; };
 		E2FA87BB1A059AC100648EB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FA87BA1A059AC100648EB6 /* AppDelegate.swift */; };
 		E2FA87BD1A059AC100648EB6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FA87BC1A059AC100648EB6 /* ViewController.swift */; };
@@ -36,10 +36,10 @@
 		E2193D051A1292A200138A29 /* Java-Android.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Java-Android.json"; path = "PredefinedLanguages/Java-Android.json"; sourceTree = "<group>"; };
 		E2197C5C1A0EAEB900549D03 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E230BA2B1A113F8C00AE2054 /* FilePreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePreviewCell.swift; sourceTree = "<group>"; };
-		E27394BD1A110213008E8254 /* Constructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constructor.swift; sourceTree = "<group>"; };
-		E27394BE1A110213008E8254 /* DataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
-		E27394BF1A110213008E8254 /* LangModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LangModel.swift; sourceTree = "<group>"; };
-		E27394C01A110213008E8254 /* UtilityMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityMethod.swift; sourceTree = "<group>"; };
+		E286314E1A158CFA0041B178 /* Constructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constructor.swift; sourceTree = "<group>"; };
+		E286314F1A158CFA0041B178 /* DataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
+		E28631501A158CFA0041B178 /* LangModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LangModel.swift; sourceTree = "<group>"; };
+		E28631511A158CFA0041B178 /* UtilityMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityMethod.swift; sourceTree = "<group>"; };
 		E2F07E8B1A0B31C3004A1DAA /* Swift-Class.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-Class.json"; path = "PredefinedLanguages/Swift-Class.json"; sourceTree = "<group>"; };
 		E2FA87B51A059AC100648EB6 /* JSONExport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSONExport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2FA87B91A059AC100648EB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -113,10 +113,10 @@
 		E2F07E8F1A0B37F4004A1DAA /* Lang Data Models */ = {
 			isa = PBXGroup;
 			children = (
-				E27394BD1A110213008E8254 /* Constructor.swift */,
-				E27394BE1A110213008E8254 /* DataType.swift */,
-				E27394BF1A110213008E8254 /* LangModel.swift */,
-				E27394C01A110213008E8254 /* UtilityMethod.swift */,
+				E286314E1A158CFA0041B178 /* Constructor.swift */,
+				E286314F1A158CFA0041B178 /* DataType.swift */,
+				E28631501A158CFA0041B178 /* LangModel.swift */,
+				E28631511A158CFA0041B178 /* UtilityMethod.swift */,
 			);
 			name = "Lang Data Models";
 			sourceTree = "<group>";
@@ -233,18 +233,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E28631521A158CFA0041B178 /* Constructor.swift in Sources */,
 				E2FA87D81A05C16300648EB6 /* FileRepresenter.swift in Sources */,
 				E21292581A0C58CF0015027D /* SharedConstants.swift in Sources */,
 				E2197C5D1A0EAEB900549D03 /* StringExtension.swift in Sources */,
 				E2FA87BD1A059AC100648EB6 /* ViewController.swift in Sources */,
-				E27394C11A110213008E8254 /* Constructor.swift in Sources */,
-				E27394C21A110213008E8254 /* DataType.swift in Sources */,
+				E28631541A158CFA0041B178 /* LangModel.swift in Sources */,
+				E28631551A158CFA0041B178 /* UtilityMethod.swift in Sources */,
 				E2FA87BB1A059AC100648EB6 /* AppDelegate.swift in Sources */,
 				E20A0DAE1A1170F1003B3D62 /* NoodleLineNumberView.m in Sources */,
-				E27394C41A110213008E8254 /* UtilityMethod.swift in Sources */,
 				E2FA87DA1A05C1BE00648EB6 /* Property.swift in Sources */,
 				E230BA2C1A113F8C00AE2054 /* FilePreviewCell.swift in Sources */,
-				E27394C31A110213008E8254 /* LangModel.swift in Sources */,
+				E28631531A158CFA0041B178 /* DataType.swift in Sources */,
 				E20A0DAD1A1170F1003B3D62 /* NoodleLineNumberMarker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

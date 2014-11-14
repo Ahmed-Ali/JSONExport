@@ -40,7 +40,7 @@ class FileRepresenter{
     var stringContent = ""
     var includeConstructors = true
     var includeUtilities = true
-    
+    var firstLine = ""
     init(className: String, properties: [Property], lang: LangModel)
     {
         self.className = className
@@ -50,6 +50,9 @@ class FileRepresenter{
     
     func toString() -> String{
         stringContent = ""
+        if lang.supportsFirstLineStatement != nil && lang.supportsFirstLineStatement! && countElements(firstLine) > 0{
+            stringContent += "\(firstLine)\n\n"
+        }
         appendCopyrights()
         
         if lang.staticImports != nil{

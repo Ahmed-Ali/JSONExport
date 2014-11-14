@@ -115,7 +115,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     {
         loadSelectedLanguageModel()
         if selectedLang.supportsFirstLineStatement != nil && selectedLang.supportsFirstLineStatement!.boolValue{
-            firstLineField.hidden = true
+            firstLineField.hidden = false
             firstLineField.placeholderString = selectedLang.firstLineHint
         }else{
             firstLineField.hidden = true
@@ -191,11 +191,14 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     @IBAction func selectedLanguageChanged(sender: AnyObject)
     {
+        updateUIFieldsForSelectedLanguage()
         generateClasses();
     }
     
     
-    @IBAction func firstLineChanged(sender: AnyObject) {
+    @IBAction func firstLineChanged(sender: AnyObject)
+    {
+        generateClasses()
     }
     
     //MARK: - NSTextDelegate
@@ -412,6 +415,11 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         let file = FileRepresenter(className: className, properties: properties, lang:selectedLang)
         file.includeUtilities = includeUtilities
         file.includeConstructors = includeConstructs
+        if selectedLang.supportsFirstLineStatement != nil && selectedLang.supportsFirstLineStatement!{
+            file.firstLine = firstLineField.stringValue
+        }else{
+            file.firstLine = ""
+        }
         files.append(file)
     }
     

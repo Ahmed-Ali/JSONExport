@@ -1,7 +1,7 @@
 //
 //	UtilityMethod.swift
 //
-//	Create by Ahmed Ali on 10/11/2014
+//	Create by Ahmed Ali on 14/11/2014
 //	Copyright (c) 2014 Mobile Developer. All rights reserved.
 //
 
