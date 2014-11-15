@@ -170,6 +170,7 @@ class FileRepresenter{
             
             stringContent += constructor.signature
             stringContent += constructor.bodyStart
+            
             for property in properties{
                 var propertyStr = ""
                 if property.isCustomClass{
@@ -178,21 +179,47 @@ class FileRepresenter{
                     
                 }else if property.isArray{
                     if(propertyTypeIsBasicType(property)){
-                        propertyStr = constructor.fetchBasicTypePropertyFromMap
+                        
+                        if constructor.fetchArrayOfBasicTypePropertyFromMap != nil{
+                            let type = elementTypeNameFromArrayProperty(property.type)
+                            let index = find(lang.basicTypesWithSpecialFetchingNeeds, type)
+                            if index != nil{
+                                propertyStr = constructor.fetchArrayOfBasicTypePropertyFromMap
+                                let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements[index!]
+                                    propertyStr = propertyStr.stringByReplacingOccurrencesOfString(varTypeReplacement, withString: replacement)
+                                
+                                
+                            }else{
+                                propertyStr = constructor.fetchBasicTypePropertyFromMap
+                            }
+                        }else{
+                            propertyStr = constructor.fetchBasicTypePropertyFromMap
+                        }
+                        
                     }else{
                         //array of custom type
                         propertyStr = constructor.fetchArrayOfCustomTypePropertyFromMap
                         let perpertyElementType = elementTypeNameFromArrayProperty(property.type)
                         propertyStr = propertyStr.stringByReplacingOccurrencesOfString(elementType, withString: perpertyElementType)
                         
-                        
                     }
+                    
                 }else {
-                    if lang.basicTypesWithSpecialFetchingNeeds != nil && find(lang.basicTypesWithSpecialFetchingNeeds, property.type) != nil{
-                        
-                        propertyStr = constructor.fetchBasicTypeWithSpecialNeedsPropertyFromMap
-                        let lowerCaseType = property.type.lowercaseString
-                        propertyStr = propertyStr.stringByReplacingOccurrencesOfString(lowerCaseVarType, withString: lowerCaseType)
+                    
+                    if lang.basicTypesWithSpecialFetchingNeeds != nil{
+                        let index = find(lang.basicTypesWithSpecialFetchingNeeds, property.type)
+                        if index != nil{
+                            propertyStr = constructor.fetchBasicTypeWithSpecialNeedsPropertyFromMap
+                            if let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements?[index!]{
+                                propertyStr = propertyStr.stringByReplacingOccurrencesOfString(varTypeReplacement, withString: replacement)
+                            }
+                            
+                            let lowerCaseType = property.type.lowercaseString
+                            propertyStr = propertyStr.stringByReplacingOccurrencesOfString(lowerCaseVarType, withString: lowerCaseType)
+                            
+                        }else{
+                            propertyStr = constructor.fetchBasicTypePropertyFromMap
+                        }
                         
                     }else{
                         propertyStr = constructor.fetchBasicTypePropertyFromMap

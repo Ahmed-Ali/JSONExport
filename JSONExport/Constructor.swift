@@ -13,6 +13,7 @@ class Constructor{
 	var bodyStart : String!
 	var comment : String!
 	var fetchArrayOfCustomTypePropertyFromMap : String!
+    var fetchArrayOfBasicTypePropertyFromMap : String!
 	var fetchBasicTypePropertyFromMap : String!
 	var fetchBasicTypeWithSpecialNeedsPropertyFromMap : String!
 	var fetchCustomTypePropertyFromMap : String!
@@ -27,6 +28,7 @@ class Constructor{
 		bodyStart = dictionary["bodyStart"] as? String
 		comment = dictionary["comment"] as? String
 		fetchArrayOfCustomTypePropertyFromMap = dictionary["fetchArrayOfCustomTypePropertyFromMap"] as? String
+        fetchArrayOfBasicTypePropertyFromMap = dictionary["fetchArrayOfBasicTypePropertyFromMap"] as? String
 		fetchBasicTypePropertyFromMap = dictionary["fetchBasicTypePropertyFromMap"] as? String
 		fetchBasicTypeWithSpecialNeedsPropertyFromMap = dictionary["fetchBasicTypeWithSpecialNeedsPropertyFromMap"] as? String
 		fetchCustomTypePropertyFromMap = dictionary["fetchCustomTypePropertyFromMap"] as? String
@@ -51,6 +53,9 @@ class Constructor{
 		if fetchArrayOfCustomTypePropertyFromMap != nil{
 			dictionary["fetchArrayOfCustomTypePropertyFromMap"] = fetchArrayOfCustomTypePropertyFromMap
 		}
+        if fetchArrayOfBasicTypePropertyFromMap != nil{
+            dictionary["fetchArrayOfBasicTypePropertyFromMap"] = fetchArrayOfBasicTypePropertyFromMap
+        }
 		if fetchBasicTypePropertyFromMap != nil{
 			dictionary["fetchBasicTypePropertyFromMap"] = fetchBasicTypePropertyFromMap
 		}

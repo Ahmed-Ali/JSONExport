@@ -1,7 +1,7 @@
 {
     "langName": "Swift",
-    "displayLangName": "Swift - Class",
-    "briefDescription" : "Defines how your JSON objects can be mapped to Swift classes using the built-in NSJSONSerialization class",
+    "displayLangName": "SwiftyJSON - Class",
+    "briefDescription" : "Defines how your JSON objects can be mapped to Swift classes using the SwiftyJSON library",
     "fileExtension": "swift",
     "genericType": "AnyObject",
     "arrayType": "[<!ElementType!>]",
@@ -30,18 +30,22 @@
                                             "]"
                                             ],
     "basicTypesWithSpecialFetchingNeeds" : [
-                                            "Int", "Bool", "Character", "Float", "Double"
+                                            "Int", "Bool", "Character", "Float", "Double", "String"
+                                            ],
+    "basicTypesWithSpecialFetchingNeedsReplacements" : [
+                                            "integerValue", "boolValue", "charValue", "floatValue", "doubleValue", "stringValue"
                                             ],
     "constructors": [
                      {
-                     "comment": "\t/**\n\t * Instantiate the instance using the passed dictionary values to set the properties values\n\t */\n",
-                     "signature": "\tinit(fromDictionary dictionary: NSDictionary)",
-                     "bodyStart": "{\n",
+                     "comment": "\t/**\n\t * Instantiate the instance using the passed json values to set the properties values\n\t */\n",
+                     "signature": "\tinit(fromJson json: JSON!)",
+                     "bodyStart": "{\n\t\tif json == nil{\n\t\t\treturn\n\t\t}\n",
                      "bodyEnd": "\t}\n",
-                     "fetchBasicTypePropertyFromMap": "\t\t<!VarName!> = dictionary[\"<!JsonKeyName!>\"] as? <!VarType!>\n",
-                    "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\t<!VarName!> = (dictionary[\"<!JsonKeyName!>\"] as? NSString)?.<!LowerCaseVarType!>Value\n",
-                     "fetchCustomTypePropertyFromMap": "\t\tif let <!VarName!>Data = dictionary[\"<!JsonKeyName!>\"] as? NSDictionary{\n\t\t\t<!VarName!> = <!VarType!>(fromDictionary: <!VarName!>Data)\n\t\t}\n",
-                     "fetchArrayOfCustomTypePropertyFromMap": "\t\t<!VarName!> = <!VarType!>()\n\t\tif let <!VarName!>Array = dictionary[\"<!JsonKeyName!>\"] as? [NSDictionary]{\n\t\t\t for dic in <!VarName!>Array{\n\t\t\t\tlet value = <!ElementType!>(fromDictionary: dic)\n\t\t\t\t<!VarName!>.append(value)\n\t\t\t}\n\t\t}\n"
+                     "fetchBasicTypePropertyFromMap": "",
+                     "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\t<!VarName!> = json[\"<!JsonKeyName!>\"].<!VarBasicTypeReplacement!>\n",
+                     "fetchCustomTypePropertyFromMap": "\t\tlet <!VarName!>Json = json[\"<!JsonKeyName!>\"]\n\t\tif <!VarName!>Json != JSON.Null(nil){\n\t\t\t<!VarName!> = <!VarType!>(fromJson: <!VarName!>Json)\n\t\t}\n",
+                     "fetchArrayOfCustomTypePropertyFromMap": "\t\t<!VarName!> = <!VarType!>()\n\t\tif let <!VarName!>Array = json[\"<!JsonKeyName!>\"].arrayValue{\n\t\t\t for <!VarName!>Json in <!VarName!>Array{\n\t\t\t\tlet value = <!ElementType!>(fromJson: <!VarName!>Json)\n\t\t\t\t<!VarName!>.append(value)\n\t\t\t}\n\t\t}\n",
+                     "fetchArrayOfBasicTypePropertyFromMap": "\t\t<!VarName!> = <!VarType!>()\n\t\tif let <!VarName!>Array = json[\"<!JsonKeyName!>\"].arrayValue{\n\t\t\t for <!VarName!>Json in <!VarName!>Array{\n\t\t\t\tif let <!VarName!>Value = <!VarName!>Json.<!VarBasicTypeReplacement!>{\n\t\t\t\t\t<!VarName!>.append(<!VarName!>Value)\n\t\t\t\t}\n\t\t\t}\n\t\t}\n"
                      }
                      ],
     "utilityMethods": [

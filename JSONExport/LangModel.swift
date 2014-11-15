@@ -11,6 +11,7 @@ class LangModel{
 
 	var arrayType : String!
 	var basicTypesWithSpecialFetchingNeeds : [String]!
+    var basicTypesWithSpecialFetchingNeedsReplacements : [String]!
 	var booleanGetter : String!
     var briefDescription : String!
     var constructors : [Constructor]!
@@ -39,6 +40,7 @@ class LangModel{
 	init(fromDictionary dictionary: NSDictionary){
 		arrayType = dictionary["arrayType"] as? String
 		basicTypesWithSpecialFetchingNeeds = dictionary["basicTypesWithSpecialFetchingNeeds"] as? [String]
+        basicTypesWithSpecialFetchingNeedsReplacements = dictionary["basicTypesWithSpecialFetchingNeedsReplacements"] as? [String]
 		booleanGetter = dictionary["booleanGetter"] as? String
         briefDescription = dictionary["briefDescription"] as? String
 		constructors = [Constructor]()
@@ -87,6 +89,9 @@ class LangModel{
 		if basicTypesWithSpecialFetchingNeeds != nil{
 			dictionary["basicTypesWithSpecialFetchingNeeds"] = basicTypesWithSpecialFetchingNeeds
 		}
+        if basicTypesWithSpecialFetchingNeedsReplacements != nil{
+            dictionary["basicTypesWithSpecialFetchingNeedsReplacements"] = basicTypesWithSpecialFetchingNeedsReplacements
+        }
 		if booleanGetter != nil{
 			dictionary["booleanGetter"] = booleanGetter
 		}
