@@ -8,71 +8,81 @@
 
 import Foundation
 
-
-class FileGenerator{
-    
+/**
+Singleton used to build the file content with the current configurations
+*/
+class FilesContentBuilder{
+    /**
+    The prefix used for first level type names (and file names as well)
+    */
     var classPrefix = ""
+    
+    /**
+    The language for which the files' content should be created
+    */
     var lang : LangModel!
+    
+    /**
+    Whether to include utility methods in the generated content
+    */
     var includeUtilities = true
+    
+    /**
+    Whether to include constructors (aka initializers)
+    */
     var includeConstructs = true
+    
+    /**
+    Whatever value will be assinged to the firstLine property, will appear as the first line in every file if the target language supports first line statement
+    */
     var firstLine = ""
     
-    class var instance : FileGenerator {
+    /**
+    Lazely load and return the singlton instance of the FilesContentBuilder
+    */
+    class var instance : FilesContentBuilder {
         struct Static {
             static var onceToken : dispatch_once_t = 0
-            static var instance : FileGenerator? = nil
+            static var instance : FilesContentBuilder? = nil
         }
         dispatch_once(&Static.onceToken) {
-            Static.instance = FileGenerator()
+            Static.instance = FilesContentBuilder()
         }
         return Static.instance!
     }
     
+    /**
+    Generates a file using the passed className and jsonObject example and appends it in the passed files array
+    */
     func addFileWithName(var className: String, jsonObject: NSDictionary, inout files : [FileRepresenter]){
         var properties = [Property]()
         if !className.hasPrefix(classPrefix){
             className = "\(classPrefix)\(className)"
         }
-        
+        //sort all the keys in the passed json dictionary
         var jsonProperties = sorted(jsonObject.allKeys as [String])
         
+        //loop all the json properties and handle each one individually
         for jsonPropertyName in jsonProperties{
-            
-            let swiftPropertyName = propertySwiftName(jsonPropertyName)
-            
             let value : AnyObject = jsonObject[jsonPropertyName]!
+            let property = propertyForValue(value, jsonKeyName: jsonPropertyName)
             
-            var type = propertyTypeName(value)
-            
-            var isDictionary = false
-            var isArray = false
-            
-            if value is NSDictionary {
-                let leafClassName = classNameForPropertyName(jsonPropertyName)
-                addFileWithName(leafClassName, jsonObject: value as NSDictionary, files:&files)
-                type = leafClassName
-                properties.append(Property(jsonName: jsonPropertyName, nativeName: swiftPropertyName, type: type, isArray: false, isCustomClass: true, lang:lang))
-            }else if value is NSArray{
-                //we need to check its elements...
+            //recursively handle custom types
+            if property.isCustomClass{
+                addFileWithName(property.type, jsonObject: value as NSDictionary, files:&files)
+            }else if property.isArray{
                 let array = value as NSArray
-                if let dic = array.firstObject? as? NSDictionary{
-                    //wow complicated
-                    let leafClassName = classNameForPropertyName(jsonPropertyName)
-                    addFileWithName(leafClassName, jsonObject: dic, files:&files)
-                    type = lang.arrayType.stringByReplacingOccurrencesOfString(elementType, withString: leafClassName)
-                    
-                    properties.append(Property(jsonName: jsonPropertyName, nativeName: swiftPropertyName, type: type, isArray: true, isCustomClass: false, lang:lang))
-                }else{
-                    properties.append(Property(jsonName: jsonPropertyName, nativeName: swiftPropertyName, type: type, isArray: true, isCustomClass: false, lang:lang))
+                if let dictionary = array.firstObject? as? NSDictionary{
+                    let type = classNameForPropertyName(property.jsonName)
+                    addFileWithName(type, jsonObject: dictionary, files:&files)
                 }
-            }else{
-                properties.append(Property(jsonName: jsonPropertyName, nativeName: swiftPropertyName, type: type, lang:lang))
             }
             
+            properties.append(property)
             
         }
         
-        
+        //create the file
         let file = FileRepresenter(className: className, properties: properties, lang:lang)
         file.includeUtilities = includeUtilities
         file.includeConstructors = includeConstructs
@@ -85,11 +95,55 @@ class FileGenerator{
     }
     
     
-    func propertySwiftName(jsonName : String) -> String
+    /**
+    Creates and returns a Property object passed on the passed value and json key name
+    */
+    func propertyForValue(value: AnyObject, jsonKeyName: String) -> Property
+    {
+        let nativePropertyName = propertyNativeName(jsonKeyName)
+        var type = propertyTypeName(value)
+        var isDictionary = false
+        var isArray = false
+        
+        var property: Property!
+        if value is NSDictionary {
+            type = classNameForPropertyName(jsonKeyName)
+            property = Property(jsonName: jsonKeyName, nativeName: nativePropertyName, type: type, isArray:false, isCustomClass: true, lang: lang)
+            
+        }else if value is NSArray{
+            //we need to check its elements...
+            let array = value as NSArray
+            if let dic = array.firstObject? as? NSDictionary{
+                //wow complicated
+                let leafClassName = classNameForPropertyName(jsonKeyName)
+
+                type = lang.arrayType.stringByReplacingOccurrencesOfString(elementType, withString: leafClassName)
+                
+                property = Property(jsonName: jsonKeyName, nativeName: nativePropertyName, type: type, isArray: true, isCustomClass: false, lang:lang)
+            }else{
+                property = Property(jsonName: jsonKeyName, nativeName: nativePropertyName, type: type, isArray: true, isCustomClass: false, lang:lang)
+            }
+        }else{
+            property = Property(jsonName: jsonKeyName, nativeName: nativePropertyName, type: type, lang:lang)
+        }
+        
+        return property
+    }
+    
+
+    
+    
+    /**
+    Returns a camel case presentation from the passed json key
+    */
+    func propertyNativeName(jsonName : String) -> String
     {
         return underscoresToCamelCaseForString(jsonName, startFromFirstChar: false)
     }
     
+    /**
+    Returns the input string with white spaces removed, and underscors converted to camel case
+    */
     func underscoresToCamelCaseForString(input: String, startFromFirstChar: Bool) -> String
     {
         var str = input.stringByReplacingOccurrencesOfString(" ", withString: "")
@@ -114,7 +168,9 @@ class FileGenerator{
     }
     
     
-    
+    /**
+    Creats and returns the class name for the passed proeprty name
+    */
     func classNameForPropertyName(propertyName : String) -> String{
         var swiftClassName = underscoresToCamelCaseForString(propertyName, startFromFirstChar: true).toSingular()
        
@@ -124,6 +180,9 @@ class FileGenerator{
         return swiftClassName
     }
     
+    /**
+    Creats and returns the type name for the passed value
+    */
     func propertyTypeName(value : AnyObject) -> String
     {
         var name = ""
@@ -138,13 +197,14 @@ class FileGenerator{
             }else{
                 name = lang.dataTypes.stringType
             }
-            
         }
         
         return name
     }
     
-    
+    /**
+    Tries to figur out the type of the elements of the passed array and returns the type of the array that can hold these values
+    */
     func typeNameForArrayElements(elements: NSArray) -> String{
         var typeName : String!
         let genericType = lang.arrayType.stringByReplacingOccurrencesOfString(elementType, withString: lang.genericType)
@@ -171,7 +231,9 @@ class FileGenerator{
         return typeName
     }
     
-    
+    /**
+    Returns one of the possible types for any numeric value (int, float, double, etc...)
+    */
     func typeForNumber(number : NSNumber) -> NSString
     {
         let numberType = CFNumberGetType(number as CFNumberRef)

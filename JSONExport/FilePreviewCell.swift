@@ -81,7 +81,7 @@ class FilePreviewCell: NSTableCellView, NSTextViewDelegate {
     }
     
     func textDidChange(notification: NSNotification) {
-        file.stringContent = textView.string ?? file.stringContent
+        file.fileContent = textView.string ?? file.fileContent
     }
     
     

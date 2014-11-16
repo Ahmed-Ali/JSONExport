@@ -230,7 +230,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         var error : NSError?
         
         for file in files{
-            let fileContent = file.stringContent
+            let fileContent = file.fileContent
             let filePath = "\(path)/\(file.className).\(selectedLang.fileExtension)"
             
             fileContent.writeToFile(filePath, atomically: false, encoding: NSUTF8StringEncoding, error: &error)
@@ -299,7 +299,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
             if let json = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error: &error) as? NSDictionary{
                 loadSelectedLanguageModel()
                 files.removeAll(keepCapacity: false)
-                let fileGenerator = prepareAndGetFileGenerator()
+                let fileGenerator = prepareAndGetFilesBuilder()
                 fileGenerator.addFileWithName(rootClassName, jsonObject: json, files: &files)
                 
                 
@@ -318,15 +318,15 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         }
     }
     
-    func prepareAndGetFileGenerator() -> FileGenerator
+    func prepareAndGetFilesBuilder() -> FilesContentBuilder
     {
-        let fileGenerator = FileGenerator.instance
-        fileGenerator.includeConstructs = (generateConstructors.state == NSOnState)
-        fileGenerator.includeUtilities = (generateUtilityMethods.state == NSOnState)
-        fileGenerator.firstLine = firstLineField.stringValue
-        fileGenerator.lang = selectedLang
-        fileGenerator.classPrefix = classPrefixField.stringValue
-        return fileGenerator
+        let filesBuilder = FilesContentBuilder.instance
+        filesBuilder.includeConstructs = (generateConstructors.state == NSOnState)
+        filesBuilder.includeUtilities = (generateUtilityMethods.state == NSOnState)
+        filesBuilder.firstLine = firstLineField.stringValue
+        filesBuilder.lang = selectedLang
+        filesBuilder.classPrefix = classPrefixField.stringValue
+        return filesBuilder
     }
     
     

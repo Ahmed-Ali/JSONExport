@@ -33,14 +33,49 @@
 import Foundation
 import AddressBook
 
+/**
+FileRepresenter is used to generate a valid syntax for the target language that represents JSON object
+*/
 class FileRepresenter{
+    /**
+    Holds the class (or type) name
+    */
     var className : String
+    
+    /**
+    Array of properties which will be included in the file content
+    */
     var properties : [Property]
+    
+    /**
+    The target language meta instance
+    */
     var lang : LangModel
-    var stringContent = ""
+    
+    /**
+    Whether to include constructors (aka initializers in Swift) in the file content
+    */
     var includeConstructors = true
+    
+    /**
+    Whether to include utility methods in the file content. Utility methods such as toDictionary method
+    */
     var includeUtilities = true
+    
+    /**
+    If the target language supports first line statement (i.e package names in Java), then you can set the value of this property to whatever the first line statement is.
+    */
     var firstLine = ""
+    
+    /**
+    After the first time you use the toString() method, this property will contain the file content.
+    */
+    var fileContent = ""
+    
+  
+    /**
+    Designated initializer
+    */
     init(className: String, properties: [Property], lang: LangModel)
     {
         self.className = className
@@ -48,86 +83,118 @@ class FileRepresenter{
         self.lang = lang
     }
     
+    /**
+    Generates the file content and stores it in the fileContent property
+    */
     func toString() -> String{
-        stringContent = ""
-        if lang.supportsFirstLineStatement != nil && lang.supportsFirstLineStatement! && countElements(firstLine) > 0{
-            stringContent += "\(firstLine)\n\n"
-        }
+        fileContent = ""
+        appendFirstLineStatement()
         appendCopyrights()
-        
-        if lang.staticImports != nil{
-            stringContent += lang.staticImports
-            stringContent += "\n"
-        }
+        appendStaticImports()
         appendCustomImports()
-        stringContent += lang.modelDefinition.stringByReplacingOccurrencesOfString(modelName, withString: className)
-        
-        stringContent += "\(lang.modelStart)"
-        
+        //start the model defination
+        fileContent += lang.modelDefinition.stringByReplacingOccurrencesOfString(modelName, withString: className)
+        //start the model content body
+        fileContent += "\(lang.modelStart)"
         
         appendProperties()
         appendSettersAndGetters()
-        if includeConstructors{
-            appendInitializers()
-        }
-        if includeUtilities{
-            appendUtilityMethods()
-        }
-        stringContent += lang.modelEnd
-        return stringContent
+        appendInitializers()
+        appendUtilityMethods()
+        fileContent += lang.modelEnd
+        return fileContent
     }
     
+    /**
+    Appneds the firstLine value (if any) to the fileContent if the lang.supportsFirstLineStatement is true
+    */
+    func appendFirstLineStatement()
+    {
+        if lang.supportsFirstLineStatement != nil && lang.supportsFirstLineStatement! && countElements(firstLine) > 0{
+            fileContent += "\(firstLine)\n\n"
+        }
+    }
+    
+    /** 
+    Appends the lang.staticImports if any
+    */
+    func appendStaticImports()
+    {
+        if lang.staticImports != nil{
+            fileContent += lang.staticImports
+            fileContent += "\n"
+        }
+    }
+    
+    /**
+    Tries to access the address book in order to fetch basic information about the author so it can include a nice copyright statment
+    */
     func appendCopyrights()
     {
         if let book = ABAddressBook.sharedAddressBook(){
             let me : ABPerson = book.me()
-            stringContent += "//\n//\t\(className).\(lang.fileExtension)\n"
-            stringContent += "//\n//\tCreate by "
-            stringContent += me.valueForProperty(kABFirstNameProperty as String) as String
-            stringContent += " "
-            stringContent += me.valueForProperty(kABLastNameProperty as String) as String
-            stringContent += " on \(getTodayFormattedDay())\n//\tCopyright (c) \(getYear()) "
-            stringContent += me.valueForProperty(kABOrganizationProperty as String) as String
-            stringContent += ". All rights reserved.\n//\n\n"
+            fileContent += "//\n//\t\(className).\(lang.fileExtension)\n"
+            fileContent += "//\n//\tCreate by "
+            fileContent += me.valueForProperty(kABFirstNameProperty as String) as String
+            fileContent += " "
+            fileContent += me.valueForProperty(kABLastNameProperty as String) as String
+            fileContent += " on \(getTodayFormattedDay())\n//\tCopyright (c) \(getYear()) "
+            fileContent += me.valueForProperty(kABOrganizationProperty as String) as String
+            fileContent += ". All rights reserved.\n//\n\n"
         }
         
     }
-    
+    /**
+    Returns the current year as String
+    */
     func getYear() -> String
     {
         return "\(NSCalendar.currentCalendar().component(.CalendarUnitYear, fromDate: NSDate()))"
     }
     
+    /**
+    Returns today date in the format dd/mm/yyyy
+    */
     func getTodayFormattedDay() -> String
     {
         let components = NSCalendar.currentCalendar().components(.CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear, fromDate: NSDate())
         return "\(components.day)/\(components.month)/\(components.year)"
     }
 
-    
+    /**
+     Loops on all properties which has a custom type and appends the custom import from the lang's importForEachCustomType property
+
+    */
     func appendCustomImports()
     {
         if lang.importForEachCustomType != nil{
             for property in properties{
                 if property.isCustomClass{
-                    stringContent += lang.importForEachCustomType.stringByReplacingOccurrencesOfString(modelName, withString: property.type)
+                    fileContent += lang.importForEachCustomType.stringByReplacingOccurrencesOfString(modelName, withString: property.type)
                 }
             }
         }
     }
     
+    /**
+    Appends all the properties using the Property.stringPresentation method
+    */
     func appendProperties()
     {
-        stringContent += "\n"
+        fileContent += "\n"
         for property in properties{
-            stringContent += property.stringPresentation()
+            fileContent += property.toString
         }
     }
     
+    /**
+    Appends the setter and getter for each property if the current target language supports them (i.e the convension in Java is to use private instance variables with public setters and getters). The method will use special getter for boolean properties if required by the target language
+    */
     func appendSettersAndGetters()
     {
-        stringContent += "\n"
+        fileContent += "\n"
         for property in properties{
+            //append the setter
             let capVarName = property.nativeName.capitalizedString
             if lang.setter != nil{
                 var set = lang.setter
@@ -135,10 +202,12 @@ class FileRepresenter{
                 set = set.stringByReplacingOccurrencesOfString(capitalizedVarName, withString: capVarName)
                 set = set.stringByReplacingOccurrencesOfString(varName, withString: property.nativeName)
                 set = set.stringByReplacingOccurrencesOfString(varType, withString: property.type)
-                stringContent += set
+                fileContent += set
             }
             
+            // append the getters
             var get : String!
+            //if the property is a boolean property determine if there is a special getter for boolean properties
             if property.type == lang.dataTypes.boolType{
                 if lang.booleanGetter != nil{
                     get = lang.booleanGetter
@@ -151,108 +220,51 @@ class FileRepresenter{
                 get = lang.getter
             }
             
-            if get != nil{
-                get = get.stringByReplacingOccurrencesOfString(capitalizedVarName, withString: capVarName)
-                get = get.stringByReplacingOccurrencesOfString(varName, withString: property.nativeName)
-                get = get.stringByReplacingOccurrencesOfString(varType, withString: property.type)
-                stringContent += get
-            }
+            get = get.stringByReplacingOccurrencesOfString(capitalizedVarName, withString: capVarName)
+            get = get.stringByReplacingOccurrencesOfString(varName, withString: property.nativeName)
+            get = get.stringByReplacingOccurrencesOfString(varType, withString: property.type)
+            fileContent += get
         }
     }
     
+    /**
+    Appends all the defined constructors (aka initializers) in lang.constructors to the fileContent
+    */
     func appendInitializers()
     {
-        stringContent += "\n"
+        fileContent += "\n"
         for constructor in lang.constructors{
             if constructor.comment != nil{
-                stringContent += constructor.comment
+                fileContent += constructor.comment
             }
             
-            stringContent += constructor.signature
-            stringContent += constructor.bodyStart
+            fileContent += constructor.signature
+            fileContent += constructor.bodyStart
             
             for property in properties{
-                var propertyStr = ""
-                if property.isCustomClass{
-                    
-                    propertyStr = constructor.fetchCustomTypePropertyFromMap
-                    
-                }else if property.isArray{
-                    if(propertyTypeIsBasicType(property)){
-                        
-                        if constructor.fetchArrayOfBasicTypePropertyFromMap != nil{
-                            let type = elementTypeNameFromArrayProperty(property.type)
-                            let index = find(lang.basicTypesWithSpecialFetchingNeeds, type)
-                            if index != nil{
-                                propertyStr = constructor.fetchArrayOfBasicTypePropertyFromMap
-                                let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements[index!]
-                                    propertyStr = propertyStr.stringByReplacingOccurrencesOfString(varTypeReplacement, withString: replacement)
-                                
-                                
-                            }else{
-                                propertyStr = constructor.fetchBasicTypePropertyFromMap
-                            }
-                        }else{
-                            propertyStr = constructor.fetchBasicTypePropertyFromMap
-                        }
-                        
-                    }else{
-                        //array of custom type
-                        propertyStr = constructor.fetchArrayOfCustomTypePropertyFromMap
-                        let perpertyElementType = elementTypeNameFromArrayProperty(property.type)
-                        propertyStr = propertyStr.stringByReplacingOccurrencesOfString(elementType, withString: perpertyElementType)
-                        
-                    }
-                    
-                }else {
-                    
-                    if lang.basicTypesWithSpecialFetchingNeeds != nil{
-                        let index = find(lang.basicTypesWithSpecialFetchingNeeds, property.type)
-                        if index != nil{
-                            propertyStr = constructor.fetchBasicTypeWithSpecialNeedsPropertyFromMap
-                            if let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements?[index!]{
-                                propertyStr = propertyStr.stringByReplacingOccurrencesOfString(varTypeReplacement, withString: replacement)
-                            }
-                            
-                            let lowerCaseType = property.type.lowercaseString
-                            propertyStr = propertyStr.stringByReplacingOccurrencesOfString(lowerCaseVarType, withString: lowerCaseType)
-                            
-                        }else{
-                            propertyStr = constructor.fetchBasicTypePropertyFromMap
-                        }
-                        
-                    }else{
-                        propertyStr = constructor.fetchBasicTypePropertyFromMap
-                    }
-                    
-                    
-                }
                 
-                propertyStr = propertyStr.stringByReplacingOccurrencesOfString(varName, withString: property.nativeName)
-                propertyStr = propertyStr.stringByReplacingOccurrencesOfString(jsonKeyName, withString: property.jsonName)
-                propertyStr = propertyStr.stringByReplacingOccurrencesOfString(varType, withString: property.type)
-                let capVarName = property.nativeName.capitalizedString
-                let capVarType = property.type.capitalizedString;
-                propertyStr = propertyStr.stringByReplacingOccurrencesOfString(capitalizedVarName, withString: capVarName)
-                propertyStr = propertyStr.stringByReplacingOccurrencesOfString(capitalizedVarType, withString: capVarType)
-                stringContent += propertyStr
+                fileContent += propertyFetchFromJsonSyntaxForProperty(property, constructor: constructor)
             }
             
-            stringContent += constructor.bodyEnd
-            stringContent = stringContent.stringByReplacingOccurrencesOfString(modelName, withString: className)
+            fileContent += constructor.bodyEnd
+            fileContent = fileContent.stringByReplacingOccurrencesOfString(modelName, withString: className)
         }
     }
     
+    
+    /**
+    Appends all the defined utility methods in lang.utilityMethods to the fileContent
+    */
     func appendUtilityMethods()
     {
-        stringContent += "\n"
+        fileContent += "\n"
         for method in lang.utilityMethods{
             if method.comment != nil{
-                stringContent += method.comment
+                fileContent += method.comment
             }
-            stringContent += method.signature
-            stringContent += method.bodyStart
-            stringContent += method.body
+            fileContent += method.signature
+            fileContent += method.bodyStart
+            fileContent += method.body
             for property in properties{
                 var propertyHandlingStr = ""
                 if property.isArray{
@@ -272,30 +284,33 @@ class FileRepresenter{
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(varType, withString:property.type)
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(jsonKeyName, withString:property.jsonName)
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(additionalCustomTypeProperty, withString:"")
-                stringContent += propertyHandlingStr
+                fileContent += propertyHandlingStr
             }
-            stringContent += method.returnStatement
-            stringContent += method.bodyEnd
+            fileContent += method.returnStatement
+            fileContent += method.bodyEnd
         }
         
         
     }
     
-    
+    /**
+    Returns true if the passed property.type is one of the basic types or an array of any of the basic types, otherwise returns false
+    */
     func propertyTypeIsBasicType(property: Property) -> Bool{
         var isBasicType = false
         var type = elementTypeNameFromArrayProperty(property.type)
 
         let basicTypes = lang.dataTypes.toDictionary().allValues as [String]
-            if find(basicTypes, type) != nil{
-                isBasicType = true
-            }
-        
-        
-        
+        if find(basicTypes, type) != nil{
+            isBasicType = true
+        }
+  
         return isBasicType
     }
     
+    /**
+    Removes any "array-specific character or words" from the passed type to return the type of the array elements. The "array-specific character or words" are fetched from the lang.wordsToRemoveToGetArrayElementsType property
+    */
     func elementTypeNameFromArrayProperty(arrayTypeName : String) -> String
     {
         
@@ -305,6 +320,98 @@ class FileRepresenter{
             type = type.stringByReplacingOccurrencesOfString(arrayWord, withString: "")
         }
         return type
+    }
+    
+    //MARK: - Fetching property from a JSON object
+    /**
+    Returns the suitable syntax to fetch the value of the property from a JSON object for the passed constructor
+    */
+    func propertyFetchFromJsonSyntaxForProperty(property: Property, constructor: Constructor) -> String
+    {
+        var propertyStr = ""
+        if property.isCustomClass{
+            
+            propertyStr = constructor.fetchCustomTypePropertyFromMap
+            
+        }else if property.isArray{
+            propertyStr = fetchArrayFromJsonSyntaxForProperty(property, constructor: constructor)
+            
+        }else {
+            propertyStr = fetchBasicTypePropertyFromJsonSyntaxForProperty(property, constructor: constructor)
+            
+        }
+        //Apply all the basic replacements
+        propertyStr = propertyStr.stringByReplacingOccurrencesOfString(varName, withString: property.nativeName)
+        propertyStr = propertyStr.stringByReplacingOccurrencesOfString(jsonKeyName, withString: property.jsonName)
+        propertyStr = propertyStr.stringByReplacingOccurrencesOfString(varType, withString: property.type)
+        let capVarName = property.nativeName.capitalizedString
+        let capVarType = property.type.capitalizedString;
+        propertyStr = propertyStr.stringByReplacingOccurrencesOfString(capitalizedVarName, withString: capVarName)
+        propertyStr = propertyStr.stringByReplacingOccurrencesOfString(capitalizedVarType, withString: capVarType)
+        return propertyStr
+    }
+    
+    /**
+    Returns valid syntax to fetch an array from a JSON object
+    */
+    func fetchArrayFromJsonSyntaxForProperty(property: Property, constructor: Constructor) -> String
+    {
+        var propertyStr = ""
+        if(propertyTypeIsBasicType(property)){
+            
+            if constructor.fetchArrayOfBasicTypePropertyFromMap != nil{
+                let type = elementTypeNameFromArrayProperty(property.type)
+                let index = find(lang.basicTypesWithSpecialFetchingNeeds, type)
+                if index != nil{
+                    propertyStr = constructor.fetchArrayOfBasicTypePropertyFromMap
+                    let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements[index!]
+                    propertyStr = propertyStr.stringByReplacingOccurrencesOfString(varTypeReplacement, withString: replacement)
+                    
+                    
+                }else{
+                    propertyStr = constructor.fetchBasicTypePropertyFromMap
+                }
+            }else{
+                propertyStr = constructor.fetchBasicTypePropertyFromMap
+            }
+            
+        }else{
+            //array of custom type
+            propertyStr = constructor.fetchArrayOfCustomTypePropertyFromMap
+            let perpertyElementType = elementTypeNameFromArrayProperty(property.type)
+            propertyStr = propertyStr.stringByReplacingOccurrencesOfString(elementType, withString: perpertyElementType)
+            
+        }
+        
+        return propertyStr
+    }
+    
+    /**
+    Returns valid syntax to fetch any property with basic type from a JSON object
+    */
+    func fetchBasicTypePropertyFromJsonSyntaxForProperty(property: Property, constructor: Constructor) -> String
+    {
+        var propertyStr = ""
+        if lang.basicTypesWithSpecialFetchingNeeds != nil{
+            let index = find(lang.basicTypesWithSpecialFetchingNeeds, property.type)
+            if index != nil{
+                propertyStr = constructor.fetchBasicTypeWithSpecialNeedsPropertyFromMap
+                if let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements?[index!]{
+                    propertyStr = propertyStr.stringByReplacingOccurrencesOfString(varTypeReplacement, withString: replacement)
+                }
+                
+                let lowerCaseType = property.type.lowercaseString
+                propertyStr = propertyStr.stringByReplacingOccurrencesOfString(lowerCaseVarType, withString: lowerCaseType)
+                
+            }else{
+                propertyStr = constructor.fetchBasicTypePropertyFromMap
+            }
+            
+        }else{
+            propertyStr = constructor.fetchBasicTypePropertyFromMap
+        }
+        
+        return propertyStr
     }
     
 }

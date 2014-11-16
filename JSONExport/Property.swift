@@ -31,13 +31,55 @@
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import Foundation
+
+/**
+Represents all the meta data needed to export a JSON property in a valid syntax for the target language
+*/
 class Property{
+    
+    /**
+    The native name that is suitable to export the JSON property in the target language
+    */
     var nativeName : String
+    
+    /**
+    The JSON property name to fetch the value of this property from a JSON object
+    */
     var jsonName : String
+    
+    /**
+    The string representation for the property type
+    */
     var type : String
+    
+    /**
+    Whether the property represents a custom type
+    */
     var isCustomClass : Bool
+    
+    /**
+    Whether the property represents an array
+    */
     var isArray : Bool
+    
+    /**
+    The target language model
+    */
     var lang : LangModel
+    
+    /**
+    Returns a valid property declaration using the LangModel.instanceVarDefinition value
+    */
+    var toString: String{
+        var string = lang.instanceVarDefinition.stringByReplacingOccurrencesOfString(varName, withString: nativeName);
+        string = string.stringByReplacingOccurrencesOfString(varType, withString: type)
+        
+        return string
+    }
+    
+    /** 
+    The designated initializer for the class
+    */
     init(jsonName: String, nativeName: String, type: String, isArray: Bool, isCustomClass: Bool, lang: LangModel)
     {
         self.jsonName = jsonName
@@ -48,15 +90,13 @@ class Property{
         self.lang = lang
     }
     
+    
+    /**
+    Convenience initializer which calls the designated initializer with isArray = false and isCustomClass = false
+    */
     convenience init(jsonName: String, nativeName: String, type: String, lang: LangModel){
         self.init(jsonName: jsonName, nativeName: nativeName, type: type, isArray: false, isCustomClass: false, lang: lang)
     }
     
-    func stringPresentation() -> String
-    {
-        var p = lang.instanceVarDefinition.stringByReplacingOccurrencesOfString(varName, withString: nativeName);
-        p = p.stringByReplacingOccurrencesOfString(varType, withString: type)
-        
-        return p
-    }
+    
 }
