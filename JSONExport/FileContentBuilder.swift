@@ -143,6 +143,9 @@ class FilesContentBuilder{
     
     /**
     Returns the input string with white spaces removed, and underscors converted to camel case
+    :param: the input string
+    :param: whether to start with upper case letter
+    :return: the camel case version of the input
     */
     func underscoresToCamelCaseForString(input: String, startFromFirstChar: Bool) -> String
     {
