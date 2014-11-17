@@ -23,7 +23,7 @@ Currently you can convert your JSON object to one of the following lanaguages:
 1. Java for Android - using org.json.* classes.
 2. Swift Classes - parses the JSON using built-in NSJSONSerialization.
 3. Swift Sturcutres - parses the JSON using built-in NSJSONSerialization.
-4. Swift Classes - parses the JSON using [SwiftyJSON](https://github.com/lingoer/SwiftyJSON)
+4. Swift Classes - parses the JSON using [SwiftyJSON](https://github.com/lingoer/SwiftyJSON) library
 
 Installation
 ========================
