@@ -33,11 +33,6 @@
 
 import Cocoa
 
-
-let supportedLanguagesKeyForUserDefaults = "supportedLangs"
-let langNameKey = "langName"
-let theLangKey = "theLang"
-
 class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTableViewDelegate, NSTableViewDataSource, NSTextViewDelegate {
 
     @IBOutlet weak var tableView: NSTableView!
@@ -59,15 +54,17 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     @IBOutlet weak var firstLineField: NSTextField!
     
-   
+    @IBOutlet weak var languagesPopup: NSPopUpButton!
 
     var selectedLang : LangModel!
+    
+    
     var selectedLanguageName : String
         {
         return languagesPopup.titleOfSelectedItem!
     }
+    
     var langs : [String : LangModel] = [String : LangModel]()
-    @IBOutlet weak var languagesPopup: NSPopUpButton!
     
     
     var files : [FileRepresenter] = [FileRepresenter]()
@@ -86,7 +83,6 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     func setLanguagesSelection()
     {
         let langNames = sorted(langs.keys.array)
-        
         languagesPopup.removeAllItems()
         languagesPopup.addItemsWithTitles(langNames)
         
@@ -180,11 +176,6 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     }
     
     
-
-    
-    
-    
-    
     //MARK: - Language selection handling
     func loadSelectedLanguageModel()
     {
@@ -193,14 +184,13 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     }
     
     
-    
-    
     //MARK: - NSUserNotificationCenterDelegate
     func userNotificationCenter(center: NSUserNotificationCenter,
         shouldPresentNotification notification: NSUserNotification) -> Bool
     {
         return true
     }
+    
     
     //MARK: - Showing the open panel and save files
     @IBAction func saveFiles(sender: AnyObject)
@@ -242,6 +232,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         }
     }
     
+    
     //MARK: - Messages
     func showDoneSuccessfully()
     {
@@ -255,6 +246,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         center.delegate = self
         center.deliverNotification(notification)
     }
+    
     func showError(error: NSError!)
     {
         if error == nil{
