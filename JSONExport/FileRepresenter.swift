@@ -232,6 +232,9 @@ class FileRepresenter{
     */
     func appendInitializers()
     {
+        if !includeConstructors{
+            return
+        }
         fileContent += "\n"
         for constructor in lang.constructors{
             if constructor.comment != nil{
@@ -257,6 +260,9 @@ class FileRepresenter{
     */
     func appendUtilityMethods()
     {
+        if !includeUtilities{
+            return
+        }
         fileContent += "\n"
         for method in lang.utilityMethods{
             if method.comment != nil{
