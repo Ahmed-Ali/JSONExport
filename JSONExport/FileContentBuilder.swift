@@ -30,7 +30,7 @@ class FilesContentBuilder{
     /**
     Whether to include constructors (aka initializers)
     */
-    var includeConstructs = true
+    var includeConstructors = true
     
     /**
     Whatever value will be assinged to the firstLine property, will appear as the first line in every file if the target language supports first line statement
@@ -53,6 +53,10 @@ class FilesContentBuilder{
     
     /**
     Generates a file using the passed className and jsonObject example and appends it in the passed files array
+    
+    :param: className for the file to be generated
+    :param: jsonObject acts as an example of the json object, which the generated fill be able to handle
+    :param: files the generated file will be appended to this array
     */
     func addFileWithName(var className: String, jsonObject: NSDictionary, inout files : [FileRepresenter]){
         var properties = [Property]()
@@ -73,7 +77,7 @@ class FilesContentBuilder{
             }else if property.isArray{
                 let array = value as NSArray
                 if let dictionary = array.firstObject? as? NSDictionary{
-                    let type = classNameForPropertyName(property.jsonName)
+                    let type = typeNameForPropertyName(property.jsonName)
                     addFileWithName(type, jsonObject: dictionary, files:&files)
                 }
             }
@@ -85,7 +89,7 @@ class FilesContentBuilder{
         //create the file
         let file = FileRepresenter(className: className, properties: properties, lang:lang)
         file.includeUtilities = includeUtilities
-        file.includeConstructors = includeConstructs
+        file.includeConstructors = includeConstructors
         if lang.supportsFirstLineStatement != nil && lang.supportsFirstLineStatement!{
             file.firstLine = firstLine
         }else{
@@ -97,6 +101,10 @@ class FilesContentBuilder{
     
     /**
     Creates and returns a Property object passed on the passed value and json key name
+    
+    :param: value example value for the property
+    :param: jsonKeyName for the property
+    :returns: a Property instance
     */
     func propertyForValue(value: AnyObject, jsonKeyName: String) -> Property
     {
@@ -107,7 +115,7 @@ class FilesContentBuilder{
         
         var property: Property!
         if value is NSDictionary {
-            type = classNameForPropertyName(jsonKeyName)
+            type = typeNameForPropertyName(jsonKeyName)
             property = Property(jsonName: jsonKeyName, nativeName: nativePropertyName, type: type, isArray:false, isCustomClass: true, lang: lang)
             
         }else if value is NSArray{
@@ -115,7 +123,7 @@ class FilesContentBuilder{
             let array = value as NSArray
             if let dic = array.firstObject? as? NSDictionary{
                 //wow complicated
-                let leafClassName = classNameForPropertyName(jsonKeyName)
+                let leafClassName = typeNameForPropertyName(jsonKeyName)
 
                 type = lang.arrayType.stringByReplacingOccurrencesOfString(elementType, withString: leafClassName)
                 
@@ -135,17 +143,22 @@ class FilesContentBuilder{
     
     /**
     Returns a camel case presentation from the passed json key
+    
+    :param: jsonKeyName the name of the json key to convert to suitable native property name
+    
+    :returns: property name
     */
-    func propertyNativeName(jsonName : String) -> String
+    func propertyNativeName(jsonKeyName : String) -> String
     {
-        return underscoresToCamelCaseForString(jsonName, startFromFirstChar: false)
+        return underscoresToCamelCaseForString(jsonKeyName, startFromFirstChar: false)
     }
     
     /**
     Returns the input string with white spaces removed, and underscors converted to camel case
-    :param: the input string
-    :param: whether to start with upper case letter
-    :return: the camel case version of the input
+    
+    :param: inputString to convert
+    :param: startFromFirstChar whether to start with upper case letter
+    :returns: the camel case version of the input
     */
     func underscoresToCamelCaseForString(input: String, startFromFirstChar: Bool) -> String
     {
@@ -173,8 +186,11 @@ class FilesContentBuilder{
     
     /**
     Creats and returns the class name for the passed proeprty name
+    
+    :param: propertyName to be converted to a type name
+    :returns: the type name
     */
-    func classNameForPropertyName(propertyName : String) -> String{
+    func typeNameForPropertyName(propertyName : String) -> String{
         var swiftClassName = underscoresToCamelCaseForString(propertyName, startFromFirstChar: true).toSingular()
        
         if !swiftClassName.hasPrefix(classPrefix){
@@ -185,6 +201,9 @@ class FilesContentBuilder{
     
     /**
     Creats and returns the type name for the passed value
+    
+    :param: value example value to figure out its type
+    :returns: the type name
     */
     func propertyTypeName(value : AnyObject) -> String
     {
@@ -207,6 +226,10 @@ class FilesContentBuilder{
     
     /**
     Tries to figur out the type of the elements of the passed array and returns the type of the array that can hold these values
+    
+    :param: elements array to try to find out which type is suitable for its elements
+    
+    :returns: the type name
     */
     func typeNameForArrayElements(elements: NSArray) -> String{
         var typeName : String!
@@ -236,8 +259,11 @@ class FilesContentBuilder{
     
     /**
     Returns one of the possible types for any numeric value (int, float, double, etc...)
+    
+    :param: number the numeric value
+    :returns: the type name
     */
-    func typeForNumber(number : NSNumber) -> NSString
+    func typeForNumber(number : NSNumber) -> String
     {
         let numberType = CFNumberGetType(number as CFNumberRef)
         

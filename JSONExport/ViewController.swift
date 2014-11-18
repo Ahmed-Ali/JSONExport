@@ -34,39 +34,53 @@
 import Cocoa
 
 class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTableViewDelegate, NSTableViewDataSource, NSTextViewDelegate {
-
+    
+    //Shows the list of files' preview
     @IBOutlet weak var tableView: NSTableView!
     
+    //Connected to the top right corner to show the current parsing status
     @IBOutlet weak var statusTextField: NSTextField!
     
+    //Connected to the save button
     @IBOutlet weak var saveButton: NSButton!
+    
+    //Connected to the JSON input text view
     @IBOutlet var sourceText: NSTextView!
     
+    //Connected to the scroll view which wraps the sourceText
     @IBOutlet weak var scrollView: NSScrollView!
+    
+    //Connected to Constructors check box
     @IBOutlet weak var generateConstructors: NSButtonCell!
     
+    //Connected to Utility Methods check box
     @IBOutlet weak var generateUtilityMethods: NSButtonCell!
     
+    //Connected to root class name field
     @IBOutlet weak var classNameField: NSTextFieldCell!
     
+    //Connected to class prefix field
     @IBOutlet weak var classPrefixField: NSTextField!
     
-    
+    //Connected to the first line statement field
     @IBOutlet weak var firstLineField: NSTextField!
     
+    //Connected to the languages pop up
     @IBOutlet weak var languagesPopup: NSPopUpButton!
 
+    //Holds the currently selected language
     var selectedLang : LangModel!
     
-    
+    //Returns the title of the selected language in the languagesPopup
     var selectedLanguageName : String
         {
         return languagesPopup.titleOfSelectedItem!
     }
     
+    //Should hold list of supported languages, where the key is the language name and the value is LangModel instance
     var langs : [String : LangModel] = [String : LangModel]()
     
-    
+    //Holds list of the generated files
     var files : [FileRepresenter] = [FileRepresenter]()
     
     
@@ -79,7 +93,9 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         updateUIFieldsForSelectedLanguage()
     }
     
-    
+    /**
+    Sets the values of languagesPopup items' titles
+    */
     func setLanguagesSelection()
     {
         let langNames = sorted(langs.keys.array)
@@ -88,6 +104,9 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         
     }
     
+    /**
+    Sets the needed configurations for show the line numbers in the input text view
+    */
     func setupNumberedTextView()
     {
         let lineNumberView = NoodleLineNumberView(scrollView: scrollView)
@@ -99,6 +118,9 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         
     }
     
+    /**
+    Updates the visible fields according to the selected language
+    */
     func updateUIFieldsForSelectedLanguage()
     {
         loadSelectedLanguageModel()
@@ -213,7 +235,11 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     }
 
     
+    /**
+    Saves all the generated files in the specified path
     
+    :param: path in which to save the files
+    */
     func saveToPath(path : String)
     {
         let fileManager = NSFileManager.defaultManager()
@@ -234,12 +260,14 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     
     //MARK: - Messages
+    /**
+    Shows the top right notification. Call it after saving the files successfully
+    */
     func showDoneSuccessfully()
     {
         let notification = NSUserNotification()
         notification.title = "Success!"
         notification.informativeText = "Your \(selectedLang.langName) model files have been generated successfully."
-        notification.identifier = "\(selectedLang.langName)Files"
         notification.deliveryDate = NSDate()
 
         let center = NSUserNotificationCenter.defaultUserNotificationCenter()
@@ -247,6 +275,9 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         center.deliverNotification(notification)
     }
     
+    /**
+    Shows an NSAlert for the passed error
+    */
     func showError(error: NSError!)
     {
         if error == nil{
@@ -256,6 +287,9 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         alert.runModal()
     }
     
+    /**
+    Shows the passed error status message
+    */
     func showErrorStatus(errorMessage: String)
     {
 
@@ -263,6 +297,9 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         statusTextField.stringValue = errorMessage
     }
     
+    /**
+    Shows the passed success status message
+    */
     func showSuccessStatus(successMessage: String)
     {
         
@@ -271,6 +308,9 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     }
     
     //MARK: - Generate files content
+    /**
+    Validates the sourceText string input, and takes any needed action to generate the model classes and view them in the preview panel
+    */
     func generateClasses()
     {
         saveButton.enabled = false
@@ -310,10 +350,15 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         }
     }
     
+    /**
+    Creates and returns an instance of FilesContentBuilder. It also configure the values from the UI components to the instance. I.e includeConstructors
+    
+    :returns: instance of configured FilesContentBuilder
+    */
     func prepareAndGetFilesBuilder() -> FilesContentBuilder
     {
         let filesBuilder = FilesContentBuilder.instance
-        filesBuilder.includeConstructs = (generateConstructors.state == NSOnState)
+        filesBuilder.includeConstructors = (generateConstructors.state == NSOnState)
         filesBuilder.includeUtilities = (generateUtilityMethods.state == NSOnState)
         filesBuilder.firstLine = firstLineField.stringValue
         filesBuilder.lang = selectedLang

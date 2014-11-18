@@ -33,6 +33,10 @@
 import Foundation
 
 extension String{
+    /**
+    Very simple method converts the last characters of a string to convert from plural to singular. For example "praties" will be changed to "party" and "stars" will be changed to "star"
+    The method does not hanle any special cases, like uncountable name i.e "people" will not be converted to "person"
+    */
     func toSingular() -> String
     {
         var singular = self
@@ -44,9 +48,7 @@ extension String{
                 singular = self.stringByReplacingOccurrencesOfString(lastThreeChars, withString: "y", options: .allZeros, range: range)
             }
                 
-        }
-        
-        if length > 2{
+        }else if length > 2{
             let range = Range(start: advance(endIndex, -1), end: endIndex)
             let lastChar = self.substringWithRange(range)
             if lastChar == "s" {
