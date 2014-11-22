@@ -30,10 +30,10 @@
                                             "]"
                                             ],
     "basicTypesWithSpecialFetchingNeeds" : [
-                                            "Int", "Bool", "Character", "Float", "Double", "String"
+                                            "Int", "Bool", "Character", "Float", "Double", "String", "AnyObject"
                                             ],
     "basicTypesWithSpecialFetchingNeedsReplacements" : [
-                                            "integerValue", "boolValue", "charValue", "floatValue", "doubleValue", "stringValue"
+                                            "integerValue", "boolValue", "charValue", "floatValue", "doubleValue", "stringValue", "stringValue"
                                             ],
     "constructors": [
                      {

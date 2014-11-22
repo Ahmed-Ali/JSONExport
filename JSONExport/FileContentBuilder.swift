@@ -219,6 +219,8 @@ class FilesContentBuilder{
             }else{
                 name = lang.dataTypes.stringType
             }
+        }else if value is NSNull{
+            name = lang.genericType
         }
         
         return name
