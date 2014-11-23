@@ -24,6 +24,8 @@ Currently you can convert your JSON object to one of the following lanaguages:
 2. Swift Classes - parses the JSON using built-in NSJSONSerialization.
 3. Swift Sturcutres - parses the JSON using built-in NSJSONSerialization.
 4. Swift Classes - parses the JSON using [SwiftyJSON](https://github.com/lingoer/SwiftyJSON) library
+5. Objective-C - iOS - parses the JSON using built-in NSJSONSerialization for iOS.
+6. Objective-C - MAC - parses the JSON using built-in NSJSONSerialization for MAC.
 
 Installation
 ========================
@@ -31,13 +33,13 @@ Kindly clone the project, build it using xCode 6.1+ on any Mac OS X 10.10 or abo
 
 To Do
 ========================
-* Support Objective-C
+* ~~Support Objective-C~~ Done
 * Sync multible classes with the same name (if a conflict happen)
 * Accept JSON arrays
 * Load JSON data from web
 * Open .json files with JSONExport
 * Supported languages management editor.
-* Try to use [HanSON](https://github.com/timjansen/hanson/) while working on the supported language JSON files, so the formatting of the file can be more readable.
+
 
 Final Note
 ========================
