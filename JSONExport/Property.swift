@@ -67,14 +67,33 @@ class Property{
     */
     var lang : LangModel
     
+    /**
+    A sample value which this property represents
+    */
+    var sampleValue : AnyObject!
+    
+    /**
+    Whether this property is for header file
+    */
     var propertyForHeaderFile : Bool = false
+    
+    /**
+    If this property is an array, this property should contain the type for its elements
+    */
+    var elementsType  = ""
+    
     /**
     Returns a valid property declaration using the LangModel.instanceVarDefinition value
     */
     var toString: String{
         var string : String!
         if propertyForHeaderFile{
-            string = lang.headerFileData.instanceVarDefinition.stringByReplacingOccurrencesOfString(varName, withString: nativeName);
+            if lang.headerFileData.instanceVarWithSpeicalDefinition != nil && find(lang.headerFileData.typesNeedSpecialDefinition, type) != nil{
+                string = lang.headerFileData.instanceVarWithSpeicalDefinition.stringByReplacingOccurrencesOfString(varName, withString: nativeName);
+            }else{
+                string = lang.headerFileData.instanceVarDefinition.stringByReplacingOccurrencesOfString(varName, withString: nativeName);
+            }
+            
             
         }else{
             string = lang.instanceVarDefinition.stringByReplacingOccurrencesOfString(varName, withString: nativeName);

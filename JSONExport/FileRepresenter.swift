@@ -305,6 +305,7 @@ class FileRepresenter{
                     }else{
                         propertyHandlingStr = method.forEachArrayOfCustomTypeProperty
                     }
+                    propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(elementType, withString: property.elementsType)
                 }else{
                     if lang.basicTypesWithSpecialStoringNeeds != nil && method.forEachPropertyWithSpecialStoringNeeds != nil && find(lang.basicTypesWithSpecialStoringNeeds, property.type) != nil{
                         propertyHandlingStr = method.forEachPropertyWithSpecialStoringNeeds
@@ -404,8 +405,7 @@ class FileRepresenter{
         if(propertyTypeIsBasicType(property)){
             
             if constructor.fetchArrayOfBasicTypePropertyFromMap != nil{
-                let type = propertyTypeWithoutArrayWords(property)
-                let index = find(lang.basicTypesWithSpecialFetchingNeeds, type)
+                let index = find(lang.basicTypesWithSpecialFetchingNeeds, property.elementsType)
                 if index != nil{
                     propertyStr = constructor.fetchArrayOfBasicTypePropertyFromMap
                     let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements[index!]
@@ -422,11 +422,11 @@ class FileRepresenter{
         }else{
             //array of custom type
             propertyStr = constructor.fetchArrayOfCustomTypePropertyFromMap
-            let perpertyElementType = propertyTypeWithoutArrayWords(property)
-            propertyStr = propertyStr.stringByReplacingOccurrencesOfString(elementType, withString: perpertyElementType)
+            
+           
             
         }
-        
+         propertyStr = propertyStr.stringByReplacingOccurrencesOfString(elementType, withString: property.elementsType)
         return propertyStr
     }
     

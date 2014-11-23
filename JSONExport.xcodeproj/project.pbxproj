@@ -17,12 +17,14 @@
 		E23C7E611A17CAC50009B9E5 /* SwiftyJSON-Class.json in Resources */ = {isa = PBXBuildFile; fileRef = E23C7E601A17CAC50009B9E5 /* SwiftyJSON-Class.json */; };
 		E23C7E631A17CAF50009B9E5 /* Swift-Struct.json in Resources */ = {isa = PBXBuildFile; fileRef = E23C7E621A17CAF50009B9E5 /* Swift-Struct.json */; };
 		E278F9C61A2149AC00306EFC /* HeaderFileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E278F9C51A2149AC00306EFC /* HeaderFileData.swift */; };
-		E278F9C81A214FF000306EFC /* Objective-C.json in Resources */ = {isa = PBXBuildFile; fileRef = E278F9C71A214FF000306EFC /* Objective-C.json */; };
+		E278F9C81A214FF000306EFC /* Objective-C-iOS.json in Resources */ = {isa = PBXBuildFile; fileRef = E278F9C71A214FF000306EFC /* Objective-C-iOS.json */; };
 		E278F9CA1A2152D800306EFC /* HeaderFileRepresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E278F9C91A2152D800306EFC /* HeaderFileRepresenter.swift */; };
 		E28631521A158CFA0041B178 /* Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286314E1A158CFA0041B178 /* Constructor.swift */; };
 		E28631531A158CFA0041B178 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286314F1A158CFA0041B178 /* DataType.swift */; };
 		E28631541A158CFA0041B178 /* LangModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28631501A158CFA0041B178 /* LangModel.swift */; };
 		E28631551A158CFA0041B178 /* UtilityMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28631511A158CFA0041B178 /* UtilityMethod.swift */; };
+		E286D00B1A226ADE001AEF0D /* SharedUtilityMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286D00A1A226ADE001AEF0D /* SharedUtilityMethods.swift */; };
+		E2DEAE9B1A2295E80001818B /* Objective-C-Mac.json in Resources */ = {isa = PBXBuildFile; fileRef = E2DEAE9A1A2295E80001818B /* Objective-C-Mac.json */; };
 		E2F07E8C1A0B31C3004A1DAA /* Swift-Class.json in Resources */ = {isa = PBXBuildFile; fileRef = E2F07E8B1A0B31C3004A1DAA /* Swift-Class.json */; };
 		E2FA87BB1A059AC100648EB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FA87BA1A059AC100648EB6 /* AppDelegate.swift */; };
 		E2FA87BD1A059AC100648EB6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FA87BC1A059AC100648EB6 /* ViewController.swift */; };
@@ -46,12 +48,14 @@
 		E23C7E601A17CAC50009B9E5 /* SwiftyJSON-Class.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "SwiftyJSON-Class.json"; sourceTree = "<group>"; };
 		E23C7E621A17CAF50009B9E5 /* Swift-Struct.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Swift-Struct.json"; sourceTree = "<group>"; };
 		E278F9C51A2149AC00306EFC /* HeaderFileData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFileData.swift; sourceTree = "<group>"; };
-		E278F9C71A214FF000306EFC /* Objective-C.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Objective-C.json"; sourceTree = "<group>"; };
+		E278F9C71A214FF000306EFC /* Objective-C-iOS.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Objective-C-iOS.json"; sourceTree = "<group>"; };
 		E278F9C91A2152D800306EFC /* HeaderFileRepresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFileRepresenter.swift; sourceTree = "<group>"; };
 		E286314E1A158CFA0041B178 /* Constructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constructor.swift; sourceTree = "<group>"; };
 		E286314F1A158CFA0041B178 /* DataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
 		E28631501A158CFA0041B178 /* LangModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LangModel.swift; sourceTree = "<group>"; };
 		E28631511A158CFA0041B178 /* UtilityMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityMethod.swift; sourceTree = "<group>"; };
+		E286D00A1A226ADE001AEF0D /* SharedUtilityMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedUtilityMethods.swift; sourceTree = "<group>"; };
+		E2DEAE9A1A2295E80001818B /* Objective-C-Mac.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Objective-C-Mac.json"; sourceTree = "<group>"; };
 		E2F07E8B1A0B31C3004A1DAA /* Swift-Class.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-Class.json"; path = "PredefinedLanguages/Swift-Class.json"; sourceTree = "<group>"; };
 		E2FA87B51A059AC100648EB6 /* JSONExport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSONExport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2FA87B91A059AC100648EB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -91,6 +95,7 @@
 			children = (
 				E2197C5C1A0EAEB900549D03 /* StringExtension.swift */,
 				E230BA2B1A113F8C00AE2054 /* FilePreviewCell.swift */,
+				E286D00A1A226ADE001AEF0D /* SharedUtilityMethods.swift */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -126,7 +131,8 @@
 		E2F07E8A1A0B3192004A1DAA /* Supported Languages */ = {
 			isa = PBXGroup;
 			children = (
-				E278F9C71A214FF000306EFC /* Objective-C.json */,
+				E278F9C71A214FF000306EFC /* Objective-C-iOS.json */,
+				E2DEAE9A1A2295E80001818B /* Objective-C-Mac.json */,
 				E2F07E8B1A0B31C3004A1DAA /* Swift-Class.json */,
 				E23C7E621A17CAF50009B9E5 /* Swift-Struct.json */,
 				E23C7E601A17CAC50009B9E5 /* SwiftyJSON-Class.json */,
@@ -245,9 +251,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2DEAE9B1A2295E80001818B /* Objective-C-Mac.json in Resources */,
 				E23C7E611A17CAC50009B9E5 /* SwiftyJSON-Class.json in Resources */,
 				E2FA87BF1A059AC100648EB6 /* Images.xcassets in Resources */,
-				E278F9C81A214FF000306EFC /* Objective-C.json in Resources */,
+				E278F9C81A214FF000306EFC /* Objective-C-iOS.json in Resources */,
 				E2F07E8C1A0B31C3004A1DAA /* Swift-Class.json in Resources */,
 				E2FA87C21A059AC100648EB6 /* Main.storyboard in Resources */,
 				E2193D061A1292A200138A29 /* Java-Android.json in Resources */,
@@ -264,6 +271,7 @@
 			files = (
 				E28631521A158CFA0041B178 /* Constructor.swift in Sources */,
 				E22BA2C51A162B54005CE143 /* FileContentBuilder.swift in Sources */,
+				E286D00B1A226ADE001AEF0D /* SharedUtilityMethods.swift in Sources */,
 				E2FA87D81A05C16300648EB6 /* FileRepresenter.swift in Sources */,
 				E21292581A0C58CF0015027D /* SharedConstants.swift in Sources */,
 				E2197C5D1A0EAEB900549D03 /* StringExtension.swift in Sources */,

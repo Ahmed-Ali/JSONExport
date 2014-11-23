@@ -105,6 +105,12 @@ class HeaderFileRepresenter : FileRepresenter{
             for property in properties{
                 if property.isCustomClass{
                     fileContent += lang.headerFileData.importForEachCustomType.stringByReplacingOccurrencesOfString(modelName, withString: property.type)
+                }else if property.isArray{
+                    //if it is an array of custom types
+                    let basicTypes = lang.dataTypes.toDictionary().allValues as [String]
+                    if find(basicTypes, property.elementsType) == nil{
+                        fileContent += lang.headerFileData.importForEachCustomType.stringByReplacingOccurrencesOfString(modelName, withString: property.elementsType)
+                    }
                 }
             }
         }

@@ -13,10 +13,12 @@ class HeaderFileData{
     var headerFileExtension : String!
     var importForEachCustomType : String!
     var instanceVarDefinition : String!
+    var instanceVarWithSpeicalDefinition : String!
     var modelDefinition : String!
     var modelEnd : String!
     var modelStart : String!
     var staticImports : String!
+    var typesNeedSpecialDefinition : [String]!
     var utilityMethodSignatures : [String]!
     
     
@@ -28,11 +30,14 @@ class HeaderFileData{
         headerFileExtension = dictionary["headerFileExtension"] as? String
         importForEachCustomType = dictionary["importForEachCustomType"] as? String
         instanceVarDefinition = dictionary["instanceVarDefinition"] as? String
+        instanceVarWithSpeicalDefinition = dictionary["instanceVarWithSpeicalDefinition"] as? String
         modelDefinition = dictionary["modelDefinition"] as? String
         modelEnd = dictionary["modelEnd"] as? String
         modelStart = dictionary["modelStart"] as? String
         staticImports = dictionary["staticImports"] as? String
+        typesNeedSpecialDefinition = dictionary["typesNeedSpecialDefinition"] as? [String]
         utilityMethodSignatures = dictionary["utilityMethodSignatures"] as? [String]
+        
     }
     
     /**
@@ -53,6 +58,9 @@ class HeaderFileData{
         if instanceVarDefinition != nil{
             dictionary["instanceVarDefinition"] = instanceVarDefinition
         }
+        if instanceVarWithSpeicalDefinition != nil{
+            dictionary["instanceVarWithSpeicalDefinition"] = instanceVarWithSpeicalDefinition
+        }
         if modelDefinition != nil{
             dictionary["modelDefinition"] = modelDefinition
         }
@@ -64,6 +72,9 @@ class HeaderFileData{
         }
         if staticImports != nil{
             dictionary["staticImports"] = staticImports
+        }
+        if typesNeedSpecialDefinition != nil{
+            dictionary["typesNeedSpecialDefinition"] = typesNeedSpecialDefinition
         }
         if utilityMethodSignatures != nil{
             dictionary["utilityMethodSignatures"] = utilityMethodSignatures

@@ -151,8 +151,10 @@ class FilesContentBuilder{
                 type = lang.arrayType.stringByReplacingOccurrencesOfString(elementType, withString: leafClassName)
                 
                 property = Property(jsonName: jsonKeyName, nativeName: nativePropertyName, type: type, isArray: true, isCustomClass: false, lang:lang)
+                property.elementsType = leafClassName
             }else{
                 property = Property(jsonName: jsonKeyName, nativeName: nativePropertyName, type: type, isArray: true, isCustomClass: false, lang:lang)
+                property.elementsType = typeNameForArrayElements(value as NSArray, lang:lang)
             }
         }else{
             property = Property(jsonName: jsonKeyName, nativeName: nativePropertyName, type: type, lang:lang)
