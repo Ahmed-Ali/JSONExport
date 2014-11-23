@@ -58,7 +58,7 @@ class FilesContentBuilder{
     :param: jsonObject acts as an example of the json object, which the generated fill be able to handle
     :param: files the generated file will be appended to this array
     */
-    func addFileWithName(var className: String, jsonObject: NSDictionary, inout files : [FileRepresenter]){
+    func addFileWithName(var className: String, jsonObject: NSDictionary, inout files : [FileRepresenter], isHeaderFile: Bool = false){
         var properties = [Property]()
         if !className.hasPrefix(classPrefix){
             className = "\(classPrefix)\(className)"
@@ -69,7 +69,13 @@ class FilesContentBuilder{
         //loop all the json properties and handle each one individually
         for jsonPropertyName in jsonProperties{
             let value : AnyObject = jsonObject[jsonPropertyName]!
-            let property = propertyForValue(value, jsonKeyName: jsonPropertyName)
+            let property = propertyForValue(value, jsonKeyName: jsonPropertyName, isHeaderFile: isHeaderFile)
+            
+            if isHeaderFile{
+                property.propertyForHeaderFile = true
+                properties.append(property)
+                continue
+            }
             
             //recursively handle custom types
             if property.isCustomClass{
@@ -86,8 +92,17 @@ class FilesContentBuilder{
             
         }
         
+        
+        
+        
         //create the file
-        let file = FileRepresenter(className: className, properties: properties, lang:lang)
+        var file : FileRepresenter!
+        if isHeaderFile{
+            file = HeaderFileRepresenter(className: className, properties: properties, lang:lang)
+        }else{
+            file = FileRepresenter(className: className, properties: properties, lang:lang)
+        }
+        
         file.includeUtilities = includeUtilities
         file.includeConstructors = includeConstructors
         if lang.supportsFirstLineStatement != nil && lang.supportsFirstLineStatement!{
@@ -96,6 +111,14 @@ class FilesContentBuilder{
             file.firstLine = ""
         }
         files.append(file)
+        if !isHeaderFile{
+            if lang.headerFileData != nil{
+                //add header file first
+                addFileWithName(className, jsonObject: jsonObject, files: &files, isHeaderFile: true)
+            }
+        }
+        
+        
     }
     
     
@@ -106,7 +129,7 @@ class FilesContentBuilder{
     :param: jsonKeyName for the property
     :returns: a Property instance
     */
-    func propertyForValue(value: AnyObject, jsonKeyName: String) -> Property
+    func propertyForValue(value: AnyObject, jsonKeyName: String, isHeaderFile: Bool) -> Property
     {
         let nativePropertyName = propertyNativeName(jsonKeyName)
         var type = propertyTypeName(value)

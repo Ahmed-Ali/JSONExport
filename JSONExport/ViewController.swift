@@ -247,7 +247,11 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         
         for file in files{
             let fileContent = file.fileContent
-            let filePath = "\(path)/\(file.className).\(selectedLang.fileExtension)"
+            var fileExtension = selectedLang.fileExtension
+            if file is HeaderFileRepresenter{
+                fileExtension = selectedLang.headerFileData.headerFileExtension
+            }
+            let filePath = "\(path)/\(file.className).\(fileExtension)"
             
             fileContent.writeToFile(filePath, atomically: false, encoding: NSUTF8StringEncoding, error: &error)
             if error != nil{

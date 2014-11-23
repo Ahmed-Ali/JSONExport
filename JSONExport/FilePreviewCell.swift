@@ -21,7 +21,15 @@ class FilePreviewCell: NSTableCellView, NSTextViewDelegate {
     var file: FileRepresenter!{
         didSet{
             if file != nil{
-                classNameLabel.stringValue = file.className
+                var fileName = file.className
+                fileName += "."
+                if file is HeaderFileRepresenter{
+                    fileName += file.lang.headerFileData.headerFileExtension
+                }else{
+                    fileName += file.lang.fileExtension
+                }
+                classNameLabel.stringValue = fileName
+                
                 textView.string = file.toString()
                 if file.includeConstructors{
                     constructors.state = NSOnState

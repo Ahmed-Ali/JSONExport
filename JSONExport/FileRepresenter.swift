@@ -91,6 +91,7 @@ class FileRepresenter{
         appendFirstLineStatement()
         appendCopyrights()
         appendStaticImports()
+        appendHeaderFileImport()
         appendCustomImports()
         //start the model defination
         fileContent += lang.modelDefinition.stringByReplacingOccurrencesOfString(modelName, withString: className)
@@ -123,6 +124,15 @@ class FileRepresenter{
         if lang.staticImports != nil{
             fileContent += lang.staticImports
             fileContent += "\n"
+        }
+    }
+
+    func appendHeaderFileImport()
+    {
+        if lang.importHeaderFile != nil{
+            fileContent += "\n"
+            fileContent += lang.importHeaderFile
+            fileContent = fileContent.stringByReplacingOccurrencesOfString(modelName, withString: className)
         }
     }
     
@@ -192,6 +202,9 @@ class FileRepresenter{
     {
         fileContent += "\n"
         for property in properties{
+            if countElements(property.toString) == 0{
+                
+            }
             fileContent += property.toString
         }
     }
@@ -229,10 +242,13 @@ class FileRepresenter{
                 get = lang.getter
             }
             
-            get = get.stringByReplacingOccurrencesOfString(capitalizedVarName, withString: capVarName)
-            get = get.stringByReplacingOccurrencesOfString(varName, withString: property.nativeName)
-            get = get.stringByReplacingOccurrencesOfString(varType, withString: property.type)
-            fileContent += get
+            if get != nil{
+                get = get.stringByReplacingOccurrencesOfString(capitalizedVarName, withString: capVarName)
+                get = get.stringByReplacingOccurrencesOfString(varName, withString: property.nativeName)
+                get = get.stringByReplacingOccurrencesOfString(varType, withString: property.type)
+                fileContent += get
+            }
+            
         }
     }
     
@@ -290,10 +306,15 @@ class FileRepresenter{
                         propertyHandlingStr = method.forEachArrayOfCustomTypeProperty
                     }
                 }else{
-                    propertyHandlingStr = method.forEachProperty
-                    if property.isCustomClass{
-                        propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(additionalCustomTypeProperty, withString:method.additionalyForEachCustomTypeProperty)
+                    if lang.basicTypesWithSpecialStoringNeeds != nil && method.forEachPropertyWithSpecialStoringNeeds != nil && find(lang.basicTypesWithSpecialStoringNeeds, property.type) != nil{
+                        propertyHandlingStr = method.forEachPropertyWithSpecialStoringNeeds
+                    }else{
+                        propertyHandlingStr = method.forEachProperty
+                        if property.isCustomClass{
+                            propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(additionalCustomTypeProperty, withString:method.additionalyForEachCustomTypeProperty)
+                        }
                     }
+                    
                 }
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(varName, withString:property.nativeName)
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(varType, withString:property.type)
@@ -428,7 +449,4 @@ class FileRepresenter{
         
         return propertyStr
     }
-    
 }
-
-

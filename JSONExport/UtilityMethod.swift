@@ -18,7 +18,7 @@ class UtilityMethod{
 	var forEachProperty : String!
 	var returnStatement : String!
 	var signature : String!
-
+    var forEachPropertyWithSpecialStoringNeeds : String!
 
 	/**
 	 * Instantiate the instance using the passed dictionary values to set the properties values
@@ -33,6 +33,7 @@ class UtilityMethod{
 		forEachProperty = dictionary["forEachProperty"] as? String
 		returnStatement = dictionary["returnStatement"] as? String
 		signature = dictionary["signature"] as? String
+        forEachPropertyWithSpecialStoringNeeds = dictionary["forEachPropertyWithSpecialStoringNeeds"] as? String
 	}
 
 	/**
@@ -68,6 +69,11 @@ class UtilityMethod{
 		if signature != nil{
 			dictionary["signature"] = signature
 		}
+        
+        if forEachPropertyWithSpecialStoringNeeds != nil{
+            dictionary["forEachPropertyWithSpecialStoringNeeds"] = forEachPropertyWithSpecialStoringNeeds
+        }
+        
 		return dictionary
 	}
 

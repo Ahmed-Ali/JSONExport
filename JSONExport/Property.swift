@@ -67,11 +67,19 @@ class Property{
     */
     var lang : LangModel
     
+    var propertyForHeaderFile : Bool = false
     /**
     Returns a valid property declaration using the LangModel.instanceVarDefinition value
     */
     var toString: String{
-        var string = lang.instanceVarDefinition.stringByReplacingOccurrencesOfString(varName, withString: nativeName);
+        var string : String!
+        if propertyForHeaderFile{
+            string = lang.headerFileData.instanceVarDefinition.stringByReplacingOccurrencesOfString(varName, withString: nativeName);
+            
+        }else{
+            string = lang.instanceVarDefinition.stringByReplacingOccurrencesOfString(varName, withString: nativeName);
+        }
+        
         string = string.stringByReplacingOccurrencesOfString(varType, withString: type)
         
         return string

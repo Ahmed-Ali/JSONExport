@@ -16,6 +16,9 @@
 		E230BA2C1A113F8C00AE2054 /* FilePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E230BA2B1A113F8C00AE2054 /* FilePreviewCell.swift */; };
 		E23C7E611A17CAC50009B9E5 /* SwiftyJSON-Class.json in Resources */ = {isa = PBXBuildFile; fileRef = E23C7E601A17CAC50009B9E5 /* SwiftyJSON-Class.json */; };
 		E23C7E631A17CAF50009B9E5 /* Swift-Struct.json in Resources */ = {isa = PBXBuildFile; fileRef = E23C7E621A17CAF50009B9E5 /* Swift-Struct.json */; };
+		E278F9C61A2149AC00306EFC /* HeaderFileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E278F9C51A2149AC00306EFC /* HeaderFileData.swift */; };
+		E278F9C81A214FF000306EFC /* Objective-C.json in Resources */ = {isa = PBXBuildFile; fileRef = E278F9C71A214FF000306EFC /* Objective-C.json */; };
+		E278F9CA1A2152D800306EFC /* HeaderFileRepresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E278F9C91A2152D800306EFC /* HeaderFileRepresenter.swift */; };
 		E28631521A158CFA0041B178 /* Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286314E1A158CFA0041B178 /* Constructor.swift */; };
 		E28631531A158CFA0041B178 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286314F1A158CFA0041B178 /* DataType.swift */; };
 		E28631541A158CFA0041B178 /* LangModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28631501A158CFA0041B178 /* LangModel.swift */; };
@@ -42,6 +45,9 @@
 		E230BA2B1A113F8C00AE2054 /* FilePreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePreviewCell.swift; sourceTree = "<group>"; };
 		E23C7E601A17CAC50009B9E5 /* SwiftyJSON-Class.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "SwiftyJSON-Class.json"; sourceTree = "<group>"; };
 		E23C7E621A17CAF50009B9E5 /* Swift-Struct.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Swift-Struct.json"; sourceTree = "<group>"; };
+		E278F9C51A2149AC00306EFC /* HeaderFileData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFileData.swift; sourceTree = "<group>"; };
+		E278F9C71A214FF000306EFC /* Objective-C.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Objective-C.json"; sourceTree = "<group>"; };
+		E278F9C91A2152D800306EFC /* HeaderFileRepresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFileRepresenter.swift; sourceTree = "<group>"; };
 		E286314E1A158CFA0041B178 /* Constructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constructor.swift; sourceTree = "<group>"; };
 		E286314F1A158CFA0041B178 /* DataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
 		E28631501A158CFA0041B178 /* LangModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LangModel.swift; sourceTree = "<group>"; };
@@ -72,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				E2FA87D71A05C16300648EB6 /* FileRepresenter.swift */,
+				E278F9C91A2152D800306EFC /* HeaderFileRepresenter.swift */,
 				E2FA87D91A05C1BE00648EB6 /* Property.swift */,
 				E21292571A0C58CF0015027D /* SharedConstants.swift */,
 				E22BA2C41A162B54005CE143 /* FileContentBuilder.swift */,
@@ -119,6 +126,7 @@
 		E2F07E8A1A0B3192004A1DAA /* Supported Languages */ = {
 			isa = PBXGroup;
 			children = (
+				E278F9C71A214FF000306EFC /* Objective-C.json */,
 				E2F07E8B1A0B31C3004A1DAA /* Swift-Class.json */,
 				E23C7E621A17CAF50009B9E5 /* Swift-Struct.json */,
 				E23C7E601A17CAC50009B9E5 /* SwiftyJSON-Class.json */,
@@ -134,6 +142,7 @@
 				E286314F1A158CFA0041B178 /* DataType.swift */,
 				E28631501A158CFA0041B178 /* LangModel.swift */,
 				E28631511A158CFA0041B178 /* UtilityMethod.swift */,
+				E278F9C51A2149AC00306EFC /* HeaderFileData.swift */,
 			);
 			name = "Lang Data Models";
 			sourceTree = "<group>";
@@ -238,6 +247,7 @@
 			files = (
 				E23C7E611A17CAC50009B9E5 /* SwiftyJSON-Class.json in Resources */,
 				E2FA87BF1A059AC100648EB6 /* Images.xcassets in Resources */,
+				E278F9C81A214FF000306EFC /* Objective-C.json in Resources */,
 				E2F07E8C1A0B31C3004A1DAA /* Swift-Class.json in Resources */,
 				E2FA87C21A059AC100648EB6 /* Main.storyboard in Resources */,
 				E2193D061A1292A200138A29 /* Java-Android.json in Resources */,
@@ -265,6 +275,8 @@
 				E2FA87DA1A05C1BE00648EB6 /* Property.swift in Sources */,
 				E230BA2C1A113F8C00AE2054 /* FilePreviewCell.swift in Sources */,
 				E28631531A158CFA0041B178 /* DataType.swift in Sources */,
+				E278F9C61A2149AC00306EFC /* HeaderFileData.swift in Sources */,
+				E278F9CA1A2152D800306EFC /* HeaderFileRepresenter.swift in Sources */,
 				E20A0DAD1A1170F1003B3D62 /* NoodleLineNumberMarker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

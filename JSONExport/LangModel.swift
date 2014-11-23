@@ -12,6 +12,7 @@ class LangModel{
 	var arrayType : String!
 	var basicTypesWithSpecialFetchingNeeds : [String]!
     var basicTypesWithSpecialFetchingNeedsReplacements : [String]!
+    var basicTypesWithSpecialStoringNeeds : [String]!
 	var booleanGetter : String!
     var briefDescription : String!
     var constructors : [Constructor]!
@@ -21,6 +22,7 @@ class LangModel{
 	var genericType : String!
 	var getter : String!
 	var importForEachCustomType : String!
+    var importHeaderFile : String!
 	var instanceVarDefinition : String!
 	var langName : String!
 	var modelDefinition : String!
@@ -32,7 +34,7 @@ class LangModel{
     var firstLineHint : String!
 	var utilityMethods : [UtilityMethod]!
 	var wordsToRemoveToGetArrayElementsType : [String]!
-    
+    var headerFileData : HeaderFileData!
 
 	/**
 	 * Instantiate the instance using the passed dictionary values to set the properties values
@@ -41,6 +43,7 @@ class LangModel{
 		arrayType = dictionary["arrayType"] as? String
 		basicTypesWithSpecialFetchingNeeds = dictionary["basicTypesWithSpecialFetchingNeeds"] as? [String]
         basicTypesWithSpecialFetchingNeedsReplacements = dictionary["basicTypesWithSpecialFetchingNeedsReplacements"] as? [String]
+        basicTypesWithSpecialStoringNeeds = dictionary["basicTypesWithSpecialStoringNeeds"] as? [String]
 		booleanGetter = dictionary["booleanGetter"] as? String
         briefDescription = dictionary["briefDescription"] as? String
 		constructors = [Constructor]()
@@ -53,6 +56,7 @@ class LangModel{
 		if let dataTypesData = dictionary["dataTypes"] as? NSDictionary{
 				dataTypes = DataType(fromDictionary: dataTypesData)
 			}
+        importHeaderFile = dictionary["importHeaderFile"] as? String
 		displayLangName = dictionary["displayLangName"] as? String
 		fileExtension = dictionary["fileExtension"] as? String
 		genericType = dictionary["genericType"] as? String
@@ -75,6 +79,10 @@ class LangModel{
 			}
 		}
 		wordsToRemoveToGetArrayElementsType = dictionary["wordsToRemoveToGetArrayElementsType"] as? [String]
+        
+        if let headerFileDataData = dictionary["headerFileData"] as? NSDictionary{
+            headerFileData = HeaderFileData(fromDictionary: headerFileDataData)
+        }
 	}
 
 	/**
@@ -91,6 +99,12 @@ class LangModel{
 		}
         if basicTypesWithSpecialFetchingNeedsReplacements != nil{
             dictionary["basicTypesWithSpecialFetchingNeedsReplacements"] = basicTypesWithSpecialFetchingNeedsReplacements
+        }
+        if basicTypesWithSpecialStoringNeeds != nil{
+            dictionary["basicTypesWithSpecialStoringNeeds"] = basicTypesWithSpecialStoringNeeds
+        }
+        if importHeaderFile != nil{
+            dictionary["importHeaderFile"] = importHeaderFile
         }
 		if booleanGetter != nil{
 			dictionary["booleanGetter"] = booleanGetter
@@ -160,6 +174,10 @@ class LangModel{
 		if wordsToRemoveToGetArrayElementsType != nil{
 			dictionary["wordsToRemoveToGetArrayElementsType"] = wordsToRemoveToGetArrayElementsType
 		}
+        
+        if headerFileData != nil{
+            dictionary["headerFileData"] = headerFileData.toDictionary()
+        }
 		return dictionary
 	}
 
