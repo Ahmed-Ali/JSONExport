@@ -317,9 +317,13 @@ class FileRepresenter{
                     
                 }
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(varName, withString:property.nativeName)
+                
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(varType, withString:property.type)
+                
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(jsonKeyName, withString:property.jsonName)
+                
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(additionalCustomTypeProperty, withString:"")
+                
                 fileContent += propertyHandlingStr
             }
             fileContent += method.returnStatement
@@ -334,8 +338,8 @@ class FileRepresenter{
     */
     func propertyTypeIsBasicType(property: Property) -> Bool{
         var isBasicType = false
-        var type = elementTypeNameFromArrayProperty(property.type)
-
+        var type = propertyTypeWithoutArrayWords(property)
+        
         let basicTypes = lang.dataTypes.toDictionary().allValues as [String]
         if find(basicTypes, type) != nil{
             isBasicType = true
@@ -347,13 +351,17 @@ class FileRepresenter{
     /**
     Removes any "array-specific character or words" from the passed type to return the type of the array elements. The "array-specific character or words" are fetched from the lang.wordsToRemoveToGetArrayElementsType property
     */
-    func elementTypeNameFromArrayProperty(arrayTypeName : String) -> String
+    func propertyTypeWithoutArrayWords(property: Property) -> String
     {
         
-        var type = arrayTypeName
+        var type = property.type
         
         for arrayWord in lang.wordsToRemoveToGetArrayElementsType{
             type = type.stringByReplacingOccurrencesOfString(arrayWord, withString: "")
+        }
+        
+        if countElements(type) == 0{
+            type = typeNameForArrayElements(property.sampleValue as NSArray, lang: lang)
         }
         return type
     }
@@ -396,7 +404,7 @@ class FileRepresenter{
         if(propertyTypeIsBasicType(property)){
             
             if constructor.fetchArrayOfBasicTypePropertyFromMap != nil{
-                let type = elementTypeNameFromArrayProperty(property.type)
+                let type = propertyTypeWithoutArrayWords(property)
                 let index = find(lang.basicTypesWithSpecialFetchingNeeds, type)
                 if index != nil{
                     propertyStr = constructor.fetchArrayOfBasicTypePropertyFromMap
@@ -414,7 +422,7 @@ class FileRepresenter{
         }else{
             //array of custom type
             propertyStr = constructor.fetchArrayOfCustomTypePropertyFromMap
-            let perpertyElementType = elementTypeNameFromArrayProperty(property.type)
+            let perpertyElementType = propertyTypeWithoutArrayWords(property)
             propertyStr = propertyStr.stringByReplacingOccurrencesOfString(elementType, withString: perpertyElementType)
             
         }
