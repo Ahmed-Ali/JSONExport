@@ -132,7 +132,7 @@ class FilesContentBuilder{
     func propertyForValue(value: AnyObject, jsonKeyName: String, isHeaderFile: Bool) -> Property
     {
         let nativePropertyName = propertyNativeName(jsonKeyName)
-        var type = propertyTypeName(value)
+        var type = propertyTypeName(value, lang:lang)
         var isDictionary = false
         var isArray = false
         
@@ -157,7 +157,7 @@ class FilesContentBuilder{
         }else{
             property = Property(jsonName: jsonKeyName, nativeName: nativePropertyName, type: type, lang:lang)
         }
-        
+        property.sampleValue = value
         return property
     }
     
@@ -206,7 +206,6 @@ class FilesContentBuilder{
         return output
     }
     
-    
     /**
     Creats and returns the class name for the passed proeprty name
     
@@ -215,104 +214,12 @@ class FilesContentBuilder{
     */
     func typeNameForPropertyName(propertyName : String) -> String{
         var swiftClassName = underscoresToCamelCaseForString(propertyName, startFromFirstChar: true).toSingular()
-       
+        
         if !swiftClassName.hasPrefix(classPrefix){
             swiftClassName = "\(classPrefix)\(swiftClassName)"
         }
+        
         return swiftClassName
     }
     
-    /**
-    Creats and returns the type name for the passed value
-    
-    :param: value example value to figure out its type
-    :returns: the type name
-    */
-    func propertyTypeName(value : AnyObject) -> String
-    {
-        var name = ""
-        if value is NSArray{
-            name = typeNameForArrayElements(value as NSArray)
-        }else if value is NSNumber{
-            name = typeForNumber(value as NSNumber)
-        }else if value is NSString{
-            let booleans : [String] = ["True", "true", "TRUE", "False", "false", "FALSE"]
-            if find(booleans, value as String) != nil{
-                name = lang.dataTypes.boolType
-            }else{
-                name = lang.dataTypes.stringType
-            }
-        }else if value is NSNull{
-            name = lang.genericType
-        }
-        
-        return name
-    }
-    
-    /**
-    Tries to figur out the type of the elements of the passed array and returns the type of the array that can hold these values
-    
-    :param: elements array to try to find out which type is suitable for its elements
-    
-    :returns: the type name
-    */
-    func typeNameForArrayElements(elements: NSArray) -> String{
-        var typeName : String!
-        let genericType = lang.arrayType.stringByReplacingOccurrencesOfString(elementType, withString: lang.genericType)
-        if elements.count == 0{
-            typeName = genericType
-            
-        }
-        for element in elements{
-            let currElementTypeName = propertyTypeName(element)
-            
-            let arrayTypeName = lang.arrayType.stringByReplacingOccurrencesOfString(elementType, withString: currElementTypeName)
-            
-            if typeName == nil{
-                typeName = arrayTypeName
-                
-            }else{
-                if typeName != arrayTypeName{
-                    typeName = genericType
-                    break
-                }
-            }
-        }
-        
-        return typeName
-    }
-    
-    /**
-    Returns one of the possible types for any numeric value (int, float, double, etc...)
-    
-    :param: number the numeric value
-    :returns: the type name
-    */
-    func typeForNumber(number : NSNumber) -> String
-    {
-        let numberType = CFNumberGetType(number as CFNumberRef)
-        
-        var typeName : String!
-        switch numberType{
-        case .CharType:
-            if (number.intValue == 0 || number.intValue == 1){
-                //it seems to be boolean
-                typeName = lang.dataTypes.boolType
-            }else{
-                typeName = lang.dataTypes.characterType
-            }
-        case .ShortType, .IntType:
-            typeName = lang.dataTypes.intType
-        case .FloatType:
-            typeName = lang.dataTypes.floatType
-        case .DoubleType:
-            typeName = lang.dataTypes.doubleType
-        case .LongType, .LongLongType:
-            typeName = lang.dataTypes.longType
-        default:
-            typeName = lang.dataTypes.intType
-        }
-        
-        return typeName
-    }
 }
