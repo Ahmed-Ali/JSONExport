@@ -123,7 +123,7 @@ class HeaderFileRepresenter : FileRepresenter{
     {
         fileContent += "\n"
         for property in properties{
-            fileContent += property.toString
+            fileContent += property.toString(forHeaderFile: true)
         }
     }
     

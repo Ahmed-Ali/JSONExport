@@ -72,10 +72,6 @@ class Property{
     */
     var sampleValue : AnyObject!
     
-    /**
-    Whether this property is for header file
-    */
-    var propertyForHeaderFile : Bool = false
     
     /**
     If this property is an array, this property should contain the type for its elements
@@ -83,11 +79,17 @@ class Property{
     var elementsType  = ""
     
     /**
+    For array properties, depetermines if the elements type is a custom type
+    */
+    var elementsAreOfCustomType = false
+    
+    /**
     Returns a valid property declaration using the LangModel.instanceVarDefinition value
     */
-    var toString: String{
+    func toString(forHeaderFile: Bool = false) -> String
+    {
         var string : String!
-        if propertyForHeaderFile{
+        if forHeaderFile{
             if lang.headerFileData.instanceVarWithSpeicalDefinition != nil && find(lang.headerFileData.typesNeedSpecialDefinition, type) != nil{
                 string = lang.headerFileData.instanceVarWithSpeicalDefinition.stringByReplacingOccurrencesOfString(varName, withString: nativeName);
             }else{
@@ -103,6 +105,7 @@ class Property{
         
         return string
     }
+    
     
     /** 
     The designated initializer for the class

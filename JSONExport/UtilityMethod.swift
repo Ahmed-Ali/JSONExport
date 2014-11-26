@@ -9,13 +9,14 @@ import Foundation
 
 class UtilityMethod{
 
-	var additionalyForEachCustomTypeProperty : String!
+	
 	var body : String!
 	var bodyEnd : String!
 	var bodyStart : String!
 	var comment : String!
 	var forEachArrayOfCustomTypeProperty : String!
 	var forEachProperty : String!
+    var forEachCustomTypeProperty : String!
 	var returnStatement : String!
 	var signature : String!
     var forEachPropertyWithSpecialStoringNeeds : String!
@@ -24,7 +25,7 @@ class UtilityMethod{
 	 * Instantiate the instance using the passed dictionary values to set the properties values
 	 */
 	init(fromDictionary dictionary: NSDictionary){
-		additionalyForEachCustomTypeProperty = dictionary["additionalyForEachCustomTypeProperty"] as? String
+		forEachCustomTypeProperty = dictionary["forEachCustomTypeProperty"] as? String
 		body = dictionary["body"] as? String
 		bodyEnd = dictionary["bodyEnd"] as? String
 		bodyStart = dictionary["bodyStart"] as? String
@@ -42,8 +43,8 @@ class UtilityMethod{
 	func toDictionary() -> NSDictionary
 	{
 		var dictionary = NSMutableDictionary()
-		if additionalyForEachCustomTypeProperty != nil{
-			dictionary["additionalyForEachCustomTypeProperty"] = additionalyForEachCustomTypeProperty
+		if forEachCustomTypeProperty != nil{
+			dictionary["forEachCustomTypeProperty"] = forEachCustomTypeProperty
 		}
 		if body != nil{
 			dictionary["body"] = body

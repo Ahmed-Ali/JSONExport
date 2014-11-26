@@ -58,4 +58,16 @@ extension String{
         }
         return singular
     }
+    
+    /**
+    Converts the first character to its lower case version
+    
+    :returns: the converted version
+    */
+    func lowercaseFirstChar() -> String{
+        let range = Range(start: startIndex, end: advance(startIndex, 1))
+        let firstLowerChar = self.substringWithRange(range).lowercaseString
+            
+        return self.stringByReplacingCharactersInRange(range, withString: firstLowerChar)
+    }
 }

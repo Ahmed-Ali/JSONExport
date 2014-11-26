@@ -190,22 +190,22 @@ class FileRepresenter{
             for property in properties{
                 if property.isCustomClass{
                     fileContent += lang.importForEachCustomType.stringByReplacingOccurrencesOfString(modelName, withString: property.type)
+                }else if property.isArray && property.elementsAreOfCustomType{
+                    fileContent += lang.importForEachCustomType.stringByReplacingOccurrencesOfString(modelName, withString: property.elementsType)
                 }
             }
         }
     }
     
     /**
-    Appends all the properties using the Property.stringPresentation method
+    Appends all the properties using the Property.toString(forHeaderFile: false) method
     */
     func appendProperties()
     {
         fileContent += "\n"
         for property in properties{
-            if countElements(property.toString) == 0{
-                
-            }
-            fileContent += property.toString
+            
+            fileContent += property.toString(forHeaderFile: false)
         }
     }
     
@@ -312,7 +312,7 @@ class FileRepresenter{
                     }else{
                         propertyHandlingStr = method.forEachProperty
                         if property.isCustomClass{
-                            propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(additionalCustomTypeProperty, withString:method.additionalyForEachCustomTypeProperty)
+                            propertyHandlingStr = method.forEachCustomTypeProperty
                         }
                     }
                     

@@ -55,8 +55,9 @@
                        "bodyStart": "\n\t{\n",
                        "bodyEnd": "\t}\n",
                        "body": "\t\tJSONObject jsonObject = new JSONObject();\n\t\ttry {\n",
-                       "forEachProperty": "\t\tjsonObject.put(\"<!JsonKeyName!>\", <!VarName!><!AdditionalForCustomTypeProperty!>);\n",
-                       "additionalyForEachCustomTypeProperty": ".toJsonObject()",
+                       "forEachProperty": "\t\tjsonObject.put(\"<!JsonKeyName!>\", <!VarName!>);\n",
+                       "forEachCustomTypeProperty" : "\t\tjsonObject.put(\"<!JsonKeyName!>\", <!VarName!>.toJsonObject());\n",
+                       
                        "forEachArrayOfCustomTypeProperty": "\t\tif(<!VarName!> != null && <!VarName!>.length > 0){\n\t\t\tJSONArray <!VarName!>JsonArray = new JSONArray();\n\t\t\tfor(<!VarType!> <!VarName!>Element : <!VarName!>){\n\t\t\t\t<!VarName!>JsonArray.put(<!VarName!>Element.toJsonObject());\n\t\t\t}\n\t\t\tjsonObject.put(\"<!JsonKeyName!>\", <!VarName!>JsonArray);\n\t\t}\n",
                        "returnStatement": "\t\t} catch (JSONException e) {\n\t\t\t// TODO Auto-generated catch block\n\t\t\te.printStackTrace();\n\t\t}\n\t\treturn jsonObject;\n"
                        }

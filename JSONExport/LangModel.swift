@@ -35,6 +35,7 @@ class LangModel{
 	var utilityMethods : [UtilityMethod]!
 	var wordsToRemoveToGetArrayElementsType : [String]!
     var headerFileData : HeaderFileData!
+    var supportMutualRelationships : Bool!
 
 	/**
 	 * Instantiate the instance using the passed dictionary values to set the properties values
@@ -83,6 +84,8 @@ class LangModel{
         if let headerFileDataData = dictionary["headerFileData"] as? NSDictionary{
             headerFileData = HeaderFileData(fromDictionary: headerFileDataData)
         }
+        
+        supportMutualRelationships = (dictionary["supportMutualRelationships"] as? NSString)?.boolValue
 	}
 
 	/**
@@ -177,6 +180,10 @@ class LangModel{
         
         if headerFileData != nil{
             dictionary["headerFileData"] = headerFileData.toDictionary()
+        }
+        
+        if supportMutualRelationships != nil{
+            dictionary["supportMutualRelationships"] = supportMutualRelationships
         }
 		return dictionary
 	}

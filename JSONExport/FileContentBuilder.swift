@@ -58,10 +58,17 @@ class FilesContentBuilder{
     :param: jsonObject acts as an example of the json object, which the generated fill be able to handle
     :param: files the generated file will be appended to this array
     */
-    func addFileWithName(var className: String, jsonObject: NSDictionary, inout files : [FileRepresenter], isHeaderFile: Bool = false){
+    func addFileWithName(var className: String, jsonObject: NSDictionary, inout files : [FileRepresenter],toOneRelationWithProperty: Property! = nil)
+    {
         var properties = [Property]()
         if !className.hasPrefix(classPrefix){
             className = "\(classPrefix)\(className)"
+        }
+        if toOneRelationWithProperty != nil{
+            if lang.supportMutualRelationships != nil && lang.supportMutualRelationships!{
+                properties.append(toOneRelationWithProperty)
+            }
+            
         }
         //sort all the keys in the passed json dictionary
         var jsonProperties = sorted(jsonObject.allKeys as [String])
@@ -69,22 +76,20 @@ class FilesContentBuilder{
         //loop all the json properties and handle each one individually
         for jsonPropertyName in jsonProperties{
             let value : AnyObject = jsonObject[jsonPropertyName]!
-            let property = propertyForValue(value, jsonKeyName: jsonPropertyName, isHeaderFile: isHeaderFile)
-            
-            if isHeaderFile{
-                property.propertyForHeaderFile = true
-                properties.append(property)
-                continue
-            }
+            let property = propertyForValue(value, jsonKeyName: jsonPropertyName)
             
             //recursively handle custom types
             if property.isCustomClass{
-                addFileWithName(property.type, jsonObject: value as NSDictionary, files:&files)
+                let rProperty = relationProperty(className)
+                addFileWithName(property.type, jsonObject: value as NSDictionary, files:&files, toOneRelationWithProperty: rProperty)
             }else if property.isArray{
                 let array = value as NSArray
                 if let dictionary = array.firstObject? as? NSDictionary{
+                    //complicated enough.....
                     let type = typeNameForPropertyName(property.jsonName)
-                    addFileWithName(type, jsonObject: dictionary, files:&files)
+                    let rProperty = relationProperty(className)
+                    
+                    addFileWithName(type, jsonObject: dictionary, files:&files, toOneRelationWithProperty: rProperty)
                 }
             }
             
@@ -92,16 +97,9 @@ class FilesContentBuilder{
             
         }
         
-        
-        
-        
         //create the file
-        var file : FileRepresenter!
-        if isHeaderFile{
-            file = HeaderFileRepresenter(className: className, properties: properties, lang:lang)
-        }else{
-            file = FileRepresenter(className: className, properties: properties, lang:lang)
-        }
+       
+        let file = FileRepresenter(className: className, properties: properties, lang:lang)
         
         file.includeUtilities = includeUtilities
         file.includeConstructors = includeConstructors
@@ -110,17 +108,34 @@ class FilesContentBuilder{
         }else{
             file.firstLine = ""
         }
+        
         files.append(file)
-        if !isHeaderFile{
-            if lang.headerFileData != nil{
-                //add header file first
-                addFileWithName(className, jsonObject: jsonObject, files: &files, isHeaderFile: true)
-            }
+        
+        if lang.headerFileData != nil{
+            //add header file first
+            files.append(HeaderFileRepresenter(className: className, properties: properties, lang:lang))
         }
         
         
     }
     
+    /**
+    Creates and returns a Property object whiche represents a to-one relation property
+    
+    :param: relationClassName to which the relation relates
+    :param: headerProperty optional whether this property is for header file
+    
+    :returns: the relation property
+    */
+    func relationProperty(relationClassName : String) -> Property
+    {
+        
+        let nativeName = relationClassName.lowercaseFirstChar()
+        let property = Property(jsonName: nativeName, nativeName: nativeName, type: relationClassName, lang: lang)
+        property.isCustomClass = true
+        
+        return property
+    }
     
     /**
     Creates and returns a Property object passed on the passed value and json key name
@@ -129,7 +144,7 @@ class FilesContentBuilder{
     :param: jsonKeyName for the property
     :returns: a Property instance
     */
-    func propertyForValue(value: AnyObject, jsonKeyName: String, isHeaderFile: Bool) -> Property
+    func propertyForValue(value: AnyObject, jsonKeyName: String) -> Property
     {
         let nativePropertyName = propertyNativeName(jsonKeyName)
         var type = propertyTypeName(value, lang:lang)
@@ -152,6 +167,7 @@ class FilesContentBuilder{
                 
                 property = Property(jsonName: jsonKeyName, nativeName: nativePropertyName, type: type, isArray: true, isCustomClass: false, lang:lang)
                 property.elementsType = leafClassName
+                property.elementsAreOfCustomType = true
             }else{
                 property = Property(jsonName: jsonKeyName, nativeName: nativePropertyName, type: type, isArray: true, isCustomClass: false, lang:lang)
                 property.elementsType = typeNameForArrayElements(value as NSArray, lang:lang)

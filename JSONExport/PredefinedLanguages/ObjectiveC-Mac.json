@@ -1,6 +1,6 @@
 {
-"langName": "Objective-C - Mac",
-"displayLangName": "Objective-C - Mac",
+"langName": "ObjectiveC - Mac",
+"displayLangName": "ObjectiveC - Mac",
 "briefDescription": "Defines how your JSON objects can be mapped to Objective-c classes using the built-in NSJSONSerialization class",
 "fileExtension": "m",
 "genericType": "NSObject",
@@ -96,8 +96,8 @@
 "bodyEnd": "\n}\n",
 "body": "\tNSMutableDictionary * dictionary = [NSMutableDictionary dictionary];\n",
 "forEachPropertyWithSpecialStoringNeeds": "\tdictionary[@\"<!JsonKeyName!>\"] = @(self.<!VarName!>);\n",
-"forEachProperty": "\tif(self.<!VarName!> != nil){\n\t\tdictionary[@\"<!JsonKeyName!>\"] = self.<!VarName!>;\n\t}\n",
-"additionalyForEachCustomTypeProperty": "",
+                   "forEachProperty": "\tif(self.<!VarName!> != nil){\n\t\tdictionary[@\"<!JsonKeyName!>\"] = self.<!VarName!>;\n\t}\n",
+                   "forEachCustomTypeProperty": "\tif(self.<!VarName!> != nil){\n\t\tdictionary[@\"<!JsonKeyName!>\"] = [self.<!VarName!> toDictionary];\n\t}\n",
 "forEachArrayOfCustomTypeProperty": "\tif(self.<!VarName!> != nil){\n\t\tNSMutableArray * dictionaryElements = [NSMutableArray array];\n\t\tfor(<!ElementType!> * <!VarName!>Element in self.<!VarName!>){\n\t\t\t[dictionaryElements addObject:[<!VarName!>Element toDictionary]];\n\t\t}\n\t\tdictionary[@\"<!JsonKeyName!>\"] = dictionaryElements;\n\t}\n",
 "returnStatement": "\treturn dictionary;\n"
 }
