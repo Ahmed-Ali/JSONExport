@@ -29,6 +29,7 @@ Currently you can convert your JSON object to one of the following lanaguages:
 7. Objective-C - MAC - parses the JSON using built-in NSJSONSerialization for MAC.
 8. Objective-C - CoreData - parses the JSON using built-in NSJSONSerialization
 
+Screenshot shows JSONExport used for a snippet from Twitter timeline JSON and converting it to Swift-CoreData.
 ![alt tag](https://cloud.githubusercontent.com/assets/5157350/5228493/72693010-7713-11e4-9e42-625a8590424a.png)
 
 Installation
@@ -43,6 +44,11 @@ To Do
 * Load JSON data from web
 * Open .json files with JSONExport
 * Supported languages management editor.
+
+
+Known Issues:
+========================
+* When exporting to subclasses of NSManagedObject some data types can not be exported. For example core data does not have data type for "array of strings"; in turn, if your JSON contains an array of strings, the exported file will not compile without you fixing the type mismatch.
 
 
 Final Note
