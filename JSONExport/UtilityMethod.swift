@@ -37,45 +37,6 @@ class UtilityMethod{
         forEachPropertyWithSpecialStoringNeeds = dictionary["forEachPropertyWithSpecialStoringNeeds"] as? String
 	}
 
-	/**
-	 * Returns all the available property values in the form of NSDictionary object where the key is the approperiate json key and the value is the value of the corresponding property
-	 */
-	func toDictionary() -> NSDictionary
-	{
-		var dictionary = NSMutableDictionary()
-		if forEachCustomTypeProperty != nil{
-			dictionary["forEachCustomTypeProperty"] = forEachCustomTypeProperty
-		}
-		if body != nil{
-			dictionary["body"] = body
-		}
-		if bodyEnd != nil{
-			dictionary["bodyEnd"] = bodyEnd
-		}
-		if bodyStart != nil{
-			dictionary["bodyStart"] = bodyStart
-		}
-		if comment != nil{
-			dictionary["comment"] = comment
-		}
-		if forEachArrayOfCustomTypeProperty != nil{
-			dictionary["forEachArrayOfCustomTypeProperty"] = forEachArrayOfCustomTypeProperty
-		}
-		if forEachProperty != nil{
-			dictionary["forEachProperty"] = forEachProperty
-		}
-		if returnStatement != nil{
-			dictionary["returnStatement"] = returnStatement
-		}
-		if signature != nil{
-			dictionary["signature"] = signature
-		}
-        
-        if forEachPropertyWithSpecialStoringNeeds != nil{
-            dictionary["forEachPropertyWithSpecialStoringNeeds"] = forEachPropertyWithSpecialStoringNeeds
-        }
-        
-		return dictionary
-	}
+	
 
 }

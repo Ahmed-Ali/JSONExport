@@ -24,6 +24,8 @@ class LangModel{
 	var importForEachCustomType : String!
     var importHeaderFile : String!
 	var instanceVarDefinition : String!
+    var instanceVarWithSpeicalDefinition : String!
+    var typesNeedSpecialDefinition : [String]!
 	var langName : String!
 	var modelDefinition : String!
 	var modelEnd : String!
@@ -64,6 +66,9 @@ class LangModel{
 		getter = dictionary["getter"] as? String
 		importForEachCustomType = dictionary["importForEachCustomType"] as? String
 		instanceVarDefinition = dictionary["instanceVarDefinition"] as? String
+        instanceVarWithSpeicalDefinition = dictionary["instanceVarWithSpeicalDefinition"] as? String
+        typesNeedSpecialDefinition = dictionary["typesNeedSpecialDefinition"] as? [String]
+        
 		langName = dictionary["langName"] as? String
 		modelDefinition = dictionary["modelDefinition"] as? String
 		modelEnd = dictionary["modelEnd"] as? String
@@ -88,104 +93,6 @@ class LangModel{
         supportMutualRelationships = (dictionary["supportMutualRelationships"] as? NSString)?.boolValue
 	}
 
-	/**
-	 * Returns all the available property values in the form of NSDictionary object where the key is the approperiate json key and the value is the value of the corresponding property
-	 */
-	func toDictionary() -> NSDictionary
-	{
-		var dictionary = NSMutableDictionary()
-		if arrayType != nil{
-			dictionary["arrayType"] = arrayType
-		}
-		if basicTypesWithSpecialFetchingNeeds != nil{
-			dictionary["basicTypesWithSpecialFetchingNeeds"] = basicTypesWithSpecialFetchingNeeds
-		}
-        if basicTypesWithSpecialFetchingNeedsReplacements != nil{
-            dictionary["basicTypesWithSpecialFetchingNeedsReplacements"] = basicTypesWithSpecialFetchingNeedsReplacements
-        }
-        if basicTypesWithSpecialStoringNeeds != nil{
-            dictionary["basicTypesWithSpecialStoringNeeds"] = basicTypesWithSpecialStoringNeeds
-        }
-        if importHeaderFile != nil{
-            dictionary["importHeaderFile"] = importHeaderFile
-        }
-		if booleanGetter != nil{
-			dictionary["booleanGetter"] = booleanGetter
-		}
-        if briefDescription != nil{
-            dictionary["briefDescription"] = briefDescription
-        }
-		if constructors != nil{
-			var dictionaryElements = [NSDictionary]()
-			for constructorsElement in constructors {
-				dictionaryElements.append(constructorsElement.toDictionary())
-			}
-			dictionary["constructors"] = dictionaryElements
-		}
-		if dataTypes != nil{
-			dictionary["dataTypes"] = dataTypes.toDictionary()
-		}
-		if displayLangName != nil{
-			dictionary["displayLangName"] = displayLangName
-		}
-		if fileExtension != nil{
-			dictionary["fileExtension"] = fileExtension
-		}
-		if genericType != nil{
-			dictionary["genericType"] = genericType
-		}
-		if getter != nil{
-			dictionary["getter"] = getter
-		}
-		if importForEachCustomType != nil{
-			dictionary["importForEachCustomType"] = importForEachCustomType
-		}
-		if instanceVarDefinition != nil{
-			dictionary["instanceVarDefinition"] = instanceVarDefinition
-		}
-		if langName != nil{
-			dictionary["langName"] = langName
-		}
-		if modelDefinition != nil{
-			dictionary["modelDefinition"] = modelDefinition
-		}
-		if modelEnd != nil{
-			dictionary["modelEnd"] = modelEnd
-		}
-		if modelStart != nil{
-			dictionary["modelStart"] = modelStart
-		}
-		if setter != nil{
-			dictionary["setter"] = setter
-		}
-		if staticImports != nil{
-			dictionary["staticImports"] = staticImports
-		}
-		if supportsFirstLineStatement != nil{
-			dictionary["supportsFirstLineStatement"] = supportsFirstLineStatement
-		}
-        if firstLineHint != nil{
-            dictionary["firstLineHint"] = firstLineHint
-        }
-		if utilityMethods != nil{
-			var dictionaryElements = [NSDictionary]()
-			for utilityMethodsElement in utilityMethods {
-				dictionaryElements.append(utilityMethodsElement.toDictionary())
-			}
-			dictionary["utilityMethods"] = dictionaryElements
-		}
-		if wordsToRemoveToGetArrayElementsType != nil{
-			dictionary["wordsToRemoveToGetArrayElementsType"] = wordsToRemoveToGetArrayElementsType
-		}
-        
-        if headerFileData != nil{
-            dictionary["headerFileData"] = headerFileData.toDictionary()
-        }
-        
-        if supportMutualRelationships != nil{
-            dictionary["supportMutualRelationships"] = supportMutualRelationships
-        }
-		return dictionary
-	}
+	
 
 }

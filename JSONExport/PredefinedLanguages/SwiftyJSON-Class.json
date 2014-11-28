@@ -44,8 +44,8 @@
                      "fetchBasicTypePropertyFromMap": "",
                      "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\t<!VarName!> = json[\"<!JsonKeyName!>\"].<!VarBasicTypeReplacement!>\n",
                      "fetchCustomTypePropertyFromMap": "\t\tlet <!VarName!>Json = json[\"<!JsonKeyName!>\"]\n\t\tif <!VarName!>Json != JSON.Null(nil){\n\t\t\t<!VarName!> = <!VarType!>(fromJson: <!VarName!>Json)\n\t\t}\n",
-                     "fetchArrayOfCustomTypePropertyFromMap": "\t\t<!VarName!> = <!VarType!>()\n\t\tif let <!VarName!>Array = json[\"<!JsonKeyName!>\"].arrayValue{\n\t\t\t for <!VarName!>Json in <!VarName!>Array{\n\t\t\t\tlet value = <!ElementType!>(fromJson: <!VarName!>Json)\n\t\t\t\t<!VarName!>.append(value)\n\t\t\t}\n\t\t}\n",
-                     "fetchArrayOfBasicTypePropertyFromMap": "\t\t<!VarName!> = <!VarType!>()\n\t\tif let <!VarName!>Array = json[\"<!JsonKeyName!>\"].arrayValue{\n\t\t\t for <!VarName!>Json in <!VarName!>Array{\n\t\t\t\tif let <!VarName!>Value = <!VarName!>Json.<!VarBasicTypeReplacement!>{\n\t\t\t\t\t<!VarName!>.append(<!VarName!>Value)\n\t\t\t\t}\n\t\t\t}\n\t\t}\n"
+                     "fetchArrayOfCustomTypePropertyFromMap": "\t\t<!VarName!> = <!VarType!>()\n\t\tif let <!VarName!>Array = json[\"<!JsonKeyName!>\"].arrayValue{\n\t\t\tfor <!VarName!>Json in <!VarName!>Array{\n\t\t\t\tlet value = <!ElementType!>(fromJson: <!VarName!>Json)\n\t\t\t\t<!VarName!>.append(value)\n\t\t\t}\n\t\t}\n",
+                     "fetchArrayOfBasicTypePropertyFromMap": "\t\t<!VarName!> = <!VarType!>()\n\t\tif let <!VarName!>Array = json[\"<!JsonKeyName!>\"].arrayValue{\n\t\t\tfor <!VarName!>Json in <!VarName!>Array{\n\t\t\t\tif let <!VarName!>Value = <!VarName!>Json.<!VarBasicTypeReplacement!>{\n\t\t\t\t\t<!VarName!>.append(<!VarName!>Value)\n\t\t\t\t}\n\t\t\t}\n\t\t}\n"
                      }
                      ],
     "utilityMethods": [

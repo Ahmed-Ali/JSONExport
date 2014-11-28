@@ -91,18 +91,22 @@ class Property{
         var string : String!
         if forHeaderFile{
             if lang.headerFileData.instanceVarWithSpeicalDefinition != nil && find(lang.headerFileData.typesNeedSpecialDefinition, type) != nil{
-                string = lang.headerFileData.instanceVarWithSpeicalDefinition.stringByReplacingOccurrencesOfString(varName, withString: nativeName);
+                string = lang.headerFileData.instanceVarWithSpeicalDefinition
             }else{
-                string = lang.headerFileData.instanceVarDefinition.stringByReplacingOccurrencesOfString(varName, withString: nativeName);
+                string = lang.headerFileData.instanceVarDefinition
             }
             
             
         }else{
-            string = lang.instanceVarDefinition.stringByReplacingOccurrencesOfString(varName, withString: nativeName);
+            if lang.instanceVarWithSpeicalDefinition != nil && find(lang.typesNeedSpecialDefinition, type) != nil{
+                string = lang.instanceVarWithSpeicalDefinition
+            }else{
+                string = lang.instanceVarDefinition
+            }
         }
         
         string = string.stringByReplacingOccurrencesOfString(varType, withString: type)
-        
+        string = string.stringByReplacingOccurrencesOfString(varName, withString: nativeName)
         return string
     }
     

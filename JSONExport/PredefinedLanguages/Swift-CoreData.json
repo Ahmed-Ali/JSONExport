@@ -1,10 +1,10 @@
 {
     "langName": "Swift",
-    "displayLangName": "Swift - Class",
+    "displayLangName": "Swift - CoreData",
     "briefDescription" : "Defines how your JSON objects can be mapped to Swift classes using the built-in NSJSONSerialization class",
     "fileExtension": "swift",
     "genericType": "AnyObject",
-    "arrayType": "[<!ElementType!>]",
+    "arrayType": "NSMutableSet",
     "dataTypes": {
         "intType" : "Int",
         "boolType": "Bool",
@@ -15,12 +15,17 @@
         "stringType": "String"
     },
     "supportsFirstLineStatement" : "false",
-    "staticImports": "import Foundation",
+    "supportMutualRelationships" : "true",
+    "staticImports": "import Foundation\nimport CoreData",
     "importForEachCustomType": "",
-    "modelDefinition": "\nclass <!ModelName!>",
+    "modelDefinition": "\nclass <!ModelName!> : NSManagedObject",
     "modelStart": "{\n",
     "modelEnd": "\n}",
-    "instanceVarDefinition": "\tvar <!VarName!> : <!VarType!>!\n",
+    "instanceVarDefinition": "\t@NSManaged var <!VarName!> : <!VarType!>!\n",
+    "instanceVarWithSpeicalDefinition": "\t@NSManaged var <!VarName!> : <!VarType!>\n",
+    "typesNeedSpecialDefinition" : [
+                                    "Int", "Bool", "Character", "Float", "Double"
+                                    ],
     "setter" : "",
     "getter" : "",
     "booleanGetter" : "",
@@ -32,16 +37,19 @@
     "basicTypesWithSpecialFetchingNeeds" : [
                                             "Int", "Bool", "Character", "Float", "Double"
                                             ],
+    "basicTypesWithSpecialStoringNeeds": [
+                                          "Int", "Bool", "Character", "Float", "Double"
+                                          ],
     "constructors": [
                      {
                      "comment": "\t/**\n\t * Instantiate the instance using the passed dictionary values to set the properties values\n\t */\n",
-                     "signature": "\tinit(fromDictionary dictionary: NSDictionary)",
-                     "bodyStart": "{\n",
+                     "signature": "\tinit(fromDictionary dictionary: NSDictionary, context: NSManagedObjectContext)",
+                     "bodyStart": "\t{\n\t\tlet entity = NSEntityDescription.entityForName(\"<!ModelName!>\", inManagedObjectContext: context)!\n\t\tsuper.init(entity: entity, insertIntoManagedObjectContext: context)\n",
                      "bodyEnd": "\t}\n",
-                     "fetchBasicTypePropertyFromMap": "\t\t<!VarName!> = dictionary[\"<!JsonKeyName!>\"] as? <!VarType!>\n",
-                    "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\t<!VarName!> = (dictionary[\"<!JsonKeyName!>\"] as? NSString)?.<!LowerCaseVarType!>Value\n",
-                     "fetchCustomTypePropertyFromMap": "\t\tif let <!VarName!>Data = dictionary[\"<!JsonKeyName!>\"] as? NSDictionary{\n\t\t\t<!VarName!> = <!VarType!>(fromDictionary: <!VarName!>Data)\n\t\t}\n",
-                     "fetchArrayOfCustomTypePropertyFromMap": "\t\t<!VarName!> = <!VarType!>()\n\t\tif let <!VarName!>Array = dictionary[\"<!JsonKeyName!>\"] as? [NSDictionary]{\n\t\t\tfor dic in <!VarName!>Array{\n\t\t\t\tlet value = <!ElementType!>(fromDictionary: dic)\n\t\t\t\t<!VarName!>.append(value)\n\t\t\t}\n\t\t}\n"
+                     "fetchBasicTypePropertyFromMap": "\t\tif let <!VarName!>Value = dictionary[\"<!JsonKeyName!>\"] as? <!VarType!>{\n\t\t\t<!VarName!> = <!VarName!>Value\n\t\t}\n",
+                     "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\tif let <!VarName!>Value = (dictionary[\"<!JsonKeyName!>\"] as? NSString)?.<!LowerCaseVarType!>Value{\n\t\t\t<!VarName!> = <!VarName!>Value\n\t\t}\n",
+                     "fetchCustomTypePropertyFromMap": "\t\tif let <!VarName!>Data = dictionary[\"<!JsonKeyName!>\"] as? NSDictionary{\n\t\t\t<!VarName!> = <!VarType!>(fromDictionary: <!VarName!>Data, context:context)\n\t\t}\n",
+                     "fetchArrayOfCustomTypePropertyFromMap": "\t\tif let <!VarName!>Array = dictionary[\"<!JsonKeyName!>\"] as? [NSDictionary]{\n\t\t\tvar <!VarName!>Set = NSMutableSet()\n\t\t\tfor dic in <!VarName!>Array{\n\t\t\t\tlet value = <!ElementType!>(fromDictionary: dic, context:context)\n\t\t\t\t<!VarName!>Set.addObject(value)\n\t\t\t}\n\t\t\t<!VarName!> = <!VarName!>Set\n\t\t}\n"
                      }
                      ],
     "utilityMethods": [
@@ -52,6 +60,7 @@
                        "bodyEnd": "\t}\n",
                        "body": "\t\tvar dictionary = NSMutableDictionary()\n",
                        "forEachProperty": "\t\tif <!VarName!> != nil{\n\t\t\tdictionary[\"<!JsonKeyName!>\"] = <!VarName!>\n\t\t}\n",
+                       "forEachPropertyWithSpecialStoringNeeds": "\t\tdictionary[\"<!JsonKeyName!>\"] = <!VarName!>\n",
                        "forEachCustomTypeProperty" : "\t\tif <!VarName!> != nil{\n\t\t\tdictionary[\"<!JsonKeyName!>\"] = <!VarName!>.toDictionary()\n\t\t}\n",
                        "forEachArrayOfCustomTypeProperty": "\t\tif <!VarName!> != nil{\n\t\t\tvar dictionaryElements = [NSDictionary]()\n\t\t\tfor <!VarName!>Element in <!VarName!> {\n\t\t\t\tdictionaryElements.append(<!VarName!>Element.toDictionary())\n\t\t\t}\n\t\t\tdictionary[\"<!JsonKeyName!>\"] = dictionaryElements\n\t\t}\n",
                        "returnStatement": "\t\treturn dictionary\n"

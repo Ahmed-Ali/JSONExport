@@ -40,45 +40,4 @@ class HeaderFileData{
         
     }
     
-    /**
-    * Returns all the available property values in the form of NSDictionary object where the key is the approperiate json key and the value is the value of the corresponding property
-    */
-    func toDictionary() -> NSDictionary
-    {
-        var dictionary = NSMutableDictionary()
-        if constructorSignatures != nil{
-            dictionary["constructorSignatures"] = constructorSignatures
-        }
-        if headerFileExtension != nil{
-            dictionary["headerFileExtension"] = headerFileExtension
-        }
-        if importForEachCustomType != nil{
-            dictionary["importForEachCustomType"] = importForEachCustomType
-        }
-        if instanceVarDefinition != nil{
-            dictionary["instanceVarDefinition"] = instanceVarDefinition
-        }
-        if instanceVarWithSpeicalDefinition != nil{
-            dictionary["instanceVarWithSpeicalDefinition"] = instanceVarWithSpeicalDefinition
-        }
-        if modelDefinition != nil{
-            dictionary["modelDefinition"] = modelDefinition
-        }
-        if modelEnd != nil{
-            dictionary["modelEnd"] = modelEnd
-        }
-        if modelStart != nil{
-            dictionary["modelStart"] = modelStart
-        }
-        if staticImports != nil{
-            dictionary["staticImports"] = staticImports
-        }
-        if typesNeedSpecialDefinition != nil{
-            dictionary["typesNeedSpecialDefinition"] = typesNeedSpecialDefinition
-        }
-        if utilityMethodSignatures != nil{
-            dictionary["utilityMethodSignatures"] = utilityMethodSignatures
-        }
-        return dictionary
-    }
 }

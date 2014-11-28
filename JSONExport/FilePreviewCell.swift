@@ -11,11 +11,11 @@ import Cocoa
 class FilePreviewCell: NSTableCellView, NSTextViewDelegate {
 
     
-    @IBOutlet weak var classNameLabel: NSTextFieldCell!
-    @IBOutlet weak var constructors: NSButton!
-    @IBOutlet weak var utilities: NSButton!
+    @IBOutlet var classNameLabel: NSTextFieldCell!
+    @IBOutlet var constructors: NSButton!
+    @IBOutlet var utilities: NSButton!
     @IBOutlet var textView: NSTextView!
-    @IBOutlet weak var scrollView: NSScrollView!
+    @IBOutlet var scrollView: NSScrollView!
     
     
     var file: FileRepresenter!{

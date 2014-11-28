@@ -113,7 +113,10 @@ class FilesContentBuilder{
         
         if lang.headerFileData != nil{
             //add header file first
-            files.append(HeaderFileRepresenter(className: className, properties: properties, lang:lang))
+            let headerFile = HeaderFileRepresenter(className: className, properties: properties, lang:lang)
+            headerFile.includeUtilities = includeUtilities
+            headerFile.includeConstructors = includeConstructors
+            files.append(headerFile)
         }
         
         
