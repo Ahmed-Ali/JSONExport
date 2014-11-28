@@ -24,8 +24,12 @@ Currently you can convert your JSON object to one of the following lanaguages:
 2. Swift Classes - parses the JSON using built-in NSJSONSerialization.
 3. Swift Sturcutres - parses the JSON using built-in NSJSONSerialization.
 4. Swift Classes - parses the JSON using [SwiftyJSON](https://github.com/lingoer/SwiftyJSON) library
-5. Objective-C - iOS - parses the JSON using built-in NSJSONSerialization for iOS.
-6. Objective-C - MAC - parses the JSON using built-in NSJSONSerialization for MAC.
+5. Swift - CoreData - parses the JSON using built-in NSJSONSerialization
+6. Objective-C - iOS - parses the JSON using built-in NSJSONSerialization for iOS.
+7. Objective-C - MAC - parses the JSON using built-in NSJSONSerialization for MAC.
+8. Objective-C - CoreData - parses the JSON using built-in NSJSONSerialization
+
+![alt tag](https://cloud.githubusercontent.com/assets/5157350/5228493/72693010-7713-11e4-9e42-625a8590424a.png)
 
 Installation
 ========================
