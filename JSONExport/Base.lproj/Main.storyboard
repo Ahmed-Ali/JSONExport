@@ -714,7 +714,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" richText="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="GOY-cO-0Ne">
-                                            <rect key="frame" x="0.0" y="0.0" width="223" height="427"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="223" height="627"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="minSize" width="360" height="627"/>
@@ -781,10 +781,10 @@
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <size key="minSize" width="540" height="194"/>
-                                                                                        <size key="maxSize" width="542" height="10000000"/>
+                                                                                        <size key="maxSize" width="557" height="10000000"/>
                                                                                         <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <size key="minSize" width="540" height="194"/>
-                                                                                        <size key="maxSize" width="542" height="10000000"/>
+                                                                                        <size key="maxSize" width="557" height="10000000"/>
                                                                                     </textView>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -322,7 +322,10 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     func generateClasses()
     {
         saveButton.enabled = false
-        let str = sourceText.string!
+        var str = sourceText.string!
+        str = str.stringByReplacingOccurrencesOfString("“", withString: "\"")
+        str = str.stringByReplacingOccurrencesOfString("”", withString: "\"")
+       
         if countElements(str) == 0{
             //Nothing to do
             return;

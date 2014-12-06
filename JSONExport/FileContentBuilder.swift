@@ -38,7 +38,7 @@ class FilesContentBuilder{
     var firstLine = ""
     
     /**
-    Lazely load and return the singlton instance of the FilesContentBuilder
+    Lazely load and return the singleton instance of the FilesContentBuilder
     */
     class var instance : FilesContentBuilder {
         struct Static {
