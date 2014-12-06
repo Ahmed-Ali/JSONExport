@@ -22,20 +22,20 @@ Currently you can convert your JSON object to one of the following lanaguages:
 1. Java for Android - using org.json.* classes.
 2. Swift Classes.
 3. Swift Sturcutres.
-4. Swift Classes - Uses [SwiftyJSON](https://github.com/lingoer/SwiftyJSON) library.
+4. Swift Classes - To use with [SwiftyJSON](https://github.com/lingoer/SwiftyJSON) library.
 5. Swift - CoreData.
 6. Objective-C - iOS.
 7. Objective-C - MAC.
 8. Objective-C - CoreData.
-9. Objective-C - [Realm](http://realm.io).
-10. Swift Classes - [Realm](http://realm.io).
+9. Objective-C - To use with [Realm](http://realm.io).
+10. Swift Classes - To use with [Realm](http://realm.io).
 
 Screenshot shows JSONExport used for a snippet from Twitter timeline JSON and converting it to Swift-CoreData.
 ![alt tag](https://cloud.githubusercontent.com/assets/5157350/5228493/72693010-7713-11e4-9e42-625a8590424a.png)
 
 Installation
 ========================
-Kindly clone the project, build it using xCode 6.1+ on any Mac OS X 10.10 or above.
+Kindly clone the project, and build it using xCode 6.1+ on any Mac OS X 10.10 or above.
 
 To Do
 ========================
@@ -54,4 +54,4 @@ Known Issues:
 
 Final Note
 ========================
-The application still in it early stages. Please report any issue so I can improve it.
+The application still in its early stages. Please report any issue so I can improve it.
