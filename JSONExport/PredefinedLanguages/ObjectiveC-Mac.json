@@ -29,8 +29,8 @@
 "modelDefinition": "\n@interface <!ModelName!> : NSObject\n",
 "modelStart": "",
 "modelEnd": "@end",
-"instanceVarDefinition": "@property <!VarType!> * <!VarName!>;\n",
-"instanceVarWithSpeicalDefinition": "@property <!VarType!> <!VarName!>;\n",
+"instanceVarDefinition": "@property (nonatomic, strong) <!VarType!> * <!VarName!>;\n",
+"instanceVarWithSpeicalDefinition": "@property (nonatomic, assign) <!VarType!> <!VarName!>;\n",
 "typesNeedSpecialDefinition" : [
 "NSInteger",
 "BOOL",
