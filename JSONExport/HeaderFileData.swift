@@ -12,9 +12,11 @@ class HeaderFileData{
     var constructorSignatures : [String]!
     var headerFileExtension : String!
     var importForEachCustomType : String!
+    var importParentHeaderFile : String!
     var instanceVarDefinition : String!
     var instanceVarWithSpeicalDefinition : String!
     var modelDefinition : String!
+    var modelDefinitionWithParent : String!
     var modelEnd : String!
     var modelStart : String!
     var staticImports : String!
@@ -29,9 +31,12 @@ class HeaderFileData{
         constructorSignatures = dictionary["constructorSignatures"] as? [String]
         headerFileExtension = dictionary["headerFileExtension"] as? String
         importForEachCustomType = dictionary["importForEachCustomType"] as? String
+        importParentHeaderFile = dictionary["importParentHeaderFile"] as? String
         instanceVarDefinition = dictionary["instanceVarDefinition"] as? String
+        
         instanceVarWithSpeicalDefinition = dictionary["instanceVarWithSpeicalDefinition"] as? String
         modelDefinition = dictionary["modelDefinition"] as? String
+        modelDefinitionWithParent = dictionary["modelDefinitionWithParent"] as? String
         modelEnd = dictionary["modelEnd"] as? String
         modelStart = dictionary["modelStart"] as? String
         staticImports = dictionary["staticImports"] as? String

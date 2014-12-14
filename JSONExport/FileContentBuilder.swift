@@ -38,6 +38,11 @@ class FilesContentBuilder{
     var firstLine = ""
     
     /**
+    If the target language supports inheritance, all the generated classes will be subclasses of this class
+    */
+    var parentClassName = ""
+    
+    /**
     Lazely load and return the singleton instance of the FilesContentBuilder
     */
     class var instance : FilesContentBuilder {
@@ -103,11 +108,8 @@ class FilesContentBuilder{
         
         file.includeUtilities = includeUtilities
         file.includeConstructors = includeConstructors
-        if lang.supportsFirstLineStatement != nil && lang.supportsFirstLineStatement!{
-            file.firstLine = firstLine
-        }else{
-            file.firstLine = ""
-        }
+        file.firstLine = firstLine
+        file.parentClassName = parentClassName
         
         files.append(file)
         
@@ -116,6 +118,8 @@ class FilesContentBuilder{
             let headerFile = HeaderFileRepresenter(className: className, properties: properties, lang:lang)
             headerFile.includeUtilities = includeUtilities
             headerFile.includeConstructors = includeConstructors
+            headerFile.parentClassName = parentClassName
+            headerFile.firstLine = firstLine
             files.append(headerFile)
         }
         

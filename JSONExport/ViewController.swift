@@ -59,6 +59,9 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     //Connected to root class name field
     @IBOutlet weak var classNameField: NSTextFieldCell!
     
+    //Connected to parent class name field
+    @IBOutlet weak var parentClassName: NSTextField!
+    
     //Connected to class prefix field
     @IBOutlet weak var classPrefixField: NSTextField!
     
@@ -82,7 +85,6 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     //Holds list of the generated files
     var files : [FileRepresenter] = [FileRepresenter]()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,12 +132,19 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         }else{
             firstLineField.hidden = true
         }
+        
+        if selectedLang.modelDefinitionWithParent != nil || selectedLang.headerFileData?.modelDefinitionWithParent != nil{
+            parentClassName.hidden = false
+        }else{
+            parentClassName.hidden = true
+        }
     }
+    
+    
     
     //MARK: - Handling pre defined languages
     func loadSupportedLanguages()
     {
-       
         if let langFiles = NSBundle.mainBundle().URLsForResourcesWithExtension("json", subdirectory: nil) as? [NSURL]{
             for langFile in langFiles{
                 if let langContent = String(contentsOfURL: langFile, encoding: NSUTF8StringEncoding, error: nil){
@@ -173,6 +182,11 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     }
     
     @IBAction func rootClassNameChanged(sender: AnyObject) {
+        generateClasses()
+    }
+    
+    @IBAction func parentClassNameChanged(sender: AnyObject)
+    {
         generateClasses()
     }
     
@@ -327,7 +341,9 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         str = str.stringByReplacingOccurrencesOfString("”", withString: "\"")
        
         if countElements(str) == 0{
-            //Nothing to do
+            //Nothing to do, just clear any generated files
+            files.removeAll(keepCapacity: false)
+            tableView.reloadData()
             return;
         }
         var rootClassName = classNameField.stringValue
@@ -374,6 +390,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         filesBuilder.firstLine = firstLineField.stringValue
         filesBuilder.lang = selectedLang
         filesBuilder.classPrefix = classPrefixField.stringValue
+        filesBuilder.parentClassName = parentClassName.stringValue
         return filesBuilder
     }
     

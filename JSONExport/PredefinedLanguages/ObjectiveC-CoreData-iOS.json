@@ -27,7 +27,9 @@
     "headerFileData": {
         "staticImports": "#import <CoreData/CoreData.h>",
         "importForEachCustomType": "@class <!ModelName!>;\n",
+        "importParentHeaderFile" : "#import \"<!ParentClass!>.h\"\n",
         "modelDefinition": "\n@interface <!ModelName!> : NSManagedObject\n",
+        "modelDefinitionWithParent" : "\n@interface <!ModelName!> : <!ParentClass!>\n",
         "modelStart": "",
         "modelEnd": "@end",
         "instanceVarDefinition": "@property (nonatomic, strong) <!VarType!> * <!VarName!>;\n",

@@ -18,6 +18,7 @@
     "staticImports": "import Foundation",
     "importForEachCustomType": "",
     "modelDefinition": "\nclass <!ModelName!>",
+    "modelDefinitionWithParent" : "\n\nclass <!ModelName!> : <!ParentClass!>",
     "modelStart": "{\n",
     "modelEnd": "\n}",
     "instanceVarDefinition": "\tvar <!VarName!> : <!VarType!>!\n",

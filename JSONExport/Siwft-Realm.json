@@ -19,6 +19,7 @@
     "staticImports": "",
     "importForEachCustomType": "",
     "modelDefinition": "\nclass <!ModelName!> : RLMObject",
+    "modelDefinitionWithParent" : "\n\nclass <!ModelName!> : <!ParentClass!>",
     "modelStart": "{\n",
     "modelEnd": "\n}",
     "instanceVarDefinition": "\tdynamic var <!VarName!> : <!VarType!>!\n",

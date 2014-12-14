@@ -19,6 +19,7 @@
     "staticImports": "import org.json.*;\nimport java.util.*;\n",
     "importForEachCustomType": "",
     "modelDefinition": "\npublic class <!ModelName!>",
+    "modelDefinitionWithParent" : "\npublic class <!ModelName!> extends <!ParentClass!>",
     "modelStart": "{\n",
     "modelEnd": "\n}",
     "instanceVarDefinition": "\tprivate <!VarType!> <!VarName!>;\n",

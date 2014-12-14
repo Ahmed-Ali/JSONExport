@@ -68,6 +68,11 @@ class FileRepresenter{
     var firstLine = ""
     
     /**
+    If the target language supports inheritance, all the generated classes will be subclasses of this class
+    */
+    var parentClassName = ""
+    
+    /**
     After the first time you use the toString() method, this property will contain the file content.
     */
     var fileContent = ""
@@ -94,7 +99,14 @@ class FileRepresenter{
         appendHeaderFileImport()
         appendCustomImports()
         //start the model defination
-        fileContent += lang.modelDefinition.stringByReplacingOccurrencesOfString(modelName, withString: className)
+        var definition = ""
+        if lang.modelDefinitionWithParent != nil && countElements(parentClassName) > 0{
+            definition = lang.modelDefinitionWithParent.stringByReplacingOccurrencesOfString(modelName, withString: className)
+            definition = definition.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: parentClassName)
+        }else{
+            definition = lang.modelDefinition.stringByReplacingOccurrencesOfString(modelName, withString: className)
+        }
+        fileContent += definition
         //start the model content body
         fileContent += "\(lang.modelStart)"
         
@@ -141,8 +153,9 @@ class FileRepresenter{
     */
     func appendCopyrights()
     {
+        fileContent += "//\n//\t\(className).\(lang.fileExtension)\n"
         if let me = ABAddressBook.sharedAddressBook()?.me(){
-            fileContent += "//\n//\t\(className).\(lang.fileExtension)\n"
+            
             if let firstName = me.valueForProperty(kABFirstNameProperty as String)? as? String{
                 fileContent += "//\n//\tCreate by \(firstName)"
                 if let lastName = me.valueForProperty(kABLastNameProperty as String)? as? String{
@@ -158,10 +171,9 @@ class FileRepresenter{
             }
             
             fileContent += ". All rights reserved.\n"
-            
-            fileContent += "//\tModel file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport\n\n"
-            
         }
+        
+        fileContent += "//\tModel file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport\n\n"
         
     }
     

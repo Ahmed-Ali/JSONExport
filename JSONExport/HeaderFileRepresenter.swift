@@ -41,9 +41,19 @@ class HeaderFileRepresenter : FileRepresenter{
         fileContent = ""
         appendCopyrights()
         appendStaticImports()
+        appendImportParentHeader()
         appendCustomImports()
+        
         //start the model defination
-        fileContent += lang.headerFileData.modelDefinition.stringByReplacingOccurrencesOfString(modelName, withString: className)
+        var definition = ""
+        if lang.headerFileData.modelDefinitionWithParent != nil && countElements(parentClassName) > 0{
+            definition = lang.headerFileData.modelDefinitionWithParent.stringByReplacingOccurrencesOfString(modelName, withString: className)
+            definition = definition.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: parentClassName)
+        }else{
+            definition = lang.headerFileData.modelDefinition.stringByReplacingOccurrencesOfString(modelName, withString: className)
+        }
+        
+        fileContent += definition
         //start the model content body
         fileContent += "\(lang.modelStart)"
         
@@ -64,6 +74,13 @@ class HeaderFileRepresenter : FileRepresenter{
         if lang.headerFileData.staticImports != nil{
             fileContent += lang.headerFileData.staticImports
             fileContent += "\n"
+        }
+    }
+    
+    func appendImportParentHeader()
+    {
+        if lang.headerFileData.importParentHeaderFile != nil && countElements(parentClassName) > 0{
+            fileContent += lang.headerFileData.importParentHeaderFile.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: parentClassName)
         }
     }
     

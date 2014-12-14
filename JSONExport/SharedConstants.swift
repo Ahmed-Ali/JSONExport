@@ -34,6 +34,7 @@ import Foundation
 
 let elementType = "<!ElementType!>"
 let modelName = "<!ModelName!>"
+let modelWithParentClassName = "<!ParentClass!>"
 let varName = "<!VarName!>"
 let capitalizedVarName = "<!CapitalizedVarName!>"
 let varType = "<!VarType!>"
@@ -42,3 +43,4 @@ let capitalizedVarType = "<!CapitalizedVarType!>"
 let lowerCaseVarType = "<!LowerCaseVarType!>"
 let jsonKeyName = "<!JsonKeyName!>"
 let additionalCustomTypeProperty = "<!AdditionalForCustomTypeProperty!>"
+
