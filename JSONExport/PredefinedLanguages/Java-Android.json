@@ -23,8 +23,8 @@
     "modelStart": "{\n",
     "modelEnd": "\n}",
     "instanceVarDefinition": "\tprivate <!VarType!> <!VarName!>;\n",
-    "setter" : "\tpublic void set<!CapitalizedVarName!>(<!VarType!> <!VarName!>)\n\t{\n\t\tthis.<!VarName!> = <!VarName!>;\n\t}\n",
-    "getter" : "\tpublic <!VarType!> get<!CapitalizedVarName!>()\n\t{\n\t\treturn this.<!VarName!>;\n\t}\n",
+    "setter" : "\tpublic void set<!CapitalizedVarName!>(<!VarType!> <!VarName!>){\n\t\tthis.<!VarName!> = <!VarName!>;\n\t}\n",
+    "getter" : "\tpublic <!VarType!> get<!CapitalizedVarName!>(){\n\t\treturn this.<!VarName!>;\n\t}\n",
     "booleanGetter" : "\tpublic <!VarType!> is<!CapitalizedVarName!>()\n\t{\n\t\treturn this.<!VarName!>;\n\t}\n",
     "wordsToRemoveToGetArrayElementsType": [
                                             "[",
@@ -51,15 +51,15 @@
                      ],
     "utilityMethods": [
                        {
-                       "comment": "\t/**\n\t * Returns all the available property values in the form of NSDictionary object where the key is the approperiate json key and the value is the value of the corresponding property\n\t */\n",
+                       "comment": "\t/**\n\t * Returns all the available property values in the form of JSONObject instance where the key is the approperiate json key and the value is the value of the corresponding field\n\t */\n",
                        "signature": "\tpublic JSONObject toJsonObject()",
                        "bodyStart": "\n\t{\n",
                        "bodyEnd": "\t}\n",
                        "body": "\t\tJSONObject jsonObject = new JSONObject();\n\t\ttry {\n",
-                       "forEachProperty": "\t\tjsonObject.put(\"<!JsonKeyName!>\", <!VarName!>);\n",
-                       "forEachCustomTypeProperty" : "\t\tjsonObject.put(\"<!JsonKeyName!>\", <!VarName!>.toJsonObject());\n",
+                       "forEachProperty": "\t\t\tjsonObject.put(\"<!JsonKeyName!>\", <!VarName!>);\n",
+                       "forEachCustomTypeProperty" : "\t\t\tjsonObject.put(\"<!JsonKeyName!>\", <!VarName!>.toJsonObject());\n",
                        
-                       "forEachArrayOfCustomTypeProperty": "\t\tif(<!VarName!> != null && <!VarName!>.length > 0){\n\t\t\tJSONArray <!VarName!>JsonArray = new JSONArray();\n\t\t\tfor(<!VarType!> <!VarName!>Element : <!VarName!>){\n\t\t\t\t<!VarName!>JsonArray.put(<!VarName!>Element.toJsonObject());\n\t\t\t}\n\t\t\tjsonObject.put(\"<!JsonKeyName!>\", <!VarName!>JsonArray);\n\t\t}\n",
+                       "forEachArrayOfCustomTypeProperty": "\t\t\tif(<!VarName!> != null && <!VarName!>.length > 0){\n\t\t\t\tJSONArray <!VarName!>JsonArray = new JSONArray();\n\t\t\t\tfor(<!ElementType!> <!VarName!>Element : <!VarName!>){\n\t\t\t\t\t<!VarName!>JsonArray.put(<!VarName!>Element.toJsonObject());\n\t\t\t\t}\n\t\t\t\tjsonObject.put(\"<!JsonKeyName!>\", <!VarName!>JsonArray);\n\t\t\t}\n",
                        "returnStatement": "\t\t} catch (JSONException e) {\n\t\t\t// TODO Auto-generated catch block\n\t\t\te.printStackTrace();\n\t\t}\n\t\treturn jsonObject;\n"
                        }
                        ]

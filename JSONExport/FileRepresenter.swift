@@ -114,6 +114,8 @@ class FileRepresenter{
         appendSettersAndGetters()
         appendInitializers()
         appendUtilityMethods()
+        fileContent = fileContent.stringByReplacingOccurrencesOfString(lowerCaseModelName, withString:className.lowercaseFirstChar())
+        fileContent = fileContent.stringByReplacingOccurrencesOfString(modelName, withString:className)
         fileContent += lang.modelEnd
         return fileContent
     }
