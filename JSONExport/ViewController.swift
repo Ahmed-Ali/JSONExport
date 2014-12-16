@@ -359,7 +359,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                 loadSelectedLanguageModel()
                 files.removeAll(keepCapacity: false)
                 let fileGenerator = prepareAndGetFilesBuilder()
-                fileGenerator.addFileWithName(rootClassName, jsonObject: json, files: &files)
+                fileGenerator.addFileWithName(&rootClassName, jsonObject: json, files: &files)
                 
                 
                 showSuccessStatus("Valid JSON structure")

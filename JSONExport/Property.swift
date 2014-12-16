@@ -35,7 +35,7 @@ import Foundation
 /**
 Represents all the meta data needed to export a JSON property in a valid syntax for the target language
 */
-class Property{
+class Property : Equatable{
     
     /**
     The native name that is suitable to export the JSON property in the target language
@@ -133,4 +133,16 @@ class Property{
     }
     
     
+    
+    
+}
+
+//for Equatable implementation
+func ==(lhs: Property, rhs: Property) -> Bool
+{
+    var matched = ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+    if !matched{
+        matched = (lhs.nativeName == rhs.nativeName && lhs.jsonName == rhs.jsonName && lhs.type == rhs.type && lhs.isCustomClass == rhs.isCustomClass && lhs.isArray == rhs.isArray && lhs.elementsType == rhs.elementsType && lhs.elementsAreOfCustomType == rhs.elementsAreOfCustomType)
+    }
+    return matched
 }

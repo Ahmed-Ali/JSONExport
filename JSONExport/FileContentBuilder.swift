@@ -59,11 +59,11 @@ class FilesContentBuilder{
     /**
     Generates a file using the passed className and jsonObject example and appends it in the passed files array
     
-    :param: className for the file to be generated
+    :param: className for the file to be generated, if the file already exist with different name, this className will be changed
     :param: jsonObject acts as an example of the json object, which the generated fill be able to handle
     :param: files the generated file will be appended to this array
     */
-    func addFileWithName(var className: String, jsonObject: NSDictionary, inout files : [FileRepresenter],toOneRelationWithProperty: Property! = nil)
+    func addFileWithName(inout className: String, jsonObject: NSDictionary, inout files : [FileRepresenter],toOneRelationWithProperty: Property! = nil)
     {
         var properties = [Property]()
         if !className.hasPrefix(classPrefix){
@@ -86,15 +86,16 @@ class FilesContentBuilder{
             //recursively handle custom types
             if property.isCustomClass{
                 let rProperty = relationProperty(className)
-                addFileWithName(property.type, jsonObject: value as NSDictionary, files:&files, toOneRelationWithProperty: rProperty)
+                addFileWithName(&property.type, jsonObject: value as NSDictionary, files:&files, toOneRelationWithProperty: rProperty)
             }else if property.isArray{
                 let array = value as NSArray
-                if let dictionary = array.firstObject? as? NSDictionary{
-                    //complicated enough.....
-                    let type = typeNameForPropertyName(property.jsonName)
-                    let rProperty = relationProperty(className)
+                if array.firstObject is NSDictionary{
                     
-                    addFileWithName(type, jsonObject: dictionary, files:&files, toOneRelationWithProperty: rProperty)
+                    //complicated enough.....
+                    var type = typeNameForPropertyName(property.jsonName)
+                    let rProperty = relationProperty(className)
+                    let allProperties = unionDictionaryFromArrayElements(array);
+                    addFileWithName(&type, jsonObject: allProperties, files:&files, toOneRelationWithProperty: rProperty)
                 }
             }
             
@@ -110,20 +111,116 @@ class FilesContentBuilder{
         file.includeConstructors = includeConstructors
         file.firstLine = firstLine
         file.parentClassName = parentClassName
+        //TODO: - Check if this file already has similar file, if so merge.
+        var exactMatchFound = false
+        if let similarFile = findSimilarFile(file, inFiles: &files, exactMatchFound: &exactMatchFound){
+            //there is a similar file
+            if !exactMatchFound{
+                //If the found file is no exact, then any additional properties to the alread exist file instead of creating new one
+                mergeProperties(fromFile: file, toFile: similarFile)
+                
+            }
+            className = similarFile.className
+            
+        }else{
+            files.append(file)
+            
+            if lang.headerFileData != nil{
+                //add header file first
+                let headerFile = HeaderFileRepresenter(className: className, properties: properties, lang:lang)
+                headerFile.includeUtilities = includeUtilities
+                headerFile.includeConstructors = includeConstructors
+                headerFile.parentClassName = parentClassName
+                headerFile.firstLine = firstLine
+                files.append(headerFile)
+            }
+        }
+    }
+    
+    /**
+    Merges the properties from the passed fromFile to the pass toFile
+    :param: fromFile in which to find any new properties
+    :param: toFile to which to add any found new properties
+    */
+    func mergeProperties(#fromFile: FileRepresenter, toFile: FileRepresenter)
+    {
+        for property in fromFile.properties{
+            if find(toFile.properties, property) == nil{
+                toFile.properties.append(property)
+            }
+        }
+    }
+    
+    /**
+    Finds the first file in the passed files which has the same class name as the passed file
+    
+    :param: file the file to compare against
+    :param: inFiles the files array to search in
+    :param: exactMathFound inout param, will have the value of 'true' if any file is found that has exactly the same properties as the passed file
+    :returns: similar file if any
+    */
+    func findSimilarFile(file: FileRepresenter, inout inFiles files: [FileRepresenter], inout exactMatchFound: Bool) -> FileRepresenter?{
+        var similarFile : FileRepresenter?
+        for targetFile in files{
+            
+            exactMatchFound = bothFilesHasSamePropreties(file1: targetFile, file2: file)
+            
+            if exactMatchFound || targetFile.className == file.className{
+                similarFile = targetFile
+                
+                break
+            }
+        }
         
-        files.append(file)
+        return similarFile
+    }
+    
+    /**
+    Compares the properties of both files to determine if they exactly similar or no.
+    
+    :param: file1 first file to compare against the second file
+    :param: file2 the second file to compare against the first file
+    :returns: whether both files has exactly the same properties
+    */
+    func bothFilesHasSamePropreties(#file1: FileRepresenter, file2: FileRepresenter) -> Bool
+    {
+        var bothHasSameProperties = true
+        if file1.properties.count == file2.properties.count{
+            //there is a propability they both has the same properties
+            for property in file1.properties{
+                if find(file2.properties, property) == nil{
+                    //property not found, no need to keep looking
+                    bothHasSameProperties = false
+                    break
+                }
+            }
+        }else{
+            bothHasSameProperties = false
+        }
         
-        if lang.headerFileData != nil{
-            //add header file first
-            let headerFile = HeaderFileRepresenter(className: className, properties: properties, lang:lang)
-            headerFile.includeUtilities = includeUtilities
-            headerFile.includeConstructors = includeConstructors
-            headerFile.parentClassName = parentClassName
-            headerFile.firstLine = firstLine
-            files.append(headerFile)
+        return bothHasSameProperties
+    }
+    
+    /**
+    Creates and returns a dictionary who is built up by combining all the dictionary elements in the passed array.
+    
+    :param: array array of dictionaries.
+    :returns: dictionary that combines all the dictionary elements in the array.
+    */
+    func unionDictionaryFromArrayElements(array: NSArray) -> NSDictionary
+    {
+        var dictionary = NSMutableDictionary()
+        for item in array{
+            if let dic = item as? NSDictionary{
+                //loop all over its keys
+                for key in dic.allKeys as [String]{
+                    dictionary[key] = dic[key]
+                }
+            }
         }
         
         
+        return dictionary
     }
     
     /**
@@ -198,7 +295,7 @@ class FilesContentBuilder{
     */
     func propertyNativeName(jsonKeyName : String) -> String
     {
-        return underscoresToCamelCaseForString(jsonKeyName, startFromFirstChar: false)
+        return underscoresToCamelCaseForString(jsonKeyName, startFromFirstChar: false).lowercaseFirstChar()
     }
     
     /**
