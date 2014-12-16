@@ -41,8 +41,8 @@ Kindly clone the project, and build it using xCode 6.1+ on any Mac OS X 10.10 or
 To Do
 ========================
 * ~~Support Objective-C~~ Done
-* Sync multible classes with the same name (if a conflict happen)
-* Accept JSON arrays
+* ~~Sync multible classes with the same name or have the same exact properties~~ Done
+* ~~Support to parse JSON arrays of objects~~ Done
 * Load JSON data from web
 * Open .json files with JSONExport
 * Supported languages management editor.
@@ -54,6 +54,10 @@ Known Issues:
 
 History log:
 ========================
+* Version 0.0.4:
+  - Sync multible classes with the same name or have the same exact properties.
+  - Support to parse JSON arrays of objects.
+
 * Version 0.0.3:
   - Added support for Realm with Android.
   - Added support to specify parent class for all generated classes.
