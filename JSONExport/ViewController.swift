@@ -355,7 +355,14 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
         if let data = str.dataUsingEncoding(NSUTF8StringEncoding){
             var error : NSError?
-            if let json = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error: &error) as? NSDictionary{
+            if let jsonData : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error: &error){
+                var json : NSDictionary!
+                if jsonData is NSDictionary{
+                    //fine nothing to do
+                    json = jsonData as NSDictionary
+                }else{
+                    json = unionDictionaryFromArrayElements(jsonData as NSArray)
+                }
                 loadSelectedLanguageModel()
                 files.removeAll(keepCapacity: false)
                 let fileGenerator = prepareAndGetFilesBuilder()

@@ -201,27 +201,7 @@ class FilesContentBuilder{
         return bothHasSameProperties
     }
     
-    /**
-    Creates and returns a dictionary who is built up by combining all the dictionary elements in the passed array.
     
-    :param: array array of dictionaries.
-    :returns: dictionary that combines all the dictionary elements in the array.
-    */
-    func unionDictionaryFromArrayElements(array: NSArray) -> NSDictionary
-    {
-        var dictionary = NSMutableDictionary()
-        for item in array{
-            if let dic = item as? NSDictionary{
-                //loop all over its keys
-                for key in dic.allKeys as [String]{
-                    dictionary[key] = dic[key]
-                }
-            }
-        }
-        
-        
-        return dictionary
-    }
     
     /**
     Creates and returns a Property object whiche represents a to-one relation property
