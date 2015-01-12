@@ -36,8 +36,8 @@
                                             "]"
                                             ],
     "basicTypesWithSpecialFetchingNeeds" : [
-                                            "Int", "Bool", "Character", "Float", "Double"
-                                            ],
+        "Int", "Bool", "Character", "Float", "Double"
+    ],
     "basicTypesWithSpecialStoringNeeds": [
                                           "Int", "Bool", "Character", "Float", "Double"
                                           ],
@@ -48,7 +48,7 @@
                      "bodyStart": "\t{\n\t\tlet entity = NSEntityDescription.entityForName(\"<!ModelName!>\", inManagedObjectContext: context)!\n\t\tsuper.init(entity: entity, insertIntoManagedObjectContext: context)\n",
                      "bodyEnd": "\t}\n",
                      "fetchBasicTypePropertyFromMap": "\t\tif let <!VarName!>Value = dictionary[\"<!JsonKeyName!>\"] as? <!VarType!>{\n\t\t\t<!VarName!> = <!VarName!>Value\n\t\t}\n",
-                     "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\tif let <!VarName!>Value = (dictionary[\"<!JsonKeyName!>\"] as? NSString)?.<!LowerCaseVarType!>Value{\n\t\t\t<!VarName!> = <!VarName!>Value\n\t\t}\n",
+                     "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\tif let <!VarName!>Value = dictionary[\"<!JsonKeyName!>\"] as? <!VarType!>{\n\t\t\t<!VarName!> = <!VarName!>Value\n\t\t}\n",
                      "fetchCustomTypePropertyFromMap": "\t\tif let <!VarName!>Data = dictionary[\"<!JsonKeyName!>\"] as? NSDictionary{\n\t\t\t<!VarName!> = <!VarType!>(fromDictionary: <!VarName!>Data, context:context)\n\t\t}\n",
                      "fetchArrayOfCustomTypePropertyFromMap": "\t\tif let <!VarName!>Array = dictionary[\"<!JsonKeyName!>\"] as? [NSDictionary]{\n\t\t\tvar <!VarName!>Set = NSMutableSet()\n\t\t\tfor dic in <!VarName!>Array{\n\t\t\t\tlet value = <!ElementType!>(fromDictionary: dic, context:context)\n\t\t\t\t<!VarName!>Set.addObject(value)\n\t\t\t}\n\t\t\t<!VarName!> = <!VarName!>Set\n\t\t}\n"
                      }

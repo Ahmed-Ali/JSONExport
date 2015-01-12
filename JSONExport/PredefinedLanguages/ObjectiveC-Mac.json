@@ -37,7 +37,7 @@
             "NSInteger",
             "BOOL",
             "char",
-            "CGGFloat",
+            "CGFloat",
             "double",
             "long"
         ],
@@ -57,7 +57,7 @@
         "NSInteger",
         "BOOL",
         "char",
-        "CGGFloat",
+        "CGFloat",
         "double",
         "long"
     ],
@@ -73,7 +73,7 @@
         "NSInteger",
         "BOOL",
         "char",
-        "CGGFloat",
+        "CGFloat",
         "double",
         "long"
     ],
@@ -83,10 +83,10 @@
             "signature": "\n-(instancetype)initWithDictionary:(NSDictionary *)dictionary\n",
             "bodyStart": "{\n\tself = [super init];",
             "bodyEnd": "\n\treturn self;\n}\n",
-            "fetchBasicTypePropertyFromMap": "\n\tself.<!VarName!> = dictionary[@\"<!JsonKeyName!>\"];\n",
-            "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\n\tself.<!VarName!> = [dictionary[@\"<!JsonKeyName!>\"] <!VarBasicTypeReplacement!>];\n",
-            "fetchCustomTypePropertyFromMap": "\n\tself.<!VarName!> = [[<!VarType!> alloc] initWithDictionary:dictionary[@\"<!JsonKeyName!>\"]];\n",
-            "fetchArrayOfCustomTypePropertyFromMap": "\n\tif(dictionary[@\"<!JsonKeyName!>\"] != nil){\n\t\tNSArray * <!VarName!>Dictionaries = dictionary[@\"<!JsonKeyName!>\"];\n\t\tNSMutableArray * <!VarName!>Items = [NSMutableArray array];\n\t\tfor(NSDictionary * <!VarName!>Dictionary in <!VarName!>Dictionaries){\n\t\t\t<!ElementType!> * <!VarName!>Item = [[<!ElementType!> alloc] initWithDictionary:<!VarName!>Dictionary];\n\t\t\t[<!VarName!>Items addObject:<!VarName!>Item];\n\t\t}\n\t\tself.<!VarName!> = <!VarName!>Items;\n\t}"
+            "fetchBasicTypePropertyFromMap": "\n\tif(![dictionary[@\"<!JsonKeyName!>\"] isKindOfClass:[NSNull class]]){\n\t\tself.<!VarName!> = dictionary[@\"<!JsonKeyName!>\"];\n\t}\n",
+            "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\n\tif(![dictionary[@\"<!JsonKeyName!>\"] isKindOfClass:[NSNull class]]){\n\t\tself.<!VarName!> = [dictionary[@\"<!JsonKeyName!>\"] <!VarBasicTypeReplacement!>];\n\t}\n",
+            "fetchCustomTypePropertyFromMap": "\n\tif(![dictionary[@\"<!JsonKeyName!>\"] isKindOfClass:[NSNull class]]){\n\t\tself.<!VarName!> = [[<!VarType!> alloc] initWithDictionary:dictionary[@\"<!JsonKeyName!>\"]];\n\t}\n",
+            "fetchArrayOfCustomTypePropertyFromMap": "\n\tif(dictionary[@\"<!JsonKeyName!>\"] != nil && ![dictionary[@\"<!JsonKeyName!>\"] isKindOfClass:[NSNull class]]){\n\t\tNSArray * <!VarName!>Dictionaries = dictionary[@\"<!JsonKeyName!>\"];\n\t\tNSMutableArray * <!VarName!>Items = [NSMutableArray array];\n\t\tfor(NSDictionary * <!VarName!>Dictionary in <!VarName!>Dictionaries){\n\t\t\t<!ElementType!> * <!VarName!>Item = [[<!ElementType!> alloc] initWithDictionary:<!VarName!>Dictionary];\n\t\t\t[<!VarName!>Items addObject:<!VarName!>Item];\n\t\t}\n\t\tself.<!VarName!> = <!VarName!>Items;\n\t}"
         }
     ],
     "utilityMethods": [

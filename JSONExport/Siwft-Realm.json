@@ -23,6 +23,7 @@
     "modelStart": "{\n",
     "modelEnd": "\n}",
     "instanceVarDefinition": "\tdynamic var <!VarName!> : <!VarType!>!\n",
+    "instanceVarWithSpeicalDefinition" : "\tdynamic var <!VarName!> : <!VarType!>\n",
     "typesNeedSpecialDefinition" : [
                                     "Int", "Bool", "Int", "Float", "Double"
                                     ],
@@ -36,20 +37,21 @@
                                             ],
     "basicTypesWithSpecialFetchingNeeds" : [
                                             "Int", "Bool", "Int", "Float", "Double"
-                                            ],
+
+    ],
     "basicTypesWithSpecialStoringNeeds": [
                                           "Int", "Bool", "Int", "Float", "Double"
                                           ],
     "constructors": [
                      {
                      "comment": "\t/**\n\t * Instantiate the instance using the passed dictionary values to set the properties values\n\t */\n",
-                     "signature": "\tinit(fromDictionary dictionary: NSDictionary)",
-                     "bodyStart": "\t{\n\t\tsuper.init()\n",
-                     "bodyEnd": "\t}\n",
-                     "fetchBasicTypePropertyFromMap": "\t\tif let <!VarName!>Value = dictionary[\"<!JsonKeyName!>\"] as? <!VarType!>{\n\t\t\t<!VarName!> = <!VarName!>Value\n\t\t}\n",
-                     "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\tif let <!VarName!>Value = (dictionary[\"<!JsonKeyName!>\"] as? NSString)?.<!LowerCaseVarType!>Value{\n\t\t\t<!VarName!> = <!VarName!>Value\n\t\t}\n",
-                     "fetchCustomTypePropertyFromMap": "\t\tif let <!VarName!>Data = dictionary[\"<!JsonKeyName!>\"] as? NSDictionary{\n\t\t\t<!VarName!> = <!VarType!>(fromDictionary: <!VarName!>Data)\n\t\t}\n",
-                     "fetchArrayOfCustomTypePropertyFromMap": "\t\tif let <!VarName!>Array = dictionary[\"<!JsonKeyName!>\"] as? [NSDictionary]{\n\t\t\tvar <!VarName!>Items = RLMArray(objectClassName: <!ElementType!>.className())\n\t\t\tfor dic in <!VarName!>Array{\n\t\t\t\tlet value = <!ElementType!>(fromDictionary: dic)\n\t\t\t\t<!VarName!>Items.addObject(value)\n\t\t\t}\n\t\t\t<!VarName!> = <!VarName!>Items\n\t\t}\n"
+                     "signature": "\tclass func fromDictionary(dictionary: NSDictionary) -> <!ModelName!>",
+                     "bodyStart": "\t{\n\t\tlet this = <!ModelName!>()\n",
+                     "bodyEnd": "\t\treturn this\n\t}\n",
+                     "fetchBasicTypePropertyFromMap": "\t\tif let <!VarName!>Value = dictionary[\"<!JsonKeyName!>\"] as? <!VarType!>{\n\t\t\tthis.<!VarName!> = <!VarName!>Value\n\t\t}\n",
+                     "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\tif let <!VarName!>Value = dictionary[\"<!JsonKeyName!>\"] as? <!VarType!>{\n\t\t\tthis.<!VarName!> = <!VarName!>Value\n\t\t}\n",
+                     "fetchCustomTypePropertyFromMap": "\t\tif let <!VarName!>Data = dictionary[\"<!JsonKeyName!>\"] as? NSDictionary{\n\t\t\tthis.<!VarName!> = <!VarType!>.fromDictionary(<!VarName!>Data)\n\t\t}\n",
+                     "fetchArrayOfCustomTypePropertyFromMap": "\t\tif let <!VarName!>Array = dictionary[\"<!JsonKeyName!>\"] as? [NSDictionary]{\n\t\t\tvar <!VarName!>Items = RLMArray(objectClassName: <!ElementType!>.className())\n\t\t\tfor dic in <!VarName!>Array{\n\t\t\t\tlet value = <!ElementType!>.fromDictionary(dic)\n\t\t\t\t<!VarName!>Items.addObject(value)\n\t\t\t}\n\t\t\t<!VarName!> = <!VarName!>Items\n\t\t}\n"
                      }
                      ],
     "utilityMethods": [
