@@ -55,7 +55,7 @@ Known Issues:
 History log:
 ========================
 * Version 0.0.5:
-  - Fixed an issue where float values would be generated into Int property (Fixed by @jmonroe).
+  - Fixed an issue where float values would be generated into Int property (Fixed by jmonroe#4).
   - Updated SiwftyJSON language definition to match the current version (Fixed by @jmonroe).
   - Fixed typo in CGGFloat instead of CGFloat.
   - In Objective-C check against NSNull values.
