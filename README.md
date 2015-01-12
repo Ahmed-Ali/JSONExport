@@ -54,6 +54,14 @@ Known Issues:
 
 History log:
 ========================
+* Version 0.0.5:
+  - Fixed an issue where float values would be generated into Int property (Fixed by @jmonroe).
+  - Updated SiwftyJSON language definition to match the current version (Fixed by @jmonroe).
+  - Fixed typo in CGGFloat instead of CGFloat.
+  - In Objective-C check against NSNull values.
+  - Swift realm, initialize using class methods instead of initializers.
+  - Swift perimitive types now casted directly instead of cating to NSString first.
+
 * Version 0.0.4:
   - Sync multible classes with the same name or have the same exact properties.
   - Support to parse JSON arrays of objects.
