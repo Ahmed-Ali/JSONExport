@@ -120,7 +120,7 @@ func typeForNumber(number : NSNumber, #lang: LangModel) -> String
         }
     case .ShortType, .IntType:
         typeName = lang.dataTypes.intType
-    case .FloatType:
+    case .FloatType, .Float32Type, .Float64Type:
         typeName = lang.dataTypes.floatType
     case .DoubleType:
         typeName = lang.dataTypes.doubleType
