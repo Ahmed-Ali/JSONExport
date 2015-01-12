@@ -55,8 +55,8 @@ Known Issues:
 History log:
 ========================
 * Version 0.0.5:
-  - Fixed an issue where float values would be generated into Int property (Fixed by jmonroe@98716627f5a2135bebed881a6266209cd4a5ca5e).
-  - Updated SiwftyJSON language definition to match the current version (Fixed by jmonroe@0b4f73fe7d65aa02eb0d32011eb589b5fd017308).
+  - Fixed an issue where float values would be generated into Int property (Thanks to jmonroe).
+  - Updated SiwftyJSON language definition to match the current version (Thanks to  jmonroe).
   - Fixed typo in CGGFloat instead of CGFloat.
   - In Objective-C check against NSNull values.
   - Swift realm, initialize using class methods instead of initializers.
