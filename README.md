@@ -48,9 +48,11 @@ To Do
 * Supported languages management editor.
 
 
-Known Issues:
+Known Limitions:
 ========================
-* When exporting to subclasses of NSManagedObject some data types can not be exported. For example core data does not have data type for "array of strings"; in turn, if your JSON contains an array of strings, the exported file will not compile without you fixing the type mismatch.
+* When exporting to subclasses of NSManagedObject, some data types can not be exported. For example core data does not have data type for "array of strings"; in turn, if your JSON contains an array of strings, the exported file will not compile without you fixing the type mismatch.
+* When exporting subclasses of RLMObject, you will have to enter the default values of premitive types manually. This is because of dynamic properties limition that prevents you from having an optional premitive type.
+
 
 History log:
 ========================
