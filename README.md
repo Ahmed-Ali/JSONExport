@@ -52,10 +52,17 @@ Known Limitions:
 ========================
 * When exporting to subclasses of NSManagedObject, some data types can not be exported. For example core data does not have data type for "array of strings"; in turn, if your JSON contains an array of strings, the exported file will not compile without you fixing the type mismatch.
 * When exporting subclasses of RLMObject, you will have to enter the default values of premitive types manually. This is because of dynamic properties limition that prevents you from having an optional premitive type.
-
+* When exporting to CoreData or Realm and you want to use the utility methods, you will need to manually watch for deep relation cycle calls; that is, when you convert an object to dictionary, this object try to convert one of its relation to a dictionary and the relation tries to convert the original object to a dictionary, that will cause a kind of cycle where each object involved calls the other object's toDictionary method infenitly...
+* Avoid attempt to model a JSON object with empty values, because JSONExport does not understand empty values and can not guess their types.
 
 History log:
 ========================
+* Version 0.0.6
+  - JSONExport will first remove any control characters before parsing the JSON object. So it will able to parse your JSON even if it has control characters.
+  - Double check property names to avoid unwanted spaces (issue #5 thanks to falcon2010).
+  - Processing JSON now happens in background queue for better responsiveness.
+  - For Java (with and without Realm) parsing of array of strings (issue #6 thanks to falcon2010)
+
 * Version 0.0.5:
   - Fixed an issue where float values would be generated into Int property (Thanks to jmonroe).
   - Updated SiwftyJSON language definition to match the current version (Thanks to  jmonroe).
