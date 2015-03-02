@@ -233,7 +233,7 @@ class FileRepresenter{
         fileContent += "\n"
         for property in properties{
             //append the setter
-            let capVarName = property.nativeName.capitalizedString
+            let capVarName = property.nativeName.uppercaseFirstChar()
             if lang.setter != nil{
                 var set = lang.setter
                 

@@ -329,6 +329,8 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         statusTextField.stringValue = successMessage
     }
     
+    
+    
     //MARK: - Generate files content
     /**
     Validates the sourceText string input, and takes any needed action to generate the model classes and view them in the preview panel
@@ -337,9 +339,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     {
         saveButton.enabled = false
         var str = sourceText.string!
-        str = str.stringByReplacingOccurrencesOfString("“", withString: "\"")
-        str = str.stringByReplacingOccurrencesOfString("”", withString: "\"")
-       
+        
         if countElements(str) == 0{
             //Nothing to do, just clear any generated files
             files.removeAll(keepCapacity: false)
@@ -351,35 +351,44 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         if countElements(rootClassName) == 0{
             rootClassName = "RootClass"
         }
-        
-    
-        if let data = str.dataUsingEncoding(NSUTF8StringEncoding){
-            var error : NSError?
-            if let jsonData : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error: &error){
-                var json : NSDictionary!
-                if jsonData is NSDictionary{
-                    //fine nothing to do
-                    json = jsonData as NSDictionary
+        sourceText.editable = false
+        //Do the lengthy process in background, it takes time with more complicated JSONs
+        runOnBackground {
+            str = jsonStringByRemovingUnwantedCharacters(str)
+            if let data = str.dataUsingEncoding(NSUTF8StringEncoding){
+                var error : NSError?
+                if let jsonData : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error: &error){
+                    var json : NSDictionary!
+                    if jsonData is NSDictionary{
+                        //fine nothing to do
+                        json = jsonData as NSDictionary
+                    }else{
+                        json = unionDictionaryFromArrayElements(jsonData as NSArray)
+                    }
+                    self.loadSelectedLanguageModel()
+                    self.files.removeAll(keepCapacity: false)
+                    let fileGenerator = self.prepareAndGetFilesBuilder()
+                    fileGenerator.addFileWithName(&rootClassName, jsonObject: json, files: &self.files)
+                    
+                    self.files = reverse(self.files)
+                    runOnUiThread{
+                        self.sourceText.editable = true
+                        self.showSuccessStatus("Valid JSON structure")
+                        self.saveButton.enabled = true
+                        
+                        self.tableView.reloadData()
+                    }
                 }else{
-                    json = unionDictionaryFromArrayElements(jsonData as NSArray)
+                    runOnUiThread({ () -> Void in
+                        self.sourceText.editable = true
+                        self.saveButton.enabled = false
+                        if error != nil{
+                            println(error)
+                        }
+                        self.showErrorStatus("It seems your JSON object is not valid!")
+                    })
+                    
                 }
-                loadSelectedLanguageModel()
-                files.removeAll(keepCapacity: false)
-                let fileGenerator = prepareAndGetFilesBuilder()
-                fileGenerator.addFileWithName(&rootClassName, jsonObject: json, files: &files)
-                
-                
-                showSuccessStatus("Valid JSON structure")
-                saveButton.enabled = true
-                files = reverse(files)
-                tableView.reloadData()
-            }else{
-                saveButton.enabled = false
-                if error != nil{
-                    println(error)
-                }
-                showErrorStatus("It seems your JSON object is not valid!")
-                
             }
         }
     }

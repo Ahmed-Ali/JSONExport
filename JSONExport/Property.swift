@@ -116,8 +116,8 @@ class Property : Equatable{
     */
     init(jsonName: String, nativeName: String, type: String, isArray: Bool, isCustomClass: Bool, lang: LangModel)
     {
-        self.jsonName = jsonName
-        self.nativeName = nativeName
+        self.jsonName = jsonName.stringByReplacingOccurrencesOfString(" ", withString: "")
+        self.nativeName = nativeName.stringByReplacingOccurrencesOfString(" ", withString: "")
         self.type = type
         self.isArray = isArray
         self.isCustomClass = isCustomClass

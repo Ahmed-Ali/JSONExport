@@ -32,11 +32,11 @@
                                             ">"
                                             ],
     "basicTypesWithSpecialFetchingNeeds" : [
-                                            "Object"
+                                            "Object", "String"
                                             ],
     "basicTypesWithSpecialFetchingNeedsReplacements" : [
                                                       
-                                                        ""
+                                                        "", ""
                                                         ],
     "constructors": [
                      {
@@ -45,7 +45,8 @@
                      "bodyStart": "{\n\t\tif(jsonObject == null){\n\t\t\treturn null;\n\t\t}\n\t\t<!ModelName!> <!LowerCaseModelName!> = realm.createObject(<!ModelName!>.class);\n",
                      "bodyEnd": "\t\treturn <!LowerCaseModelName!>;\n\t}\n",
                      "fetchBasicTypePropertyFromMap": "\t\t<!LowerCaseModelName!>.<!VarName!> = jsonObject.opt<!CapitalizedVarType!>(\"<!JsonKeyName!>\");\n",
-                    "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\t<!LowerCaseModelName!>.<!VarName!> = jsonObject.opt<!VarBasicTypeReplacement!>(\"<!JsonKeyName!>\");\n",
+                     "fetchArrayOfBasicTypePropertyFromMap" : "\t\tJSONArray <!VarName!>Tmp = jsonObject.optJSONArray(\"<!JsonKeyName!>\");\n\t\tif(<!VarName!>Tmp != null){\n\t\t\t<!VarName!> = new <!ElementType!>[<!VarName!>Tmp.length()];\n\t\t\tfor(int i = 0; i < <!VarName!>Tmp.length(); i++){\n\t\t\t\t<!VarName!>[i] = <!VarName!>Tmp.get(i);\n\t\t\t}\n\t\t}\n",
+					 "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\t<!LowerCaseModelName!>.<!VarName!> = jsonObject.opt<!VarBasicTypeReplacement!>(\"<!JsonKeyName!>\");\n",
                      "fetchCustomTypePropertyFromMap": "\t\t<!LowerCaseModelName!>.<!VarName!> = <!VarType!>.fromJson(realm, jsonObject.optJSONObject(\"<!JsonKeyName!>\"));\n",
                      "fetchArrayOfCustomTypePropertyFromMap": "\t\tJSONArray <!VarName!>JsonArray = jsonObject.optJSONArray(\"<!JsonKeyName!>\");\n\t\tif(<!VarName!>JsonArray != null){\n\t\t\tfor (int i = 0; i < <!VarName!>JsonArray.length(); i++) {\n\t\t\t\tJSONObject <!VarName!>Object = <!VarName!>JsonArray.optJSONObject(i);\n\t\t\t\t<!ElementType!> <!VarName!>Value = <!ElementType!>.fromJson(realm, <!VarName!>Object);\n\t\t\t\tif(<!VarName!>Value != null){\n\t\t\t\t\t<!LowerCaseModelName!>.get<!CapitalizedVarName!>().add(<!VarName!>Value);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n"
                      }

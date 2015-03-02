@@ -29,8 +29,10 @@ class FilePreviewCell: NSTableCellView, NSTextViewDelegate {
                     fileName += file.lang.fileExtension
                 }
                 classNameLabel.stringValue = fileName
+                if(textView != nil){
+                    textView.string = file.toString()
+                }
                 
-                textView.string = file.toString()
                 if file.includeConstructors{
                     constructors.state = NSOnState
                 }else{

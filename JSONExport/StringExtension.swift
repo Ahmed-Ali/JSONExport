@@ -65,9 +65,31 @@ extension String{
     :returns: the converted version
     */
     func lowercaseFirstChar() -> String{
-        let range = Range(start: startIndex, end: advance(startIndex, 1))
-        let firstLowerChar = self.substringWithRange(range).lowercaseString
+        if countElements(self) > 0{
+            let range = Range(start: startIndex, end: advance(startIndex, 1))
+            let firstLowerChar = self.substringWithRange(range).lowercaseString
             
-        return self.stringByReplacingCharactersInRange(range, withString: firstLowerChar)
+            return self.stringByReplacingCharactersInRange(range, withString: firstLowerChar)
+        }else{
+            return self
+        }
+        
+    }
+    
+    /**
+    Converts the first character to its upper case version
+    
+    :returns: the converted version
+    */
+    func uppercaseFirstChar() -> String{
+        if countElements(self) > 0{
+            let range = Range(start: startIndex, end: advance(startIndex, 1))
+            let firstUpperChar = self.substringWithRange(range).uppercaseString
+            
+            return self.stringByReplacingCharactersInRange(range, withString: firstUpperChar)
+        }else{
+            return self
+        }
+        
     }
 }

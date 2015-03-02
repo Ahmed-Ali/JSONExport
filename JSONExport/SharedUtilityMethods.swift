@@ -151,7 +151,59 @@ func unionDictionaryFromArrayElements(array: NSArray) -> NSDictionary
             }
         }
     }
-    
-    
     return dictionary
 }
+
+
+/**
+Cleans up the passed string from any characters that can make it invalid JSON string.
+
+:param: jsonStr the JSON string to be cleaned up
+:returns: a clean version of the passed string
+*/
+
+func jsonStringByRemovingUnwantedCharacters(jsonString: String) -> String
+{
+    var str = jsonString;
+    str = str.stringByReplacingOccurrencesOfString("“", withString: "\"")
+    str = str.stringByReplacingOccurrencesOfString("”", withString: "\"")
+    return stringByRemovingControlCharacters(str)
+}
+
+/**
+Cleans up the passed string from any control characters.
+
+:param: string the string to be cleaned up
+:returns: a clean version of the passed string
+*/
+
+func stringByRemovingControlCharacters(string: String) -> String
+{
+    let controlChars = NSCharacterSet.controlCharacterSet()
+    var range = string.rangeOfCharacterFromSet(controlChars)
+    var cleanString = string;
+    while range != nil && !range!.isEmpty{
+        cleanString = cleanString.stringByReplacingCharactersInRange(range!, withString: "")
+        range = cleanString.rangeOfCharacterFromSet(controlChars)
+    }
+    
+    return cleanString
+    
+}
+
+
+
+func runOnBackground(task: () -> Void)
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), { () -> Void in
+        task();
+    })
+}
+
+func runOnUiThread(task: () -> Void)
+{
+    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        task();
+    })
+}
+
