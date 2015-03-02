@@ -74,7 +74,7 @@ History log:
 
 Final Note
 ========================
-The application still in its early stages. Please report any issue so I can improve it.
+The application still in its early stage. Please report any issue so I can improve it.
 
 License
 ========================
