@@ -40,7 +40,7 @@ extension String{
     func toSingular() -> String
     {
         var singular = self
-        let length = countElements(self)
+        let length = count(self)
         if length > 3{
             let range = Range(start: advance(endIndex, -3), end: endIndex)
             let lastThreeChars = self.substringWithRange(range)
@@ -65,7 +65,7 @@ extension String{
     :returns: the converted version
     */
     func lowercaseFirstChar() -> String{
-        if countElements(self) > 0{
+        if count(self) > 0{
             let range = Range(start: startIndex, end: advance(startIndex, 1))
             let firstLowerChar = self.substringWithRange(range).lowercaseString
             
@@ -82,7 +82,7 @@ extension String{
     :returns: the converted version
     */
     func uppercaseFirstChar() -> String{
-        if countElements(self) > 0{
+        if count(self) > 0{
             let range = Range(start: startIndex, end: advance(startIndex, 1))
             let firstUpperChar = self.substringWithRange(range).uppercaseString
             

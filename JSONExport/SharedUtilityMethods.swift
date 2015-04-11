@@ -19,12 +19,12 @@ func propertyTypeName(value : AnyObject, #lang: LangModel) -> String
 {
     var name = ""
     if value is NSArray{
-        name = typeNameForArrayOfElements(value as NSArray, lang:lang)
+        name = typeNameForArrayOfElements(value as! NSArray, lang:lang)
     }else if value is NSNumber{
-        name = typeForNumber(value as NSNumber, lang: lang)
+        name = typeForNumber(value as! NSNumber, lang: lang)
     }else if value is NSString{
         let booleans : [String] = ["True", "true", "TRUE", "False", "false", "FALSE"]
-        if find(booleans, value as String) != nil{
+        if find(booleans, value as! String) != nil{
             name = lang.dataTypes.boolType
         }else{
             name = lang.dataTypes.stringType
@@ -146,7 +146,7 @@ func unionDictionaryFromArrayElements(array: NSArray) -> NSDictionary
     for item in array{
         if let dic = item as? NSDictionary{
             //loop all over its keys
-            for key in dic.allKeys as [String]{
+            for key in dic.allKeys as! [String]{
                 dictionary[key] = dic[key]
             }
         }

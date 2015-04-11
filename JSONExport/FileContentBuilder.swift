@@ -76,7 +76,7 @@ class FilesContentBuilder{
             
         }
         //sort all the keys in the passed json dictionary
-        var jsonProperties = sorted(jsonObject.allKeys as [String])
+        var jsonProperties = sorted(jsonObject.allKeys as! [String])
         
         //loop all the json properties and handle each one individually
         for jsonPropertyName in jsonProperties{
@@ -86,9 +86,9 @@ class FilesContentBuilder{
             //recursively handle custom types
             if property.isCustomClass{
                 let rProperty = relationProperty(className)
-                addFileWithName(&property.type, jsonObject: value as NSDictionary, files:&files, toOneRelationWithProperty: rProperty)
+                addFileWithName(&property.type, jsonObject: value as! NSDictionary, files:&files, toOneRelationWithProperty: rProperty)
             }else if property.isArray{
-                let array = value as NSArray
+                let array = value as! NSArray
                 if array.firstObject is NSDictionary{
                     
                     //complicated enough.....
@@ -242,8 +242,8 @@ class FilesContentBuilder{
             
         }else if value is NSArray{
             //we need to check its elements...
-            let array = value as NSArray
-            if let dic = array.firstObject? as? NSDictionary{
+            let array = value as! NSArray
+            if let dic = array.firstObject as? NSDictionary{
                 //wow complicated
                 let leafClassName = typeNameForPropertyName(jsonKeyName)
 
@@ -254,7 +254,7 @@ class FilesContentBuilder{
                 property.elementsAreOfCustomType = true
             }else{
                 property = Property(jsonName: jsonKeyName, nativeName: nativePropertyName, type: type, isArray: true, isCustomClass: false, lang:lang)
-                property.elementsType = typeNameForArrayElements(value as NSArray, lang:lang)
+                property.elementsType = typeNameForArrayElements(value as! NSArray, lang:lang)
             }
         }else{
             property = Property(jsonName: jsonKeyName, nativeName: nativePropertyName, type: type, lang:lang)
