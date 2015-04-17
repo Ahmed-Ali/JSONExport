@@ -57,6 +57,9 @@ Known Limitions:
 
 History log:
 ========================
+* Version 0.0.7
+  - Few changes by tomkidd for xCode 6.3 and Swift 1.2
+
 * Version 0.0.6
   - JSONExport will first remove any control characters before parsing the JSON object. So it will able to parse your JSON even if it has control characters.
   - Double check property names to avoid unwanted spaces (issue #5 thanks to falcon2010).
