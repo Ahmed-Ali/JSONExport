@@ -46,6 +46,7 @@ To Do
 * Load JSON data from web
 * Open .json files with JSONExport
 * Supported languages management editor.
+* Beside raw JSON, load the model raw data from plist files as well.
 
 
 Known Limitions:
