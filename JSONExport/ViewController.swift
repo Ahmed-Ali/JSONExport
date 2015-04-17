@@ -340,7 +340,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         saveButton.enabled = false
         var str = sourceText.string!
         
-        if countElements(str) == 0{
+        if count(str) == 0{
             //Nothing to do, just clear any generated files
             files.removeAll(keepCapacity: false)
             tableView.reloadData()
@@ -348,7 +348,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         }
         var rootClassName = classNameField.stringValue
         let prefix = classPrefixField.stringValue
-        if countElements(rootClassName) == 0{
+        if count(rootClassName) == 0{
             rootClassName = "RootClass"
         }
         sourceText.editable = false
@@ -361,9 +361,9 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                     var json : NSDictionary!
                     if jsonData is NSDictionary{
                         //fine nothing to do
-                        json = jsonData as NSDictionary
+                        json = jsonData as! NSDictionary
                     }else{
-                        json = unionDictionaryFromArrayElements(jsonData as NSArray)
+                        json = unionDictionaryFromArrayElements(jsonData as! NSArray)
                     }
                     self.loadSelectedLanguageModel()
                     self.files.removeAll(keepCapacity: false)
@@ -421,9 +421,9 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     
     //MARK: - NSTableViewDelegate
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView
+    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView?
     {
-        let cell = tableView.makeViewWithIdentifier("fileCell", owner: self) as FilePreviewCell
+        let cell = tableView.makeViewWithIdentifier("fileCell", owner: self) as! FilePreviewCell
         let file = files[row]
         cell.file = file
         

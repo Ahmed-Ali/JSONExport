@@ -100,7 +100,7 @@ class FileRepresenter{
         appendCustomImports()
         //start the model defination
         var definition = ""
-        if lang.modelDefinitionWithParent != nil && countElements(parentClassName) > 0{
+        if lang.modelDefinitionWithParent != nil && count(parentClassName) > 0{
             definition = lang.modelDefinitionWithParent.stringByReplacingOccurrencesOfString(modelName, withString: className)
             definition = definition.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: parentClassName)
         }else{
@@ -125,7 +125,7 @@ class FileRepresenter{
     */
     func appendFirstLineStatement()
     {
-        if lang.supportsFirstLineStatement != nil && lang.supportsFirstLineStatement! && countElements(firstLine) > 0{
+        if lang.supportsFirstLineStatement != nil && lang.supportsFirstLineStatement! && count(firstLine) > 0{
             fileContent += "\(firstLine)\n\n"
         }
     }
@@ -158,9 +158,9 @@ class FileRepresenter{
         fileContent += "//\n//\t\(className).\(lang.fileExtension)\n"
         if let me = ABAddressBook.sharedAddressBook()?.me(){
             
-            if let firstName = me.valueForProperty(kABFirstNameProperty as String)? as? String{
+            if let firstName = me.valueForProperty(kABFirstNameProperty as String) as? String{
                 fileContent += "//\n//\tCreate by \(firstName)"
-                if let lastName = me.valueForProperty(kABLastNameProperty as String)? as? String{
+                if let lastName = me.valueForProperty(kABLastNameProperty as String) as? String{
                    fileContent += " \(lastName)"
                 }
             }
@@ -168,7 +168,7 @@ class FileRepresenter{
             
             fileContent += " on \(getTodayFormattedDay())\n//\tCopyright © \(getYear())"
             
-            if let organization = me.valueForProperty(kABOrganizationProperty as String)? as? String{
+            if let organization = me.valueForProperty(kABOrganizationProperty as String) as? String{
                 fileContent += " \(organization)"
             }
             
@@ -357,7 +357,7 @@ class FileRepresenter{
         var isBasicType = false
         var type = propertyTypeWithoutArrayWords(property)
         
-        let basicTypes = lang.dataTypes.toDictionary().allValues as [String]
+        let basicTypes = lang.dataTypes.toDictionary().allValues as! [String]
         if find(basicTypes, type) != nil{
             isBasicType = true
         }
@@ -377,8 +377,8 @@ class FileRepresenter{
             type = type.stringByReplacingOccurrencesOfString(arrayWord, withString: "")
         }
         
-        if countElements(type) == 0{
-            type = typeNameForArrayElements(property.sampleValue as NSArray, lang: lang)
+        if count(type) == 0{
+            type = typeNameForArrayElements(property.sampleValue as! NSArray, lang: lang)
         }
         return type
     }

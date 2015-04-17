@@ -46,7 +46,7 @@ class HeaderFileRepresenter : FileRepresenter{
         
         //start the model defination
         var definition = ""
-        if lang.headerFileData.modelDefinitionWithParent != nil && countElements(parentClassName) > 0{
+        if lang.headerFileData.modelDefinitionWithParent != nil && count(parentClassName) > 0{
             definition = lang.headerFileData.modelDefinitionWithParent.stringByReplacingOccurrencesOfString(modelName, withString: className)
             definition = definition.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: parentClassName)
         }else{
@@ -79,7 +79,7 @@ class HeaderFileRepresenter : FileRepresenter{
     
     func appendImportParentHeader()
     {
-        if lang.headerFileData.importParentHeaderFile != nil && countElements(parentClassName) > 0{
+        if lang.headerFileData.importParentHeaderFile != nil && count(parentClassName) > 0{
             fileContent += lang.headerFileData.importParentHeaderFile.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: parentClassName)
         }
     }
@@ -91,9 +91,9 @@ class HeaderFileRepresenter : FileRepresenter{
     {
         if let me = ABAddressBook.sharedAddressBook()?.me(){
             fileContent += "//\n//\t\(className).\(lang.headerFileData.headerFileExtension)\n"
-            if let firstName = me.valueForProperty(kABFirstNameProperty as String)? as? String{
+            if let firstName = me.valueForProperty(kABFirstNameProperty as String) as? String{
                 fileContent += "//\n//\tCreate by \(firstName)"
-                if let lastName = me.valueForProperty(kABLastNameProperty as String)? as? String{
+                if let lastName = me.valueForProperty(kABLastNameProperty as String) as? String{
                     fileContent += " \(lastName)"
                 }
             }
@@ -101,7 +101,7 @@ class HeaderFileRepresenter : FileRepresenter{
             
             fileContent += " on \(getTodayFormattedDay())\n//\tCopyright © \(getYear())"
             
-            if let organization = me.valueForProperty(kABOrganizationProperty as String)? as? String{
+            if let organization = me.valueForProperty(kABOrganizationProperty as String) as? String{
                 fileContent += " \(organization)"
             }
             
@@ -124,7 +124,7 @@ class HeaderFileRepresenter : FileRepresenter{
                     fileContent += lang.headerFileData.importForEachCustomType.stringByReplacingOccurrencesOfString(modelName, withString: property.type)
                 }else if property.isArray{
                     //if it is an array of custom types
-                    let basicTypes = lang.dataTypes.toDictionary().allValues as [String]
+                    let basicTypes = lang.dataTypes.toDictionary().allValues as! [String]
                     if find(basicTypes, property.elementsType) == nil{
                         fileContent += lang.headerFileData.importForEachCustomType.stringByReplacingOccurrencesOfString(modelName, withString: property.elementsType)
                     }
