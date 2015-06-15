@@ -49,7 +49,7 @@ extension String{
             }
                 
         }
-        if length > 2{
+        else if length > 2{
             let range = Range(start: advance(endIndex, -1), end: endIndex)
             let lastChar = self.substringWithRange(range)
             if lastChar == "s" {
