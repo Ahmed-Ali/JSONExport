@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		065F84451B5FD01100B4DD74 /* Swift-Mappable.json in Resources */ = {isa = PBXBuildFile; fileRef = 065F84441B5FD01100B4DD74 /* Swift-Mappable.json */; };
 		E20615C31A3E03210010C177 /* Java-Android Realm.json in Resources */ = {isa = PBXBuildFile; fileRef = E20615C21A3E03210010C177 /* Java-Android Realm.json */; };
 		E20A0DAD1A1170F1003B3D62 /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = E20A0DAA1A1170F1003B3D62 /* NoodleLineNumberMarker.m */; };
 		E20A0DAE1A1170F1003B3D62 /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = E20A0DAC1A1170F1003B3D62 /* NoodleLineNumberView.m */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		065F84441B5FD01100B4DD74 /* Swift-Mappable.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-Mappable.json"; path = "PredefinedLanguages/Swift-Mappable.json"; sourceTree = "<group>"; };
 		E20615C21A3E03210010C177 /* Java-Android Realm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Java-Android Realm.json"; path = "PredefinedLanguages/Java-Android Realm.json"; sourceTree = "<group>"; };
 		E20A0DA81A1170F1003B3D62 /* JSONExport-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JSONExport-Bridging-Header.h"; sourceTree = "<group>"; };
 		E20A0DA91A1170F1003B3D62 /* NoodleLineNumberMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberMarker.h; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				E2DEAE9A1A2295E80001818B /* ObjectiveC-Mac.json */,
 				E2D930C11A2661350014B195 /* ObjectiveC-CoreData-iOS.json */,
 				E2F07E8B1A0B31C3004A1DAA /* Swift-Class.json */,
+				065F84441B5FD01100B4DD74 /* Swift-Mappable.json */,
 				E2502B2E1A2894E800A77A5D /* Swift-CoreData.json */,
 				E27421E61A33637A009685AD /* Siwft-Realm.json */,
 				E23C7E621A17CAF50009B9E5 /* Swift-Struct.json */,
@@ -267,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E27421D91A334165009685AD /* ObjectiveC-Realm.json in Resources */,
+				065F84451B5FD01100B4DD74 /* Swift-Mappable.json in Resources */,
 				E2D930C21A2661350014B195 /* ObjectiveC-CoreData-iOS.json in Resources */,
 				E20615C31A3E03210010C177 /* Java-Android Realm.json in Resources */,
 				E2DEAE9B1A2295E80001818B /* ObjectiveC-Mac.json in Resources */,
