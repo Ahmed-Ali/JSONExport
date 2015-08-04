@@ -34,8 +34,8 @@ import Foundation
 
 extension String{
     /**
-    Very simple method converts the last characters of a string to convert from plural to singular. For example "praties" will be changed to "party" and "stars" will be changed to "star"
-    The method does not hanle any special cases, like uncountable name i.e "people" will not be converted to "person"
+    Very simple method converts the last characters of a string to convert from plural to singular. For example "parties" will be changed to "party" and "stars" will be changed to "star"
+    The method does not handle any special cases, like uncountable name i.e "people" will not be converted to "person"
     */
     func toSingular() -> String
     {
@@ -46,6 +46,7 @@ extension String{
             let lastThreeChars = self.substringWithRange(range)
             if lastThreeChars == "ies" {
                 singular = self.stringByReplacingOccurrencesOfString(lastThreeChars, withString: "y", options: .allZeros, range: range)
+                return singular
             }
                 
         }
@@ -54,6 +55,7 @@ extension String{
             let lastChar = self.substringWithRange(range)
             if lastChar == "s" {
                 singular = self.stringByReplacingOccurrencesOfString(lastChar, withString: "", options: .allZeros, range: range)
+                return singular
             }
         }
         return singular
