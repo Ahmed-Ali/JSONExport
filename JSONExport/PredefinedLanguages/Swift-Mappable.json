@@ -34,8 +34,8 @@
     "constructors": [
                      {
                      "comment": "",
-                     "signature": "\trequired init?(_ map: Map)",
-                     "bodyStart": "{\n\t\tmapping(map)",
+                     "signature": "\tclass func newInstance() -> Mappable",
+                     "bodyStart": "{\n\t\treturn <!ModelName!>()",
                      "bodyEnd": "\n\t}\n",
                      "fetchBasicTypePropertyFromMap": "",
                      "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "",
