@@ -36,6 +36,7 @@ class LangModel{
 	var supportsFirstLineStatement : Bool!
     var firstLineHint : String!
 	var utilityMethods : [UtilityMethod]!
+    var reservedKeywords : [String]!
 	var wordsToRemoveToGetArrayElementsType : [String]!
     var headerFileData : HeaderFileData!
     var supportMutualRelationships : Bool!
@@ -50,6 +51,7 @@ class LangModel{
         basicTypesWithSpecialStoringNeeds = dictionary["basicTypesWithSpecialStoringNeeds"] as? [String]
 		booleanGetter = dictionary["booleanGetter"] as? String
         briefDescription = dictionary["briefDescription"] as? String
+        
 		constructors = [Constructor]()
 		if let constructorsArray = dictionary["constructors"] as? [NSDictionary]{
 			 for dic in constructorsArray{
@@ -86,6 +88,7 @@ class LangModel{
 				utilityMethods.append(value)
 			}
 		}
+        reservedKeywords = dictionary["reservedKeywords"] as? [String]
 		wordsToRemoveToGetArrayElementsType = dictionary["wordsToRemoveToGetArrayElementsType"] as? [String]
         
         if let headerFileDataData = dictionary["headerFileData"] as? NSDictionary{

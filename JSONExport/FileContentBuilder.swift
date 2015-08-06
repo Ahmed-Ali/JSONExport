@@ -275,7 +275,13 @@ class FilesContentBuilder{
     */
     func propertyNativeName(jsonKeyName : String) -> String
     {
-        return underscoresToCamelCaseForString(jsonKeyName, startFromFirstChar: false).lowercaseFirstChar()
+        var propertyName = underscoresToCamelCaseForString(jsonKeyName, startFromFirstChar: false).lowercaseFirstChar()
+        //Fix property name that could be a reserved keyword
+        if lang.reservedKeywords != nil && contains(lang.reservedKeywords, propertyName.lowercaseString){
+            //Property name need to be suffixed by proper suffix, any ideas of better generlized prefix/suffix?
+            propertyName += "Field"
+        }
+        return propertyName
     }
     
     /**
