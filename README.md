@@ -89,4 +89,4 @@ The application still in its early stage. Please report any issue so I can impro
 
 License
 ========================
-JSONExport is available under **MIT** license.
+JSONExport is available under custom version of **MIT** license.
