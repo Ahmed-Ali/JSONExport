@@ -369,7 +369,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                     self.files.removeAll(keepCapacity: false)
                     let fileGenerator = self.prepareAndGetFilesBuilder()
                     fileGenerator.addFileWithName(&rootClassName, jsonObject: json, files: &self.files)
-                    
+                    fileGenerator.fixReferenceMismatches(inFiles: self.files)
                     self.files = reverse(self.files)
                     runOnUiThread{
                         self.sourceText.editable = true

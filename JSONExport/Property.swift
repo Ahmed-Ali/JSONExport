@@ -137,7 +137,7 @@ class Property : Equatable{
     
 }
 
-//for Equatable implementation
+//For Equatable implementation
 func ==(lhs: Property, rhs: Property) -> Bool
 {
     var matched = ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
