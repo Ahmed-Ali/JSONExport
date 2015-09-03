@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>arrayType</key>
+	<string>NSMutableSet</string>
+	<key>basicTypesWithSpecialFetchingNeeds</key>
+	<array>
+		<string>Int</string>
+		<string>Bool</string>
+		<string>Character</string>
+		<string>Float</string>
+		<string>Double</string>
+	</array>
+	<key>basicTypesWithSpecialStoringNeeds</key>
+	<array>
+		<string>Int</string>
+		<string>Bool</string>
+		<string>Character</string>
+		<string>Float</string>
+		<string>Double</string>
+	</array>
+	<key>booleanGetter</key>
+	<string></string>
+	<key>briefDescription</key>
+	<string>Defines how your JSON objects can be mapped to Swift classes using the built-in NSJSONSerialization class</string>
+	<key>constructors</key>
+	<array>
+		<dict>
+			<key>bodyEnd</key>
+			<string>	}
+</string>
+			<key>bodyStart</key>
+			<string>	{
+		let entity = NSEntityDescription.entityForName("&lt;!ModelName!&gt;", inManagedObjectContext: context)!
+		super.init(entity: entity, insertIntoManagedObjectContext: context)
+</string>
+			<key>comment</key>
+			<string>	/**
+	 * Instantiate the instance using the passed dictionary values to set the properties values
+	 */
+</string>
+			<key>fetchArrayOfCustomTypePropertyFromMap</key>
+			<string>		if let &lt;!VarName!&gt;Array = dictionary["&lt;!JsonKeyName!&gt;"] as? [NSDictionary]{
+			var &lt;!VarName!&gt;Set = NSMutableSet()
+			for dic in &lt;!VarName!&gt;Array{
+				let value = &lt;!ElementType!&gt;(fromDictionary: dic, context:context)
+				&lt;!VarName!&gt;Set.addObject(value)
+			}
+			&lt;!VarName!&gt; = &lt;!VarName!&gt;Set
+		}
+</string>
+			<key>fetchBasicTypePropertyFromMap</key>
+			<string>		if let &lt;!VarName!&gt;Value = dictionary["&lt;!JsonKeyName!&gt;"] as? &lt;!VarType!&gt;{
+			&lt;!VarName!&gt; = &lt;!VarName!&gt;Value
+		}
+</string>
+			<key>fetchBasicTypeWithSpecialNeedsPropertyFromMap</key>
+			<string>		if let &lt;!VarName!&gt;Value = dictionary["&lt;!JsonKeyName!&gt;"] as? &lt;!VarType!&gt;{
+			&lt;!VarName!&gt; = &lt;!VarName!&gt;Value
+		}
+</string>
+			<key>fetchCustomTypePropertyFromMap</key>
+			<string>		if let &lt;!VarName!&gt;Data = dictionary["&lt;!JsonKeyName!&gt;"] as? NSDictionary{
+			&lt;!VarName!&gt; = &lt;!VarType!&gt;(fromDictionary: &lt;!VarName!&gt;Data, context:context)
+		}
+</string>
+			<key>signature</key>
+			<string>	init(fromDictionary dictionary: NSDictionary, context: NSManagedObjectContext)</string>
+		</dict>
+	</array>
+	<key>dataTypes</key>
+	<dict>
+		<key>boolType</key>
+		<string>Bool</string>
+		<key>characterType</key>
+		<string>Character</string>
+		<key>doubleType</key>
+		<string>Double</string>
+		<key>floatType</key>
+		<string>Float</string>
+		<key>intType</key>
+		<string>Int</string>
+		<key>longType</key>
+		<string>Double</string>
+		<key>stringType</key>
+		<string>String</string>
+	</dict>
+	<key>displayLangName</key>
+	<string>Swift - CoreData</string>
+	<key>fileExtension</key>
+	<string>swift</string>
+	<key>genericType</key>
+	<string>AnyObject</string>
+	<key>getter</key>
+	<string></string>
+	<key>importForEachCustomType</key>
+	<string></string>
+	<key>instanceVarDefinition</key>
+	<string>	@NSManaged var &lt;!VarName!&gt; : &lt;!VarType!&gt;!
+</string>
+	<key>instanceVarWithSpeicalDefinition</key>
+	<string>	@NSManaged var &lt;!VarName!&gt; : &lt;!VarType!&gt;
+</string>
+	<key>langName</key>
+	<string>Swift</string>
+	<key>modelDefinition</key>
+	<string>
+class &lt;!ModelName!&gt; : NSManagedObject</string>
+	<key>modelDefinitionWithParent</key>
+	<string>
+
+class &lt;!ModelName!&gt; : &lt;!ParentClass!&gt;</string>
+	<key>modelEnd</key>
+	<string>
+}</string>
+	<key>modelStart</key>
+	<string>{
+</string>
+	<key>reservedKeywords</key>
+	<array>
+		<string>abstract</string>
+		<string>assert</string>
+		<string>boolean</string>
+		<string>break</string>
+		<string>byte</string>
+		<string>case</string>
+		<string>catch</string>
+		<string>char</string>
+		<string>class</string>
+		<string>const</string>
+		<string>continue</string>
+		<string>default</string>
+		<string>do</string>
+		<string>double</string>
+		<string>else</string>
+		<string>enum</string>
+		<string>extends</string>
+		<string>false</string>
+		<string>final</string>
+		<string>finally</string>
+		<string>float</string>
+		<string>for</string>
+		<string>goto</string>
+		<string>if</string>
+		<string>implements</string>
+		<string>import</string>
+		<string>instanceof</string>
+		<string>int</string>
+		<string>interface</string>
+		<string>long</string>
+		<string>native</string>
+		<string>new</string>
+		<string>null</string>
+		<string>package</string>
+		<string>private</string>
+		<string>protected</string>
+		<string>public</string>
+		<string>return</string>
+		<string>short</string>
+		<string>static</string>
+		<string>strictfp</string>
+		<string>super</string>
+		<string>switch</string>
+		<string>synchronized</string>
+		<string>this</string>
+		<string>throw</string>
+		<string>throws</string>
+		<string>transient</string>
+		<string>true</string>
+		<string>try</string>
+		<string>void</string>
+		<string>volatile</string>
+		<string>while</string>
+		<string>class</string>
+		<string>description</string>
+	</array>
+	<key>setter</key>
+	<string></string>
+	<key>staticImports</key>
+	<string>import Foundation
+import CoreData</string>
+	<key>supportMutualRelationships</key>
+	<string>true</string>
+	<key>supportsFirstLineStatement</key>
+	<string>false</string>
+	<key>typesNeedSpecialDefinition</key>
+	<array>
+		<string>Int</string>
+		<string>Bool</string>
+		<string>Character</string>
+		<string>Float</string>
+		<string>Double</string>
+	</array>
+	<key>utilityMethods</key>
+	<array>
+		<dict>
+			<key>body</key>
+			<string>		var dictionary = NSMutableDictionary()
+</string>
+			<key>bodyEnd</key>
+			<string>	}
+</string>
+			<key>bodyStart</key>
+			<string>
+	{
+</string>
+			<key>comment</key>
+			<string>	/**
+	 * Returns all the available property values in the form of NSDictionary object where the key is the approperiate json key and the value is the value of the corresponding property
+	 */
+</string>
+			<key>forEachArrayOfCustomTypeProperty</key>
+			<string>		if &lt;!VarName!&gt; != nil{
+			var dictionaryElements = [NSDictionary]()
+			for &lt;!VarName!&gt;Element in &lt;!VarName!&gt; {
+				dictionaryElements.append(&lt;!VarName!&gt;Element.toDictionary())
+			}
+			dictionary["&lt;!JsonKeyName!&gt;"] = dictionaryElements
+		}
+</string>
+			<key>forEachCustomTypeProperty</key>
+			<string>		if &lt;!VarName!&gt; != nil{
+			dictionary["&lt;!JsonKeyName!&gt;"] = &lt;!VarName!&gt;.toDictionary()
+		}
+</string>
+			<key>forEachProperty</key>
+			<string>		if &lt;!VarName!&gt; != nil{
+			dictionary["&lt;!JsonKeyName!&gt;"] = &lt;!VarName!&gt;
+		}
+</string>
+			<key>forEachPropertyWithSpecialStoringNeeds</key>
+			<string>		dictionary["&lt;!JsonKeyName!&gt;"] = &lt;!VarName!&gt;
+</string>
+			<key>returnStatement</key>
+			<string>		return dictionary
+</string>
+			<key>signature</key>
+			<string>	func toDictionary() -&gt; NSDictionary</string>
+		</dict>
+	</array>
+	<key>wordsToRemoveToGetArrayElementsType</key>
+	<array>
+		<string>[</string>
+		<string>]</string>
+	</array>
+</dict>
+</plist>

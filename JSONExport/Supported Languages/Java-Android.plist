@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>arrayType</key>
+	<string>&lt;!ElementType!&gt;[]</string>
+	<key>basicTypesWithSpecialFetchingNeeds</key>
+	<array>
+		<string>Object</string>
+		<string>String</string>
+	</array>
+	<key>basicTypesWithSpecialFetchingNeedsReplacements</key>
+	<array>
+		<string></string>
+		<string></string>
+	</array>
+	<key>booleanGetter</key>
+	<string>	public &lt;!VarType!&gt; is&lt;!CapitalizedVarName!&gt;()
+	{
+		return this.&lt;!VarName!&gt;;
+	}
+</string>
+	<key>briefDescription</key>
+	<string>Defines how your JSON objects can be mapped to Java classes using Android's org.json JSONObject.</string>
+	<key>constructors</key>
+	<array>
+		<dict>
+			<key>bodyEnd</key>
+			<string>	}
+</string>
+			<key>bodyStart</key>
+			<string>{
+		if(jsonObject == null){
+			return;
+		}
+</string>
+			<key>comment</key>
+			<string>	/**
+	 * Instantiate the instance using the passed jsonObject to set the properties values
+	 */
+</string>
+			<key>fetchArrayOfBasicTypePropertyFromMap</key>
+			<string>		JSONArray &lt;!VarName!&gt;Tmp = jsonObject.optJSONArray("&lt;!JsonKeyName!&gt;");
+		if(&lt;!VarName!&gt;Tmp != null){
+			&lt;!VarName!&gt; = new &lt;!ElementType!&gt;[&lt;!VarName!&gt;Tmp.length()];
+			for(int i = 0; i &lt; &lt;!VarName!&gt;Tmp.length(); i++){
+				&lt;!VarName!&gt;[i] = &lt;!VarName!&gt;Tmp.get(i);
+			}
+		}
+</string>
+			<key>fetchArrayOfCustomTypePropertyFromMap</key>
+			<string>		JSONArray &lt;!VarName!&gt;JsonArray = jsonObject.optJSONArray("&lt;!JsonKeyName!&gt;");
+		if(&lt;!VarName!&gt;JsonArray != null){
+			ArrayList&lt;&lt;!ElementType!&gt;&gt; &lt;!VarName!&gt;ArrayList = new ArrayList&lt;&gt;();
+			for (int i = 0; i &lt; &lt;!VarName!&gt;JsonArray.length(); i++) {
+				JSONObject &lt;!VarName!&gt;Object = &lt;!VarName!&gt;JsonArray.optJSONObject(i);
+				&lt;!VarName!&gt;ArrayList.add(new &lt;!ElementType!&gt;(&lt;!VarName!&gt;Object));
+			}
+			&lt;!VarName!&gt; = (&lt;!ElementType!&gt;[]) &lt;!VarName!&gt;ArrayList.toArray();
+		}</string>
+			<key>fetchBasicTypePropertyFromMap</key>
+			<string>		&lt;!VarName!&gt; = jsonObject.opt&lt;!CapitalizedVarType!&gt;("&lt;!JsonKeyName!&gt;");
+</string>
+			<key>fetchBasicTypeWithSpecialNeedsPropertyFromMap</key>
+			<string>		&lt;!VarName!&gt; = jsonObject.opt&lt;!VarBasicTypeReplacement!&gt;("&lt;!JsonKeyName!&gt;");
+</string>
+			<key>fetchCustomTypePropertyFromMap</key>
+			<string>		&lt;!VarName!&gt; = new &lt;!VarType!&gt;(jsonObject.optJSONObject("&lt;!JsonKeyName!&gt;"));
+</string>
+			<key>signature</key>
+			<string>	public &lt;!ModelName!&gt;(JSONObject jsonObject)</string>
+		</dict>
+	</array>
+	<key>dataTypes</key>
+	<dict>
+		<key>boolType</key>
+		<string>boolean</string>
+		<key>characterType</key>
+		<string>char</string>
+		<key>doubleType</key>
+		<string>double</string>
+		<key>floatType</key>
+		<string>float</string>
+		<key>intType</key>
+		<string>int</string>
+		<key>longType</key>
+		<string>long</string>
+		<key>stringType</key>
+		<string>String</string>
+	</dict>
+	<key>displayLangName</key>
+	<string>Java for Android</string>
+	<key>fileExtension</key>
+	<string>java</string>
+	<key>firstLineHint</key>
+	<string>Package name</string>
+	<key>genericType</key>
+	<string>Object</string>
+	<key>getter</key>
+	<string>	public &lt;!VarType!&gt; get&lt;!CapitalizedVarName!&gt;(){
+		return this.&lt;!VarName!&gt;;
+	}
+</string>
+	<key>importForEachCustomType</key>
+	<string></string>
+	<key>instanceVarDefinition</key>
+	<string>	private &lt;!VarType!&gt; &lt;!VarName!&gt;;
+</string>
+	<key>langName</key>
+	<string>Java</string>
+	<key>modelDefinition</key>
+	<string>
+public class &lt;!ModelName!&gt;</string>
+	<key>modelDefinitionWithParent</key>
+	<string>
+public class &lt;!ModelName!&gt; extends &lt;!ParentClass!&gt;</string>
+	<key>modelEnd</key>
+	<string>
+}</string>
+	<key>modelStart</key>
+	<string>{
+</string>
+	<key>reservedKeywords</key>
+	<array>
+		<string>abstract</string>
+		<string>assert</string>
+		<string>boolean</string>
+		<string>break</string>
+		<string>byte</string>
+		<string>case</string>
+		<string>catch</string>
+		<string>char</string>
+		<string>class</string>
+		<string>const</string>
+		<string>continue</string>
+		<string>default</string>
+		<string>do</string>
+		<string>double</string>
+		<string>else</string>
+		<string>enum</string>
+		<string>extends</string>
+		<string>false</string>
+		<string>final</string>
+		<string>finally</string>
+		<string>float</string>
+		<string>for</string>
+		<string>goto</string>
+		<string>if</string>
+		<string>implements</string>
+		<string>import</string>
+		<string>instanceof</string>
+		<string>int</string>
+		<string>interface</string>
+		<string>long</string>
+		<string>native</string>
+		<string>new</string>
+		<string>null</string>
+		<string>package</string>
+		<string>private</string>
+		<string>protected</string>
+		<string>public</string>
+		<string>return</string>
+		<string>short</string>
+		<string>static</string>
+		<string>strictfp</string>
+		<string>super</string>
+		<string>switch</string>
+		<string>synchronized</string>
+		<string>this</string>
+		<string>throw</string>
+		<string>throws</string>
+		<string>transient</string>
+		<string>true</string>
+		<string>try</string>
+		<string>void</string>
+		<string>volatile</string>
+		<string>while</string>
+	</array>
+	<key>setter</key>
+	<string>	public void set&lt;!CapitalizedVarName!&gt;(&lt;!VarType!&gt; &lt;!VarName!&gt;){
+		this.&lt;!VarName!&gt; = &lt;!VarName!&gt;;
+	}
+</string>
+	<key>staticImports</key>
+	<string>import org.json.*;
+import java.util.*;
+</string>
+	<key>supportsFirstLineStatement</key>
+	<string>true</string>
+	<key>utilityMethods</key>
+	<array>
+		<dict>
+			<key>body</key>
+			<string>		JSONObject jsonObject = new JSONObject();
+		try {
+</string>
+			<key>bodyEnd</key>
+			<string>	}
+</string>
+			<key>bodyStart</key>
+			<string>
+	{
+</string>
+			<key>comment</key>
+			<string>	/**
+	 * Returns all the available property values in the form of JSONObject instance where the key is the approperiate json key and the value is the value of the corresponding field
+	 */
+</string>
+			<key>forEachArrayOfCustomTypeProperty</key>
+			<string>			if(&lt;!VarName!&gt; != null &amp;&amp; &lt;!VarName!&gt;.length &gt; 0){
+				JSONArray &lt;!VarName!&gt;JsonArray = new JSONArray();
+				for(&lt;!ElementType!&gt; &lt;!VarName!&gt;Element : &lt;!VarName!&gt;){
+					&lt;!VarName!&gt;JsonArray.put(&lt;!VarName!&gt;Element.toJsonObject());
+				}
+				jsonObject.put("&lt;!JsonKeyName!&gt;", &lt;!VarName!&gt;JsonArray);
+			}
+</string>
+			<key>forEachCustomTypeProperty</key>
+			<string>			jsonObject.put("&lt;!JsonKeyName!&gt;", &lt;!VarName!&gt;.toJsonObject());
+</string>
+			<key>forEachProperty</key>
+			<string>			jsonObject.put("&lt;!JsonKeyName!&gt;", &lt;!VarName!&gt;);
+</string>
+			<key>returnStatement</key>
+			<string>		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonObject;
+</string>
+			<key>signature</key>
+			<string>	public JSONObject toJsonObject()</string>
+		</dict>
+	</array>
+	<key>wordsToRemoveToGetArrayElementsType</key>
+	<array>
+		<string>[</string>
+		<string>]</string>
+	</array>
+</dict>
+</plist>

@@ -145,19 +145,16 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     //MARK: - Handling pre defined languages
     func loadSupportedLanguages()
     {
-        if let langFiles = NSBundle.mainBundle().URLsForResourcesWithExtension("json", subdirectory: nil) as? [NSURL]{
+        if let langFiles = NSBundle.mainBundle().URLsForResourcesWithExtension("plist", subdirectory: nil) as? [NSURL]{
             for langFile in langFiles{
-                if let langContent = String(contentsOfURL: langFile, encoding: NSUTF8StringEncoding, error: nil){
-                    if let langDictionary = NSJSONSerialization.JSONObjectWithData(langContent.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!, options: .allZeros, error: nil) as? NSDictionary{
-                        
-                        let lang = LangModel(fromDictionary: langDictionary)
-                        if langs[lang.displayLangName] != nil{
-                            continue
-                        }
-                        langs[lang.displayLangName] = lang
-
-                        
+                if let langDictionary = NSDictionary(contentsOfURL: langFile){
+                    
+                    let lang = LangModel(fromDictionary: langDictionary)
+                    if langs[lang.displayLangName] != nil{
+                        continue
                     }
+                    langs[lang.displayLangName] = lang
+                    
                     
                 }
                 
