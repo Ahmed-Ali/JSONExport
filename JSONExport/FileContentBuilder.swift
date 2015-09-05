@@ -42,6 +42,9 @@ class FilesContentBuilder{
     */
     var parentClassName = ""
     
+    
+    var mismatchedTypes = [String : String]()
+    
     /**
     Lazely load and return the singleton instance of the FilesContentBuilder
     */
@@ -63,16 +66,14 @@ class FilesContentBuilder{
     :param: jsonObject acts as an example of the json object, which the generated fill be able to handle
     :param: files the generated file will be appended to this array
     */
-    func addFileWithName(inout className: String, jsonObject: NSDictionary, inout files : [FileRepresenter],toOneRelationWithProperty: Property! = nil)
+    func addFileWithName(inout className: String, jsonObject: NSDictionary, inout files : [FileRepresenter], toOneRelationWithProperty: Property! = nil)
     {
         var properties = [Property]()
         if !className.hasPrefix(classPrefix){
             className = "\(classPrefix)\(className)"
         }
-        if toOneRelationWithProperty != nil{
-            if lang.supportMutualRelationships != nil && lang.supportMutualRelationships!{
-                properties.append(toOneRelationWithProperty)
-            }
+        if toOneRelationWithProperty != nil && lang.supportMutualRelationships != nil && lang.supportMutualRelationships!{
+            properties.append(toOneRelationWithProperty)
             
         }
         //sort all the keys in the passed json dictionary
@@ -92,10 +93,10 @@ class FilesContentBuilder{
                 if array.firstObject is NSDictionary{
                     
                     //complicated enough.....
-                    var type = typeNameForPropertyName(property.jsonName)
-                    let rProperty = relationProperty(className)
+                    var type = property.elementsType
+                    let relatedProperty = relationProperty(className)
                     let allProperties = unionDictionaryFromArrayElements(array);
-                    addFileWithName(&type, jsonObject: allProperties, files:&files, toOneRelationWithProperty: rProperty)
+                    addFileWithName(&type, jsonObject: allProperties, files:&files, toOneRelationWithProperty: relatedProperty)
                 }
             }
             
@@ -111,15 +112,18 @@ class FilesContentBuilder{
         file.includeConstructors = includeConstructors
         file.firstLine = firstLine
         file.parentClassName = parentClassName
-        //TODO: - Check if this file already has similar file, if so merge.
+        
         var exactMatchFound = false
-        if let similarFile = findSimilarFile(file, inFiles: &files, exactMatchFound: &exactMatchFound){
+        if let similarFile = findSimilarFile(file, inFiles: files, exactMatchFound: &exactMatchFound){
             //there is a similar file
             if !exactMatchFound{
                 //If the found file is no exact, then any additional properties to the alread exist file instead of creating new one
                 mergeProperties(fromFile: file, toFile: similarFile)
                 
             }
+            //Hold list of mismatches to be fixed later
+            mismatchedTypes[className] = similarFile.className
+
             className = similarFile.className
             
         }else{
@@ -159,7 +163,7 @@ class FilesContentBuilder{
     :param: exactMathFound inout param, will have the value of 'true' if any file is found that has exactly the same properties as the passed file
     :returns: similar file if any
     */
-    func findSimilarFile(file: FileRepresenter, inout inFiles files: [FileRepresenter], inout exactMatchFound: Bool) -> FileRepresenter?{
+    func findSimilarFile(file: FileRepresenter, inFiles files: [FileRepresenter], inout exactMatchFound: Bool) -> FileRepresenter?{
         var similarFile : FileRepresenter?
         for targetFile in files{
             
@@ -202,6 +206,19 @@ class FilesContentBuilder{
     }
     
     
+    func fixReferenceMismatches(inFiles files: [FileRepresenter])
+    {
+        for file in files{
+            for property in file.properties{
+                if property.isCustomClass, let toType = mismatchedTypes[property.type]{
+                    property.type = toType
+                }else if property.isArray, let toType = mismatchedTypes[property.elementsType]{
+                    property.elementsType = toType
+                    property.type = lang.arrayType.stringByReplacingOccurrencesOfString(elementType, withString: toType)
+                }
+            }
+        }
+    }
     
     /**
     Creates and returns a Property object whiche represents a to-one relation property
@@ -232,8 +249,8 @@ class FilesContentBuilder{
     {
         let nativePropertyName = propertyNativeName(jsonKeyName)
         var type = propertyTypeName(value, lang:lang)
-        var isDictionary = false
-        var isArray = false
+//        var isDictionary = false
+//        var isArray = false
         
         var property: Property!
         if value is NSDictionary {
@@ -251,6 +268,8 @@ class FilesContentBuilder{
                 
                 property = Property(jsonName: jsonKeyName, nativeName: nativePropertyName, type: type, isArray: true, isCustomClass: false, lang:lang)
                 property.elementsType = leafClassName
+                //Create a class for this type as well!
+                
                 property.elementsAreOfCustomType = true
             }else{
                 property = Property(jsonName: jsonKeyName, nativeName: nativePropertyName, type: type, isArray: true, isCustomClass: false, lang:lang)
@@ -275,7 +294,13 @@ class FilesContentBuilder{
     */
     func propertyNativeName(jsonKeyName : String) -> String
     {
-        return underscoresToCamelCaseForString(jsonKeyName, startFromFirstChar: false).lowercaseFirstChar()
+        var propertyName = underscoresToCamelCaseForString(jsonKeyName, startFromFirstChar: false).lowercaseFirstChar()
+        //Fix property name that could be a reserved keyword
+        if lang.reservedKeywords != nil && contains(lang.reservedKeywords, propertyName.lowercaseString){
+            //Property name need to be suffixed by proper suffix, any ideas of better generlized prefix/suffix?
+            propertyName += "Field"
+        }
+        return propertyName
     }
     
     /**

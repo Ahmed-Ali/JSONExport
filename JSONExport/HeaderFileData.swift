@@ -17,6 +17,7 @@ class HeaderFileData{
     var instanceVarWithSpeicalDefinition : String!
     var modelDefinition : String!
     var modelDefinitionWithParent : String!
+    var defaultParentWithUtilityMethods : String!
     var modelEnd : String!
     var modelStart : String!
     var staticImports : String!
@@ -37,6 +38,7 @@ class HeaderFileData{
         instanceVarWithSpeicalDefinition = dictionary["instanceVarWithSpeicalDefinition"] as? String
         modelDefinition = dictionary["modelDefinition"] as? String
         modelDefinitionWithParent = dictionary["modelDefinitionWithParent"] as? String
+        defaultParentWithUtilityMethods = dictionary["defaultParentWithUtilityMethods"] as? String
         modelEnd = dictionary["modelEnd"] as? String
         modelStart = dictionary["modelStart"] as? String
         staticImports = dictionary["staticImports"] as? String

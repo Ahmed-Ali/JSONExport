@@ -147,19 +147,14 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     {
         if let langFiles = NSBundle.mainBundle().URLsForResourcesWithExtension("json", subdirectory: nil) as? [NSURL]{
             for langFile in langFiles{
-                if let langContent = String(contentsOfURL: langFile, encoding: NSUTF8StringEncoding, error: nil){
-                    if let langDictionary = NSJSONSerialization.JSONObjectWithData(langContent.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!, options: .allZeros, error: nil) as? NSDictionary{
-                        
-                        let lang = LangModel(fromDictionary: langDictionary)
-                        if langs[lang.displayLangName] != nil{
-                            continue
-                        }
-                        langs[lang.displayLangName] = lang
-
-                        
+                if let data = NSData(contentsOfURL: langFile), langDictionary = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error: nil) as? NSDictionary{
+                    let lang = LangModel(fromDictionary: langDictionary)
+                    if langs[lang.displayLangName] != nil{
+                        continue
                     }
-                    
+                    langs[lang.displayLangName] = lang
                 }
+                
                 
             }
         }
@@ -369,7 +364,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                     self.files.removeAll(keepCapacity: false)
                     let fileGenerator = self.prepareAndGetFilesBuilder()
                     fileGenerator.addFileWithName(&rootClassName, jsonObject: json, files: &self.files)
-                    
+                    fileGenerator.fixReferenceMismatches(inFiles: self.files)
                     self.files = reverse(self.files)
                     runOnUiThread{
                         self.sourceText.editable = true

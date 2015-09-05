@@ -103,6 +103,9 @@ class FileRepresenter{
         if lang.modelDefinitionWithParent != nil && count(parentClassName) > 0{
             definition = lang.modelDefinitionWithParent.stringByReplacingOccurrencesOfString(modelName, withString: className)
             definition = definition.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: parentClassName)
+        }else if includeUtilities && lang.defaultParentWithUtilityMethods != nil{
+            definition = lang.modelDefinitionWithParent.stringByReplacingOccurrencesOfString(modelName, withString: className)
+            definition = definition.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: lang.defaultParentWithUtilityMethods)
         }else{
             definition = lang.modelDefinition.stringByReplacingOccurrencesOfString(modelName, withString: className)
         }
@@ -340,7 +343,16 @@ class FileRepresenter{
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(jsonKeyName, withString:property.jsonName)
                 
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(additionalCustomTypeProperty, withString:"")
-                
+                if lang.basicTypesWithSpecialFetchingNeeds != nil{
+                    if let index = find(lang.basicTypesWithSpecialFetchingNeeds, property.type), let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements?[index]{
+                       propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(varTypeReplacement, withString: replacement)
+                        
+                        
+                        let lowerCaseType = property.type.lowercaseString
+                        propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(lowerCaseVarType, withString: lowerCaseType)
+                        
+                    }
+                }
                 fileContent += propertyHandlingStr
             }
             fileContent += method.returnStatement
@@ -356,12 +368,17 @@ class FileRepresenter{
     func propertyTypeIsBasicType(property: Property) -> Bool{
         var isBasicType = false
         var type = propertyTypeWithoutArrayWords(property)
-        
-        let basicTypes = lang.dataTypes.toDictionary().allValues as! [String]
-        if find(basicTypes, type) != nil{
+        if lang.genericType == type{
             isBasicType = true
+        }else{
+            let basicTypes = lang.dataTypes.toDictionary().allValues as! [String]
+            
+            if find(basicTypes, type) != nil{
+                isBasicType = true
+            }
         }
-  
+        
+        
         return isBasicType
     }
     
@@ -421,13 +438,10 @@ class FileRepresenter{
         if(propertyTypeIsBasicType(property)){
             
             if constructor.fetchArrayOfBasicTypePropertyFromMap != nil{
-                let index = find(lang.basicTypesWithSpecialFetchingNeeds, property.elementsType)
-                if index != nil{
+                if let index = find(lang.basicTypesWithSpecialFetchingNeeds, property.elementsType){
                     propertyStr = constructor.fetchArrayOfBasicTypePropertyFromMap
-                    let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements[index!]
+                    let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements[index]
                     propertyStr = propertyStr.stringByReplacingOccurrencesOfString(varTypeReplacement, withString: replacement)
-                    
-                    
                 }else{
                     propertyStr = constructor.fetchBasicTypePropertyFromMap
                 }

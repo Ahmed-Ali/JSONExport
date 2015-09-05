@@ -49,6 +49,9 @@ class HeaderFileRepresenter : FileRepresenter{
         if lang.headerFileData.modelDefinitionWithParent != nil && count(parentClassName) > 0{
             definition = lang.headerFileData.modelDefinitionWithParent.stringByReplacingOccurrencesOfString(modelName, withString: className)
             definition = definition.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: parentClassName)
+        }else if includeUtilities && lang.defaultParentWithUtilityMethods != nil{
+            definition = lang.headerFileData.modelDefinitionWithParent.stringByReplacingOccurrencesOfString(modelName, withString: className)
+            definition = definition.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: lang.headerFileData.defaultParentWithUtilityMethods)
         }else{
             definition = lang.headerFileData.modelDefinition.stringByReplacingOccurrencesOfString(modelName, withString: className)
         }
@@ -124,10 +127,13 @@ class HeaderFileRepresenter : FileRepresenter{
                     fileContent += lang.headerFileData.importForEachCustomType.stringByReplacingOccurrencesOfString(modelName, withString: property.type)
                 }else if property.isArray{
                     //if it is an array of custom types
-                    let basicTypes = lang.dataTypes.toDictionary().allValues as! [String]
-                    if find(basicTypes, property.elementsType) == nil{
-                        fileContent += lang.headerFileData.importForEachCustomType.stringByReplacingOccurrencesOfString(modelName, withString: property.elementsType)
+                    if(property.elementsType != lang.genericType){
+                        let basicTypes = lang.dataTypes.toDictionary().allValues as! [String]
+                        if find(basicTypes, property.elementsType) == nil{
+                            fileContent += lang.headerFileData.importForEachCustomType.stringByReplacingOccurrencesOfString(modelName, withString: property.elementsType)
+                        }
                     }
+                    
                 }
             }
         }

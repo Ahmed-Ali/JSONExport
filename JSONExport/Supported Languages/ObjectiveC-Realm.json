@@ -51,6 +51,7 @@
                                     "-(NSDictionary *)toDictionary;\n"
                                     ]
     },
+    "reservedKeywords" : ["abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "default", "do", "double", "else", "enum", "extends", "false", "final", "finally", "float", "for", "goto", "if", "implements", "import", "instanceof", "int", "interface", "long", "native", "new", "null", "package", "private", "protected", "public", "return", "short", "static", "strictfp", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void", "volatile", "while", "id", "class", "description"],
     "wordsToRemoveToGetArrayElementsType": [
                                             "RLMArray",
                                             "<",
@@ -102,6 +103,30 @@
                        "forEachCustomTypeProperty": "\tif(self.<!VarName!> != nil){\n\t\tdictionary[@\"<!JsonKeyName!>\"] = [self.<!VarName!> toDictionary];\n\t}\n",
                        "forEachArrayOfCustomTypeProperty": "\tif(self.<!VarName!> != nil){\n\t\tNSMutableArray * dictionaryElements = [NSMutableArray array];\n\t\tfor(<!ElementType!> * <!VarName!>Element in self.<!VarName!>){\n\t\t\t[dictionaryElements addObject:[<!VarName!>Element toDictionary]];\n\t\t}\n\t\tdictionary[@\"<!JsonKeyName!>\"] = dictionaryElements;\n\t}\n",
                        "returnStatement": "\treturn dictionary;\n"
-                       }
+                       },
+				       {
+				         "forEachProperty": "\tif(self.<!VarName!> != nil){\n\t\t[aCoder encodeObject:self.<!VarName!> forKey:@\"<!JsonKeyName!>\"];\n\t}\n",
+				         "bodyEnd": "\n}\n",
+				         "signature": "- (void)encodeWithCoder:(NSCoder *)aCoder",
+				         "forEachPropertyWithSpecialStoringNeeds": "\t[aCoder encodeObject:@(self.<!VarName!>) forKey:@\"<!JsonKeyName!>\"];",
+				         "forEachArrayOfCustomTypeProperty": "\tif(self.<!VarName!> != nil){\n\t\t[aCoder encodeObject:self.<!VarName!> forKey:@\"<!JsonKeyName!>\"];\n\t}\n",
+				         "forEachCustomTypeProperty": "\tif(self.<!VarName!> != nil){\n\t\t[aCoder encodeObject:self.<!VarName!> forKey:@\"<!JsonKeyName!>\"];\n\t}\n",
+				         "returnStatement": "",
+				         "body": "",
+				         "comment": "\n/**\n * Implementation of NSCoding encoding method\n */\n/**\n * Returns all the available property values in the form of NSDictionary object where the key is the approperiate json key and the value is the value of the corresponding property\n */\n",
+				         "bodyStart": "\n{\n"
+				       },
+				       {
+				         "forEachProperty": "\tself.<!VarName!> = [aDecoder decodeObjectForKey:@\"<!JsonKeyName!>\"];\n",
+				         "bodyEnd": "\n}\n",
+				         "signature": "- (instancetype)initWithCoder:(NSCoder *)aDecoder",
+				         "forEachPropertyWithSpecialStoringNeeds": "\tself.<!VarName!> = [[aDecoder decodeObjectForKey:@\"<!JsonKeyName!>\"] <!VarBasicTypeReplacement!>];\n",
+				         "forEachArrayOfCustomTypeProperty": "\tself.<!VarName!> = [aDecoder decodeObjectForKey:@\"<!JsonKeyName!>\"];\n",
+				         "forEachCustomTypeProperty": "\tself.<!VarName!> = [aDecoder decodeObjectForKey:@\"<!JsonKeyName!>\"];\n",
+				         "returnStatement": "\treturn self;\n",
+				         "body": "\tself = [super init];\n",
+				         "comment": "\n/**\n * Implementation of NSCoding initWithCoder: method\n */\n",
+				         "bodyStart": "\n{\n"
+				       }
                        ]
 }
