@@ -58,6 +58,11 @@ Known Limitions:
 
 History log:
 ========================
+* Version 0.0.8
+  - Added reserved keywords for each language; json keys that has one of these keywords (eg: {"false": "This is false value"}), will be handled approperiately
+  - Fix for issue #10, whcih prevented the creation of some classes/structs in some cases.
+  - Added NSCoding support for the following language definitions: Swift-Classes, Swift-Mappable, SwiftyJSON, Swift-Realm, Objective-C iOS, Mac and Realm.
+
 * Version 0.0.7
   - Few changes by tomkidd for xCode 6.3 and Swift 1.2
 
