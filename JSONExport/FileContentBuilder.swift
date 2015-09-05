@@ -83,7 +83,10 @@ class FilesContentBuilder{
         for jsonPropertyName in jsonProperties{
             let value : AnyObject = jsonObject[jsonPropertyName]!
             let property = propertyForValue(value, jsonKeyName: jsonPropertyName)
-            
+            //Avoid duplicated property names
+            if let index = find(properties.map({$0.nativeName}), property.nativeName){
+                continue
+            }
             //recursively handle custom types
             if property.isCustomClass{
                 let rProperty = relationProperty(className)
@@ -294,13 +297,24 @@ class FilesContentBuilder{
     */
     func propertyNativeName(jsonKeyName : String) -> String
     {
-        var propertyName = underscoresToCamelCaseForString(jsonKeyName, startFromFirstChar: false).lowercaseFirstChar()
+        var propertyName = cleanUpVersionOfPropertyNamed(jsonKeyName)
+        propertyName = underscoresToCamelCaseForString(propertyName, startFromFirstChar: false).lowercaseFirstChar()
         //Fix property name that could be a reserved keyword
         if lang.reservedKeywords != nil && contains(lang.reservedKeywords, propertyName.lowercaseString){
             //Property name need to be suffixed by proper suffix, any ideas of better generlized prefix/suffix?
             propertyName += "Field"
         }
         return propertyName
+    }
+    
+    
+    func cleanUpVersionOfPropertyNamed(propertyName: String) -> String
+    {
+        var allowedCharacters = NSMutableCharacterSet.alphanumericCharacterSet()
+        allowedCharacters.addCharactersInString("_1234567890")
+        var notAllowedCharacters = allowedCharacters.invertedSet
+        let cleanVersion = join("", propertyName.componentsSeparatedByCharactersInSet(allowedCharacters.invertedSet))
+        return cleanVersion
     }
     
     /**
