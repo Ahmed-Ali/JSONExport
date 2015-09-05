@@ -49,8 +49,11 @@ class HeaderFileRepresenter : FileRepresenter{
         if lang.headerFileData.modelDefinitionWithParent != nil && count(parentClassName) > 0{
             definition = lang.headerFileData.modelDefinitionWithParent.stringByReplacingOccurrencesOfString(modelName, withString: className)
             definition = definition.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: parentClassName)
+        }else if includeUtilities && lang.defaultParentWithUtilityMethods != nil{
+            definition = lang.modelDefinitionWithParent.stringByReplacingOccurrencesOfString(modelName, withString: className)
+            definition = definition.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: lang.defaultParentWithUtilityMethods)
         }else{
-            definition = lang.headerFileData.modelDefinition.stringByReplacingOccurrencesOfString(modelName, withString: className)
+            definition = lang.modelDefinition.stringByReplacingOccurrencesOfString(modelName, withString: className)
         }
         
         fileContent += definition

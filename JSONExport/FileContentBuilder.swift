@@ -112,7 +112,7 @@ class FilesContentBuilder{
         file.includeConstructors = includeConstructors
         file.firstLine = firstLine
         file.parentClassName = parentClassName
-        //TODO: - Check if this file already has similar file, if so merge.
+        
         var exactMatchFound = false
         if let similarFile = findSimilarFile(file, inFiles: files, exactMatchFound: &exactMatchFound){
             //there is a similar file

@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		60E4A26C1B990457008FE367 /* Java-Android Realm.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60E4A2621B990457008FE367 /* Java-Android Realm.plist */; };
-		60E4A26D1B990457008FE367 /* Java-Android.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60E4A2631B990457008FE367 /* Java-Android.plist */; };
-		60E4A26E1B990457008FE367 /* ObjectiveC-CoreData-iOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60E4A2641B990457008FE367 /* ObjectiveC-CoreData-iOS.plist */; };
-		60E4A26F1B990457008FE367 /* ObjectiveC-iOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60E4A2651B990457008FE367 /* ObjectiveC-iOS.plist */; };
-		60E4A2701B990457008FE367 /* ObjectiveC-Mac.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60E4A2661B990457008FE367 /* ObjectiveC-Mac.plist */; };
-		60E4A2711B990457008FE367 /* Swift-Class.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60E4A2671B990457008FE367 /* Swift-Class.plist */; };
-		60E4A2721B990457008FE367 /* Swift-CoreData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60E4A2681B990457008FE367 /* Swift-CoreData.plist */; };
-		60E4A2731B990457008FE367 /* Swift-Mappable.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60E4A2691B990457008FE367 /* Swift-Mappable.plist */; };
-		60E4A2741B990457008FE367 /* Swift-Struct.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60E4A26A1B990457008FE367 /* Swift-Struct.plist */; };
-		60E4A2751B990457008FE367 /* SwiftyJSON-Class.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60E4A26B1B990457008FE367 /* SwiftyJSON-Class.plist */; };
+		60FB8FF01B9B361600290979 /* Java-Android Realm.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FE61B9B361600290979 /* Java-Android Realm.json */; };
+		60FB8FF11B9B361600290979 /* Java-Android.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FE71B9B361600290979 /* Java-Android.json */; };
+		60FB8FF21B9B361600290979 /* ObjectiveC-CoreData-iOS.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FE81B9B361600290979 /* ObjectiveC-CoreData-iOS.json */; };
+		60FB8FF31B9B361600290979 /* ObjectiveC-iOS.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FE91B9B361600290979 /* ObjectiveC-iOS.json */; };
+		60FB8FF41B9B361600290979 /* ObjectiveC-Mac.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FEA1B9B361600290979 /* ObjectiveC-Mac.json */; };
+		60FB8FF51B9B361600290979 /* Swift-Class.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FEB1B9B361600290979 /* Swift-Class.json */; };
+		60FB8FF61B9B361600290979 /* Swift-CoreData.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FEC1B9B361600290979 /* Swift-CoreData.json */; };
+		60FB8FF71B9B361600290979 /* Swift-Mappable.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FED1B9B361600290979 /* Swift-Mappable.json */; };
+		60FB8FF81B9B361600290979 /* Swift-Struct.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FEE1B9B361600290979 /* Swift-Struct.json */; };
+		60FB8FF91B9B361600290979 /* SwiftyJSON-Class.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FEF1B9B361600290979 /* SwiftyJSON-Class.json */; };
+		60FB8FFC1B9B3F6400290979 /* ObjectiveC-Realm.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FFA1B9B3F6400290979 /* ObjectiveC-Realm.json */; };
+		60FB8FFD1B9B3F6400290979 /* Siwft-Realm.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FFB1B9B3F6400290979 /* Siwft-Realm.json */; };
 		E20A0DAD1A1170F1003B3D62 /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = E20A0DAA1A1170F1003B3D62 /* NoodleLineNumberMarker.m */; };
 		E20A0DAE1A1170F1003B3D62 /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = E20A0DAC1A1170F1003B3D62 /* NoodleLineNumberView.m */; };
 		E21292581A0C58CF0015027D /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21292571A0C58CF0015027D /* SharedConstants.swift */; };
@@ -39,16 +41,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		60E4A2621B990457008FE367 /* Java-Android Realm.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Java-Android Realm.plist"; path = "Supported Languages/Java-Android Realm.plist"; sourceTree = "<group>"; };
-		60E4A2631B990457008FE367 /* Java-Android.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Java-Android.plist"; path = "Supported Languages/Java-Android.plist"; sourceTree = "<group>"; };
-		60E4A2641B990457008FE367 /* ObjectiveC-CoreData-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ObjectiveC-CoreData-iOS.plist"; path = "Supported Languages/ObjectiveC-CoreData-iOS.plist"; sourceTree = "<group>"; };
-		60E4A2651B990457008FE367 /* ObjectiveC-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ObjectiveC-iOS.plist"; path = "Supported Languages/ObjectiveC-iOS.plist"; sourceTree = "<group>"; };
-		60E4A2661B990457008FE367 /* ObjectiveC-Mac.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ObjectiveC-Mac.plist"; path = "Supported Languages/ObjectiveC-Mac.plist"; sourceTree = "<group>"; };
-		60E4A2671B990457008FE367 /* Swift-Class.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Swift-Class.plist"; path = "Supported Languages/Swift-Class.plist"; sourceTree = "<group>"; };
-		60E4A2681B990457008FE367 /* Swift-CoreData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Swift-CoreData.plist"; path = "Supported Languages/Swift-CoreData.plist"; sourceTree = "<group>"; };
-		60E4A2691B990457008FE367 /* Swift-Mappable.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Swift-Mappable.plist"; path = "Supported Languages/Swift-Mappable.plist"; sourceTree = "<group>"; };
-		60E4A26A1B990457008FE367 /* Swift-Struct.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Swift-Struct.plist"; path = "Supported Languages/Swift-Struct.plist"; sourceTree = "<group>"; };
-		60E4A26B1B990457008FE367 /* SwiftyJSON-Class.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "SwiftyJSON-Class.plist"; path = "Supported Languages/SwiftyJSON-Class.plist"; sourceTree = "<group>"; };
+		60FB8FE61B9B361600290979 /* Java-Android Realm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Java-Android Realm.json"; path = "Supported Languages/Java-Android Realm.json"; sourceTree = "<group>"; };
+		60FB8FE71B9B361600290979 /* Java-Android.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Java-Android.json"; path = "Supported Languages/Java-Android.json"; sourceTree = "<group>"; };
+		60FB8FE81B9B361600290979 /* ObjectiveC-CoreData-iOS.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "ObjectiveC-CoreData-iOS.json"; path = "Supported Languages/ObjectiveC-CoreData-iOS.json"; sourceTree = "<group>"; };
+		60FB8FE91B9B361600290979 /* ObjectiveC-iOS.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "ObjectiveC-iOS.json"; path = "Supported Languages/ObjectiveC-iOS.json"; sourceTree = "<group>"; };
+		60FB8FEA1B9B361600290979 /* ObjectiveC-Mac.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "ObjectiveC-Mac.json"; path = "Supported Languages/ObjectiveC-Mac.json"; sourceTree = "<group>"; };
+		60FB8FEB1B9B361600290979 /* Swift-Class.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-Class.json"; path = "Supported Languages/Swift-Class.json"; sourceTree = "<group>"; };
+		60FB8FEC1B9B361600290979 /* Swift-CoreData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-CoreData.json"; path = "Supported Languages/Swift-CoreData.json"; sourceTree = "<group>"; };
+		60FB8FED1B9B361600290979 /* Swift-Mappable.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-Mappable.json"; path = "Supported Languages/Swift-Mappable.json"; sourceTree = "<group>"; };
+		60FB8FEE1B9B361600290979 /* Swift-Struct.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-Struct.json"; path = "Supported Languages/Swift-Struct.json"; sourceTree = "<group>"; };
+		60FB8FEF1B9B361600290979 /* SwiftyJSON-Class.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "SwiftyJSON-Class.json"; path = "Supported Languages/SwiftyJSON-Class.json"; sourceTree = "<group>"; };
+		60FB8FFA1B9B3F6400290979 /* ObjectiveC-Realm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "ObjectiveC-Realm.json"; path = "Supported Languages/ObjectiveC-Realm.json"; sourceTree = "<group>"; };
+		60FB8FFB1B9B3F6400290979 /* Siwft-Realm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Siwft-Realm.json"; path = "Supported Languages/Siwft-Realm.json"; sourceTree = "<group>"; };
 		E20A0DA81A1170F1003B3D62 /* JSONExport-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JSONExport-Bridging-Header.h"; sourceTree = "<group>"; };
 		E20A0DA91A1170F1003B3D62 /* NoodleLineNumberMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberMarker.h; sourceTree = "<group>"; };
 		E20A0DAA1A1170F1003B3D62 /* NoodleLineNumberMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoodleLineNumberMarker.m; sourceTree = "<group>"; };
@@ -139,16 +143,18 @@
 		E2F07E8A1A0B3192004A1DAA /* Supported Languages */ = {
 			isa = PBXGroup;
 			children = (
-				60E4A2621B990457008FE367 /* Java-Android Realm.plist */,
-				60E4A2631B990457008FE367 /* Java-Android.plist */,
-				60E4A2641B990457008FE367 /* ObjectiveC-CoreData-iOS.plist */,
-				60E4A2651B990457008FE367 /* ObjectiveC-iOS.plist */,
-				60E4A2661B990457008FE367 /* ObjectiveC-Mac.plist */,
-				60E4A2671B990457008FE367 /* Swift-Class.plist */,
-				60E4A2681B990457008FE367 /* Swift-CoreData.plist */,
-				60E4A2691B990457008FE367 /* Swift-Mappable.plist */,
-				60E4A26A1B990457008FE367 /* Swift-Struct.plist */,
-				60E4A26B1B990457008FE367 /* SwiftyJSON-Class.plist */,
+				60FB8FFA1B9B3F6400290979 /* ObjectiveC-Realm.json */,
+				60FB8FE61B9B361600290979 /* Java-Android Realm.json */,
+				60FB8FE71B9B361600290979 /* Java-Android.json */,
+				60FB8FE81B9B361600290979 /* ObjectiveC-CoreData-iOS.json */,
+				60FB8FE91B9B361600290979 /* ObjectiveC-iOS.json */,
+				60FB8FEA1B9B361600290979 /* ObjectiveC-Mac.json */,
+				60FB8FFB1B9B3F6400290979 /* Siwft-Realm.json */,
+				60FB8FEB1B9B361600290979 /* Swift-Class.json */,
+				60FB8FEC1B9B361600290979 /* Swift-CoreData.json */,
+				60FB8FED1B9B361600290979 /* Swift-Mappable.json */,
+				60FB8FEE1B9B361600290979 /* Swift-Struct.json */,
+				60FB8FEF1B9B361600290979 /* SwiftyJSON-Class.json */,
 			);
 			name = "Supported Languages";
 			sourceTree = "<group>";
@@ -263,18 +269,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60E4A26D1B990457008FE367 /* Java-Android.plist in Resources */,
+				60FB8FF51B9B361600290979 /* Swift-Class.json in Resources */,
+				60FB8FF01B9B361600290979 /* Java-Android Realm.json in Resources */,
+				60FB8FF31B9B361600290979 /* ObjectiveC-iOS.json in Resources */,
+				60FB8FFC1B9B3F6400290979 /* ObjectiveC-Realm.json in Resources */,
+				60FB8FF11B9B361600290979 /* Java-Android.json in Resources */,
+				60FB8FF81B9B361600290979 /* Swift-Struct.json in Resources */,
 				E2FA87BF1A059AC100648EB6 /* Images.xcassets in Resources */,
-				60E4A26E1B990457008FE367 /* ObjectiveC-CoreData-iOS.plist in Resources */,
-				60E4A2751B990457008FE367 /* SwiftyJSON-Class.plist in Resources */,
-				60E4A2721B990457008FE367 /* Swift-CoreData.plist in Resources */,
-				60E4A2711B990457008FE367 /* Swift-Class.plist in Resources */,
-				60E4A26C1B990457008FE367 /* Java-Android Realm.plist in Resources */,
-				60E4A2701B990457008FE367 /* ObjectiveC-Mac.plist in Resources */,
-				60E4A2741B990457008FE367 /* Swift-Struct.plist in Resources */,
-				60E4A26F1B990457008FE367 /* ObjectiveC-iOS.plist in Resources */,
-				60E4A2731B990457008FE367 /* Swift-Mappable.plist in Resources */,
+				60FB8FFD1B9B3F6400290979 /* Siwft-Realm.json in Resources */,
+				60FB8FF71B9B361600290979 /* Swift-Mappable.json in Resources */,
+				60FB8FF61B9B361600290979 /* Swift-CoreData.json in Resources */,
+				60FB8FF91B9B361600290979 /* SwiftyJSON-Class.json in Resources */,
+				60FB8FF21B9B361600290979 /* ObjectiveC-CoreData-iOS.json in Resources */,
 				E2FA87C21A059AC100648EB6 /* Main.storyboard in Resources */,
+				60FB8FF41B9B361600290979 /* ObjectiveC-Mac.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

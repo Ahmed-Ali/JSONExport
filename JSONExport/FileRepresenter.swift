@@ -103,6 +103,9 @@ class FileRepresenter{
         if lang.modelDefinitionWithParent != nil && count(parentClassName) > 0{
             definition = lang.modelDefinitionWithParent.stringByReplacingOccurrencesOfString(modelName, withString: className)
             definition = definition.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: parentClassName)
+        }else if includeUtilities && lang.defaultParentWithUtilityMethods != nil{
+            definition = lang.modelDefinitionWithParent.stringByReplacingOccurrencesOfString(modelName, withString: className)
+            definition = definition.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: lang.defaultParentWithUtilityMethods)
         }else{
             definition = lang.modelDefinition.stringByReplacingOccurrencesOfString(modelName, withString: className)
         }
@@ -356,12 +359,17 @@ class FileRepresenter{
     func propertyTypeIsBasicType(property: Property) -> Bool{
         var isBasicType = false
         var type = propertyTypeWithoutArrayWords(property)
-        
-        let basicTypes = lang.dataTypes.toDictionary().allValues as! [String]
-        if find(basicTypes, type) != nil{
+        if lang.genericType == type{
             isBasicType = true
+        }else{
+            let basicTypes = lang.dataTypes.toDictionary().allValues as! [String]
+            
+            if find(basicTypes, type) != nil{
+                isBasicType = true
+            }
         }
-  
+        
+        
         return isBasicType
     }
     

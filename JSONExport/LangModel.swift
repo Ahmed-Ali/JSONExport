@@ -29,6 +29,7 @@ class LangModel{
 	var langName : String!
 	var modelDefinition : String!
     var modelDefinitionWithParent : String!
+    var defaultParentWithUtilityMethods : String!
 	var modelEnd : String!
 	var modelStart : String!
 	var setter : String!
@@ -75,6 +76,7 @@ class LangModel{
 		langName = dictionary["langName"] as? String
 		modelDefinition = dictionary["modelDefinition"] as? String
         modelDefinitionWithParent = dictionary["modelDefinitionWithParent"] as? String
+        defaultParentWithUtilityMethods = dictionary["defaultParentWithUtilityMethods"] as? String
 		modelEnd = dictionary["modelEnd"] as? String
 		modelStart = dictionary["modelStart"] as? String
 		setter = dictionary["setter"] as? String
