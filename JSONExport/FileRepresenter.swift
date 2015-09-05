@@ -343,7 +343,16 @@ class FileRepresenter{
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(jsonKeyName, withString:property.jsonName)
                 
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(additionalCustomTypeProperty, withString:"")
-                
+                if lang.basicTypesWithSpecialFetchingNeeds != nil{
+                    if let index = find(lang.basicTypesWithSpecialFetchingNeeds, property.type), let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements?[index]{
+                       propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(varTypeReplacement, withString: replacement)
+                        
+                        
+                        let lowerCaseType = property.type.lowercaseString
+                        propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(lowerCaseVarType, withString: lowerCaseType)
+                        
+                    }
+                }
                 fileContent += propertyHandlingStr
             }
             fileContent += method.returnStatement
@@ -429,13 +438,10 @@ class FileRepresenter{
         if(propertyTypeIsBasicType(property)){
             
             if constructor.fetchArrayOfBasicTypePropertyFromMap != nil{
-                let index = find(lang.basicTypesWithSpecialFetchingNeeds, property.elementsType)
-                if index != nil{
+                if let index = find(lang.basicTypesWithSpecialFetchingNeeds, property.elementsType){
                     propertyStr = constructor.fetchArrayOfBasicTypePropertyFromMap
-                    let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements[index!]
+                    let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements[index]
                     propertyStr = propertyStr.stringByReplacingOccurrencesOfString(varTypeReplacement, withString: replacement)
-                    
-                    
                 }else{
                     propertyStr = constructor.fetchBasicTypePropertyFromMap
                 }
