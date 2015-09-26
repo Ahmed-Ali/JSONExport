@@ -36,7 +36,7 @@ class DataType{
 	 */
 	func toDictionary() -> NSDictionary
 	{
-		var dictionary = NSMutableDictionary()
+		let dictionary = NSMutableDictionary()
 		if boolType != nil{
 			dictionary["boolType"] = boolType
 		}

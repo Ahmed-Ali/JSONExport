@@ -100,7 +100,7 @@ class FileRepresenter{
         appendCustomImports()
         //start the model defination
         var definition = ""
-        if lang.modelDefinitionWithParent != nil && count(parentClassName) > 0{
+        if lang.modelDefinitionWithParent != nil && parentClassName.characters.count > 0{
             definition = lang.modelDefinitionWithParent.stringByReplacingOccurrencesOfString(modelName, withString: className)
             definition = definition.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: parentClassName)
         }else if includeUtilities && lang.defaultParentWithUtilityMethods != nil{
@@ -128,7 +128,7 @@ class FileRepresenter{
     */
     func appendFirstLineStatement()
     {
-        if lang.supportsFirstLineStatement != nil && lang.supportsFirstLineStatement! && count(firstLine) > 0{
+        if lang.supportsFirstLineStatement != nil && lang.supportsFirstLineStatement! && firstLine.characters.count > 0{
             fileContent += "\(firstLine)\n\n"
         }
     }
@@ -187,7 +187,7 @@ class FileRepresenter{
     */
     func getYear() -> String
     {
-        return "\(NSCalendar.currentCalendar().component(.CalendarUnitYear, fromDate: NSDate()))"
+        return "\(NSCalendar.currentCalendar().component(.Year, fromDate: NSDate()))"
     }
     
     /**
@@ -195,7 +195,7 @@ class FileRepresenter{
     */
     func getTodayFormattedDay() -> String
     {
-        let components = NSCalendar.currentCalendar().components(.CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear, fromDate: NSDate())
+        let components = NSCalendar.currentCalendar().components([.Day, .Month, .Year], fromDate: NSDate())
         return "\(components.day)/\(components.month)/\(components.year)"
     }
 
@@ -224,7 +224,7 @@ class FileRepresenter{
         fileContent += "\n"
         for property in properties{
             
-            fileContent += property.toString(forHeaderFile: false)
+            fileContent += property.toString(false)
         }
     }
     
@@ -326,7 +326,7 @@ class FileRepresenter{
                     }
                     propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(elementType, withString: property.elementsType)
                 }else{
-                    if lang.basicTypesWithSpecialStoringNeeds != nil && method.forEachPropertyWithSpecialStoringNeeds != nil && find(lang.basicTypesWithSpecialStoringNeeds, property.type) != nil{
+                    if lang.basicTypesWithSpecialStoringNeeds != nil && method.forEachPropertyWithSpecialStoringNeeds != nil && lang.basicTypesWithSpecialStoringNeeds.indexOf(property.type) != nil{
                         propertyHandlingStr = method.forEachPropertyWithSpecialStoringNeeds
                     }else{
                         propertyHandlingStr = method.forEachProperty
@@ -344,7 +344,7 @@ class FileRepresenter{
                 
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(additionalCustomTypeProperty, withString:"")
                 if lang.basicTypesWithSpecialFetchingNeeds != nil{
-                    if let index = find(lang.basicTypesWithSpecialFetchingNeeds, property.type), let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements?[index]{
+                    if let index = lang.basicTypesWithSpecialFetchingNeeds.indexOf(property.type), let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements?[index]{
                        propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(varTypeReplacement, withString: replacement)
                         
                         
@@ -367,13 +367,13 @@ class FileRepresenter{
     */
     func propertyTypeIsBasicType(property: Property) -> Bool{
         var isBasicType = false
-        var type = propertyTypeWithoutArrayWords(property)
+        let type = propertyTypeWithoutArrayWords(property)
         if lang.genericType == type{
             isBasicType = true
         }else{
             let basicTypes = lang.dataTypes.toDictionary().allValues as! [String]
             
-            if find(basicTypes, type) != nil{
+            if basicTypes.indexOf(type) != nil{
                 isBasicType = true
             }
         }
@@ -394,7 +394,7 @@ class FileRepresenter{
             type = type.stringByReplacingOccurrencesOfString(arrayWord, withString: "")
         }
         
-        if count(type) == 0{
+        if type.characters.count == 0{
             type = typeNameForArrayElements(property.sampleValue as! NSArray, lang: lang)
         }
         return type
@@ -438,7 +438,7 @@ class FileRepresenter{
         if(propertyTypeIsBasicType(property)){
             
             if constructor.fetchArrayOfBasicTypePropertyFromMap != nil{
-                if let index = find(lang.basicTypesWithSpecialFetchingNeeds, property.elementsType){
+                if let index = lang.basicTypesWithSpecialFetchingNeeds.indexOf(property.elementsType){
                     propertyStr = constructor.fetchArrayOfBasicTypePropertyFromMap
                     let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements[index]
                     propertyStr = propertyStr.stringByReplacingOccurrencesOfString(varTypeReplacement, withString: replacement)
@@ -467,7 +467,7 @@ class FileRepresenter{
     {
         var propertyStr = ""
         if lang.basicTypesWithSpecialFetchingNeeds != nil{
-            let index = find(lang.basicTypesWithSpecialFetchingNeeds, property.type)
+            let index = lang.basicTypesWithSpecialFetchingNeeds.indexOf(property.type)
             if index != nil{
                 propertyStr = constructor.fetchBasicTypeWithSpecialNeedsPropertyFromMap
                 if let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements?[index!]{

@@ -100,7 +100,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     */
     func setLanguagesSelection()
     {
-        let langNames = sorted(langs.keys.array)
+        let langNames = Array(langs.keys).sort()
         languagesPopup.removeAllItems()
         languagesPopup.addItemsWithTitles(langNames)
         
@@ -145,9 +145,9 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     //MARK: - Handling pre defined languages
     func loadSupportedLanguages()
     {
-        if let langFiles = NSBundle.mainBundle().URLsForResourcesWithExtension("json", subdirectory: nil) as? [NSURL]{
+        if let langFiles = NSBundle.mainBundle().URLsForResourcesWithExtension("json", subdirectory: nil) as [NSURL]!{
             for langFile in langFiles{
-                if let data = NSData(contentsOfURL: langFile), langDictionary = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error: nil) as? NSDictionary{
+                if let data = NSData(contentsOfURL: langFile), langDictionary = (try? NSJSONSerialization.JSONObjectWithData(data, options: [])) as? NSDictionary{
                     let lang = LangModel(fromDictionary: langDictionary)
                     if langs[lang.displayLangName] != nil{
                         continue
@@ -251,7 +251,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     /**
     Saves all the generated files in the specified path
     
-    :param: path in which to save the files
+    - parameter path: in which to save the files
     */
     func saveToPath(path : String)
     {
@@ -266,7 +266,11 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
             }
             let filePath = "\(path)/\(file.className).\(fileExtension)"
             
-            fileContent.writeToFile(filePath, atomically: false, encoding: NSUTF8StringEncoding, error: &error)
+            do {
+                try fileContent.writeToFile(filePath, atomically: false, encoding: NSUTF8StringEncoding)
+            } catch let error1 as NSError {
+                error = error1
+            }
             if error != nil{
                 showError(error!)
                 break
@@ -335,7 +339,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         saveButton.enabled = false
         var str = sourceText.string!
         
-        if count(str) == 0{
+        if str.characters.count == 0{
             //Nothing to do, just clear any generated files
             files.removeAll(keepCapacity: false)
             tableView.reloadData()
@@ -343,7 +347,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         }
         var rootClassName = classNameField.stringValue
         let prefix = classPrefixField.stringValue
-        if count(rootClassName) == 0{
+        if rootClassName.characters.count == 0{
             rootClassName = "RootClass"
         }
         sourceText.editable = false
@@ -352,7 +356,8 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
             str = jsonStringByRemovingUnwantedCharacters(str)
             if let data = str.dataUsingEncoding(NSUTF8StringEncoding){
                 var error : NSError?
-                if let jsonData : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error: &error){
+                do {
+                    let jsonData : AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
                     var json : NSDictionary!
                     if jsonData is NSDictionary{
                         //fine nothing to do
@@ -365,7 +370,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                     let fileGenerator = self.prepareAndGetFilesBuilder()
                     fileGenerator.addFileWithName(&rootClassName, jsonObject: json, files: &self.files)
                     fileGenerator.fixReferenceMismatches(inFiles: self.files)
-                    self.files = reverse(self.files)
+                    self.files = Array(self.files.reverse())
                     runOnUiThread{
                         self.sourceText.editable = true
                         self.showSuccessStatus("Valid JSON structure")
@@ -373,16 +378,19 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                         
                         self.tableView.reloadData()
                     }
-                }else{
+                } catch let error1 as NSError {
+                    error = error1
                     runOnUiThread({ () -> Void in
                         self.sourceText.editable = true
                         self.saveButton.enabled = false
                         if error != nil{
-                            println(error)
+                            print(error)
                         }
                         self.showErrorStatus("It seems your JSON object is not valid!")
                     })
                     
+                } catch {
+                    fatalError()
                 }
             }
         }
@@ -391,7 +399,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     /**
     Creates and returns an instance of FilesContentBuilder. It also configure the values from the UI components to the instance. I.e includeConstructors
     
-    :returns: instance of configured FilesContentBuilder
+    - returns: instance of configured FilesContentBuilder
     */
     func prepareAndGetFilesBuilder() -> FilesContentBuilder
     {

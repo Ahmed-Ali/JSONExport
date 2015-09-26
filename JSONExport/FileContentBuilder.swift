@@ -62,9 +62,9 @@ class FilesContentBuilder{
     /**
     Generates a file using the passed className and jsonObject example and appends it in the passed files array
     
-    :param: className for the file to be generated, if the file already exist with different name, this className will be changed
-    :param: jsonObject acts as an example of the json object, which the generated fill be able to handle
-    :param: files the generated file will be appended to this array
+    - parameter className: for the file to be generated, if the file already exist with different name, this className will be changed
+    - parameter jsonObject: acts as an example of the json object, which the generated fill be able to handle
+    - parameter files: the generated file will be appended to this array
     */
     func addFileWithName(inout className: String, jsonObject: NSDictionary, inout files : [FileRepresenter], toOneRelationWithProperty: Property! = nil)
     {
@@ -77,14 +77,14 @@ class FilesContentBuilder{
             
         }
         //sort all the keys in the passed json dictionary
-        var jsonProperties = sorted(jsonObject.allKeys as! [String])
+        let jsonProperties = (jsonObject.allKeys as! [String]).sort()
         
         //loop all the json properties and handle each one individually
         for jsonPropertyName in jsonProperties{
             let value : AnyObject = jsonObject[jsonPropertyName]!
             let property = propertyForValue(value, jsonKeyName: jsonPropertyName)
             //Avoid duplicated property names
-            if let index = find(properties.map({$0.nativeName}), property.nativeName){
+            if let index = properties.map({$0.nativeName}).indexOf(property.nativeName){
                 continue
             }
             //recursively handle custom types
@@ -146,13 +146,13 @@ class FilesContentBuilder{
     
     /**
     Merges the properties from the passed fromFile to the pass toFile
-    :param: fromFile in which to find any new properties
-    :param: toFile to which to add any found new properties
+    - parameter fromFile: in which to find any new properties
+    - parameter toFile: to which to add any found new properties
     */
-    func mergeProperties(#fromFile: FileRepresenter, toFile: FileRepresenter)
+    func mergeProperties(fromFile fromFile: FileRepresenter, toFile: FileRepresenter)
     {
         for property in fromFile.properties{
-            if find(toFile.properties, property) == nil{
+            if toFile.properties.indexOf(property) == nil{
                 toFile.properties.append(property)
             }
         }
@@ -161,10 +161,10 @@ class FilesContentBuilder{
     /**
     Finds the first file in the passed files which has the same class name as the passed file
     
-    :param: file the file to compare against
-    :param: inFiles the files array to search in
-    :param: exactMathFound inout param, will have the value of 'true' if any file is found that has exactly the same properties as the passed file
-    :returns: similar file if any
+    - parameter file: the file to compare against
+    - parameter inFiles: the files array to search in
+    - parameter exactMathFound: inout param, will have the value of 'true' if any file is found that has exactly the same properties as the passed file
+    - returns: similar file if any
     */
     func findSimilarFile(file: FileRepresenter, inFiles files: [FileRepresenter], inout exactMatchFound: Bool) -> FileRepresenter?{
         var similarFile : FileRepresenter?
@@ -185,17 +185,17 @@ class FilesContentBuilder{
     /**
     Compares the properties of both files to determine if they exactly similar or no.
     
-    :param: file1 first file to compare against the second file
-    :param: file2 the second file to compare against the first file
-    :returns: whether both files has exactly the same properties
+    - parameter file1: first file to compare against the second file
+    - parameter file2: the second file to compare against the first file
+    - returns: whether both files has exactly the same properties
     */
-    func bothFilesHasSamePropreties(#file1: FileRepresenter, file2: FileRepresenter) -> Bool
+    func bothFilesHasSamePropreties(file1 file1: FileRepresenter, file2: FileRepresenter) -> Bool
     {
         var bothHasSameProperties = true
         if file1.properties.count == file2.properties.count{
             //there is a propability they both has the same properties
             for property in file1.properties{
-                if find(file2.properties, property) == nil{
+                if file2.properties.indexOf(property) == nil{
                     //property not found, no need to keep looking
                     bothHasSameProperties = false
                     break
@@ -226,10 +226,10 @@ class FilesContentBuilder{
     /**
     Creates and returns a Property object whiche represents a to-one relation property
     
-    :param: relationClassName to which the relation relates
-    :param: headerProperty optional whether this property is for header file
+    - parameter relationClassName: to which the relation relates
+    - parameter headerProperty: optional whether this property is for header file
     
-    :returns: the relation property
+    - returns: the relation property
     */
     func relationProperty(relationClassName : String) -> Property
     {
@@ -244,9 +244,9 @@ class FilesContentBuilder{
     /**
     Creates and returns a Property object passed on the passed value and json key name
     
-    :param: value example value for the property
-    :param: jsonKeyName for the property
-    :returns: a Property instance
+    - parameter value: example value for the property
+    - parameter jsonKeyName: for the property
+    - returns: a Property instance
     */
     func propertyForValue(value: AnyObject, jsonKeyName: String) -> Property
     {
@@ -291,16 +291,16 @@ class FilesContentBuilder{
     /**
     Returns a camel case presentation from the passed json key
     
-    :param: jsonKeyName the name of the json key to convert to suitable native property name
+    - parameter jsonKeyName: the name of the json key to convert to suitable native property name
     
-    :returns: property name
+    - returns: property name
     */
     func propertyNativeName(jsonKeyName : String) -> String
     {
         var propertyName = cleanUpVersionOfPropertyNamed(jsonKeyName)
         propertyName = underscoresToCamelCaseForString(propertyName, startFromFirstChar: false).lowercaseFirstChar()
         //Fix property name that could be a reserved keyword
-        if lang.reservedKeywords != nil && contains(lang.reservedKeywords, propertyName.lowercaseString){
+        if lang.reservedKeywords != nil && lang.reservedKeywords.contains(propertyName.lowercaseString){
             //Property name need to be suffixed by proper suffix, any ideas of better generlized prefix/suffix?
             propertyName += "Field"
         }
@@ -310,19 +310,19 @@ class FilesContentBuilder{
     
     func cleanUpVersionOfPropertyNamed(propertyName: String) -> String
     {
-        var allowedCharacters = NSMutableCharacterSet.alphanumericCharacterSet()
+        let allowedCharacters = NSMutableCharacterSet.alphanumericCharacterSet()
         allowedCharacters.addCharactersInString("_1234567890")
         var notAllowedCharacters = allowedCharacters.invertedSet
-        let cleanVersion = join("", propertyName.componentsSeparatedByCharactersInSet(allowedCharacters.invertedSet))
+        let cleanVersion = propertyName.componentsSeparatedByCharactersInSet(allowedCharacters.invertedSet).joinWithSeparator("")
         return cleanVersion
     }
     
     /**
     Returns the input string with white spaces removed, and underscors converted to camel case
     
-    :param: inputString to convert
-    :param: startFromFirstChar whether to start with upper case letter
-    :returns: the camel case version of the input
+    - parameter inputString: to convert
+    - parameter startFromFirstChar: whether to start with upper case letter
+    - returns: the camel case version of the input
     */
     func underscoresToCamelCaseForString(input: String, startFromFirstChar: Bool) -> String
     {
@@ -331,7 +331,7 @@ class FilesContentBuilder{
         str = str.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         var output = ""
         var makeNextCharUpperCase = startFromFirstChar
-        for char in input{
+        for char in input.characters{
             if char == "_" {
                 makeNextCharUpperCase = true
             }else if makeNextCharUpperCase{
@@ -350,8 +350,8 @@ class FilesContentBuilder{
     /**
     Creats and returns the class name for the passed proeprty name
     
-    :param: propertyName to be converted to a type name
-    :returns: the type name
+    - parameter propertyName: to be converted to a type name
+    - returns: the type name
     */
     func typeNameForPropertyName(propertyName : String) -> String{
         var swiftClassName = underscoresToCamelCaseForString(propertyName, startFromFirstChar: true).toSingular()
