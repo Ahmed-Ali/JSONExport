@@ -84,7 +84,7 @@ class FilesContentBuilder{
             let value : AnyObject = jsonObject[jsonPropertyName]!
             let property = propertyForValue(value, jsonKeyName: jsonPropertyName)
             //Avoid duplicated property names
-            if let index = properties.map({$0.nativeName}).indexOf(property.nativeName){
+            if properties.map({$0.nativeName}).indexOf(property.nativeName) != nil{
                 continue
             }
             //recursively handle custom types
@@ -263,7 +263,8 @@ class FilesContentBuilder{
         }else if value is NSArray{
             //we need to check its elements...
             let array = value as! NSArray
-            if let dic = array.firstObject as? NSDictionary{
+            
+            if array.firstObject is NSDictionary{
                 //wow complicated
                 let leafClassName = typeNameForPropertyName(jsonKeyName)
 
@@ -312,7 +313,6 @@ class FilesContentBuilder{
     {
         let allowedCharacters = NSMutableCharacterSet.alphanumericCharacterSet()
         allowedCharacters.addCharactersInString("_1234567890")
-        var notAllowedCharacters = allowedCharacters.invertedSet
         let cleanVersion = propertyName.componentsSeparatedByCharactersInSet(allowedCharacters.invertedSet).joinWithSeparator("")
         return cleanVersion
     }

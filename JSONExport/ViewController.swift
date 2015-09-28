@@ -255,9 +255,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     */
     func saveToPath(path : String)
     {
-        let fileManager = NSFileManager.defaultManager()
         var error : NSError?
-        
         for file in files{
             let fileContent = file.fileContent
             var fileExtension = selectedLang.fileExtension
@@ -346,7 +344,6 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
             return;
         }
         var rootClassName = classNameField.stringValue
-        let prefix = classPrefixField.stringValue
         if rootClassName.characters.count == 0{
             rootClassName = "RootClass"
         }
