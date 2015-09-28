@@ -12,10 +12,10 @@ import Foundation
 /**
 Creats and returns the type name for the passed value
 
-:param: value example value to figure out its type
-:returns: the type name
+- parameter value: example value to figure out its type
+- returns: the type name
 */
-func propertyTypeName(value : AnyObject, #lang: LangModel) -> String
+func propertyTypeName(value : AnyObject, lang: LangModel) -> String
 {
     var name = ""
     if value is NSArray{
@@ -24,7 +24,7 @@ func propertyTypeName(value : AnyObject, #lang: LangModel) -> String
         name = typeForNumber(value as! NSNumber, lang: lang)
     }else if value is NSString{
         let booleans : [String] = ["True", "true", "TRUE", "False", "false", "FALSE"]
-        if find(booleans, value as! String) != nil{
+        if booleans.indexOf((value as! String)) != nil{
             name = lang.dataTypes.boolType
         }else{
             name = lang.dataTypes.stringType
@@ -39,12 +39,12 @@ func propertyTypeName(value : AnyObject, #lang: LangModel) -> String
 /**
 Tries to figur out the type of the elements of the passed array and returns the type that can be used as the type of any element in the array
 
-:param: elements array to try to find out which type is suitable for its elements
+- parameter elements: array to try to find out which type is suitable for its elements
 
-:returns: typeName the type name as String
+- returns: typeName the type name as String
 */
 
-func typeNameForArrayElements(elements: NSArray, #lang: LangModel) -> String{
+func typeNameForArrayElements(elements: NSArray, lang: LangModel) -> String{
     var typeName : String!
     let genericType = lang.genericType
     if elements.count == 0{
@@ -70,11 +70,11 @@ func typeNameForArrayElements(elements: NSArray, #lang: LangModel) -> String{
 /**
 Tries to figur out the type of the elements of the passed array and returns the type of the array that can hold these values
 
-:param: elements array to try to find out which type is suitable for its elements
+- parameter elements: array to try to find out which type is suitable for its elements
 
-:returns: the type name
+- returns: the type name
 */
-func typeNameForArrayOfElements(elements: NSArray, #lang: LangModel) -> String{
+func typeNameForArrayOfElements(elements: NSArray, lang: LangModel) -> String{
     var typeName : String!
     let genericType = lang.arrayType.stringByReplacingOccurrencesOfString(elementType, withString: lang.genericType)
     if elements.count == 0{
@@ -102,10 +102,10 @@ func typeNameForArrayOfElements(elements: NSArray, #lang: LangModel) -> String{
 /**
 Returns one of the possible types for any numeric value (int, float, double, etc...)
 
-:param: number the numeric value
-:returns: the type name
+- parameter number: the numeric value
+- returns: the type name
 */
-func typeForNumber(number : NSNumber, #lang: LangModel) -> String
+func typeForNumber(number : NSNumber, lang: LangModel) -> String
 {
     let numberType = CFNumberGetType(number as CFNumberRef)
     
@@ -137,12 +137,12 @@ func typeForNumber(number : NSNumber, #lang: LangModel) -> String
 /**
 Creates and returns a dictionary who is built up by combining all the dictionary elements in the passed array.
 
-:param: array array of dictionaries.
-:returns: dictionary that combines all the dictionary elements in the array.
+- parameter array: array of dictionaries.
+- returns: dictionary that combines all the dictionary elements in the array.
 */
 func unionDictionaryFromArrayElements(array: NSArray) -> NSDictionary
 {
-    var dictionary = NSMutableDictionary()
+    let dictionary = NSMutableDictionary()
     for item in array{
         if let dic = item as? NSDictionary{
             //loop all over its keys
@@ -158,8 +158,8 @@ func unionDictionaryFromArrayElements(array: NSArray) -> NSDictionary
 /**
 Cleans up the passed string from any characters that can make it invalid JSON string.
 
-:param: jsonStr the JSON string to be cleaned up
-:returns: a clean version of the passed string
+- parameter jsonStr: the JSON string to be cleaned up
+- returns: a clean version of the passed string
 */
 
 func jsonStringByRemovingUnwantedCharacters(jsonString: String) -> String
@@ -173,8 +173,8 @@ func jsonStringByRemovingUnwantedCharacters(jsonString: String) -> String
 /**
 Cleans up the passed string from any control characters.
 
-:param: string the string to be cleaned up
-:returns: a clean version of the passed string
+- parameter string: the string to be cleaned up
+- returns: a clean version of the passed string
 */
 
 func stringByRemovingControlCharacters(string: String) -> String

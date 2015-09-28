@@ -46,7 +46,7 @@ class HeaderFileRepresenter : FileRepresenter{
         
         //start the model defination
         var definition = ""
-        if lang.headerFileData.modelDefinitionWithParent != nil && count(parentClassName) > 0{
+        if lang.headerFileData.modelDefinitionWithParent != nil && parentClassName.characters.count > 0{
             definition = lang.headerFileData.modelDefinitionWithParent.stringByReplacingOccurrencesOfString(modelName, withString: className)
             definition = definition.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: parentClassName)
         }else if includeUtilities && lang.defaultParentWithUtilityMethods != nil{
@@ -82,7 +82,7 @@ class HeaderFileRepresenter : FileRepresenter{
     
     func appendImportParentHeader()
     {
-        if lang.headerFileData.importParentHeaderFile != nil && count(parentClassName) > 0{
+        if lang.headerFileData.importParentHeaderFile != nil && parentClassName.characters.count > 0{
             fileContent += lang.headerFileData.importParentHeaderFile.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: parentClassName)
         }
     }
@@ -129,7 +129,7 @@ class HeaderFileRepresenter : FileRepresenter{
                     //if it is an array of custom types
                     if(property.elementsType != lang.genericType){
                         let basicTypes = lang.dataTypes.toDictionary().allValues as! [String]
-                        if find(basicTypes, property.elementsType) == nil{
+                        if basicTypes.indexOf(property.elementsType) == nil{
                             fileContent += lang.headerFileData.importForEachCustomType.stringByReplacingOccurrencesOfString(modelName, withString: property.elementsType)
                         }
                     }
@@ -146,7 +146,7 @@ class HeaderFileRepresenter : FileRepresenter{
     {
         fileContent += "\n"
         for property in properties{
-            fileContent += property.toString(forHeaderFile: true)
+            fileContent += property.toString(true)
         }
     }
     
