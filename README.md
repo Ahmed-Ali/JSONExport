@@ -58,6 +58,8 @@ Known Limitions:
 
 History log:
 ========================
+* Version 0.0.9
+  - Merged pull request #25 for support to Xcode 7 and Swift 2.0
 * Version 0.0.8
   - Added reserved keywords for each language; json keys that has one of these keywords (eg: {"false": "This is false value"}), will be handled approperiately.
   - Fix for issue #10, whcih prevented the creation of some classes/structs in some cases.
