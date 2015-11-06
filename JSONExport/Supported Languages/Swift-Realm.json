@@ -1,5 +1,5 @@
 {
-    "modelStart": "{\n",
+    "modelStart": " {\n",
     "importForEachCustomType": "",
     "basicTypesWithSpecialStoringNeeds": [
                                           "Int",
@@ -68,7 +68,7 @@
                          ],
     "booleanGetter": "",
     "briefDescription": "Defines how your JSON objects can be mapped to Swift classes using the built-in NSJSONSerialization class",
-    "instanceVarWithSpeicalDefinition": "\tdynamic var <!VarName!> : <!VarType!>\n",
+    "instanceVarWithSpeicalDefinition": "\tdynamic var <!VarName!>: <!VarType!>\n",
     "utilityMethods": [
                        {
                        "forEachProperty": "\t\tif <!VarName!> != nil{\n\t\t\tdictionary[\"<!JsonKeyName!>\"] = <!VarName!>\n\t\t}\n",
@@ -120,7 +120,7 @@
                                             "[",
                                             "]"
                                             ],
-    "defaultParentWithUtilityMethods": "RLMObject, NSCoding",
+    "defaultParentWithUtilityMethods": "Object, NSCoding",
     "constructors": [
                      {
                      "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\tif let <!VarName!>Value = dictionary[\"<!JsonKeyName!>\"] as? <!VarType!>{\n\t\t\tthis.<!VarName!> = <!VarName!>Value\n\t\t}\n",
@@ -128,18 +128,18 @@
                      "bodyEnd": "\t\treturn this\n\t}\n",
                      "fetchBasicTypePropertyFromMap": "\t\tif let <!VarName!>Value = dictionary[\"<!JsonKeyName!>\"] as? <!VarType!>{\n\t\t\tthis.<!VarName!> = <!VarName!>Value\n\t\t}\n",
                      "signature": "\tclass func fromDictionary(dictionary: NSDictionary) -> <!ModelName!>",
-                     "fetchArrayOfCustomTypePropertyFromMap": "\t\tif let <!VarName!>Array = dictionary[\"<!JsonKeyName!>\"] as? [NSDictionary]{\n\t\t\tvar <!VarName!>Items = RLMArray(objectClassName: <!ElementType!>.className())\n\t\t\tfor dic in <!VarName!>Array{\n\t\t\t\tlet value = <!ElementType!>.fromDictionary(dic)\n\t\t\t\t<!VarName!>Items.addObject(value)\n\t\t\t}\n\t\t\t<!VarName!> = <!VarName!>Items\n\t\t}\n",
+                     "fetchArrayOfCustomTypePropertyFromMap": "\t\tif let <!VarName!>Array = dictionary[\"<!JsonKeyName!>\"] as? [NSDictionary]{\n\t\t\tvar <!VarName!>Items = List(objectClassName: <!ElementType!>.className())\n\t\t\tfor dic in <!VarName!>Array{\n\t\t\t\tlet value = <!ElementType!>.fromDictionary(dic)\n\t\t\t\t<!VarName!>Items.addObject(value)\n\t\t\t}\n\t\t\t<!VarName!> = <!VarName!>Items\n\t\t}\n",
                      "comment": "\t/**\n\t * Instantiate the instance using the passed dictionary values to set the properties values\n\t */\n",
                      "bodyStart": "\t{\n\t\tlet this = <!ModelName!>()\n"
                      }
                      ],
-    "modelDefinition": "\nclass <!ModelName!> : RLMObject",
+    "modelDefinition": "\nclass <!ModelName!>: Object",
     "genericType": "AnyObject",
     "getter": "",
     "setter": "",
     "fileExtension": "swift",
-    "arrayType": "RLMArray",
-    "modelDefinitionWithParent": "\n\nclass <!ModelName!> : <!ParentClass!>",
+    "arrayType": "List",
+    "modelDefinitionWithParent": "\n\nclass <!ModelName!>: <!ParentClass!>",
     "displayLangName": "Swift - Realm",
     "basicTypesWithSpecialFetchingNeeds": [
                                            "Int",
@@ -148,7 +148,7 @@
                                            "Float",
                                            "Double"
                                            ],
-    "instanceVarDefinition": "\tdynamic var <!VarName!> : <!VarType!>!\n",
+    "instanceVarDefinition": "\tdynamic var <!VarName!>: <!VarType!>!\n",
     "supportsFirstLineStatement": "false",
     "modelEnd": "\n}",
     "typesNeedSpecialDefinition": [
