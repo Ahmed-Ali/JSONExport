@@ -55,6 +55,7 @@ Known Limitions:
 * When exporting subclasses of RLMObject, you will have to enter the default values of premitive types manually. This is because of dynamic properties limition that prevents you from having an optional premitive type.
 * When exporting to CoreData or Realm and you want to use the utility methods, you will need to manually watch for deep relation cycle calls; that is, when you convert an object to dictionary, this object try to convert one of its relation to a dictionary and the relation tries to convert the original object to a dictionary, that will cause a kind of cycle where each object involved calls the other object's toDictionary method infenitly...
 * Avoid attempt to model a JSON object with empty values, because JSONExport does not understand empty values and can not guess their types.
+* Deep nesting of arrays and objects will not be exported in a proper model files.
 
 History log:
 ========================
