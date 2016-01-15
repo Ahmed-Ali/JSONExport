@@ -18,6 +18,7 @@
     "staticImports": "",
     "importForEachCustomType": "",
     "importHeaderFile": "#import \"<!ModelName!>.h\"\n",
+    "constVarDefinition": "NSString *const <!ConstKeyName!> = @\"<!JsonKeyName!>\";\n",
     "modelDefinition": "\n@interface <!ModelName!> ()\n@end\n@implementation <!ModelName!>\n",
     "modelStart": "",
     "modelEnd": "@end",

@@ -97,6 +97,7 @@ class FileRepresenter{
         appendCopyrights()
         appendStaticImports()
         appendHeaderFileImport()
+        appendConstVarDefinition()
         appendCustomImports()
         //start the model defination
         var definition = ""
@@ -150,6 +151,16 @@ class FileRepresenter{
             fileContent += "\n"
             fileContent += lang.importHeaderFile
             fileContent = fileContent.stringByReplacingOccurrencesOfString(modelName, withString: className)
+        }
+    }
+    
+    func appendConstVarDefinition()
+    {
+        if lang.constVarDefinition != nil {
+            fileContent += "\n"
+        }
+        for property in properties{
+            fileContent += property.toConstVar(className)
         }
     }
     

@@ -47,6 +47,8 @@ class Property : Equatable{
     */
     var jsonName : String
     
+    var constName : String?
+    
     /**
     The string representation for the property type
     */
@@ -107,6 +109,21 @@ class Property : Equatable{
         
         string = string.stringByReplacingOccurrencesOfString(varType, withString: type)
         string = string.stringByReplacingOccurrencesOfString(varName, withString: nativeName)
+        return string
+    }
+    
+    func toConstVar(className: String) -> String
+    {
+        var string : String!
+        if lang.constVarDefinition != nil {
+            string = lang.constVarDefinition
+        } else {
+            string = ""
+        }
+        self.constName = "k"+className+nativeName.uppercaseFirstChar()
+        
+        string = string.stringByReplacingOccurrencesOfString(constKeyName, withString: constName!)
+        string = string.stringByReplacingOccurrencesOfString(jsonKeyName, withString: jsonName)
         return string
     }
     
