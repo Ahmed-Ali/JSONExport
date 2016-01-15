@@ -114,6 +114,18 @@
       "body": "\tself = [super init];\n",
       "comment": "\n/**\n * Implementation of NSCoding initWithCoder: method\n */\n",
       "bodyStart": "\n{\n"
+    },
+    {
+      "forEachProperty": "\tcopy.<!VarName!> = [self.<!VarName!> copyWithZone:zone];\n",
+      "bodyEnd": "\n}\n",
+      "signature": "- (instancetype)copyWithZone:(NSZone *)zone",
+      "forEachPropertyWithSpecialStoringNeeds": "\tcopy.<!VarName!> = self.<!VarName!>;\n",
+      "forEachArrayOfCustomTypeProperty": "\tcopy.<!VarName!> = [self.<!VarName!> copyWithZone:zone];\n",
+      "forEachCustomTypeProperty": "\tcopy.<!VarName!> = [self.<!VarName!> copyWithZone:zone];\n",
+      "returnStatement": "\n\treturn copy;",
+      "body": "\t<!ModelName!> *copy = [<!ModelName!> new];\n\n",
+      "comment": "\n/**\n * Implementation of NSCopying copyWithZone: method\n */\n",
+      "bodyStart": "\n{\n"
     }
   ],
   "dataTypes": {
