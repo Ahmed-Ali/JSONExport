@@ -59,6 +59,10 @@ Known Limitions:
 
 History log:
 ========================
+* Version 1.0.0
+	- Merged pull requests #28 and #31
+	- The app seems to be stable enough at this point
+
 * Version 0.0.9
   - Merged pull request #25 for support to Xcode 7 and Swift 2.0
 * Version 0.0.8
