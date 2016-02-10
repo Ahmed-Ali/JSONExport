@@ -27,6 +27,7 @@ class LangModel{
     var instanceVarWithSpeicalDefinition : String!
     var typesNeedSpecialDefinition : [String]!
 	var langName : String!
+    var constVarDefinition : String!
 	var modelDefinition : String!
     var modelDefinitionWithParent : String!
     var defaultParentWithUtilityMethods : String!
@@ -74,6 +75,7 @@ class LangModel{
         typesNeedSpecialDefinition = dictionary["typesNeedSpecialDefinition"] as? [String]
         
 		langName = dictionary["langName"] as? String
+        constVarDefinition = dictionary["constVarDefinition"] as? String
 		modelDefinition = dictionary["modelDefinition"] as? String
         modelDefinitionWithParent = dictionary["modelDefinitionWithParent"] as? String
         defaultParentWithUtilityMethods = dictionary["defaultParentWithUtilityMethods"] as? String

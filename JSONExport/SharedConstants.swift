@@ -43,5 +43,6 @@ let capitalizedVarType = "<!CapitalizedVarType!>"
 let lowerCaseVarType = "<!LowerCaseVarType!>"
 let lowerCaseModelName = "<!LowerCaseModelName!>"
 let jsonKeyName = "<!JsonKeyName!>"
+let constKeyName = "<!ConstKeyName!>"
 let additionalCustomTypeProperty = "<!AdditionalForCustomTypeProperty!>"
 

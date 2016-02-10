@@ -97,6 +97,7 @@ class FileRepresenter{
         appendCopyrights()
         appendStaticImports()
         appendHeaderFileImport()
+        appendConstVarDefinition()
         appendCustomImports()
         //start the model defination
         var definition = ""
@@ -150,6 +151,16 @@ class FileRepresenter{
             fileContent += "\n"
             fileContent += lang.importHeaderFile
             fileContent = fileContent.stringByReplacingOccurrencesOfString(modelName, withString: className)
+        }
+    }
+    
+    func appendConstVarDefinition()
+    {
+        if lang.constVarDefinition != nil {
+            fileContent += "\n"
+        }
+        for property in properties{
+            fileContent += property.toConstVar(className)
         }
     }
     
@@ -337,7 +348,7 @@ class FileRepresenter{
                     
                 }
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(varName, withString:property.nativeName)
-                
+                propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(constKeyName, withString:property.constName!)
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(varType, withString:property.type)
                 
                 propertyHandlingStr = propertyHandlingStr.stringByReplacingOccurrencesOfString(jsonKeyName, withString:property.jsonName)
@@ -421,6 +432,7 @@ class FileRepresenter{
         //Apply all the basic replacements
         propertyStr = propertyStr.stringByReplacingOccurrencesOfString(varName, withString: property.nativeName)
         propertyStr = propertyStr.stringByReplacingOccurrencesOfString(jsonKeyName, withString: property.jsonName)
+        propertyStr = propertyStr.stringByReplacingOccurrencesOfString(constKeyName, withString: property.constName!)
         propertyStr = propertyStr.stringByReplacingOccurrencesOfString(varType, withString: property.type)
         let capVarName = property.nativeName.capitalizedString
         let capVarType = property.type.capitalizedString;
