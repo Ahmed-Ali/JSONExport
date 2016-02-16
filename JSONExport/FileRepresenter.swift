@@ -120,6 +120,7 @@ class FileRepresenter{
         appendUtilityMethods()
         fileContent = fileContent.stringByReplacingOccurrencesOfString(lowerCaseModelName, withString:className.lowercaseFirstChar())
         fileContent = fileContent.stringByReplacingOccurrencesOfString(modelName, withString:className)
+        fileContent = fileContent.stringByReplacingOccurrencesOfString("\t", withString:"    ")
         fileContent += lang.modelEnd
         return fileContent
     }
@@ -169,27 +170,27 @@ class FileRepresenter{
     */
     func appendCopyrights()
     {
-        fileContent += "//\n//\t\(className).\(lang.fileExtension)\n"
-        if let me = ABAddressBook.sharedAddressBook()?.me(){
-            
-            if let firstName = me.valueForProperty(kABFirstNameProperty as String) as? String{
-                fileContent += "//\n//\tCreate by \(firstName)"
-                if let lastName = me.valueForProperty(kABLastNameProperty as String) as? String{
-                   fileContent += " \(lastName)"
-                }
-            }
-            
-            
-            fileContent += " on \(getTodayFormattedDay())\n//\tCopyright © \(getYear())"
-            
-            if let organization = me.valueForProperty(kABOrganizationProperty as String) as? String{
-                fileContent += " \(organization)"
-            }
-            
-            fileContent += ". All rights reserved.\n"
-        }
-        
-        fileContent += "//\tModel file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport\n\n"
+        fileContent += "//\n//  \(className).\(lang.fileExtension)\n//\n//  Create on \(getTodayFormattedDay())\n//  Copyright © \(getYear()) GMO Media, Inc. All rights reserved.\n//\n\n"
+//        if let me = ABAddressBook.sharedAddressBook()?.me(){
+//            
+//            if let firstName = me.valueForProperty(kABFirstNameProperty as String) as? String{
+//                fileContent += "//\n//\tCreate by \(firstName)"
+//                if let lastName = me.valueForProperty(kABLastNameProperty as String) as? String{
+//                   fileContent += " \(lastName)"
+//                }
+//            }
+//            
+//            
+//            fileContent += " on \(getTodayFormattedDay())\n//\tCopyright © \(getYear())"
+//            
+//            if let organization = me.valueForProperty(kABOrganizationProperty as String) as? String{
+//                fileContent += " \(organization)"
+//            }
+//            
+//            fileContent += ". All rights reserved.\n"
+//        }
+//        
+//        fileContent += "//\tModel file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport\n\n"
         
     }
     
@@ -233,9 +234,11 @@ class FileRepresenter{
     func appendProperties()
     {
         fileContent += "\n"
-        for property in properties{
-            
+        for property in properties {
             fileContent += property.toString(false)
+        }
+        if properties.count > 0 {
+            fileContent.removeAtIndex(fileContent.endIndex.predecessor())
         }
     }
     
@@ -365,6 +368,9 @@ class FileRepresenter{
                     }
                 }
                 fileContent += propertyHandlingStr
+            }
+            if properties.count > 0 {
+                fileContent.removeAtIndex(fileContent.endIndex.predecessor())
             }
             fileContent += method.returnStatement
             fileContent += method.bodyEnd
