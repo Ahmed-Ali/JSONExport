@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		166AF5CE1CEF6C3600516EDD /* Swift-Struct-Gloss.json in Resources */ = {isa = PBXBuildFile; fileRef = 166AF5CD1CEF6C3600516EDD /* Swift-Struct-Gloss.json */; };
 		60FB8FF01B9B361600290979 /* Java-Android Realm.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FE61B9B361600290979 /* Java-Android Realm.json */; };
 		60FB8FF11B9B361600290979 /* Java-Android.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FE71B9B361600290979 /* Java-Android.json */; };
 		60FB8FF21B9B361600290979 /* ObjectiveC-CoreData-iOS.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FE81B9B361600290979 /* ObjectiveC-CoreData-iOS.json */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		166AF5CD1CEF6C3600516EDD /* Swift-Struct-Gloss.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-Struct-Gloss.json"; path = "Supported Languages/Swift-Struct-Gloss.json"; sourceTree = "<group>"; };
 		60FB8FE61B9B361600290979 /* Java-Android Realm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Java-Android Realm.json"; path = "Supported Languages/Java-Android Realm.json"; sourceTree = "<group>"; };
 		60FB8FE71B9B361600290979 /* Java-Android.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Java-Android.json"; path = "Supported Languages/Java-Android.json"; sourceTree = "<group>"; };
 		60FB8FE81B9B361600290979 /* ObjectiveC-CoreData-iOS.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "ObjectiveC-CoreData-iOS.json"; path = "Supported Languages/ObjectiveC-CoreData-iOS.json"; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		E2F07E8A1A0B3192004A1DAA /* Supported Languages */ = {
 			isa = PBXGroup;
 			children = (
+				166AF5CD1CEF6C3600516EDD /* Swift-Struct-Gloss.json */,
 				60FB8FFA1B9B3F6400290979 /* ObjectiveC-Realm.json */,
 				60FB8FE61B9B361600290979 /* Java-Android Realm.json */,
 				60FB8FE71B9B361600290979 /* Java-Android.json */,
@@ -284,6 +287,7 @@
 				60FB8FF91B9B361600290979 /* SwiftyJSON-Class.json in Resources */,
 				60FB8FF21B9B361600290979 /* ObjectiveC-CoreData-iOS.json in Resources */,
 				E2FA87C21A059AC100648EB6 /* Main.storyboard in Resources */,
+				166AF5CE1CEF6C3600516EDD /* Swift-Struct-Gloss.json in Resources */,
 				60FB8FF41B9B361600290979 /* ObjectiveC-Mac.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
