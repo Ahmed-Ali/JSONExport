@@ -42,7 +42,8 @@ extension String{
         var singular = self
         let length = self.characters.count
         if length > 3{
-            let range = Range(start: endIndex.advancedBy(-3), end: endIndex)
+            let range = Range(endIndex.advancedBy(-3) ..< endIndex)
+            
             let lastThreeChars = self.substringWithRange(range)
             if lastThreeChars == "ies" {
                 singular = self.stringByReplacingOccurrencesOfString(lastThreeChars, withString: "y", options: [], range: range)
@@ -51,7 +52,7 @@ extension String{
                 
         }
         if length > 2{
-            let range = Range(start: endIndex.advancedBy(-1), end: endIndex)
+            let range = Range(endIndex.advancedBy(-1) ..< endIndex)
             let lastChar = self.substringWithRange(range)
             if lastChar == "s" {
                 singular = self.stringByReplacingOccurrencesOfString(lastChar, withString: "", options: [], range: range)
@@ -68,7 +69,7 @@ extension String{
     */
     func lowercaseFirstChar() -> String{
         if self.characters.count > 0{
-            let range = Range(start: startIndex, end: startIndex.advancedBy(1))
+            let range = Range(startIndex ..< startIndex.advancedBy(1))
             let firstLowerChar = self.substringWithRange(range).lowercaseString
             
             return self.stringByReplacingCharactersInRange(range, withString: firstLowerChar)
@@ -85,7 +86,7 @@ extension String{
     */
     func uppercaseFirstChar() -> String{
         if self.characters.count > 0{
-            let range = Range(start: startIndex, end: startIndex.advancedBy(1))
+            let range = Range(startIndex ..< startIndex.advancedBy(1))
             let firstUpperChar = self.substringWithRange(range).uppercaseString
             
             return self.stringByReplacingCharactersInRange(range, withString: firstUpperChar)
