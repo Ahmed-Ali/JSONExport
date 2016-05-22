@@ -26,10 +26,12 @@ Currently you can convert your JSON object to one of the following lanaguages:
 5. Swift Classes - To use with [Realm](http://realm.io).
 6. Swift - CoreData.
 7. Swift Sturcutres.
-8. Objective-C - iOS.
-9. Objective-C - MAC.
-10. Objective-C - CoreData.
-11. Objective-C - To use with [Realm](http://realm.io).
+8. Swift - Struct - Gloss
+9. Objective-C - iOS.
+10. Objective-C - MAC.
+11. Objective-C - CoreData.
+12. Objective-C - To use with [Realm](http://realm.io).
+
 
 Screenshot shows JSONExport used for a snippet from Twitter timeline JSON and converting it to Swift-CoreData.
 ![alt tag](https://cloud.githubusercontent.com/assets/5157350/5228493/72693010-7713-11e4-9e42-625a8590424a.png)
@@ -59,6 +61,10 @@ Known Limitions:
 
 History log:
 ========================
+* Version 1.0.1
+	- Merged pull request #38 to add support to Gloss (Thanks goes to CodeEagle)
+	- Add "author" section in the lang files, so when you contribute by adding a definition of a language, you can add your "name", "email", "website" on top of every generated to the language you added. See the Swift-Struct-Gloss.json" author key for an example.
+
 * Version 1.0.0
 	- Merged pull requests #28 and #31
 	- The app seems to be stable enough at this point
