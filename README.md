@@ -22,7 +22,7 @@ Currently you can convert your JSON object to one of the following lanaguages:
 1. Java for Android.
 2. Java for Android - to use with [Realm](http://realm.io).
 3. Swift Classes.
-4. Swift Classes - To use with [SwiftyJSON](https://github.com/lingoer/SwiftyJSON) library.
+4. Swift Classes - To use with [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) library.
 5. Swift Classes - To use with [Realm](http://realm.io).
 6. Swift - CoreData.
 7. Swift Sturcutres.
