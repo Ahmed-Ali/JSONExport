@@ -111,5 +111,10 @@
     "supportsFirstLineStatement": "false",
     "modelEnd": "\n}",
     "staticImports": "import Foundation \nimport Gloss",
-    "langName": "Swift"
+    "langName": "Swift",
+    "author" : {
+        "name" : "CodeEagle",
+        "website" : "https://github.com/CodeEagle"
+    }
+    
 }

@@ -42,7 +42,7 @@ class LangModel{
 	var wordsToRemoveToGetArrayElementsType : [String]!
     var headerFileData : HeaderFileData!
     var supportMutualRelationships : Bool!
-
+    var author : Author!
 	/**
 	 * Instantiate the instance using the passed dictionary values to set the properties values
 	 */
@@ -100,6 +100,9 @@ class LangModel{
         }
         
         supportMutualRelationships = (dictionary["supportMutualRelationships"] as? NSString)?.boolValue
+        if let authorDictionary = dictionary["author"] as? NSDictionary{
+            author = Author(fromDictionary: authorDictionary)
+        }
 	}
 
 	

@@ -189,8 +189,22 @@ class FileRepresenter{
             fileContent += ". All rights reserved.\n"
         }
         
-        fileContent += "//\tModel file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport\n\n"
+        fileContent += "//\tModel file generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport"
         
+        if let langAuthor = lang.author{
+            fileContent += "\n\n//\tThe \"\(lang.displayLangName)\" support has been made available by \(langAuthor.name)"
+            if let email = langAuthor.email{
+                fileContent += "(\(email))"
+            }
+            
+            if let website = langAuthor.website{
+                fileContent += "\n//\tMore about him/her can be found at his/her website: \(website)"
+            }
+            
+        }
+        
+        
+        fileContent += "\n\n"
     }
     
     /**
