@@ -62,7 +62,7 @@ Known Limitions:
 History log:
 ========================
 * Version 1.0.1
-	- Merged pull request #38 to add support to Gloss (Thanks goes to CodeEagle)
+	- Merged pull request #38 to add support to Gloss (Thanks to CodeEagle help)
 	- Add "author" section in the lang files, so when you contribute by adding a definition of a language, you can add your "name", "email", "website" on top of every generated to the language you added. See the Swift-Struct-Gloss.json" author key for an example.
 
 * Version 1.0.0
