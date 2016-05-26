@@ -25,7 +25,7 @@ Currently you can convert your JSON object to one of the following lanaguages:
 4. Swift Classes - To use with [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) library.
 5. Swift Classes - To use with [Realm](http://realm.io).
 6. Swift - CoreData.
-7. Swift Sturcutres.
+7. Swift Structures.
 8. Swift - Struct - Gloss
 9. Objective-C - iOS.
 10. Objective-C - MAC.
