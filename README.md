@@ -17,7 +17,7 @@ Each generated file, besid the getters and setters (for Java) can include:
 
 Currently supported languages
 ========================
-Currently you can convert your JSON object to one of the following lanaguages:
+Currently you can convert your JSON object to one of the following languages:
 
 1. Java for Android.
 2. Java for Android - to use with [Realm](http://realm.io).
