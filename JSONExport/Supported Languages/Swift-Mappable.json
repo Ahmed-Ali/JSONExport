@@ -125,7 +125,7 @@
                      "bodyStart": "{",
                      "bodyEnd": "}\n",
                      "fetchBasicTypePropertyFromMap": "",
-                     "signature": "\tprivate override init()",
+                     "signature": "\trequired init?(_ map: Map)",
                      "fetchArrayOfCustomTypePropertyFromMap": "",
                      "comment": "",
                      "fetchCustomTypePropertyFromMap": ""
