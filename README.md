@@ -20,17 +20,20 @@ Currently supported languages
 Currently you can convert your JSON object to one of the following languages:
 
 1. Java for Android.
-2. Java for Android - to use with [Realm](http://realm.io).
+2. Java for [Realm](http://realm.io) Android.
 3. Swift Classes.
-4. Swift Classes - To use with [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) library.
-5. Swift Classes - To use with [Realm](http://realm.io).
+4. Swift Classes for [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) library.
+5. Swift Classes for [Realm](http://realm.io).
 6. Swift - CoreData.
 7. Swift Structures.
-8. Swift - Struct - Gloss
-9. Objective-C - iOS.
-10. Objective-C - MAC.
-11. Objective-C - CoreData.
-12. Objective-C - To use with [Realm](http://realm.io).
+8. Swift Structures for [Gloss](https://github.com/hkellaway/Gloss)
+9. Swift Mappable Classes for [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper)
+10. Swift Structures for [Unbox](https://github.com/JohnSundell/Unbox)
+11. Objective-C - iOS.
+12. Objective-C - MAC.
+13. Objective-C - CoreData.
+14. Objective-C for [Realm](http://realm.io) iOS.
+
 
 
 Screenshot shows JSONExport used for a snippet from Twitter timeline JSON and converting it to Swift-CoreData.
@@ -61,9 +64,13 @@ Known Limitions:
 
 History log:
 ========================
+* Version 1.0.2
+	- Merged pull request #43 to add support for Swift 3 for Mappable classes (Thanks to amolgupta)
+	- Merged pull request #44 to add support for Unbox structures (Thanks to baroqueworksdev)
+	
 * Version 1.0.1
 	- Merged pull request #38 to add support to Gloss (Thanks to CodeEagle help)
-	- Add "author" section in the lang files, so when you contribute by adding a definition of a language, you can add your "name", "email", "website" on top of every generated to the language you added. See the Swift-Struct-Gloss.json" author key for an example.
+	- Add "author" section in the lang files, so when you contribute by adding a definition of a language, you can add your "name", "email", "website" on top of every generated file of the language you added. See the Swift-Struct-Gloss.json" author key for an example.
 
 * Version 1.0.0
 	- Merged pull requests #28 and #31
