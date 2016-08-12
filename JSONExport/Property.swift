@@ -109,6 +109,7 @@ class Property : Equatable{
         
         string = string.stringByReplacingOccurrencesOfString(varType, withString: type)
         string = string.stringByReplacingOccurrencesOfString(varName, withString: nativeName)
+        string = string.stringByReplacingOccurrencesOfString(jsonKeyName, withString: jsonName)
         return string
     }
     
