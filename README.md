@@ -21,18 +21,19 @@ Currently you can convert your JSON object to one of the following languages:
 
 1. Java for Android.
 2. Java for [Realm](http://realm.io) Android.
-3. Swift Classes.
-4. Swift Classes for [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) library.
-5. Swift Classes for [Realm](http://realm.io).
-6. Swift - CoreData.
-7. Swift Structures.
-8. Swift Structures for [Gloss](https://github.com/hkellaway/Gloss)
-9. Swift Mappable Classes for [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper)
-10. Swift Structures for [Unbox](https://github.com/JohnSundell/Unbox)
-11. Objective-C - iOS.
-12. Objective-C - MAC.
-13. Objective-C - CoreData.
-14. Objective-C for [Realm](http://realm.io) iOS.
+3. GSON for Android
+4. Swift Classes.
+5. Swift Classes for [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) library.
+6. Swift Classes for [Realm](http://realm.io).
+7. Swift - CoreData.
+8. Swift Structures.
+9. Swift Structures for [Gloss](https://github.com/hkellaway/Gloss)
+10. Swift Mappable Classes for [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper)
+11. Swift Structures for [Unbox](https://github.com/JohnSundell/Unbox)
+12. Objective-C - iOS.
+13. Objective-C - MAC.
+14. Objective-C - CoreData.
+15. Objective-C for [Realm](http://realm.io) iOS.
 
 
 
@@ -62,51 +63,6 @@ Known Limitions:
 * Avoid attempt to model a JSON object with empty values, because JSONExport does not understand empty values and can not guess their types.
 * Deep nesting of arrays and objects will not be exported in a proper model files.
 
-History log:
-========================
-* Version 1.0.2
-	- Merged pull request #43 to add support for Swift 3 for Mappable classes (Thanks to amolgupta)
-	- Merged pull request #44 to add support for Unbox structures (Thanks to baroqueworksdev)
-	
-* Version 1.0.1
-	- Merged pull request #38 to add support to Gloss (Thanks to CodeEagle help)
-	- Add "author" section in the lang files, so when you contribute by adding a definition of a language, you can add your "name", "email", "website" on top of every generated file of the language you added. See the Swift-Struct-Gloss.json" author key for an example.
-
-* Version 1.0.0
-	- Merged pull requests #28 and #31
-	- The app seems to be stable enough at this point
-
-* Version 0.0.9
-  - Merged pull request #25 for support to Xcode 7 and Swift 2.0
-* Version 0.0.8
-  - Added reserved keywords for each language; json keys that has one of these keywords (eg: {"false": "This is false value"}), will be handled approperiately.
-  - Fix for issue #10, whcih prevented the creation of some classes/structs in some cases.
-  - Added NSCoding support for the following language definitions: Swift-Classes, Swift-Mappable, SwiftyJSON, Swift-Realm, Objective-C iOS, Mac and Realm.
-
-* Version 0.0.7
-  - Few changes by tomkidd for xCode 6.3 and Swift 1.2
-
-* Version 0.0.6
-  - JSONExport will first remove any control characters before parsing the JSON object. So it will able to parse your JSON even if it has control characters.
-  - Double check property names to avoid unwanted spaces (issue #5 thanks to falcon2010).
-  - Processing JSON now happens in background queue for better responsiveness.
-  - For Java (with and without Realm) parsing of array of strings (issue #6 thanks to falcon2010)
-
-* Version 0.0.5:
-  - Fixed an issue where float values would be generated into Int property (Thanks to jmonroe).
-  - Updated SiwftyJSON language definition to match the current version (Thanks to  jmonroe).
-  - Fixed typo in CGGFloat instead of CGFloat.
-  - In Objective-C check against NSNull values.
-  - Swift realm, initialize using class methods instead of initializers.
-  - Swift perimitive types now casted directly instead of cating to NSString first.
-
-* Version 0.0.4:
-  - Sync multible classes with the same name or have the same exact properties.
-  - Support to parse JSON arrays of objects.
-
-* Version 0.0.3:
-  - Added support for Realm with Android.
-  - Added support to specify parent class for all generated classes.
 
 Final Note
 ========================
