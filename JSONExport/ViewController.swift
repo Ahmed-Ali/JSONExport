@@ -165,6 +165,29 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     //MARK: - Handlind events
     
+    @IBAction func openJSONFiles(sender: AnyObject)
+    {
+        let oPanel: NSOpenPanel = NSOpenPanel()
+        oPanel.canChooseDirectories = false
+        oPanel.canChooseFiles = true
+        oPanel.allowsMultipleSelection = false
+        oPanel.allowedFileTypes = ["json","JSON"]
+        oPanel.prompt = "Choose JSON file"
+        
+        oPanel.beginSheetModalForWindow(self.view.window!, completionHandler: { (button : Int) -> Void in
+            if button == NSFileHandlingPanelOKButton{
+                
+                let jsonPath = oPanel.URLs.first!.path
+                print(jsonPath)
+                let fileHandle = NSFileHandle(forReadingAtPath: jsonPath!)
+                let fileContext = String(data: fileHandle!.readDataToEndOfFile(), encoding: NSUTF8StringEncoding)
+                
+                self.sourceText.string = fileContext
+                self.generateClasses()
+            }
+        }) 
+    }
+    
     @IBAction func toggleConstructors(sender: AnyObject)
     {
         generateClasses()

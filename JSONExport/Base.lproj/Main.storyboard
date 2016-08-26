@@ -680,8 +680,8 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="s2t-kJ-BOU">
-                                <rect key="frame" x="6" y="675" width="126" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Enter your json data" id="5aC-KR-174">
+                                <rect key="frame" x="6" y="675" width="115" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Enter json data  or" id="5aC-KR-174">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -958,6 +958,20 @@
                                     <action selector="classPrefixChanged:" target="XfG-lQ-9wD" id="J0a-tg-epq"/>
                                 </connections>
                             </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ja7-oL-t8I">
+                                <rect key="frame" x="127" y="674" width="98" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="vkY-4K-sSo"/>
+                                    <constraint firstAttribute="width" constant="98" id="xqL-Qr-Dv1"/>
+                                </constraints>
+                                <buttonCell key="cell" type="roundRect" title="Open .json File" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XsJ-Wl-WPN">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="cellTitle"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="openJSONFiles:" target="XfG-lQ-9wD" id="yaW-nm-5fh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="JzR-I4-tfP" firstAttribute="leading" secondItem="Au9-Q1-2Pe" secondAttribute="trailing" constant="10" id="2kd-gY-f93"/>
@@ -967,6 +981,8 @@
                             <constraint firstItem="s2t-kJ-BOU" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="8" id="EVt-S0-uEr"/>
                             <constraint firstItem="xw8-Mo-9li" firstAttribute="centerY" secondItem="LyJ-Rf-1eI" secondAttribute="centerY" id="G9r-2r-pi7"/>
                             <constraint firstAttribute="trailing" secondItem="JzR-I4-tfP" secondAttribute="trailing" constant="8" id="Glk-cx-XVe"/>
+                            <constraint firstItem="ja7-oL-t8I" firstAttribute="centerY" secondItem="s2t-kJ-BOU" secondAttribute="centerY" id="Hqd-8m-3Rl"/>
+                            <constraint firstItem="ja7-oL-t8I" firstAttribute="leading" secondItem="s2t-kJ-BOU" secondAttribute="trailing" constant="8" id="IDq-mB-1U8"/>
                             <constraint firstItem="Hvg-Hd-Ndn" firstAttribute="leading" secondItem="ehr-4Y-V2c" secondAttribute="leading" id="Igh-Fs-Gn0"/>
                             <constraint firstItem="Hvg-Hd-Ndn" firstAttribute="top" secondItem="s2t-kJ-BOU" secondAttribute="top" id="Jct-j6-uKN"/>
                             <constraint firstAttribute="bottom" secondItem="JzR-I4-tfP" secondAttribute="bottom" constant="8" id="Jib-dd-r1l"/>
