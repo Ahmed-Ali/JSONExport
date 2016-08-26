@@ -71,6 +71,8 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     //Connected to the languages pop up
     @IBOutlet weak var languagesPopup: NSPopUpButton!
 
+    var jsonWriter: SBJson4Writer?
+    
     //Holds the currently selected language
     var selectedLang : LangModel!
     
@@ -91,6 +93,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         saveButton.enabled = false
         loadSupportedLanguages()
         setupNumberedTextView()
+        initSBJsonWriter()
         setLanguagesSelection()
         updateUIFieldsForSelectedLanguage()
     }
@@ -161,7 +164,28 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         
     }
 
+    // MARK: - Init the SBJsonWriter
+    func initSBJsonWriter()
+    {
+        jsonWriter = SBJson4Writer()
+        jsonWriter!.humanReadable = true
+        jsonWriter!.sortKeys = true
+    }
     
+    
+    // MARK: - parse the json file
+    func parseJSONData(jsonData: NSData!)
+    {
+        let parser = SBJson4Parser.parserWithBlock({ (object, ignored) in
+            let data = self.jsonWriter!.dataWithObject(object)
+            let output = String(data: data!, encoding: NSUTF8StringEncoding)
+            self.sourceText.string = output
+            self.generateClasses()
+            }, allowMultiRoot: false, unwrapRootArray: false) { error in
+                self.showError(error)
+        }
+        parser.parse(jsonData)
+    }
     
     //MARK: - Handlind events
     
@@ -178,12 +202,10 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
             if button == NSFileHandlingPanelOKButton{
                 
                 let jsonPath = oPanel.URLs.first!.path
-                print(jsonPath)
                 let fileHandle = NSFileHandle(forReadingAtPath: jsonPath!)
-                let fileContext = String(data: fileHandle!.readDataToEndOfFile(), encoding: NSUTF8StringEncoding)
                 
-                self.sourceText.string = fileContext
-                self.generateClasses()
+                self.parseJSONData(fileHandle!.readDataToEndOfFile())
+                
             }
         }) 
     }
