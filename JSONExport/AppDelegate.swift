@@ -34,17 +34,26 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-
-
+    
+    weak var window: NSWindow!
+    
+    
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
     }
-
+    
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
     }
-
-
+    
+    func applicationShouldHandleReopen(sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        
+        if let window = window {
+            window.makeKeyAndOrderFront(self)
+            return true
+        } else {
+            return false
+        }
+    }
+    
 }
-

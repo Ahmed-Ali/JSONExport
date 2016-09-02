@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		166AF5CE1CEF6C3600516EDD /* Swift-Struct-Gloss.json in Resources */ = {isa = PBXBuildFile; fileRef = 166AF5CD1CEF6C3600516EDD /* Swift-Struct-Gloss.json */; };
+		3C963FCB1D79B9CF005CF78C /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C963FCA1D79B9CF005CF78C /* WindowController.swift */; };
 		608896441CF278440074CB80 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608896431CF278440074CB80 /* Author.swift */; };
 		60FB8FF01B9B361600290979 /* Java-Android Realm.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FE61B9B361600290979 /* Java-Android Realm.json */; };
 		60FB8FF11B9B361600290979 /* Java-Android.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FE71B9B361600290979 /* Java-Android.json */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		166AF5CD1CEF6C3600516EDD /* Swift-Struct-Gloss.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-Struct-Gloss.json"; path = "Supported Languages/Swift-Struct-Gloss.json"; sourceTree = "<group>"; };
+		3C963FCA1D79B9CF005CF78C /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		608896431CF278440074CB80 /* Author.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		60FB8FE61B9B361600290979 /* Java-Android Realm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Java-Android Realm.json"; path = "Supported Languages/Java-Android Realm.json"; sourceTree = "<group>"; };
 		60FB8FE71B9B361600290979 /* Java-Android.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Java-Android.json"; path = "Supported Languages/Java-Android.json"; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		E251AC5B1A16A434000923D5 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3C963FCA1D79B9CF005CF78C /* WindowController.swift */,
 				E2FA87BC1A059AC100648EB6 /* ViewController.swift */,
 			);
 			name = "View Controllers";
@@ -314,6 +317,7 @@
 				E22BA2C51A162B54005CE143 /* FileContentBuilder.swift in Sources */,
 				E286D00B1A226ADE001AEF0D /* SharedUtilityMethods.swift in Sources */,
 				E2FA87D81A05C16300648EB6 /* FileRepresenter.swift in Sources */,
+				3C963FCB1D79B9CF005CF78C /* WindowController.swift in Sources */,
 				E21292581A0C58CF0015027D /* SharedConstants.swift in Sources */,
 				E2197C5D1A0EAEB900549D03 /* StringExtension.swift in Sources */,
 				E2FA87BD1A059AC100648EB6 /* ViewController.swift in Sources */,
