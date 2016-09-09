@@ -69,9 +69,15 @@ class FilesContentBuilder{
     func addFileWithName(inout className: String, jsonObject: NSDictionary, inout files : [FileRepresenter], toOneRelationWithProperty: Property! = nil)
     {
         var properties = [Property]()
+        /////////////////////////////////////////////////nixs_Begin///////////////////////////////////////////////////
+        //TODO*********在此处加上了后缀Model
+//        if !className.hasPrefix(classPrefix){
+//            className = "\(classPrefix)\(className)"
+//        }
         if !className.hasPrefix(classPrefix){
-            className = "\(classPrefix)\(className)"
+            className = "\(classPrefix)\(className)Model"
         }
+        /////////////////////////////////////////////////nixs_End///////////////////////////////////////////////////
         if toOneRelationWithProperty != nil && lang.supportMutualRelationships != nil && lang.supportMutualRelationships!{
             properties.append(toOneRelationWithProperty)
             

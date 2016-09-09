@@ -344,9 +344,20 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
             return;
         }
         var rootClassName = classNameField.stringValue
-        if rootClassName.characters.count == 0{
+        /////////////////////////////////////////////////nixs_Begin///////////////////////////////////////////////////
+//        if rootClassName.characters.count == 0{
+//            rootClassName = "RootClass"
+//        }
+        
+        /**
+         *  @author nixs, 16-09-09 10:09:14
+         *
+         *  Description:TODO*********rootClassName为空时的默认名字
+         */
+        if rootClassName.characters.count==0 {
             rootClassName = "RootClass"
         }
+        /////////////////////////////////////////////////nixs_End///////////////////////////////////////////////////
         sourceText.editable = false
         //Do the lengthy process in background, it takes time with more complicated JSONs
         runOnBackground {
@@ -364,9 +375,22 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                     }
                     self.loadSelectedLanguageModel()
                     self.files.removeAll(keepCapacity: false)
+          /////////////////////////////////////////////////nixs_Begin///////////////////////////////////////////////////
+//                    let fileGenerator = self.prepareAndGetFilesBuilder()
+//                    fileGenerator.addFileWithName(&rootClassName, jsonObject: json, files: &self.files)
+//                    fileGenerator.fixReferenceMismatches(inFiles: self.files)
+                    /**
+                     *  @author nixs, 16-09-09 10:09:46
+                     *
+                     *  Description:TODO*********这个prepareAndGetFilesBuilder()方法设置生成的model
+                     *
+                     *  @param self.files.reverse self.files.reverse description
+                     *
+                     *  @return return value description
+                     */
                     let fileGenerator = self.prepareAndGetFilesBuilder()
                     fileGenerator.addFileWithName(&rootClassName, jsonObject: json, files: &self.files)
-                    fileGenerator.fixReferenceMismatches(inFiles: self.files)
+            /////////////////////////////////////////////////nixs_End///////////////////////////////////////////////////
                     self.files = Array(self.files.reverse())
                     runOnUiThread{
                         self.sourceText.editable = true
