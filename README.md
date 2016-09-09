@@ -66,6 +66,28 @@ Known Limitions:
 
 ###`Update by nixs(Add "Model" in each className) result flowing`
 
+```
+{
+  "Rsp": {
+    "ResultCode": "0",
+    "ResultDesc": "成功",
+    "Send": [
+      {
+        "Message": "m",
+        "SpreadWxName": "autospread5",
+        "Type": "0",
+        "TypeTxtOrPic": "1",
+        "WxName": "meizu"
+      }
+    ]
+  }
+}
+```
+
+
+
+
+
 ![alt tag1](https://github.com/wvqusrtg/JSONExport/blob/master/nixs_Resources/Add%20%E2%80%9CModel%E2%80%9D%20in%20each%20className1.jpg?raw=true)
 ![alt tag2](https://github.com/wvqusrtg/JSONExport/blob/master/nixs_Resources/Add%20%E2%80%9CModel%E2%80%9D%20in%20each%20className2.jpg?raw=true)
 
