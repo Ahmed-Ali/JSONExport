@@ -15,7 +15,7 @@ Creats and returns the type name for the passed value
 - parameter value: example value to figure out its type
 - returns: the type name
 */
-func propertyTypeName(value : AnyObject, lang: LangModel) -> String
+func propertyTypeName(_ value : AnyObject, lang: LangModel) -> String
 {
     var name = ""
     if value is NSArray{
@@ -24,7 +24,7 @@ func propertyTypeName(value : AnyObject, lang: LangModel) -> String
         name = typeForNumber(value as! NSNumber, lang: lang)
     }else if value is NSString{
         let booleans : [String] = ["True", "true", "TRUE", "False", "false", "FALSE"]
-        if booleans.indexOf((value as! String)) != nil{
+        if booleans.index(of: (value as! String)) != nil{
             name = lang.dataTypes.boolType
         }else{
             name = lang.dataTypes.stringType
@@ -44,14 +44,14 @@ Tries to figur out the type of the elements of the passed array and returns the 
 - returns: typeName the type name as String
 */
 
-func typeNameForArrayElements(elements: NSArray, lang: LangModel) -> String{
+func typeNameForArrayElements(_ elements: NSArray, lang: LangModel) -> String{
     var typeName : String!
     let genericType = lang.genericType
     if elements.count == 0{
         typeName = genericType
     }
     for element in elements{
-        let currElementTypeName = propertyTypeName(element, lang: lang)
+        let currElementTypeName = propertyTypeName(element as AnyObject, lang: lang)
         
         if typeName == nil{
             typeName = currElementTypeName
@@ -74,16 +74,16 @@ Tries to figur out the type of the elements of the passed array and returns the 
 
 - returns: the type name
 */
-func typeNameForArrayOfElements(elements: NSArray, lang: LangModel) -> String{
+func typeNameForArrayOfElements(_ elements: NSArray, lang: LangModel) -> String{
     var typeName : String!
-    let genericType = lang.arrayType.stringByReplacingOccurrencesOfString(elementType, withString: lang.genericType)
+    let genericType = lang.arrayType.replacingOccurrences(of: elementType, with: lang.genericType)
     if elements.count == 0{
         typeName = genericType
     }
     for element in elements{
-        let currElementTypeName = propertyTypeName(element, lang: lang)
+        let currElementTypeName = propertyTypeName(element as AnyObject, lang: lang)
         
-        let arrayTypeName = lang.arrayType.stringByReplacingOccurrencesOfString(elementType, withString: currElementTypeName)
+        let arrayTypeName = lang.arrayType.replacingOccurrences(of: elementType, with: currElementTypeName)
         
         if typeName == nil{
             typeName = arrayTypeName
@@ -105,26 +105,26 @@ Returns one of the possible types for any numeric value (int, float, double, etc
 - parameter number: the numeric value
 - returns: the type name
 */
-func typeForNumber(number : NSNumber, lang: LangModel) -> String
+func typeForNumber(_ number : NSNumber, lang: LangModel) -> String
 {
-    let numberType = CFNumberGetType(number as CFNumberRef)
+    let numberType = CFNumberGetType(number as CFNumber)
     
     var typeName : String!
     switch numberType{
-    case .CharType:
-        if (number.intValue == 0 || number.intValue == 1){
+    case .charType:
+        if (number.int32Value == 0 || number.int32Value == 1){
             //it seems to be boolean
             typeName = lang.dataTypes.boolType
         }else{
             typeName = lang.dataTypes.characterType
         }
-    case .ShortType, .IntType:
+    case .shortType, .intType:
         typeName = lang.dataTypes.intType
-    case .FloatType, .Float32Type, .Float64Type:
+    case .floatType, .float32Type, .float64Type:
         typeName = lang.dataTypes.floatType
-    case .DoubleType:
+    case .doubleType:
         typeName = lang.dataTypes.doubleType
-    case .LongType, .LongLongType:
+    case .longType, .longLongType:
         typeName = lang.dataTypes.longType
     default:
         typeName = lang.dataTypes.intType
@@ -140,7 +140,7 @@ Creates and returns a dictionary who is built up by combining all the dictionary
 - parameter array: array of dictionaries.
 - returns: dictionary that combines all the dictionary elements in the array.
 */
-func unionDictionaryFromArrayElements(array: NSArray) -> NSDictionary
+func unionDictionaryFromArrayElements(_ array: NSArray) -> NSDictionary
 {
     let dictionary = NSMutableDictionary()
     for item in array{
@@ -162,11 +162,11 @@ Cleans up the passed string from any characters that can make it invalid JSON st
 - returns: a clean version of the passed string
 */
 
-func jsonStringByRemovingUnwantedCharacters(jsonString: String) -> String
+func jsonStringByRemovingUnwantedCharacters(_ jsonString: String) -> String
 {
     var str = jsonString;
-    str = str.stringByReplacingOccurrencesOfString("“", withString: "\"")
-    str = str.stringByReplacingOccurrencesOfString("”", withString: "\"")
+    str = str.replacingOccurrences(of: "“", with: "\"")
+    str = str.replacingOccurrences(of: "”", with: "\"")
     return stringByRemovingControlCharacters(str)
 }
 
@@ -177,14 +177,14 @@ Cleans up the passed string from any control characters.
 - returns: a clean version of the passed string
 */
 
-func stringByRemovingControlCharacters(string: String) -> String
+func stringByRemovingControlCharacters(_ string: String) -> String
 {
-    let controlChars = NSCharacterSet.controlCharacterSet()
-    var range = string.rangeOfCharacterFromSet(controlChars)
+    let controlChars = CharacterSet.controlCharacters
+    var range = string.rangeOfCharacter(from: controlChars)
     var cleanString = string;
     while range != nil && !range!.isEmpty{
-        cleanString = cleanString.stringByReplacingCharactersInRange(range!, withString: "")
-        range = cleanString.rangeOfCharacterFromSet(controlChars)
+        cleanString = cleanString.replacingCharacters(in: range!, with: "")
+        range = cleanString.rangeOfCharacter(from: controlChars)
     }
     
     return cleanString
@@ -193,16 +193,16 @@ func stringByRemovingControlCharacters(string: String) -> String
 
 
 
-func runOnBackground(task: () -> Void)
+func runOnBackground(_ task: @escaping () -> Void)
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), { () -> Void in
+    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background).async(execute: { () -> Void in
         task();
     })
 }
 
-func runOnUiThread(task: () -> Void)
+func runOnUiThread(_ task: @escaping () -> Void)
 {
-    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+    DispatchQueue.main.async(execute: { () -> Void in
         task();
     })
 }
