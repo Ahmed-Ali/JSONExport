@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NetworkRequestViewController" customModule="JSONExport" customModuleProvider="target">
+            <connections>
+                <outlet property="automaticallyCloses" destination="kk1-8C-fzZ" id="Pmp-iQ-8O3"/>
+                <outlet property="infoTextView" destination="ZBd-DF-3K8" id="Kmh-sa-oH7"/>
+                <outlet property="inputRequestAddress" destination="QwR-Cq-ph9" id="mRM-fi-bIp"/>
+                <outlet property="requestBtn" destination="YH3-cF-3j4" id="fGj-Lb-Min"/>
+                <outlet property="requestInfo" destination="aa0-Dy-hDH" id="2PE-pC-EcO"/>
+                <outlet property="requestMethodSegmented" destination="nsx-fB-Rdl" id="Qiz-1f-WoY"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="dPM-lD-Tup">
+                    <rect key="frame" x="18" y="360" width="124" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="Cu9-hh-JMP"/>
+                        <constraint firstAttribute="width" constant="120" id="ZOH-hD-UYg"/>
+                    </constraints>
+                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Request Method" placeholderString="" id="pyJ-h1-Sss">
+                        <font key="font" size="15" name=".PingFangSC-Regular"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nsx-fB-Rdl">
+                    <rect key="frame" x="155" y="358" width="72" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="1cz-Qj-ANg"/>
+                    </constraints>
+                    <segmentedCell key="cell" controlSize="mini" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="BjT-zf-jh0">
+                        <font key="font" metaFont="system" size="9"/>
+                        <segments>
+                            <segment label="GET" width="33" selected="YES"/>
+                            <segment label="POST" width="32" tag="1"/>
+                        </segments>
+                    </segmentedCell>
+                </segmentedControl>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="02i-nP-CwO">
+                    <rect key="frame" x="18" y="325" width="124" height="20"/>
+                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Request Address" id="un9-nZ-XcP">
+                        <font key="font" size="15" name=".PingFangSC-Regular"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QwR-Cq-ph9">
+                    <rect key="frame" x="156" y="323" width="344" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="IUi-Ey-Oxw"/>
+                    </constraints>
+                    <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" placeholderString="Please enter the Request Address" drawsBackground="YES" id="BLI-jO-3JD">
+                        <font key="font" metaFont="system" size="16"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YH3-cF-3j4">
+                    <rect key="frame" x="509" y="318" width="77" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="2WK-US-3Ze"/>
+                    </constraints>
+                    <buttonCell key="cell" type="push" title="Request" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" sound="Bottle" inset="2" id="7dN-d2-JfH">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="requestClick:" target="-2" id="ntT-OY-VRO"/>
+                    </connections>
+                </button>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="aa0-Dy-hDH">
+                    <rect key="frame" x="18" y="296" width="93" height="19"/>
+                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Request Info" id="cvc-En-deM">
+                        <font key="font" size="15" name=".PingFangSC-Regular"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="taA-dy-Und">
+                    <rect key="frame" x="20" y="20" width="560" height="266"/>
+                    <clipView key="contentView" id="05E-QX-uMa">
+                        <rect key="frame" x="0.0" y="0.0" width="545" height="266"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView editable="NO" importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="ZBd-DF-3K8">
+                                <rect key="frame" x="0.0" y="0.0" width="545" height="266"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="minSize" width="545" height="266"/>
+                                <size key="maxSize" width="545" height="10000000"/>
+                                <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="DhO-n4-6UD">
+                        <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="XQR-fe-lzE">
+                        <rect key="frame" x="545" y="0.0" width="15" height="266"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="kk1-8C-fzZ">
+                    <rect key="frame" x="154" y="296" width="396" height="19"/>
+                    <buttonCell key="cell" type="check" title="Request is completed automatically closes the window" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FaL-aW-Fd3">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system" size="15"/>
+                    </buttonCell>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="02i-nP-CwO" firstAttribute="leading" secondItem="dPM-lD-Tup" secondAttribute="leading" id="2tS-w4-l6c"/>
+                <constraint firstItem="02i-nP-CwO" firstAttribute="top" secondItem="dPM-lD-Tup" secondAttribute="bottom" constant="15" id="Ato-7C-xp1"/>
+                <constraint firstItem="QwR-Cq-ph9" firstAttribute="centerY" secondItem="02i-nP-CwO" secondAttribute="centerY" id="BKD-9G-w3e"/>
+                <constraint firstItem="QwR-Cq-ph9" firstAttribute="leading" secondItem="nsx-fB-Rdl" secondAttribute="leading" id="Glq-Qg-hKG"/>
+                <constraint firstItem="02i-nP-CwO" firstAttribute="height" secondItem="dPM-lD-Tup" secondAttribute="height" id="LrE-Zi-Sys"/>
+                <constraint firstItem="dPM-lD-Tup" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="NLb-26-tAa"/>
+                <constraint firstItem="kk1-8C-fzZ" firstAttribute="leading" secondItem="QwR-Cq-ph9" secondAttribute="leading" id="PEu-dX-uTh"/>
+                <constraint firstItem="nsx-fB-Rdl" firstAttribute="leading" secondItem="dPM-lD-Tup" secondAttribute="trailing" constant="16" id="PI7-X0-OZe"/>
+                <constraint firstAttribute="bottom" secondItem="taA-dy-Und" secondAttribute="bottom" constant="20" id="Pr8-Y8-yqo"/>
+                <constraint firstItem="aa0-Dy-hDH" firstAttribute="leading" secondItem="02i-nP-CwO" secondAttribute="leading" id="RpN-w6-0y2"/>
+                <constraint firstItem="nsx-fB-Rdl" firstAttribute="centerY" secondItem="dPM-lD-Tup" secondAttribute="centerY" id="YF9-5J-d2n"/>
+                <constraint firstItem="taA-dy-Und" firstAttribute="top" secondItem="aa0-Dy-hDH" secondAttribute="bottom" constant="10" id="Zj2-cI-HPJ"/>
+                <constraint firstAttribute="trailing" secondItem="QwR-Cq-ph9" secondAttribute="trailing" constant="100" id="ZkX-Mg-w8t"/>
+                <constraint firstItem="YH3-cF-3j4" firstAttribute="leading" secondItem="QwR-Cq-ph9" secondAttribute="trailing" constant="15" id="aG9-sE-qiO"/>
+                <constraint firstItem="kk1-8C-fzZ" firstAttribute="centerY" secondItem="aa0-Dy-hDH" secondAttribute="centerY" id="gJq-BC-tz4"/>
+                <constraint firstItem="taA-dy-Und" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="nin-r9-QdL"/>
+                <constraint firstItem="02i-nP-CwO" firstAttribute="trailing" secondItem="dPM-lD-Tup" secondAttribute="trailing" id="pId-p4-Ig7"/>
+                <constraint firstItem="YH3-cF-3j4" firstAttribute="centerY" secondItem="QwR-Cq-ph9" secondAttribute="centerY" id="s0O-kb-eOu"/>
+                <constraint firstAttribute="trailing" secondItem="taA-dy-Und" secondAttribute="trailing" constant="20" id="wEr-Eb-elJ"/>
+                <constraint firstItem="dPM-lD-Tup" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="wMu-8h-okG"/>
+                <constraint firstItem="aa0-Dy-hDH" firstAttribute="top" secondItem="02i-nP-CwO" secondAttribute="bottom" constant="10" id="xie-dn-Nrf"/>
+                <constraint firstAttribute="trailing" secondItem="YH3-cF-3j4" secondAttribute="trailing" constant="20" id="zit-GI-oPE"/>
+            </constraints>
+            <point key="canvasLocation" x="-228" y="139"/>
+        </customView>
+    </objects>
+    <resources>
+        <sound name="Bottle"/>
+    </resources>
+</document>

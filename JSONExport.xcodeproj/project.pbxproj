@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		166AF5CE1CEF6C3600516EDD /* Swift-Struct-Gloss.json in Resources */ = {isa = PBXBuildFile; fileRef = 166AF5CD1CEF6C3600516EDD /* Swift-Struct-Gloss.json */; };
 		3C963FCB1D79B9CF005CF78C /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C963FCA1D79B9CF005CF78C /* WindowController.swift */; };
+		3CC028831D89C36C00A36ADE /* NetworkRequestWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC028811D89C36C00A36ADE /* NetworkRequestWindowController.swift */; };
+		3CC028841D89C36C00A36ADE /* NetworkRequestWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CC028821D89C36C00A36ADE /* NetworkRequestWindowController.xib */; };
+		3CC028871D89C8D600A36ADE /* NetworkRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC028851D89C8D500A36ADE /* NetworkRequestViewController.swift */; };
+		3CC028881D89C8D600A36ADE /* NetworkRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CC028861D89C8D500A36ADE /* NetworkRequestViewController.xib */; };
+		3CC028961D89D3ED00A36ADE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC028941D89D3C700A36ADE /* Alamofire.framework */; };
+		3CC028971D89D3ED00A36ADE /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC028941D89D3C700A36ADE /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		608896441CF278440074CB80 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608896431CF278440074CB80 /* Author.swift */; };
 		60FB8FF01B9B361600290979 /* Java-Android Realm.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FE61B9B361600290979 /* Java-Android Realm.json */; };
 		60FB8FF11B9B361600290979 /* Java-Android.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FE71B9B361600290979 /* Java-Android.json */; };
@@ -45,9 +51,28 @@
 		E2FA87DA1A05C1BE00648EB6 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FA87D91A05C1BE00648EB6 /* Property.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3CC0288E1D89D24F00A36ADE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3CC028971D89D3ED00A36ADE /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		166AF5CD1CEF6C3600516EDD /* Swift-Struct-Gloss.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-Struct-Gloss.json"; path = "Supported Languages/Swift-Struct-Gloss.json"; sourceTree = "<group>"; };
 		3C963FCA1D79B9CF005CF78C /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		3CC028811D89C36C00A36ADE /* NetworkRequestWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequestWindowController.swift; sourceTree = "<group>"; };
+		3CC028821D89C36C00A36ADE /* NetworkRequestWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkRequestWindowController.xib; sourceTree = "<group>"; };
+		3CC028851D89C8D500A36ADE /* NetworkRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequestViewController.swift; sourceTree = "<group>"; };
+		3CC028861D89C8D500A36ADE /* NetworkRequestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkRequestViewController.xib; sourceTree = "<group>"; };
+		3CC028941D89D3C700A36ADE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Alamofire.framework; sourceTree = "<group>"; };
 		608896431CF278440074CB80 /* Author.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		60FB8FE61B9B361600290979 /* Java-Android Realm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Java-Android Realm.json"; path = "Supported Languages/Java-Android Realm.json"; sourceTree = "<group>"; };
 		60FB8FE71B9B361600290979 /* Java-Android.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Java-Android.json"; path = "Supported Languages/Java-Android.json"; sourceTree = "<group>"; };
@@ -94,12 +119,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CC028961D89D3ED00A36ADE /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3CC028801D89C33900A36ADE /* networkRequest */ = {
+			isa = PBXGroup;
+			children = (
+				3CC028811D89C36C00A36ADE /* NetworkRequestWindowController.swift */,
+				3CC028821D89C36C00A36ADE /* NetworkRequestWindowController.xib */,
+				3CC028851D89C8D500A36ADE /* NetworkRequestViewController.swift */,
+				3CC028861D89C8D500A36ADE /* NetworkRequestViewController.xib */,
+			);
+			name = networkRequest;
+			sourceTree = "<group>";
+		};
+		3CC028891D89D20F00A36ADE /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				3CC028941D89D3C700A36ADE /* Alamofire.framework */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
 		E20A0DA41A117096003B3D62 /* File content generators */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +250,7 @@
 		E2FA87B71A059AC100648EB6 /* JSONExport */ = {
 			isa = PBXGroup;
 			children = (
+				3CC028801D89C33900A36ADE /* networkRequest */,
 				E20A0DA61A1170C3003B3D62 /* Third party libraries */,
 				E20A0DA51A1170B6003B3D62 /* Misc */,
 				E20A0DA41A117096003B3D62 /* File content generators */,
@@ -215,6 +261,7 @@
 				E2FA87BE1A059AC100648EB6 /* Images.xcassets */,
 				E2FA87C01A059AC100648EB6 /* Main.storyboard */,
 				E2FA87B81A059AC100648EB6 /* Supporting Files */,
+				3CC028891D89D20F00A36ADE /* Framework */,
 			);
 			path = JSONExport;
 			sourceTree = "<group>";
@@ -237,6 +284,7 @@
 				E2FA87B11A059AC100648EB6 /* Sources */,
 				E2FA87B21A059AC100648EB6 /* Frameworks */,
 				E2FA87B31A059AC100648EB6 /* Resources */,
+				3CC0288E1D89D24F00A36ADE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -255,11 +303,12 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Ahmed Ali";
 				TargetAttributes = {
 					E2FA87B41A059AC100648EB6 = {
 						CreatedOnToolsVersion = 6.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -289,6 +338,7 @@
 				60FB8FF51B9B361600290979 /* Swift-Class.json in Resources */,
 				60FB8FF01B9B361600290979 /* Java-Android Realm.json in Resources */,
 				A329A7ED1D5DA1ED00FB59E8 /* Java-Android Gson.json in Resources */,
+				3CC028881D89C8D600A36ADE /* NetworkRequestViewController.xib in Resources */,
 				60FB8FF31B9B361600290979 /* ObjectiveC-iOS.json in Resources */,
 				60FB8FFC1B9B3F6400290979 /* ObjectiveC-Realm.json in Resources */,
 				60FB8FF11B9B361600290979 /* Java-Android.json in Resources */,
@@ -302,6 +352,7 @@
 				60FB8FF21B9B361600290979 /* ObjectiveC-CoreData-iOS.json in Resources */,
 				E2FA87C21A059AC100648EB6 /* Main.storyboard in Resources */,
 				166AF5CE1CEF6C3600516EDD /* Swift-Struct-Gloss.json in Resources */,
+				3CC028841D89C36C00A36ADE /* NetworkRequestWindowController.xib in Resources */,
 				60FB8FF41B9B361600290979 /* ObjectiveC-Mac.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,7 +381,9 @@
 				E230BA2C1A113F8C00AE2054 /* FilePreviewCell.swift in Sources */,
 				E28631531A158CFA0041B178 /* DataType.swift in Sources */,
 				E278F9C61A2149AC00306EFC /* HeaderFileData.swift in Sources */,
+				3CC028871D89C8D600A36ADE /* NetworkRequestViewController.swift in Sources */,
 				E278F9CA1A2152D800306EFC /* HeaderFileRepresenter.swift in Sources */,
+				3CC028831D89C36C00A36ADE /* NetworkRequestWindowController.swift in Sources */,
 				E20A0DAD1A1170F1003B3D62 /* NoodleLineNumberMarker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,8 +415,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -372,6 +427,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -405,8 +461,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -415,6 +473,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -424,6 +483,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -433,12 +493,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/JSONExport",
+				);
 				INFOPLIST_FILE = JSONExport/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "ahmed.ali.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "JSONExport/JSONExport-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -448,11 +514,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/JSONExport",
+				);
 				INFOPLIST_FILE = JSONExport/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "ahmed.ali.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "JSONExport/JSONExport-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
