@@ -47,13 +47,13 @@ class HeaderFileRepresenter : FileRepresenter{
         //start the model defination
         var definition = ""
         if lang.headerFileData.modelDefinitionWithParent != nil && parentClassName.characters.count > 0{
-            definition = lang.headerFileData.modelDefinitionWithParent.stringByReplacingOccurrencesOfString(modelName, withString: className)
-            definition = definition.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: parentClassName)
+            definition = lang.headerFileData.modelDefinitionWithParent.replacingOccurrences(of: modelName, with: className)
+            definition = definition.replacingOccurrences(of: modelWithParentClassName, with: parentClassName)
         }else if includeUtilities && lang.defaultParentWithUtilityMethods != nil{
-            definition = lang.headerFileData.modelDefinitionWithParent.stringByReplacingOccurrencesOfString(modelName, withString: className)
-            definition = definition.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: lang.headerFileData.defaultParentWithUtilityMethods)
+            definition = lang.headerFileData.modelDefinitionWithParent.replacingOccurrences(of: modelName, with: className)
+            definition = definition.replacingOccurrences(of: modelWithParentClassName, with: lang.headerFileData.defaultParentWithUtilityMethods)
         }else{
-            definition = lang.headerFileData.modelDefinition.stringByReplacingOccurrencesOfString(modelName, withString: className)
+            definition = lang.headerFileData.modelDefinition.replacingOccurrences(of: modelName, with: className)
         }
         
         fileContent += definition
@@ -83,7 +83,7 @@ class HeaderFileRepresenter : FileRepresenter{
     func appendImportParentHeader()
     {
         if lang.headerFileData.importParentHeaderFile != nil && parentClassName.characters.count > 0{
-            fileContent += lang.headerFileData.importParentHeaderFile.stringByReplacingOccurrencesOfString(modelWithParentClassName, withString: parentClassName)
+            fileContent += lang.headerFileData.importParentHeaderFile.replacingOccurrences(of: modelWithParentClassName, with: parentClassName)
         }
     }
     
@@ -92,11 +92,11 @@ class HeaderFileRepresenter : FileRepresenter{
     */
     override func appendCopyrights()
     {
-        if let me = ABAddressBook.sharedAddressBook()?.me(){
+        if let me = ABAddressBook.shared()?.me(){
             fileContent += "//\n//\t\(className).\(lang.headerFileData.headerFileExtension)\n"
-            if let firstName = me.valueForProperty(kABFirstNameProperty as String) as? String{
+            if let firstName = me.value(forProperty: kABFirstNameProperty as String) as? String{
                 fileContent += "//\n//\tCreate by \(firstName)"
-                if let lastName = me.valueForProperty(kABLastNameProperty as String) as? String{
+                if let lastName = me.value(forProperty: kABLastNameProperty as String) as? String{
                     fileContent += " \(lastName)"
                 }
             }
@@ -104,7 +104,7 @@ class HeaderFileRepresenter : FileRepresenter{
             
             fileContent += " on \(getTodayFormattedDay())\n//\tCopyright © \(getYear())"
             
-            if let organization = me.valueForProperty(kABOrganizationProperty as String) as? String{
+            if let organization = me.value(forProperty: kABOrganizationProperty as String) as? String{
                 fileContent += " \(organization)"
             }
             
@@ -124,13 +124,13 @@ class HeaderFileRepresenter : FileRepresenter{
         if lang.importForEachCustomType != nil{
             for property in properties{
                 if property.isCustomClass{
-                    fileContent += lang.headerFileData.importForEachCustomType.stringByReplacingOccurrencesOfString(modelName, withString: property.type)
+                    fileContent += lang.headerFileData.importForEachCustomType.replacingOccurrences(of: modelName, with: property.type)
                 }else if property.isArray{
                     //if it is an array of custom types
                     if(property.elementsType != lang.genericType){
                         let basicTypes = lang.dataTypes.toDictionary().allValues as! [String]
-                        if basicTypes.indexOf(property.elementsType) == nil{
-                            fileContent += lang.headerFileData.importForEachCustomType.stringByReplacingOccurrencesOfString(modelName, withString: property.elementsType)
+                        if basicTypes.index(of: property.elementsType) == nil{
+                            fileContent += lang.headerFileData.importForEachCustomType.replacingOccurrences(of: modelName, with: property.elementsType)
                         }
                     }
                     
@@ -163,7 +163,7 @@ class HeaderFileRepresenter : FileRepresenter{
            
             fileContent += constructorSignature
             
-            fileContent = fileContent.stringByReplacingOccurrencesOfString(modelName, withString: className)
+            fileContent = fileContent.replacingOccurrences(of: modelName, with: className)
         }
     }
     
