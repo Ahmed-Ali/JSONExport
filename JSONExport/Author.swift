@@ -48,9 +48,9 @@ class Author : NSObject, NSCoding{
      */
     @objc required init(coder aDecoder: NSCoder)
     {
-        website = aDecoder.decodeObjectForKey("website") as? String
-        email = aDecoder.decodeObjectForKey("email") as? String
-        name = aDecoder.decodeObjectForKey("name") as? String
+        website = aDecoder.decodeObject(forKey: "website") as? String
+        email = aDecoder.decodeObject(forKey: "email") as? String
+        name = aDecoder.decodeObject(forKey: "name") as? String
         
     }
     
@@ -58,16 +58,16 @@ class Author : NSObject, NSCoding{
      * NSCoding required method.
      * Encodes mode properties into the decoder
      */
-    @objc func encodeWithCoder(aCoder: NSCoder)
+    @objc func encode(with aCoder: NSCoder)
     {
         if website != nil{
-            aCoder.encodeObject(website, forKey: "website")
+            aCoder.encode(website, forKey: "website")
         }
         if email != nil{
-            aCoder.encodeObject(email, forKey: "email")
+            aCoder.encode(email, forKey: "email")
         }
         if name != nil{
-            aCoder.encodeObject(name, forKey: "name")
+            aCoder.encode(name, forKey: "name")
         }
         
     }
