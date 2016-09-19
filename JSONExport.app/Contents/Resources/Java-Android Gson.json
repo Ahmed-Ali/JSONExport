@@ -1,0 +1,69 @@
+{
+    "langName": "Java",
+    "displayLangName": "Java Gson for Android",
+    "briefDescription" : "Defines how your JSON objects can be mapped to Java classes using Android's org.json JSONObject.",
+    "fileExtension": "java",
+    "genericType": "Object",
+    "arrayType": "<!ElementType!>[]",
+    "dataTypes": {
+        "intType": "int",
+        "boolType": "boolean",
+        "characterType": "char",
+        "floatType": "float",
+        "longType": "long",
+        "doubleType": "double",
+        "stringType": "String"
+    },
+    "supportsFirstLineStatement" : "true",
+    "firstLineHint" : "Package name",
+    "staticImports": "import org.json.*;\nimport java.util.*;\nimport com.google.gson.annotations.SerializedName;\n",
+    "importForEachCustomType": "",
+    "modelDefinition": "\npublic class <!ModelName!>",
+    "modelDefinitionWithParent" : "\npublic class <!ModelName!> extends <!ParentClass!>",
+    "modelStart": "{\n",
+    "modelEnd": "\n}",
+    "instanceVarDefinition": "\t@SerializedName(\"<!JsonKeyName!>\")\n\tprivate <!VarType!> <!VarName!>;\n",
+    "setter" : "\tpublic void set<!CapitalizedVarName!>(<!VarType!> <!VarName!>){\n\t\tthis.<!VarName!> = <!VarName!>;\n\t}\n",
+    "getter" : "\tpublic <!VarType!> get<!CapitalizedVarName!>(){\n\t\treturn this.<!VarName!>;\n\t}\n",
+    "booleanGetter" : "\tpublic <!VarType!> is<!CapitalizedVarName!>()\n\t{\n\t\treturn this.<!VarName!>;\n\t}\n",
+    "reservedKeywords" : ["abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "default", "do", "double", "else", "enum", "extends", "false", "final", "finally", "float", "for", "goto", "if", "implements", "import", "instanceof", "int", "interface", "long", "native", "new", "null", "package", "private", "protected", "public", "return", "short", "static", "strictfp", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void", "volatile", "while"],
+    "wordsToRemoveToGetArrayElementsType": [
+                                            "[",
+                                            "]"
+                                            ],
+    "basicTypesWithSpecialFetchingNeeds" : [
+                                            "Object",
+                                            "String"
+                                            ],
+    "basicTypesWithSpecialFetchingNeedsReplacements" : [
+                                                        
+                                                        "",""
+                                                        ],
+    "constructors": [
+                     {
+                     "comment": "\t/**\n\t * Instantiate the instance using the passed jsonObject to set the properties values\n\t */\n",
+                     "signature": "\tpublic <!ModelName!>(JSONObject jsonObject)",
+                     "bodyStart": "{\n\t\tif(jsonObject == null){\n\t\t\treturn;\n\t\t}\n",
+                     "bodyEnd": "\t}\n",
+                     "fetchBasicTypePropertyFromMap": "\t\t<!VarName!> = jsonObject.opt<!CapitalizedVarType!>(\"<!JsonKeyName!>\");\n",
+                     "fetchArrayOfBasicTypePropertyFromMap" : "\t\tJSONArray <!VarName!>Tmp = jsonObject.optJSONArray(\"<!JsonKeyName!>\");\n\t\tif(<!VarName!>Tmp != null){\n\t\t\t<!VarName!> = new <!ElementType!>[<!VarName!>Tmp.length()];\n\t\t\tfor(int i = 0; i < <!VarName!>Tmp.length(); i++){\n\t\t\t\t<!VarName!>[i] = <!VarName!>Tmp.get(i);\n\t\t\t}\n\t\t}\n",
+                     "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\t<!VarName!> = jsonObject.opt<!VarBasicTypeReplacement!>(\"<!JsonKeyName!>\");\n",
+                     "fetchCustomTypePropertyFromMap": "\t\t<!VarName!> = new <!VarType!>(jsonObject.optJSONObject(\"<!JsonKeyName!>\"));\n",
+                     "fetchArrayOfCustomTypePropertyFromMap": "\t\tJSONArray <!VarName!>JsonArray = jsonObject.optJSONArray(\"<!JsonKeyName!>\");\n\t\tif(<!VarName!>JsonArray != null){\n\t\t\tArrayList<<!ElementType!>> <!VarName!>ArrayList = new ArrayList<>();\n\t\t\tfor (int i = 0; i < <!VarName!>JsonArray.length(); i++) {\n\t\t\t\tJSONObject <!VarName!>Object = <!VarName!>JsonArray.optJSONObject(i);\n\t\t\t\t<!VarName!>ArrayList.add(new <!ElementType!>(<!VarName!>Object));\n\t\t\t}\n\t\t\t<!VarName!> = (<!ElementType!>[]) <!VarName!>ArrayList.toArray();\n\t\t}"
+                     }
+                     ],
+    "utilityMethods": [
+                       {
+                       "comment": "\t/**\n\t * Returns all the available property values in the form of JSONObject instance where the key is the approperiate json key and the value is the value of the corresponding field\n\t */\n",
+                       "signature": "\tpublic JSONObject toJsonObject()",
+                       "bodyStart": "\n\t{\n",
+                       "bodyEnd": "\t}\n",
+                       "body": "\t\tJSONObject jsonObject = new JSONObject();\n\t\ttry {\n",
+                       "forEachProperty": "\t\t\tjsonObject.put(\"<!JsonKeyName!>\", <!VarName!>);\n",
+                       "forEachCustomTypeProperty" : "\t\t\tjsonObject.put(\"<!JsonKeyName!>\", <!VarName!>.toJsonObject());\n",
+                       
+                       "forEachArrayOfCustomTypeProperty": "\t\t\tif(<!VarName!> != null && <!VarName!>.length > 0){\n\t\t\t\tJSONArray <!VarName!>JsonArray = new JSONArray();\n\t\t\t\tfor(<!ElementType!> <!VarName!>Element : <!VarName!>){\n\t\t\t\t\t<!VarName!>JsonArray.put(<!VarName!>Element.toJsonObject());\n\t\t\t\t}\n\t\t\t\tjsonObject.put(\"<!JsonKeyName!>\", <!VarName!>JsonArray);\n\t\t\t}\n",
+                       "returnStatement": "\t\t} catch (JSONException e) {\n\t\t\t// TODO Auto-generated catch block\n\t\t\te.printStackTrace();\n\t\t}\n\t\treturn jsonObject;\n"
+                       }
+                       ]
+}

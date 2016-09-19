@@ -1,0 +1,69 @@
+{
+    "langName": "Java-Realm",
+    "displayLangName": "Java Realm for Android",
+    "briefDescription" : "Defines how your JSON objects can be mapped to Java classes using Android's org.json JSONObject with support to Realm.",
+    "fileExtension": "java",
+    "genericType": "Object",
+    "arrayType": "RealmList<<!ElementType!>>",
+    "dataTypes": {
+        "intType": "int",
+        "boolType": "boolean",
+        "characterType": "char",
+        "floatType": "float",
+        "longType": "long",
+        "doubleType": "double",
+        "stringType": "String"
+    },
+    "supportsFirstLineStatement" : "true",
+    "firstLineHint" : "Package name",
+    "staticImports": "import org.json.*;\nimport io.realm.*;\nimport io.realm.annotations.*;\n",
+    "importForEachCustomType": "",
+    "modelDefinition": "\n@RealmClass\npublic class <!ModelName!> extends RealmObject",
+    "modelDefinitionWithParent" : "\npublic class <!ModelName!> extends <!ParentClass!>",
+    "modelStart": "{\n",
+    "modelEnd": "\n}",
+    "instanceVarDefinition": "\tprivate <!VarType!> <!VarName!>;\n",
+    "setter" : "\tpublic void set<!CapitalizedVarName!>(<!VarType!> <!VarName!>){\n\t\tthis.<!VarName!> = <!VarName!>;\n\t}\n",
+    "getter" : "\tpublic <!VarType!> get<!CapitalizedVarName!>(){\n\t\treturn this.<!VarName!>;\n\t}\n",
+    "booleanGetter" : "\tpublic <!VarType!> is<!CapitalizedVarName!>()\n\t{\n\t\treturn this.<!VarName!>;\n\t}\n",
+    "reservedKeywords" : ["abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "default", "do", "double", "else", "enum", "extends", "false", "final", "finally", "float", "for", "goto", "if", "implements", "import", "instanceof", "int", "interface", "long", "native", "new", "null", "package", "private", "protected", "public", "return", "short", "static", "strictfp", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void", "volatile", "while"],
+    "wordsToRemoveToGetArrayElementsType": [
+                                            "RealmList",
+                                            "<",
+                                            ">"
+                                            ],
+    "basicTypesWithSpecialFetchingNeeds" : [
+                                            "Object", "String"
+                                            ],
+    "basicTypesWithSpecialFetchingNeedsReplacements" : [
+                                                      
+                                                        "", ""
+                                                        ],
+    "constructors": [
+                     {
+                     "comment": "\t/**\n\t * Creates instance using the passed realm and jsonObject to set the properties values\n\t */\n",
+                     "signature": "\tpublic static <!ModelName!> fromJson(Realm realm, JSONObject jsonObject)",
+                     "bodyStart": "{\n\t\tif(jsonObject == null){\n\t\t\treturn null;\n\t\t}\n\t\t<!ModelName!> <!LowerCaseModelName!> = realm.createObject(<!ModelName!>.class);\n",
+                     "bodyEnd": "\t\treturn <!LowerCaseModelName!>;\n\t}\n",
+                     "fetchBasicTypePropertyFromMap": "\t\t<!LowerCaseModelName!>.<!VarName!> = jsonObject.opt<!CapitalizedVarType!>(\"<!JsonKeyName!>\");\n",
+                     "fetchArrayOfBasicTypePropertyFromMap" : "\t\tJSONArray <!VarName!>Tmp = jsonObject.optJSONArray(\"<!JsonKeyName!>\");\n\t\tif(<!VarName!>Tmp != null){\n\t\t\t<!VarName!> = new <!ElementType!>[<!VarName!>Tmp.length()];\n\t\t\tfor(int i = 0; i < <!VarName!>Tmp.length(); i++){\n\t\t\t\t<!VarName!>[i] = <!VarName!>Tmp.get(i);\n\t\t\t}\n\t\t}\n",
+					 "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\t<!LowerCaseModelName!>.<!VarName!> = jsonObject.opt<!VarBasicTypeReplacement!>(\"<!JsonKeyName!>\");\n",
+                     "fetchCustomTypePropertyFromMap": "\t\t<!LowerCaseModelName!>.<!VarName!> = <!VarType!>.fromJson(realm, jsonObject.optJSONObject(\"<!JsonKeyName!>\"));\n",
+                     "fetchArrayOfCustomTypePropertyFromMap": "\t\tJSONArray <!VarName!>JsonArray = jsonObject.optJSONArray(\"<!JsonKeyName!>\");\n\t\tif(<!VarName!>JsonArray != null){\n\t\t\tfor (int i = 0; i < <!VarName!>JsonArray.length(); i++) {\n\t\t\t\tJSONObject <!VarName!>Object = <!VarName!>JsonArray.optJSONObject(i);\n\t\t\t\t<!ElementType!> <!VarName!>Value = <!ElementType!>.fromJson(realm, <!VarName!>Object);\n\t\t\t\tif(<!VarName!>Value != null){\n\t\t\t\t\t<!LowerCaseModelName!>.get<!CapitalizedVarName!>().add(<!VarName!>Value);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n"
+                     }
+                     ],
+    "utilityMethods": [
+                       {
+                       "comment": "\t/**\n\t * Returns all the available property values in the form of JSONObject instance where the key is the approperiate json key and the value is the value of the corresponding field\n\t */\n",
+                       "signature": "\tpublic static JSONObject toJsonObject(<!ModelName!> <!LowerCaseModelName!>)",
+                       "bodyStart": "\n\t{\n",
+                       "bodyEnd": "\t}\n",
+                       "body": "\t\tJSONObject jsonObject = new JSONObject();\n\t\ttry {\n",
+                       "forEachProperty": "\t\t\tjsonObject.put(\"<!JsonKeyName!>\", <!LowerCaseModelName!>.<!VarName!>);\n",
+                       "forEachCustomTypeProperty" : "\t\t\tjsonObject.put(\"<!JsonKeyName!>\", <!VarType!>.toJsonObject(<!LowerCaseModelName!>.<!VarName!>));\n",
+                       
+                       "forEachArrayOfCustomTypeProperty": "\t\t\tif(<!LowerCaseModelName!>.<!VarName!> != null && <!LowerCaseModelName!>.<!VarName!>.size() > 0){\n\t\t\t\tJSONArray <!VarName!>JsonArray = new JSONArray();\n\t\t\t\tfor(<!ElementType!> <!VarName!>Element : <!LowerCaseModelName!>.<!VarName!>){\n\t\t\t\t\t<!VarName!>JsonArray.put(<!ElementType!>.toJsonObject(<!VarName!>Element));\n\t\t\t\t}\n\t\t\t\tjsonObject.put(\"<!JsonKeyName!>\", <!VarName!>JsonArray);\n\t\t\t}\n",
+                       "returnStatement": "\t\t} catch (JSONException e) {\n\t\t\t// TODO Auto-generated catch block\n\t\t\te.printStackTrace();\n\t\t}\n\t\treturn jsonObject;\n"
+                       }
+                       ]
+}

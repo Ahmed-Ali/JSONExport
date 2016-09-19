@@ -44,6 +44,10 @@ Installation
 ========================
 Kindly clone the project, and build it using xCode 6.1+ on any Mac OS X 10.10 or above.
 
+or
+
+download `JSONExport.app` drag in application
+
 To Do
 ========================
 * ~~Support Objective-C~~ Done

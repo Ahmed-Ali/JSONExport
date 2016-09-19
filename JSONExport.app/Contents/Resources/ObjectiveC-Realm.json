@@ -1,0 +1,132 @@
+{
+    "langName": "ObjectiveC-Realm",
+    "displayLangName": "ObjectiveC - Realm",
+    "briefDescription": "Defines how your JSON objects can be mapped to Objective-c Realm subclasses using the built-in NSJSONSerialization class",
+    "fileExtension": "m",
+    "genericType": "NSObject",
+    "arrayType": "RLMArray<<!ElementType!>>",
+    "dataTypes": {
+        "intType": "NSInteger",
+        "boolType": "BOOL",
+        "characterType": "int",
+        "floatType": "float",
+        "longType": "long",
+        "doubleType": "double",
+        "stringType": "NSString"
+    },
+    "supportsFirstLineStatement": "false",
+    "supportMutualRelationships" : "true",
+    "staticImports": "",
+    "importForEachCustomType": "#import \"<!ModelName!>.h\"\n",
+    "importHeaderFile": "#import \"<!ModelName!>.h\"\n",
+    "modelDefinition": "\n@interface <!ModelName!> ()\n@end\n@implementation <!ModelName!>\n",
+    "modelStart": "",
+    "modelEnd": "@end",
+    "instanceVarDefinition": "",
+    "hasHeaderFile": true,
+    "headerFileData": {
+        "staticImports": "#import <Realm/Realm.h>",
+        "importForEachCustomType": "RLM_ARRAY_TYPE(<!ModelName!>)\n@class <!ModelName!>;\n",
+        "importParentHeaderFile" : "#import \"<!ParentClass!>.h\"\n",
+        "modelDefinition": "\n@interface <!ModelName!> : RLMObject\n",
+        "modelDefinitionWithParent" : "\n@interface <!ModelName!> : <!ParentClass!>\n",
+        "modelStart": "",
+        "modelEnd": "@end",
+        "instanceVarDefinition": "@property (nonatomic, strong) <!VarType!> * <!VarName!>;\n",
+        "instanceVarWithSpeicalDefinition": "@property (nonatomic, assign) <!VarType!> <!VarName!>;\n",
+        "typesNeedSpecialDefinition" : [
+                                        "NSInteger",
+                                        "BOOL",
+                                        "int",
+                                        "float",
+                                        "double",
+                                        "long"
+                                        ],
+        
+        "headerFileExtension": "h",
+        "constructorSignatures": [
+            "-(instancetype)initWithDictionary:(NSDictionary *)dictionary;\n"
+        ],
+        "utilityMethodSignatures": [
+                                    "-(NSDictionary *)toDictionary;\n"
+                                    ]
+    },
+    "reservedKeywords" : ["abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "default", "do", "double", "else", "enum", "extends", "false", "final", "finally", "float", "for", "goto", "if", "implements", "import", "instanceof", "int", "interface", "long", "native", "new", "null", "package", "private", "protected", "public", "return", "short", "static", "strictfp", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void", "volatile", "while", "id", "class", "description"],
+    "wordsToRemoveToGetArrayElementsType": [
+                                            "RLMArray",
+                                            "<",
+                                            ">"
+                                            ],
+    "basicTypesWithSpecialFetchingNeeds": [
+                                           "NSInteger",
+                                           "BOOL",
+                                           "int",
+                                           "float",
+                                           "double",
+                                           "long"
+                                           ],
+    "basicTypesWithSpecialFetchingNeedsReplacements": ["integerValue",
+                                                       "boolValue",
+                                                       "intValue",
+                                                       "floatValue",
+                                                       "doubleValue",
+                                                       "longValue"],
+    "basicTypesWithSpecialStoringNeeds": [
+                                          "NSInteger",
+                                          "BOOL",
+                                          "int",
+                                          "float",
+                                          "double",
+                                          "long"
+                                          ],
+    "constructors": [
+                     {
+                     "comment": "\n/**\n * Instantiate the instance using the passed dictionary values to set the properties values\n */\n",
+                     "signature": "\n-(instancetype)initWithDictionary:(NSDictionary *)dictionary\n",
+                     "bodyStart": "{\n\tif(dictionary == nil || [dictionary isKindOfClass:[NSNull class]]){\n\t\treturn nil;\n\t}\n\tself = [super init];\n",
+                     "bodyEnd": "\n\treturn self;\n}\n",
+                     "fetchBasicTypePropertyFromMap": "\n\tif(![dictionary[@\"<!JsonKeyName!>\"] isKindOfClass:[NSNull class]]){\n\t\tself.<!VarName!> = dictionary[@\"<!JsonKeyName!>\"];\n\t}\n",
+                     "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\n\tif(![dictionary[@\"<!JsonKeyName!>\"] isKindOfClass:[NSNull class]]){\n\t\tself.<!VarName!> = [dictionary[@\"<!JsonKeyName!>\"] <!VarBasicTypeReplacement!>];\n\t}\n",
+                     "fetchCustomTypePropertyFromMap": "\n\tif(![dictionary[@\"<!JsonKeyName!>\"] isKindOfClass:[NSNull class]]){\n\t\tself.<!VarName!> = [[<!VarType!> alloc] initWithDictionary:dictionary[@\"<!JsonKeyName!>\"]];\n\t}\n",
+                     "fetchArrayOfCustomTypePropertyFromMap": "\n\tif(dictionary[@\"<!JsonKeyName!>\"] != nil && ![dictionary[@\"<!JsonKeyName!>\"] isKindOfClass:[NSNull class]]){\n\t\tNSArray * <!VarName!>Dictionaries = dictionary[@\"<!JsonKeyName!>\"];\n\t\tRLMArray * <!VarName!>Items = [[RLMArray alloc] initWithObjectClassName:[<!ElementType!> className]];\n\t\tfor(NSDictionary * <!VarName!>Dictionary in <!VarName!>Dictionaries){\n\t\t\t<!ElementType!> * <!VarName!>Item = [[<!ElementType!> alloc] initWithDictionary:<!VarName!>Dictionary];\n\t\t\t[<!VarName!>Items addObject:<!VarName!>Item];\n\t\t}\n\t\tself.<!VarName!> = (RLMArray<<!ElementType!>> *)<!VarName!>Items;\n\t}"
+                     }
+    ],
+    "utilityMethods": [
+                       {
+                       "comment": "\n/**\n * Returns all the available property values in the form of NSDictionary object where the key is the approperiate json key and the value is the value of the corresponding property\n */\n",
+                       "signature": "-(NSDictionary *)toDictionary",
+                       "bodyStart": "\n{\n",
+                       "bodyEnd": "\n}\n",
+                       "body": "\tNSMutableDictionary * dictionary = [NSMutableDictionary dictionary];\n",
+                       "forEachPropertyWithSpecialStoringNeeds": "\tdictionary[@\"<!JsonKeyName!>\"] = @(self.<!VarName!>);\n",
+                       "forEachProperty": "\tif(self.<!VarName!> != nil){\n\t\tdictionary[@\"<!JsonKeyName!>\"] = self.<!VarName!>;\n\t}\n",
+                       "forEachCustomTypeProperty": "\tif(self.<!VarName!> != nil){\n\t\tdictionary[@\"<!JsonKeyName!>\"] = [self.<!VarName!> toDictionary];\n\t}\n",
+                       "forEachArrayOfCustomTypeProperty": "\tif(self.<!VarName!> != nil){\n\t\tNSMutableArray * dictionaryElements = [NSMutableArray array];\n\t\tfor(<!ElementType!> * <!VarName!>Element in self.<!VarName!>){\n\t\t\t[dictionaryElements addObject:[<!VarName!>Element toDictionary]];\n\t\t}\n\t\tdictionary[@\"<!JsonKeyName!>\"] = dictionaryElements;\n\t}\n",
+                       "returnStatement": "\treturn dictionary;\n"
+                       },
+				       {
+				         "forEachProperty": "\tif(self.<!VarName!> != nil){\n\t\t[aCoder encodeObject:self.<!VarName!> forKey:@\"<!JsonKeyName!>\"];\n\t}\n",
+				         "bodyEnd": "\n}\n",
+				         "signature": "- (void)encodeWithCoder:(NSCoder *)aCoder",
+				         "forEachPropertyWithSpecialStoringNeeds": "\t[aCoder encodeObject:@(self.<!VarName!>) forKey:@\"<!JsonKeyName!>\"];",
+				         "forEachArrayOfCustomTypeProperty": "\tif(self.<!VarName!> != nil){\n\t\t[aCoder encodeObject:self.<!VarName!> forKey:@\"<!JsonKeyName!>\"];\n\t}\n",
+				         "forEachCustomTypeProperty": "\tif(self.<!VarName!> != nil){\n\t\t[aCoder encodeObject:self.<!VarName!> forKey:@\"<!JsonKeyName!>\"];\n\t}\n",
+				         "returnStatement": "",
+				         "body": "",
+				         "comment": "\n/**\n * Implementation of NSCoding encoding method\n */\n/**\n * Returns all the available property values in the form of NSDictionary object where the key is the approperiate json key and the value is the value of the corresponding property\n */\n",
+				         "bodyStart": "\n{\n"
+				       },
+				       {
+				         "forEachProperty": "\tself.<!VarName!> = [aDecoder decodeObjectForKey:@\"<!JsonKeyName!>\"];\n",
+				         "bodyEnd": "\n}\n",
+				         "signature": "- (instancetype)initWithCoder:(NSCoder *)aDecoder",
+				         "forEachPropertyWithSpecialStoringNeeds": "\tself.<!VarName!> = [[aDecoder decodeObjectForKey:@\"<!JsonKeyName!>\"] <!VarBasicTypeReplacement!>];\n",
+				         "forEachArrayOfCustomTypeProperty": "\tself.<!VarName!> = [aDecoder decodeObjectForKey:@\"<!JsonKeyName!>\"];\n",
+				         "forEachCustomTypeProperty": "\tself.<!VarName!> = [aDecoder decodeObjectForKey:@\"<!JsonKeyName!>\"];\n",
+				         "returnStatement": "\treturn self;\n",
+				         "body": "\tself = [super init];\n",
+				         "comment": "\n/**\n * Implementation of NSCoding initWithCoder: method\n */\n",
+				         "bodyStart": "\n{\n"
+				       }
+                       ]
+}
