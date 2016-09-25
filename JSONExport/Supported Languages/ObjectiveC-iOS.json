@@ -116,12 +116,12 @@
       "bodyStart": "\n{\n"
     },
     {
-      "forEachProperty": "\tcopy.<!VarName!> = [self.<!VarName!> copyWithZone:zone];\n",
+      "forEachProperty": "\tcopy.<!VarName!> = [self.<!VarName!> copy];\n",
       "bodyEnd": "\n}\n",
       "signature": "- (instancetype)copyWithZone:(NSZone *)zone",
       "forEachPropertyWithSpecialStoringNeeds": "\tcopy.<!VarName!> = self.<!VarName!>;\n",
-      "forEachArrayOfCustomTypeProperty": "\tcopy.<!VarName!> = [self.<!VarName!> copyWithZone:zone];\n",
-      "forEachCustomTypeProperty": "\tcopy.<!VarName!> = [self.<!VarName!> copyWithZone:zone];\n",
+      "forEachArrayOfCustomTypeProperty": "\tcopy.<!VarName!> = [self.<!VarName!> copy];\n",
+      "forEachCustomTypeProperty": "\tcopy.<!VarName!> = [self.<!VarName!> copy];\n",
       "returnStatement": "\n\treturn copy;",
       "body": "\t<!ModelName!> *copy = [<!ModelName!> new];\n\n",
       "comment": "\n/**\n * Implementation of NSCopying copyWithZone: method\n */\n",
