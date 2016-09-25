@@ -304,7 +304,10 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     {
         var error : NSError?
         for file in files{
-            let fileContent = file.fileContent
+            var fileContent = file.fileContent
+            if fileContent == ""{
+                fileContent = file.toString()
+            }
             var fileExtension = selectedLang.fileExtension
             if file is HeaderFileRepresenter{
                 fileExtension = selectedLang.headerFileData.headerFileExtension
