@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		000552711D700D0100E48A0B /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0005525D1D700D0100E48A0B /* LICENSE */; };
-		000552721D700D0100E48A0B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0005525E1D700D0100E48A0B /* README.md */; };
 		000552731D700D0100E48A0B /* SBJson4Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 000552641D700D0100E48A0B /* SBJson4Parser.m */; };
 		000552741D700D0100E48A0B /* SBJson4StreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 000552661D700D0100E48A0B /* SBJson4StreamParser.m */; };
 		000552751D700D0100E48A0B /* SBJson4StreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 000552681D700D0100E48A0B /* SBJson4StreamParserState.m */; };
@@ -404,7 +403,6 @@
 				000552791D700D0100E48A0B /* SBJson4Writer.m in Sources */,
 				E2FA87DA1A05C1BE00648EB6 /* Property.swift in Sources */,
 				608896441CF278440074CB80 /* Author.swift in Sources */,
-				000552721D700D0100E48A0B /* README.md in Sources */,
 				E230BA2C1A113F8C00AE2054 /* FilePreviewCell.swift in Sources */,
 				E28631531A158CFA0041B178 /* DataType.swift in Sources */,
 				E278F9C61A2149AC00306EFC /* HeaderFileData.swift in Sources */,
