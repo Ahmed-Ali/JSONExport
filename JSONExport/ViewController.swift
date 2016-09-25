@@ -211,7 +211,8 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         }) 
     }
     
-    @IBAction func toggleConstructors(sender: AnyObject)
+    
+    @IBAction func toggleConstructors(_ sender: AnyObject)
     {
         generateClasses()
     }
@@ -319,7 +320,6 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                 showError(error!)
                 break
             }
-            
         }
     }
     
@@ -450,7 +450,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         filesBuilder.includeConstructors = (generateConstructors.state == NSOnState)
         filesBuilder.includeUtilities = (generateUtilityMethods.state == NSOnState)
         filesBuilder.firstLine = firstLineField.stringValue
-        filesBuilder.lang = selectedLang
+        filesBuilder.lang = selectedLang!
         filesBuilder.classPrefix = classPrefixField.stringValue
         filesBuilder.parentClassName = parentClassName.stringValue
         return filesBuilder

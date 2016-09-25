@@ -112,7 +112,7 @@ class FileRepresenter{
         }
         fileContent += definition
         //start the model content body
-        fileContent += "\(lang.modelStart)"
+        fileContent += "\(lang.modelStart!)"
         
         appendProperties()
         appendSettersAndGetters()
@@ -192,7 +192,7 @@ class FileRepresenter{
         fileContent += "//\tModel file generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport"
         
         if let langAuthor = lang.author{
-            fileContent += "\n\n//\tThe \"\(lang.displayLangName)\" support has been made available by \(langAuthor.name)"
+            fileContent += "\n\n//\tThe \"\(lang.displayLangName!)\" support has been made available by \(langAuthor.name!)"
             if let email = langAuthor.email{
                 fileContent += "(\(email))"
             }

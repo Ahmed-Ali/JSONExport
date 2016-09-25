@@ -93,7 +93,7 @@ class HeaderFileRepresenter : FileRepresenter{
     override func appendCopyrights()
     {
         if let me = ABAddressBook.shared()?.me(){
-            fileContent += "//\n//\t\(className).\(lang.headerFileData.headerFileExtension)\n"
+            fileContent += "//\n//\t\(self.className).\(lang.headerFileData.headerFileExtension!)\n"
             if let firstName = me.value(forProperty: kABFirstNameProperty as String) as? String{
                 fileContent += "//\n//\tCreate by \(firstName)"
                 if let lastName = me.value(forProperty: kABLastNameProperty as String) as? String{

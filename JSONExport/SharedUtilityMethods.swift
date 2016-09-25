@@ -195,9 +195,9 @@ func stringByRemovingControlCharacters(_ string: String) -> String
 
 func runOnBackground(_ task: @escaping () -> Void)
 {
-    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background).async(execute: { () -> Void in
+    DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
         task();
-    })
+    }
 }
 
 func runOnUiThread(_ task: @escaping () -> Void)

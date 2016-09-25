@@ -13,6 +13,8 @@ Singleton used to build the file content with the current configurations
 */
 class FilesContentBuilder{
     
+    private init() {}
+    
     /**
      Lazely load and return the singleton instance of the FilesContentBuilder
      */
