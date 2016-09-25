@@ -1,3 +1,10 @@
+* Version 1.0.4
+	- Merged pull request #47 to add support to open .json file from the app (thanks to RobinChao)
+	- Merged pull request #50 (thanks king129)
+	- Merged pull request #54 to complete the Swift 3 and Xcode 8 support
+	- Fixed issue #48 that causes the app to produce empty files
+	- Fixed issue #53 to call copy instead of copyWithZone method for the NSCopying implementation
+	
 * Version 1.0.3
 	- Merged pull request #45 to add support Android GSON (Thanks to forestsoftjpdev)
 
