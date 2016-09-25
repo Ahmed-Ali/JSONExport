@@ -140,7 +140,7 @@ class FileRepresenter{
     func appendStaticImports()
     {
         if lang.staticImports != nil{
-            fileContent += lang.staticImports
+            fileContent += lang.staticImports!
             fileContent += "\n"
         }
     }
@@ -149,7 +149,7 @@ class FileRepresenter{
     {
         if lang.importHeaderFile != nil{
             fileContent += "\n"
-            fileContent += lang.importHeaderFile
+            fileContent += lang.importHeaderFile!
             fileContent = fileContent.replacingOccurrences(of: modelName, with: className)
         }
     }
@@ -221,7 +221,7 @@ class FileRepresenter{
     func getTodayFormattedDay() -> String
     {
         let components = (Calendar.current as NSCalendar).components([.day, .month, .year], from: Date())
-        return "\(components.day)/\(components.month)/\(components.year)"
+        return "\(components.day!)/\(components.month!)/\(components.year!)"
     }
 
     /**
