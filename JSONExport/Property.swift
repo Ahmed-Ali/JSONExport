@@ -88,11 +88,11 @@ class Property : Equatable{
     /**
     Returns a valid property declaration using the LangModel.instanceVarDefinition value
     */
-    func toString(forHeaderFile: Bool = false) -> String
+    func toString(_ forHeaderFile: Bool = false) -> String
     {
         var string : String!
         if forHeaderFile{
-            if lang.headerFileData.instanceVarWithSpeicalDefinition != nil && lang.headerFileData.typesNeedSpecialDefinition.indexOf(type) != nil{
+            if lang.headerFileData.instanceVarWithSpeicalDefinition != nil && lang.headerFileData.typesNeedSpecialDefinition.index(of: type) != nil{
                 string = lang.headerFileData.instanceVarWithSpeicalDefinition
             }else{
                 string = lang.headerFileData.instanceVarDefinition
@@ -100,19 +100,20 @@ class Property : Equatable{
             
             
         }else{
-            if lang.instanceVarWithSpeicalDefinition != nil && lang.typesNeedSpecialDefinition.indexOf(type) != nil{
+            if lang.instanceVarWithSpeicalDefinition != nil && lang.typesNeedSpecialDefinition.index(of: type) != nil{
                 string = lang.instanceVarWithSpeicalDefinition
             }else{
                 string = lang.instanceVarDefinition
             }
         }
         
-        string = string.stringByReplacingOccurrencesOfString(varType, withString: type)
-        string = string.stringByReplacingOccurrencesOfString(varName, withString: nativeName)
+        string = string.replacingOccurrences(of: varType, with: type)
+        string = string.replacingOccurrences(of: varName, with: nativeName)
+        string = string.replacingOccurrences(of: jsonKeyName, with: jsonName)
         return string
     }
     
-    func toConstVar(className: String) -> String
+    func toConstVar(_ className: String) -> String
     {
         var string : String!
         if lang.constVarDefinition != nil {
@@ -122,8 +123,8 @@ class Property : Equatable{
         }
         self.constName = "k"+className+nativeName.uppercaseFirstChar()
         
-        string = string.stringByReplacingOccurrencesOfString(constKeyName, withString: constName!)
-        string = string.stringByReplacingOccurrencesOfString(jsonKeyName, withString: jsonName)
+        string = string.replacingOccurrences(of: constKeyName, with: constName!)
+        string = string.replacingOccurrences(of: jsonKeyName, with: jsonName)
         return string
     }
     
@@ -133,8 +134,8 @@ class Property : Equatable{
     */
     init(jsonName: String, nativeName: String, type: String, isArray: Bool, isCustomClass: Bool, lang: LangModel)
     {
-        self.jsonName = jsonName.stringByReplacingOccurrencesOfString(" ", withString: "")
-        self.nativeName = nativeName.stringByReplacingOccurrencesOfString(" ", withString: "")
+        self.jsonName = jsonName.replacingOccurrences(of: " ", with: "")
+        self.nativeName = nativeName.replacingOccurrences(of: " ", with: "")
         self.type = type
         self.isArray = isArray
         self.isCustomClass = isCustomClass

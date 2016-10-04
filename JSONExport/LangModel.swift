@@ -18,7 +18,7 @@ class LangModel{
     var constructors : [Constructor]!
 	var dataTypes : DataType!
 	var displayLangName : String!
-	var fileExtension : String!
+	var fileExtension : String = ""
 	var genericType : String!
 	var getter : String!
 	var importForEachCustomType : String!
@@ -26,7 +26,7 @@ class LangModel{
 	var instanceVarDefinition : String!
     var instanceVarWithSpeicalDefinition : String!
     var typesNeedSpecialDefinition : [String]!
-	var langName : String!
+	var langName : String = ""
     var constVarDefinition : String!
 	var modelDefinition : String!
     var modelDefinitionWithParent : String!
@@ -66,7 +66,7 @@ class LangModel{
 			}
         importHeaderFile = dictionary["importHeaderFile"] as? String
 		displayLangName = dictionary["displayLangName"] as? String
-		fileExtension = dictionary["fileExtension"] as? String
+		fileExtension = dictionary["fileExtension"] as! String
 		genericType = dictionary["genericType"] as? String
 		getter = dictionary["getter"] as? String
 		importForEachCustomType = dictionary["importForEachCustomType"] as? String
@@ -74,7 +74,7 @@ class LangModel{
         instanceVarWithSpeicalDefinition = dictionary["instanceVarWithSpeicalDefinition"] as? String
         typesNeedSpecialDefinition = dictionary["typesNeedSpecialDefinition"] as? [String]
         
-		langName = dictionary["langName"] as? String
+		langName = dictionary["langName"] as! String
         constVarDefinition = dictionary["constVarDefinition"] as? String
 		modelDefinition = dictionary["modelDefinition"] as? String
         modelDefinitionWithParent = dictionary["modelDefinitionWithParent"] as? String
