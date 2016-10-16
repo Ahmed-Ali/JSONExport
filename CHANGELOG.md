@@ -1,3 +1,5 @@
+* Version 1.0.5
+	- Merged pull request #58 to update ObjectMapper generated files to for Swift 3	
 * Version 1.0.4
 	- Merged pull request #47 to add support to open .json file from the app (thanks to RobinChao)
 	- Merged pull request #50 (thanks king129)

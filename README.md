@@ -28,7 +28,7 @@ Currently you can convert your JSON object to one of the following languages:
 7. Swift - CoreData.
 8. Swift Structures.
 9. Swift Structures for [Gloss](https://github.com/hkellaway/Gloss)
-10. Swift Mappable Classes for [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper)
+10. Swift Mappable Classes for (Swift 3) [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper)
 11. Swift Structures for [Unbox](https://github.com/JohnSundell/Unbox)
 12. Objective-C - iOS.
 13. Objective-C - MAC.
