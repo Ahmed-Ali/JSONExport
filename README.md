@@ -50,7 +50,7 @@ To Do
 * ~~Sync multible classes with the same name or have the same exact properties~~ Done
 * ~~Support to parse JSON arrays of objects~~ Done
 * Load JSON data from web
-* Open .json files with JSONExport
+* ~~Open .json files from JSONExport~~
 * Supported languages management editor.
 * Beside raw JSON, load the model raw data from plist files as well.
 
