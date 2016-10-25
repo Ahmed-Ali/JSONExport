@@ -32,7 +32,7 @@ class LangModel{
     var modelDefinitionWithParent : String!
     var defaultParentWithUtilityMethods : String!
 	var modelEnd : String!
-	var modelStart : String!
+	var modelStart : String = ""
 	var setter : String!
 	var staticImports : String!
 	var supportsFirstLineStatement : Bool!
@@ -80,7 +80,10 @@ class LangModel{
         modelDefinitionWithParent = dictionary["modelDefinitionWithParent"] as? String
         defaultParentWithUtilityMethods = dictionary["defaultParentWithUtilityMethods"] as? String
 		modelEnd = dictionary["modelEnd"] as? String
-		modelStart = dictionary["modelStart"] as? String
+        if let mStart = dictionary["modelStart"] as? String{
+            modelStart = mStart
+        }
+
 		setter = dictionary["setter"] as? String
 		staticImports = dictionary["staticImports"] as? String
 		supportsFirstLineStatement = (dictionary["supportsFirstLineStatement"] as? NSString)?.boolValue

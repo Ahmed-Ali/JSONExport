@@ -112,7 +112,7 @@ class FileRepresenter{
         }
         fileContent += definition
         //start the model content body
-        fileContent += "\(lang.modelStart!)"
+        fileContent += "\(lang.modelStart)"
         
         appendProperties()
         appendSettersAndGetters()
