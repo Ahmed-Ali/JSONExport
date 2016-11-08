@@ -204,7 +204,8 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                 
                 let jsonPath = oPanel.urls.first!.path
                 let fileHandle = FileHandle(forReadingAtPath: jsonPath)
-                
+                let urlStr:String  = oPanel.urls.first!.lastPathComponent
+                self.classNameField.stringValue = urlStr.replacingOccurrences(of: ".json", with: "")
                 self.parseJSONData(jsonData: (fileHandle!.readDataToEndOfFile() as NSData!) as Data!)
                 
             }
