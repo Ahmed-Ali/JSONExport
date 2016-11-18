@@ -77,27 +77,27 @@
                        "forEachCustomTypeProperty": "\t\tif <!VarName!> != nil{\n\t\t\tdictionary[\"<!JsonKeyName!>\"] = <!VarName!>.toDictionary()\n\t\t}\n",
                        "forEachArrayOfCustomTypeProperty": "\t\tif <!VarName!> != nil{\n\t\t\tvar dictionaryElements = [NSDictionary]()\n\t\t\tfor <!VarName!>Element in <!VarName!> {\n\t\t\t\tdictionaryElements.append(<!VarName!>Element.toDictionary())\n\t\t\t}\n\t\t\tdictionary[\"<!JsonKeyName!>\"] = dictionaryElements\n\t\t}\n",
                        "returnStatement": "\t\treturn dictionary\n",
-                       "body": "\t\tvar dictionary = NSMutableDictionary()\n",
+                       "body": "\t\tlet dictionary = NSMutableDictionary()\n",
                        "comment": "\t/**\n\t * Returns all the available property values in the form of NSDictionary object where the key is the approperiate json key and the value is the value of the corresponding property\n\t */\n",
                        "bodyStart": "\n\t{\n"
                        },
                        {
-                       "forEachProperty": "         <!VarName!> = aDecoder.decodeObjectForKey(\"<!JsonKeyName!>\") as? <!VarType!>\n",
+                       "forEachProperty": "         <!VarName!> = aDecoder.decodeObject(forKey: \"<!JsonKeyName!>\") as? <!VarType!>\n",
                        "bodyEnd": "\n\t}\n",
                        "signature": "    @objc required init(coder aDecoder: NSCoder)",
-                       "forEachCustomTypeProperty": "         <!VarName!> = aDecoder.decodeObjectForKey(\"<!JsonKeyName!>\") as? <!VarType!>\n",
-                       "forEachArrayOfCustomTypeProperty": "         <!VarName!> = aDecoder.decodeObjectForKey(\"<!JsonKeyName!>\") as? <!VarType!>\n",
+                       "forEachCustomTypeProperty": "         <!VarName!> = aDecoder.decodeObject(forKey: \"<!JsonKeyName!>\") as? <!VarType!>\n",
+                       "forEachArrayOfCustomTypeProperty": "         <!VarName!> = aDecoder.decodeObject(forKey: \"<!JsonKeyName!>\") as? <!VarType!>\n",
                        "returnStatement": "",
                        "body": "",
                        "comment": "\n    /**\n    * NSCoding required initializer.\n    * Fills the data from the passed decoder\n    */\n",
                        "bodyStart": "\n\t{\n"
                        },
                        {
-                       "forEachProperty": "\t\tif <!VarName!> != nil{\n\t\t\taCoder.encodeObject(<!VarName!>, forKey: \"<!JsonKeyName!>\")\n\t\t}\n",
+                       "forEachProperty": "\t\tif <!VarName!> != nil{\n\t\t\taCoder.encode(<!VarName!>, forKey: \"<!JsonKeyName!>\")\n\t\t}\n",
                        "bodyEnd": "\n\t}\n",
-                       "signature": "    @objc func encodeWithCoder(aCoder: NSCoder)",
-                       "forEachCustomTypeProperty": "\t\tif <!VarName!> != nil{\n\t\t\taCoder.encodeObject(<!VarName!>, forKey: \"<!JsonKeyName!>\")\n\t\t}\n",
-                       "forEachArrayOfCustomTypeProperty": "\t\tif <!VarName!> != nil{\n\t\t\taCoder.encodeObject(<!VarName!>, forKey: \"<!JsonKeyName!>\")\n\t\t}\n",
+                       "signature": "    func encode(with aCoder: NSCoder)",
+                       "forEachCustomTypeProperty": "\t\tif <!VarName!> != nil{\n\t\t\taCoder.encode(<!VarName!>, forKey: \"<!JsonKeyName!>\")\n\t\t}\n",
+                       "forEachArrayOfCustomTypeProperty": "\t\tif <!VarName!> != nil{\n\t\t\taCoder.encode(<!VarName!>, forKey: \"<!JsonKeyName!>\")\n\t\t}\n",
                        "returnStatement": "",
                        "body": "",
                        "comment": "\n    /**\n    * NSCoding required method.\n    * Encodes mode properties into the decoder\n    */\n",
@@ -122,13 +122,13 @@
                      {
                      "fetchArrayOfBasicTypePropertyFromMap": "\t\t<!VarName!> = <!VarType!>()\n\t\tlet <!VarName!>Array = json[\"<!JsonKeyName!>\"].arrayValue\n\t\tfor <!VarName!>Json in <!VarName!>Array{\n\t\t\t<!VarName!>.append(<!VarName!>Json.<!VarBasicTypeReplacement!>)\n\t\t}\n",
                      "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\t<!VarName!> = json[\"<!JsonKeyName!>\"].<!VarBasicTypeReplacement!>\n",
-                     "bodyStart": "{\n\t\tif json == nil{\n\t\t\treturn\n\t\t}\n",
+                     "bodyStart": "{\n\t\tif json.isEmpty{\n\t\t\treturn\n\t\t}\n",
                      "bodyEnd": "\t}\n",
                      "fetchBasicTypePropertyFromMap": "",
                      "signature": "\tinit(fromJson json: JSON!)",
                      "fetchArrayOfCustomTypePropertyFromMap": "\t\t<!VarName!> = <!VarType!>()\n\t\tlet <!VarName!>Array = json[\"<!JsonKeyName!>\"].arrayValue\n\t\tfor <!VarName!>Json in <!VarName!>Array{\n\t\t\tlet value = <!ElementType!>(fromJson: <!VarName!>Json)\n\t\t\t<!VarName!>.append(value)\n\t\t}\n",
                      "comment": "\t/**\n\t * Instantiate the instance using the passed json values to set the properties values\n\t */\n",
-                     "fetchCustomTypePropertyFromMap": "\t\tlet <!VarName!>Json = json[\"<!JsonKeyName!>\"]\n\t\tif <!VarName!>Json != JSON.nullJSON{\n\t\t\t<!VarName!> = <!VarType!>(fromJson: <!VarName!>Json)\n\t\t}\n"
+                     "fetchCustomTypePropertyFromMap": "\t\tlet <!VarName!>Json = json[\"<!JsonKeyName!>\"]\n\t\tif !<!VarName!>Json.isEmpty{\n\t\t\t<!VarName!> = <!VarType!>(fromJson: <!VarName!>Json)\n\t\t}\n"
                      }
                      ],
     "modelDefinition": "\nclass <!ModelName!>",
@@ -151,6 +151,6 @@
     "instanceVarDefinition": "\tvar <!VarName!> : <!VarType!>!\n",
     "supportsFirstLineStatement": "false",
     "modelEnd": "\n}",
-    "staticImports": "import Foundation",
+    "staticImports": "import Foundation \nimport SwiftyJSON",
     "langName": "Swift"
 }
