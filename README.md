@@ -42,7 +42,7 @@ Screenshot shows JSONExport used for a snippet from Twitter timeline JSON and co
 
 Installation
 ========================
-Kindly clone the project, and build it using xCode 6.1+ on any Mac OS X 10.10 or above.
+Kindly clone the project, and build it using xCode 8 and above.
 
 To Do
 ========================
@@ -50,7 +50,7 @@ To Do
 * ~~Sync multible classes with the same name or have the same exact properties~~ Done
 * ~~Support to parse JSON arrays of objects~~ Done
 * Load JSON data from web
-* Open .json files with JSONExport
+* ~~Open .json files from JSONExport~~
 * Supported languages management editor.
 * Beside raw JSON, load the model raw data from plist files as well.
 
