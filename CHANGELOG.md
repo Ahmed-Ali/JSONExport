@@ -1,3 +1,6 @@
+* Version 1.0.6
+	- Merged PR #69 to fix some issues with SwiftyJSON generated files
+	- Merged PR #59 to auto fill the root class name from the imported JSON file.	
 * Version 1.0.5
 	- Merged pull request #58 to update ObjectMapper generated files to for Swift 3	
 * Version 1.0.4
