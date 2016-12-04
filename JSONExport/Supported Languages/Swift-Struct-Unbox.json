@@ -91,11 +91,11 @@
                      "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "",
                      "bodyStart": "{\n",
                      "bodyEnd": "\t}\n",
-                     "fetchBasicTypePropertyFromMap": "\t\t<!VarName!> = unboxer.unbox(\"<!JsonKeyName!>\")\n",
-                     "signature": "\tinit(unboxer: Unboxer)",
-                     "fetchArrayOfCustomTypePropertyFromMap": "\t\t<!VarName!> = unboxer.unbox(\"<!JsonKeyName!>\")\n",
+                     "fetchBasicTypePropertyFromMap": "\t\t<!VarName!> = try unboxer.unbox(key: \"<!JsonKeyName!>\")\n",
+                     "signature": "\tinit(unboxer: Unboxer) throws ",
+                     "fetchArrayOfCustomTypePropertyFromMap": "\t\t<!VarName!> = try unboxer.unbox(key: \"<!JsonKeyName!>\")\n",
                      "comment": "",
-                     "fetchCustomTypePropertyFromMap": "\t\t<!VarName!> = unboxer.unbox(\"<!JsonKeyName!>\")\n"
+                     "fetchCustomTypePropertyFromMap": "\t\t<!VarName!> = try unboxer.unbox(key: \"<!JsonKeyName!>\")\n"
                      }
                      ],
     "modelDefinition": "\nstruct <!ModelName!>: Unboxable ",
