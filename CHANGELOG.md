@@ -1,3 +1,9 @@
+* Version 1.0.7
+	- Merged PR #70 to update unbox JSON file for Swift 3
+	- Fixed issue #71 by disabiliing the handling of smart quotes and also fixing the source of this issue in the JSON inpute text view.
+	- Removed SBJson dependency.
+
+
 * Version 1.0.6
 	- Merged PR #69 to fix some issues with SwiftyJSON generated files
 	- Merged PR #59 to auto fill the root class name from the imported JSON file.	
