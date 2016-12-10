@@ -71,7 +71,6 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     //Connected to the languages pop up
     @IBOutlet weak var languagesPopup: NSPopUpButton!
 
-    var jsonWriter: SBJson4Writer?
     
     //Holds the currently selected language
     var selectedLang : LangModel!
@@ -94,7 +93,6 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         sourceText.isAutomaticQuoteSubstitutionEnabled = false
         loadSupportedLanguages()
         setupNumberedTextView()
-        initSBJsonWriter()
         setLanguagesSelection()
         updateUIFieldsForSelectedLanguage()
     }
@@ -165,28 +163,15 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         
     }
 
-    // MARK: - Init the SBJsonWriter
-    func initSBJsonWriter()
-    {
-        jsonWriter = SBJson4Writer()
-        jsonWriter!.humanReadable = true
-        jsonWriter!.sortKeys = true
-    }
+    
     
     
     // MARK: - parse the json file
     func parseJSONData(jsonData: Data!)
     {
-        let parser : SBJson4Parser = SBJson4Parser.parser({ (object, ignored) in
-            let data = self.jsonWriter!.data(with: object)
-            let output = String(data: data!, encoding: String.Encoding.utf8)
-            self.sourceText.string = output
-            self.generateClasses()
-            }, allowMultiRoot: false, unwrapRootArray: false) { errorBlock in
-//                self.showError(errorBlock)
-        } as! SBJson4Parser
+        let jsonString = String(data: jsonData, encoding: .utf8)
         
-        parser.parse(jsonData)
+        sourceText.string = jsonString
     }
     
     //MARK: - Handlind events

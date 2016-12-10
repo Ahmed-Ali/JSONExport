@@ -7,14 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		000552711D700D0100E48A0B /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0005525D1D700D0100E48A0B /* LICENSE */; };
-		000552731D700D0100E48A0B /* SBJson4Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 000552641D700D0100E48A0B /* SBJson4Parser.m */; };
-		000552741D700D0100E48A0B /* SBJson4StreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 000552661D700D0100E48A0B /* SBJson4StreamParser.m */; };
-		000552751D700D0100E48A0B /* SBJson4StreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 000552681D700D0100E48A0B /* SBJson4StreamParserState.m */; };
-		000552761D700D0100E48A0B /* SBJson4StreamTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005526A1D700D0100E48A0B /* SBJson4StreamTokeniser.m */; };
-		000552771D700D0100E48A0B /* SBJson4StreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005526C1D700D0100E48A0B /* SBJson4StreamWriter.m */; };
-		000552781D700D0100E48A0B /* SBJson4StreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005526E1D700D0100E48A0B /* SBJson4StreamWriterState.m */; };
-		000552791D700D0100E48A0B /* SBJson4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 000552701D700D0100E48A0B /* SBJson4Writer.m */; };
 		166AF5CE1CEF6C3600516EDD /* Swift-Struct-Gloss.json in Resources */ = {isa = PBXBuildFile; fileRef = 166AF5CD1CEF6C3600516EDD /* Swift-Struct-Gloss.json */; };
 		608896441CF278440074CB80 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608896431CF278440074CB80 /* Author.swift */; };
 		60FB8FF01B9B361600290979 /* Java-Android Realm.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FE61B9B361600290979 /* Java-Android Realm.json */; };
@@ -53,23 +45,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0005525D1D700D0100E48A0B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		0005525E1D700D0100E48A0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		000552621D700D0100E48A0B /* SBJson4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4.h; sourceTree = "<group>"; };
-		000552631D700D0100E48A0B /* SBJson4Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Parser.h; sourceTree = "<group>"; };
-		000552641D700D0100E48A0B /* SBJson4Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4Parser.m; sourceTree = "<group>"; };
-		000552651D700D0100E48A0B /* SBJson4StreamParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamParser.h; sourceTree = "<group>"; };
-		000552661D700D0100E48A0B /* SBJson4StreamParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamParser.m; sourceTree = "<group>"; };
-		000552671D700D0100E48A0B /* SBJson4StreamParserState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamParserState.h; sourceTree = "<group>"; };
-		000552681D700D0100E48A0B /* SBJson4StreamParserState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamParserState.m; sourceTree = "<group>"; };
-		000552691D700D0100E48A0B /* SBJson4StreamTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamTokeniser.h; sourceTree = "<group>"; };
-		0005526A1D700D0100E48A0B /* SBJson4StreamTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamTokeniser.m; sourceTree = "<group>"; };
-		0005526B1D700D0100E48A0B /* SBJson4StreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamWriter.h; sourceTree = "<group>"; };
-		0005526C1D700D0100E48A0B /* SBJson4StreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamWriter.m; sourceTree = "<group>"; };
-		0005526D1D700D0100E48A0B /* SBJson4StreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamWriterState.h; sourceTree = "<group>"; };
-		0005526E1D700D0100E48A0B /* SBJson4StreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamWriterState.m; sourceTree = "<group>"; };
-		0005526F1D700D0100E48A0B /* SBJson4Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Writer.h; sourceTree = "<group>"; };
-		000552701D700D0100E48A0B /* SBJson4Writer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4Writer.m; sourceTree = "<group>"; };
 		166AF5CD1CEF6C3600516EDD /* Swift-Struct-Gloss.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-Struct-Gloss.json"; path = "Supported Languages/Swift-Struct-Gloss.json"; sourceTree = "<group>"; };
 		608896431CF278440074CB80 /* Author.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		60FB8FE61B9B361600290979 /* Java-Android Realm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Java-Android Realm.json"; path = "Supported Languages/Java-Android Realm.json"; sourceTree = "<group>"; };
@@ -123,54 +98,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0005525C1D700D0100E48A0B /* SBJson */ = {
-			isa = PBXGroup;
-			children = (
-				0005525D1D700D0100E48A0B /* LICENSE */,
-				0005525E1D700D0100E48A0B /* README.md */,
-				0005525F1D700D0100E48A0B /* src */,
-			);
-			path = SBJson;
-			sourceTree = "<group>";
-		};
-		0005525F1D700D0100E48A0B /* src */ = {
-			isa = PBXGroup;
-			children = (
-				000552601D700D0100E48A0B /* main */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		000552601D700D0100E48A0B /* main */ = {
-			isa = PBXGroup;
-			children = (
-				000552611D700D0100E48A0B /* objc */,
-			);
-			path = main;
-			sourceTree = "<group>";
-		};
-		000552611D700D0100E48A0B /* objc */ = {
-			isa = PBXGroup;
-			children = (
-				000552621D700D0100E48A0B /* SBJson4.h */,
-				000552631D700D0100E48A0B /* SBJson4Parser.h */,
-				000552641D700D0100E48A0B /* SBJson4Parser.m */,
-				000552651D700D0100E48A0B /* SBJson4StreamParser.h */,
-				000552661D700D0100E48A0B /* SBJson4StreamParser.m */,
-				000552671D700D0100E48A0B /* SBJson4StreamParserState.h */,
-				000552681D700D0100E48A0B /* SBJson4StreamParserState.m */,
-				000552691D700D0100E48A0B /* SBJson4StreamTokeniser.h */,
-				0005526A1D700D0100E48A0B /* SBJson4StreamTokeniser.m */,
-				0005526B1D700D0100E48A0B /* SBJson4StreamWriter.h */,
-				0005526C1D700D0100E48A0B /* SBJson4StreamWriter.m */,
-				0005526D1D700D0100E48A0B /* SBJson4StreamWriterState.h */,
-				0005526E1D700D0100E48A0B /* SBJson4StreamWriterState.m */,
-				0005526F1D700D0100E48A0B /* SBJson4Writer.h */,
-				000552701D700D0100E48A0B /* SBJson4Writer.m */,
-			);
-			path = objc;
-			sourceTree = "<group>";
-		};
 		E20A0DA41A117096003B3D62 /* File content generators */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,7 +123,6 @@
 		E20A0DA61A1170C3003B3D62 /* Third party libraries */ = {
 			isa = PBXGroup;
 			children = (
-				0005525C1D700D0100E48A0B /* SBJson */,
 				E20A0DA71A1170E0003B3D62 /* Noodle Line Number */,
 			);
 			name = "Third party libraries";
@@ -364,7 +290,6 @@
 				60FB8FF31B9B361600290979 /* ObjectiveC-iOS.json in Resources */,
 				60FB8FFC1B9B3F6400290979 /* ObjectiveC-Realm.json in Resources */,
 				60FB8FF11B9B361600290979 /* Java-Android.json in Resources */,
-				000552711D700D0100E48A0B /* LICENSE in Resources */,
 				60FB8FF81B9B361600290979 /* Swift-Struct.json in Resources */,
 				E2FA87BF1A059AC100648EB6 /* Images.xcassets in Resources */,
 				98978FC11D5B6B19000C1846 /* Swift-Struct-Unbox.json in Resources */,
@@ -390,27 +315,20 @@
 				E22BA2C51A162B54005CE143 /* FileContentBuilder.swift in Sources */,
 				E286D00B1A226ADE001AEF0D /* SharedUtilityMethods.swift in Sources */,
 				E2FA87D81A05C16300648EB6 /* FileRepresenter.swift in Sources */,
-				000552751D700D0100E48A0B /* SBJson4StreamParserState.m in Sources */,
 				E21292581A0C58CF0015027D /* SharedConstants.swift in Sources */,
 				E2197C5D1A0EAEB900549D03 /* StringExtension.swift in Sources */,
 				E2FA87BD1A059AC100648EB6 /* ViewController.swift in Sources */,
 				E28631541A158CFA0041B178 /* LangModel.swift in Sources */,
-				000552761D700D0100E48A0B /* SBJson4StreamTokeniser.m in Sources */,
 				E28631551A158CFA0041B178 /* UtilityMethod.swift in Sources */,
-				000552781D700D0100E48A0B /* SBJson4StreamWriterState.m in Sources */,
 				E2FA87BB1A059AC100648EB6 /* AppDelegate.swift in Sources */,
 				E20A0DAE1A1170F1003B3D62 /* NoodleLineNumberView.m in Sources */,
-				000552791D700D0100E48A0B /* SBJson4Writer.m in Sources */,
 				E2FA87DA1A05C1BE00648EB6 /* Property.swift in Sources */,
 				608896441CF278440074CB80 /* Author.swift in Sources */,
 				E230BA2C1A113F8C00AE2054 /* FilePreviewCell.swift in Sources */,
 				E28631531A158CFA0041B178 /* DataType.swift in Sources */,
 				E278F9C61A2149AC00306EFC /* HeaderFileData.swift in Sources */,
 				E278F9CA1A2152D800306EFC /* HeaderFileRepresenter.swift in Sources */,
-				000552771D700D0100E48A0B /* SBJson4StreamWriter.m in Sources */,
-				000552731D700D0100E48A0B /* SBJson4Parser.m in Sources */,
 				E20A0DAD1A1170F1003B3D62 /* NoodleLineNumberMarker.m in Sources */,
-				000552741D700D0100E48A0B /* SBJson4StreamParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
