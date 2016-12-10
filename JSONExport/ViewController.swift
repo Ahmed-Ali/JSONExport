@@ -91,6 +91,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     override func viewDidLoad() {
         super.viewDidLoad()
         saveButton.isEnabled = false
+        sourceText.isAutomaticQuoteSubstitutionEnabled = false
         loadSupportedLanguages()
         setupNumberedTextView()
         initSBJsonWriter()
@@ -400,7 +401,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         sourceText.isEditable = false
         //Do the lengthy process in background, it takes time with more complicated JSONs
         runOnBackground {
-            str = jsonStringByRemovingUnwantedCharacters(str)
+            str = stringByRemovingControlCharacters(str)
             if let data = str.data(using: String.Encoding.utf8){
                 var error : NSError?
                 do {
@@ -431,7 +432,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                         self.sourceText.isEditable = true
                         self.saveButton.isEnabled = false
                         if error != nil{
-                            print(error)
+                            print(error!)
                         }
                         self.showErrorStatus("It seems your JSON object is not valid!")
                     })

@@ -155,20 +155,7 @@ func unionDictionaryFromArrayElements(_ array: NSArray) -> NSDictionary
 }
 
 
-/**
-Cleans up the passed string from any characters that can make it invalid JSON string.
 
-- parameter jsonStr: the JSON string to be cleaned up
-- returns: a clean version of the passed string
-*/
-
-func jsonStringByRemovingUnwantedCharacters(_ jsonString: String) -> String
-{
-    var str = jsonString;
-    str = str.replacingOccurrences(of: "“", with: "\"")
-    str = str.replacingOccurrences(of: "”", with: "\"")
-    return stringByRemovingControlCharacters(str)
-}
 
 /**
 Cleans up the passed string from any control characters.
