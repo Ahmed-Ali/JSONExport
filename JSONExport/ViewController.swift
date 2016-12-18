@@ -94,6 +94,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         loadSupportedLanguages()
         setupNumberedTextView()
         setLanguagesSelection()
+        loadLastSelectedLanguage()
         updateUIFieldsForSelectedLanguage()
     }
     
@@ -142,6 +143,19 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         }
     }
     
+    /**
+    Loads last selected language by user
+     */
+    func loadLastSelectedLanguage()
+    {
+        guard let lastSelectedLanguage = UserDefaults.standard.value(forKey: "selectedLanguage") as? String else{
+            return
+        }
+        
+        if langs[lastSelectedLanguage] != nil{
+            languagesPopup.selectItem(withTitle: lastSelectedLanguage)
+        }
+    }
     
     
     //MARK: - Handling pre defined languages
@@ -229,7 +243,8 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     @IBAction func selectedLanguageChanged(_ sender: AnyObject)
     {
         updateUIFieldsForSelectedLanguage()
-        generateClasses();
+        generateClasses()
+        UserDefaults.standard.set(selectedLanguageName, forKey: "selectedLanguage")
     }
     
     
