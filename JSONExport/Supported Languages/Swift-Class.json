@@ -77,7 +77,7 @@
                        "bodyEnd": "\n\t}\n",
                        "signature": "    @objc required init(coder aDecoder: NSCoder)",
                        "forEachCustomTypeProperty": "         <!VarName!> = aDecoder.decodeObject(forKey: \"<!JsonKeyName!>\") as? <!VarType!>\n",
-                       "forEachArrayOfCustomTypeProperty": "         <!VarName!> = aDecoder.decodeObject(forKey: \"<!JsonKeyName!>\") as? <!VarType!>\n",
+                       "forEachArrayOfCustomTypeProperty": "         <!VarName!> = aDecoder.decodeObject(forKey :\"<!JsonKeyName!>\") as? <!VarType!>\n",
                        "returnStatement": "",
                        "body": "",
                        "comment": "\n    /**\n    * NSCoding required initializer.\n    * Fills the data from the passed decoder\n    */\n",
@@ -86,7 +86,7 @@
                        {
                        "forEachProperty": "\t\tif <!VarName!> != nil{\n\t\t\taCoder.encode(<!VarName!>, forKey: \"<!JsonKeyName!>\")\n\t\t}\n",
                        "bodyEnd": "\n\t}\n",
-                       "signature": "    func encode(with aCoder: NSCoder)",
+                       "signature": "    @objc func encode(with aCoder: NSCoder)",
                        "forEachCustomTypeProperty": "\t\tif <!VarName!> != nil{\n\t\t\taCoder.encode(<!VarName!>, forKey: \"<!JsonKeyName!>\")\n\t\t}\n",
                        "forEachArrayOfCustomTypeProperty": "\t\tif <!VarName!> != nil{\n\t\t\taCoder.encode(<!VarName!>, forKey: \"<!JsonKeyName!>\")\n\t\t}\n",
                        "returnStatement": "",
