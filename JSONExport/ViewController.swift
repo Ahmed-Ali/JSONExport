@@ -70,14 +70,14 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     //Connected to the languages pop up
     @IBOutlet weak var languagesPopup: NSPopUpButton!
-
+    
     
     //Holds the currently selected language
     var selectedLang : LangModel!
     
     //Returns the title of the selected language in the languagesPopup
     var selectedLanguageName : String
-        {
+    {
         return languagesPopup.titleOfSelectedItem!
     }
     
@@ -99,8 +99,8 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     }
     
     /**
-    Sets the values of languagesPopup items' titles
-    */
+     Sets the values of languagesPopup items' titles
+     */
     func setLanguagesSelection()
     {
         let langNames = Array(langs.keys).sorted()
@@ -110,8 +110,8 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     }
     
     /**
-    Sets the needed configurations for show the line numbers in the input text view
-    */
+     Sets the needed configurations for show the line numbers in the input text view
+     */
     func setupNumberedTextView()
     {
         let lineNumberView = NoodleLineNumberView(scrollView: scrollView)
@@ -124,8 +124,8 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     }
     
     /**
-    Updates the visible fields according to the selected language
-    */
+     Updates the visible fields according to the selected language
+     */
     func updateUIFieldsForSelectedLanguage()
     {
         loadSelectedLanguageModel()
@@ -144,7 +144,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     }
     
     /**
-    Loads last selected language by user
+     Loads last selected language by user
      */
     func loadLastSelectedLanguage()
     {
@@ -176,7 +176,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         }
         
     }
-
+    
     
     
     
@@ -270,7 +270,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     //MARK: - NSUserNotificationCenterDelegate
     func userNotificationCenter(_ center: NSUserNotificationCenter,
-        shouldPresent notification: NSUserNotification) -> Bool
+                                shouldPresent notification: NSUserNotification) -> Bool
     {
         return true
     }
@@ -295,13 +295,13 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
             }
         })
     }
-
+    
     
     /**
-    Saves all the generated files in the specified path
-    
-    - parameter path: in which to save the files
-    */
+     Saves all the generated files in the specified path
+     
+     - parameter path: in which to save the files
+     */
     func saveToPath(_ path : String)
     {
         var error : NSError?
@@ -331,23 +331,23 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     //MARK: - Messages
     /**
-    Shows the top right notification. Call it after saving the files successfully
-    */
+     Shows the top right notification. Call it after saving the files successfully
+     */
     func showDoneSuccessfully()
     {
         let notification = NSUserNotification()
         notification.title = "Success!"
         notification.informativeText = "Your \(selectedLang.langName) model files have been generated successfully."
         notification.deliveryDate = Date()
-
+        
         let center = NSUserNotificationCenter.default
         center.delegate = self
         center.deliver(notification)
     }
     
     /**
-    Shows an NSAlert for the passed error
-    */
+     Shows an NSAlert for the passed error
+     */
     func showError(_ error: NSError!)
     {
         if error == nil{
@@ -358,18 +358,18 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     }
     
     /**
-    Shows the passed error status message
-    */
+     Shows the passed error status message
+     */
     func showErrorStatus(_ errorMessage: String)
     {
-
+        
         statusTextField.textColor = NSColor.red
         statusTextField.stringValue = errorMessage
     }
     
     /**
-    Shows the passed success status message
-    */
+     Shows the passed success status message
+     */
     func showSuccessStatus(_ successMessage: String)
     {
         
@@ -381,17 +381,19 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     //MARK: - Generate files content
     /**
-    Validates the sourceText string input, and takes any needed action to generate the model classes and view them in the preview panel
-    */
+     Validates the sourceText string input, and takes any needed action to generate the model classes and view them in the preview panel
+     */
     func generateClasses()
     {
         saveButton.isEnabled = false
         var str = sourceText.string!
         
         if str.characters.count == 0{
-            //Nothing to do, just clear any generated files
-            files.removeAll(keepingCapacity: false)
-            tableView.reloadData()
+            runOnUiThread{
+                //Nothing to do, just clear any generated files
+                self.files.removeAll(keepingCapacity: false)
+                self.tableView.reloadData()
+            }
             return;
         }
         var rootClassName = classNameField.stringValue
@@ -415,16 +417,17 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                     }
                     self.loadSelectedLanguageModel()
                     self.files.removeAll(keepingCapacity: false)
-                    let fileGenerator = self.prepareAndGetFilesBuilder()
-                    fileGenerator.addFileWithName(&rootClassName, jsonObject: json, files: &self.files)
-                    fileGenerator.fixReferenceMismatches(inFiles: self.files)
-                    self.files = Array(self.files.reversed())
                     runOnUiThread{
+                        let fileGenerator = self.prepareAndGetFilesBuilder()
+                        fileGenerator.addFileWithName(&rootClassName, jsonObject: json, files: &self.files)
+                        fileGenerator.fixReferenceMismatches(inFiles: self.files)
+                        self.files = Array(self.files.reversed())
                         self.sourceText.isEditable = true
                         self.showSuccessStatus("Valid JSON structure")
                         self.saveButton.isEnabled = true
                         
                         self.tableView.reloadData()
+                        self.tableView.layout()
                     }
                 } catch let error1 as NSError {
                     error = error1
@@ -445,10 +448,10 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     }
     
     /**
-    Creates and returns an instance of FilesContentBuilder. It also configure the values from the UI components to the instance. I.e includeConstructors
-    
-    - returns: instance of configured FilesContentBuilder
-    */
+     Creates and returns an instance of FilesContentBuilder. It also configure the values from the UI components to the instance. I.e includeConstructors
+     
+     - returns: instance of configured FilesContentBuilder
+     */
     func prepareAndGetFilesBuilder() -> FilesContentBuilder
     {
         let filesBuilder = FilesContentBuilder.instance
@@ -480,8 +483,8 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         
         return cell
     }
-   
-
+    
+    
     
 }
 
