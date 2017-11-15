@@ -55,7 +55,7 @@ To Do
 * Beside raw JSON, load the model raw data from plist files as well.
 
 
-Known Limitions:
+Known Limitations:
 ========================
 * When exporting to subclasses of NSManagedObject, some data types can not be exported. For example core data does not have data type for "array of strings"; in turn, if your JSON contains an array of strings, the exported file will not compile without you fixing the type mismatch.
 * When exporting subclasses of RLMObject, you will have to enter the default values of premitive types manually. This is because of dynamic properties limition that prevents you from having an optional premitive type.
