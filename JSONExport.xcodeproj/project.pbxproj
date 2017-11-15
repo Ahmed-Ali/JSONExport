@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01ACC24B1FBB42E300C410C2 /* Swift-Codable.json in Resources */ = {isa = PBXBuildFile; fileRef = 01ACC24A1FBB42E300C410C2 /* Swift-Codable.json */; };
 		166AF5CE1CEF6C3600516EDD /* Swift-Struct-Gloss.json in Resources */ = {isa = PBXBuildFile; fileRef = 166AF5CD1CEF6C3600516EDD /* Swift-Struct-Gloss.json */; };
 		608896441CF278440074CB80 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608896431CF278440074CB80 /* Author.swift */; };
 		60FB8FF01B9B361600290979 /* Java-Android Realm.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FE61B9B361600290979 /* Java-Android Realm.json */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01ACC24A1FBB42E300C410C2 /* Swift-Codable.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-Codable.json"; path = "Supported Languages/Swift-Codable.json"; sourceTree = "<group>"; };
 		166AF5CD1CEF6C3600516EDD /* Swift-Struct-Gloss.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-Struct-Gloss.json"; path = "Supported Languages/Swift-Struct-Gloss.json"; sourceTree = "<group>"; };
 		608896431CF278440074CB80 /* Author.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		60FB8FE61B9B361600290979 /* Java-Android Realm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Java-Android Realm.json"; path = "Supported Languages/Java-Android Realm.json"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				60FB8FED1B9B361600290979 /* Swift-Mappable.json */,
 				60FB8FEE1B9B361600290979 /* Swift-Struct.json */,
 				98978FC01D5B6B19000C1846 /* Swift-Struct-Unbox.json */,
+				01ACC24A1FBB42E300C410C2 /* Swift-Codable.json */,
 				60FB8FEF1B9B361600290979 /* SwiftyJSON-Class.json */,
 			);
 			name = "Supported Languages";
@@ -284,6 +287,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01ACC24B1FBB42E300C410C2 /* Swift-Codable.json in Resources */,
 				60FB8FF51B9B361600290979 /* Swift-Class.json in Resources */,
 				60FB8FF01B9B361600290979 /* Java-Android Realm.json in Resources */,
 				A329A7ED1D5DA1ED00FB59E8 /* Java-Android Gson.json in Resources */,
