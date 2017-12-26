@@ -388,7 +388,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         saveButton.isEnabled = false
         var str = sourceText.string!
         
-        if str.characters.count == 0{
+        if str.count == 0{
             runOnUiThread{
                 //Nothing to do, just clear any generated files
                 self.files.removeAll(keepingCapacity: false)
@@ -397,7 +397,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
             return;
         }
         var rootClassName = classNameField.stringValue
-        if rootClassName.characters.count == 0{
+        if rootClassName.count == 0{
             rootClassName = "RootClass"
         }
         sourceText.isEditable = false
