@@ -5,3 +5,34 @@ JSONExport.xcodeproj/xcuserdata/ahmed.xcuserdatad/xcdebugger/Breakpoints_v2.xcbk
 JSONExport.xcodeproj/project.xcworkspace/xcuserdata/ahmedali.xcuserdatad/UserInterfaceState.xcuserstate
 JSONExport.xcodeproj/xcuserdata/ahmedali.xcuserdatad/xcschemes/JSONExport.xcscheme
 JSONExport.xcodeproj/xcuserdata/ahmedali.xcuserdatad/xcschemes/xcschememanagement.plist
+
+
+# OS X Finder
+.DS_Store
+.LSOverride
+
+# Xcode per-user config
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+#*.xcworkspace
+xcuserdata
+
+
+# Build products
+build/
+*.o
+*.LinkFileList
+*.hmap
+
+# Automatic backup files
+*~.nib/
+*.swp
+*~
+*.dat
+*.dep
+
+Breakpoints.xcbkptlist
