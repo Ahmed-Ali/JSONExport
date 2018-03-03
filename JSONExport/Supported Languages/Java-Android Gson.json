@@ -36,8 +36,8 @@
                                             "String"
                                             ],
     "basicTypesWithSpecialFetchingNeedsReplacements" : [
-                                                        
-                                                        "",""
+                                                        "",
+                                                        "String"
                                                         ],
     "constructors": [
                      {
