@@ -101,7 +101,7 @@ class FileRepresenter{
         appendCustomImports()
         //start the model defination
         var definition = ""
-        if lang.modelDefinitionWithParent != nil && parentClassName.characters.count > 0{
+        if lang.modelDefinitionWithParent != nil && parentClassName.count > 0{
             definition = lang.modelDefinitionWithParent.replacingOccurrences(of: modelName, with: className)
             definition = definition.replacingOccurrences(of: modelWithParentClassName, with: parentClassName)
         }else if includeUtilities && lang.defaultParentWithUtilityMethods != nil{
@@ -129,7 +129,7 @@ class FileRepresenter{
     */
     func appendFirstLineStatement()
     {
-        if lang.supportsFirstLineStatement != nil && lang.supportsFirstLineStatement! && firstLine.characters.count > 0{
+        if lang.supportsFirstLineStatement != nil && lang.supportsFirstLineStatement! && firstLine.count > 0{
             fileContent += "\(firstLine)\n\n"
         }
     }
@@ -419,7 +419,7 @@ class FileRepresenter{
             type = type.replacingOccurrences(of: arrayWord, with: "")
         }
         
-        if type.characters.count == 0{
+        if type.count == 0{
             type = typeNameForArrayElements(property.sampleValue as! NSArray, lang: lang)
         }
         return type
