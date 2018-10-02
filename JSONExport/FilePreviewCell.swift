@@ -35,14 +35,14 @@ class FilePreviewCell: NSTableCellView, NSTextViewDelegate {
                     }
                     
                     if self.file.includeConstructors{
-                        self.constructors.state = NSOnState
+                        self.constructors.state = NSControl.StateValue.on
                     }else{
-                        self.constructors.state = NSOffState
+                        self.constructors.state = NSControl.StateValue.off
                     }
                     if self.file.includeUtilities{
-                        self.utilities.state = NSOnState
+                        self.utilities.state = NSControl.StateValue.on
                     }else{
-                        self.utilities.state = NSOffState
+                        self.utilities.state = NSControl.StateValue.off
                     }
                 }
             }else{
@@ -70,14 +70,14 @@ class FilePreviewCell: NSTableCellView, NSTextViewDelegate {
         scrollView.hasVerticalRuler = true
         scrollView.verticalRulerView = lineNumberView
         scrollView.rulersVisible = true
-        textView.font = NSFont.userFixedPitchFont(ofSize: NSFont.smallSystemFontSize())
+        textView.font = NSFont.userFixedPitchFont(ofSize: NSFont.smallSystemFontSize)
         
     }
     
     @IBAction func toggleConstructors(_ sender: NSButtonCell)
     {
         if file != nil{
-            file.includeConstructors = (sender.state == NSOnState)
+            file.includeConstructors = (sender.state == NSControl.StateValue.off)
             textView.string = file.toString()
             
         }
@@ -86,14 +86,12 @@ class FilePreviewCell: NSTableCellView, NSTextViewDelegate {
     @IBAction func toggleUtilityMethods(_ sender: NSButtonCell)
     {
         if file != nil{
-            file.includeUtilities = (sender.state == NSOnState)
+            file.includeUtilities = (sender.state == NSControl.StateValue.on)
             textView.string = file.toString()
         }
     }
     
     func textDidChange(_ notification: Notification) {
-        file.fileContent = textView.string ?? file.fileContent
+		file.fileContent = textView.string
     }
-    
-    
 }
