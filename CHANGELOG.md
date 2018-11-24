@@ -6,6 +6,7 @@
 - Merged PR #108 : Java Gson for Android: Fix method name. Thanks @ty0521-fss
 - Merged PR #119 : Suuport for Outlaw. Thanks @LifetimeCode
 - Merged PR #123 : Update to Swift 4.2. Thanks @BrychanOdlum
+- Fixed an issue with trying to figure the selected language from an UI element outside the UI thread
 
 
 * Version 1.0.9

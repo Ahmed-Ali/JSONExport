@@ -171,15 +171,10 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                     }
                     langs[lang.displayLangName] = lang
                 }
-                
-                
             }
         }
-        
     }
-    
-    
-    
+
     
     // MARK: - parse the json file
     func parseJSONData(jsonData: Data!)
