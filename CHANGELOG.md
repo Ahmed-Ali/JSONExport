@@ -1,5 +1,6 @@
 * Version 1.1.0
-- Merged PR #98 : fix a complier error in SwiftyJSON - Class. Thanks to @superk589
+- Merged PR #98 : fix a complier error in SwiftyJSON - Class. Thanks @superk589
+- Merged PR #99 : Migrate to Swift 4. Thanks @serhii-londar
 
 
 * Version 1.0.9
