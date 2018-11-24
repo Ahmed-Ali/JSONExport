@@ -12,6 +12,7 @@ class LangModel{
 	var arrayType : String!
 	var basicTypesWithSpecialFetchingNeeds : [String]!
     var basicTypesWithSpecialFetchingNeedsReplacements : [String]!
+    var basicTypesWithSpecialFetchingNeedsTypeCast : [String]!
     var basicTypesWithSpecialStoringNeeds : [String]!
 	var booleanGetter : String!
     var briefDescription : String!
@@ -50,6 +51,7 @@ class LangModel{
 		arrayType = dictionary["arrayType"] as? String
 		basicTypesWithSpecialFetchingNeeds = dictionary["basicTypesWithSpecialFetchingNeeds"] as? [String]
         basicTypesWithSpecialFetchingNeedsReplacements = dictionary["basicTypesWithSpecialFetchingNeedsReplacements"] as? [String]
+        basicTypesWithSpecialFetchingNeedsTypeCast = dictionary["basicTypesWithSpecialFetchingNeedsTypeCast"] as? [String]
         basicTypesWithSpecialStoringNeeds = dictionary["basicTypesWithSpecialStoringNeeds"] as? [String]
 		booleanGetter = dictionary["booleanGetter"] as? String
         briefDescription = dictionary["briefDescription"] as? String
