@@ -40,20 +40,21 @@ extension String{
     func toSingular() -> String
     {
         var singular = self
-        let length = self.characters.count
-        if length > 3{
-            let range = Range(characters.index(endIndex, offsetBy: -3) ..< endIndex)
+        let length = self.count
+        if length > 3 {
+			let range = self.index(self.endIndex, offsetBy: -3)..<self.endIndex
             
-            let lastThreeChars = self.substring(with: range)
+            let lastThreeChars = self[range]
             if lastThreeChars == "ies" {
                 singular = self.replacingOccurrences(of: lastThreeChars, with: "y", options: [], range: range)
                 return singular
             }
                 
         }
-        if length > 2{
-            let range = Range(characters.index(endIndex, offsetBy: -1) ..< endIndex)
-            let lastChar = self.substring(with: range)
+        if length > 2 {
+			let range = self.index(self.endIndex, offsetBy: -1)..<self.endIndex
+			
+            let lastChar = self[range]
             if lastChar == "s" {
                 singular = self.replacingOccurrences(of: lastChar, with: "", options: [], range: range)
                 return singular
@@ -68,9 +69,10 @@ extension String{
     - returns: the converted version
     */
     func lowercaseFirstChar() -> String{
-        if self.characters.count > 0{
-            let range = Range(startIndex ..< characters.index(startIndex, offsetBy: 1))
-            let firstLowerChar = self.substring(with: range).lowercased()
+        if self.count > 0 {
+			let range = self.startIndex..<self.index(self.startIndex, offsetBy: 1)
+			
+            let firstLowerChar = self[range].lowercased()
             
             return self.replacingCharacters(in: range, with: firstLowerChar)
         }else{
@@ -85,9 +87,10 @@ extension String{
     - returns: the converted version
     */
     func uppercaseFirstChar() -> String{
-        if self.characters.count > 0{
-            let range = Range(startIndex ..< characters.index(startIndex, offsetBy: 1))
-            let firstUpperChar = self.substring(with: range).uppercased()
+        if self.count > 0 {
+			let range = startIndex..<self.index(startIndex, offsetBy: 1)
+			
+            let firstUpperChar = self[range].uppercased()
             
             return self.replacingCharacters(in: range, with: firstUpperChar)
         }else{

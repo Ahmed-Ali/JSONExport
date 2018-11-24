@@ -35,14 +35,14 @@ class FilePreviewCell: NSTableCellView, NSTextViewDelegate {
                     }
                     
                     if self.file.includeConstructors{
-                        self.constructors.state =  .on
+                        self.constructors.state = NSControl.StateValue.on
                     }else{
-                        self.constructors.state = .off
+                        self.constructors.state = NSControl.StateValue.off
                     }
                     if self.file.includeUtilities{
-                        self.utilities.state = .on
+                        self.utilities.state = NSControl.StateValue.on
                     }else{
-                        self.utilities.state = .off
+                        self.utilities.state = NSControl.StateValue.off
                     }
                 }
             }else{
@@ -77,7 +77,7 @@ class FilePreviewCell: NSTableCellView, NSTextViewDelegate {
     @IBAction func toggleConstructors(_ sender: NSButtonCell)
     {
         if file != nil{
-            file.includeConstructors = (sender.state == NSControl.StateValue.on)
+            file.includeConstructors = (sender.state == NSControl.StateValue.off)
             textView.string = file.toString()
             
         }
@@ -92,8 +92,6 @@ class FilePreviewCell: NSTableCellView, NSTextViewDelegate {
     }
     
     func textDidChange(_ notification: Notification) {
-        file.fileContent = textView.string 
+		file.fileContent = textView.string
     }
-    
-    
 }
