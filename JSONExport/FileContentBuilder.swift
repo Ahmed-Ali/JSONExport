@@ -338,7 +338,7 @@ class FilesContentBuilder{
         str = str.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         var output = ""
         var makeNextCharUpperCase = startFromFirstChar
-        for char in input.characters{
+        for char in input {
             if char == "_" {
                 makeNextCharUpperCase = true
             }else if makeNextCharUpperCase{
