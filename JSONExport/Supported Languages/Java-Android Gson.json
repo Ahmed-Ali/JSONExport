@@ -33,11 +33,18 @@
                                             ],
     "basicTypesWithSpecialFetchingNeeds" : [
                                             "Object",
-                                            "String"
+                                            "String",
+                                            "float"
                                             ],
     "basicTypesWithSpecialFetchingNeedsReplacements" : [
-                                                        
-                                                        "",""
+                                                        "",
+                                                        "String",
+                                                        "Double"
+                                                        ],
+    "basicTypesWithSpecialFetchingNeedsTypeCast" : [
+                                                        "",
+                                                        "",
+                                                        "float"
                                                         ],
     "constructors": [
                      {
@@ -47,7 +54,7 @@
                      "bodyEnd": "\t}\n",
                      "fetchBasicTypePropertyFromMap": "\t\t<!VarName!> = jsonObject.opt<!CapitalizedVarType!>(\"<!JsonKeyName!>\");\n",
                      "fetchArrayOfBasicTypePropertyFromMap" : "\t\tJSONArray <!VarName!>Tmp = jsonObject.optJSONArray(\"<!JsonKeyName!>\");\n\t\tif(<!VarName!>Tmp != null){\n\t\t\t<!VarName!> = new <!ElementType!>[<!VarName!>Tmp.length()];\n\t\t\tfor(int i = 0; i < <!VarName!>Tmp.length(); i++){\n\t\t\t\t<!VarName!>[i] = <!VarName!>Tmp.get(i);\n\t\t\t}\n\t\t}\n",
-                     "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\t<!VarName!> = jsonObject.opt<!VarBasicTypeReplacement!>(\"<!JsonKeyName!>\");\n",
+                     "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\t<!VarName!> = <!VarBasicTypeCast!>jsonObject.opt<!VarBasicTypeReplacement!>(\"<!JsonKeyName!>\");\n",
                      "fetchCustomTypePropertyFromMap": "\t\t<!VarName!> = new <!VarType!>(jsonObject.optJSONObject(\"<!JsonKeyName!>\"));\n",
                      "fetchArrayOfCustomTypePropertyFromMap": "\t\tJSONArray <!VarName!>JsonArray = jsonObject.optJSONArray(\"<!JsonKeyName!>\");\n\t\tif(<!VarName!>JsonArray != null){\n\t\t\tArrayList<<!ElementType!>> <!VarName!>ArrayList = new ArrayList<>();\n\t\t\tfor (int i = 0; i < <!VarName!>JsonArray.length(); i++) {\n\t\t\t\tJSONObject <!VarName!>Object = <!VarName!>JsonArray.optJSONObject(i);\n\t\t\t\t<!VarName!>ArrayList.add(new <!ElementType!>(<!VarName!>Object));\n\t\t\t}\n\t\t\t<!VarName!> = (<!ElementType!>[]) <!VarName!>ArrayList.toArray();\n\t\t}"
                      }
