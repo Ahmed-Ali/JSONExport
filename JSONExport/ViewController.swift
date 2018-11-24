@@ -119,7 +119,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         scrollView.hasVerticalRuler = true
         scrollView.verticalRulerView = lineNumberView
         scrollView.rulersVisible = true
-        sourceText.font = NSFont.userFixedPitchFont(ofSize: NSFont.smallSystemFontSize())
+        sourceText.font = NSFont.userFixedPitchFont(ofSize: NSFont.smallSystemFontSize)
         
     }
     
@@ -185,7 +185,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     {
         let jsonString = String(data: jsonData, encoding: .utf8)
         
-        sourceText.string = jsonString
+        sourceText.string = jsonString!
     }
     
     //MARK: - Handlind events
@@ -199,8 +199,8 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         oPanel.allowedFileTypes = ["json","JSON"]
         oPanel.prompt = "Choose JSON file"
         
-        oPanel.beginSheetModal(for: self.view.window!, completionHandler: { (button : Int) -> Void in
-            if button == NSFileHandlingPanelOKButton{
+        oPanel.beginSheetModal(for: self.view.window!) { (button) in
+            if button.rawValue == NSFileHandlingPanelOKButton {
                 
                 let jsonPath = oPanel.urls.first!.path
                 let fileHandle = FileHandle(forReadingAtPath: jsonPath)
@@ -209,7 +209,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                 self.parseJSONData(jsonData: (fileHandle!.readDataToEndOfFile() as NSData!) as Data!)
                 
             }
-        }) 
+        }
     }
     
     
@@ -286,14 +286,12 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         openPanel.canChooseDirectories = true
         openPanel.canCreateDirectories = true
         openPanel.prompt = "Choose"
-        openPanel.beginSheetModal(for: self.view.window!, completionHandler: { (button : Int) -> Void in
-            if button == NSFileHandlingPanelOKButton{
-                
+        openPanel.beginSheetModal(for: self.view.window!) { button in
+            if button.rawValue == NSFileHandlingPanelOKButton{
                 self.saveToPath(openPanel.url!.path)
-                
                 self.showDoneSuccessfully()
             }
-        })
+        }
     }
     
     
@@ -386,7 +384,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     func generateClasses()
     {
         saveButton.isEnabled = false
-        var str = sourceText.string!
+        var str = sourceText.string
         
         if str.characters.count == 0{
             runOnUiThread{
@@ -455,8 +453,8 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     func prepareAndGetFilesBuilder() -> FilesContentBuilder
     {
         let filesBuilder = FilesContentBuilder.instance
-        filesBuilder.includeConstructors = (generateConstructors.state == NSOnState)
-        filesBuilder.includeUtilities = (generateUtilityMethods.state == NSOnState)
+        filesBuilder.includeConstructors = (generateConstructors.state == .on)
+        filesBuilder.includeUtilities = (generateUtilityMethods.state == .on)
         filesBuilder.firstLine = firstLineField.stringValue
         filesBuilder.lang = selectedLang!
         filesBuilder.classPrefix = classPrefixField.stringValue
@@ -477,7 +475,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     //MARK: - NSTableViewDelegate
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
     {
-        let cell = tableView.make(withIdentifier: "fileCell", owner: self) as! FilePreviewCell
+        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "fileCell"), owner: self) as! FilePreviewCell
         let file = files[row]
         cell.file = file
         
