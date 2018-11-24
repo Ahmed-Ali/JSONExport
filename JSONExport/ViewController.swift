@@ -159,7 +159,6 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         }
     }
     
-    
     //MARK: - Handling pre defined languages
     func loadSupportedLanguages()
     {
