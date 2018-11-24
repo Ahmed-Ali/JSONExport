@@ -76,8 +76,10 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     var selectedLang : LangModel!
     
     //Returns the title of the selected language in the languagesPopup
+    //Call only from main thread
     var selectedLanguageName : String
     {
+        assert(Thread.isMainThread);
         return languagesPopup.titleOfSelectedItem!
     }
     
@@ -242,7 +244,10 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     {
         updateUIFieldsForSelectedLanguage()
         generateClasses()
-        UserDefaults.standard.set(selectedLanguageName, forKey: "selectedLanguage")
+        DispatchQueue.main.async {
+            UserDefaults.standard.set(self.selectedLanguageName, forKey: "selectedLanguage")
+        }
+        
     }
     
     
@@ -261,8 +266,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     //MARK: - Language selection handling
     func loadSelectedLanguageModel()
     {
-        selectedLang = langs[selectedLanguageName]
-        
+       selectedLang = langs[self.selectedLanguageName]
     }
     
     
@@ -411,9 +415,10 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                     }else{
                         json = unionDictionaryFromArrayElements(jsonData as! NSArray)
                     }
-                    self.loadSelectedLanguageModel()
-                    self.files.removeAll(keepingCapacity: false)
+                    
                     runOnUiThread{
+                        self.loadSelectedLanguageModel()
+                        self.files.removeAll(keepingCapacity: false)
                         let fileGenerator = self.prepareAndGetFilesBuilder()
                         fileGenerator.addFileWithName(&rootClassName, jsonObject: json, files: &self.files)
                         fileGenerator.fixReferenceMismatches(inFiles: self.files)

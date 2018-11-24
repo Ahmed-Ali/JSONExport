@@ -30,6 +30,8 @@
 		E2197C5D1A0EAEB900549D03 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2197C5C1A0EAEB900549D03 /* StringExtension.swift */; };
 		E22BA2C51A162B54005CE143 /* FileContentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22BA2C41A162B54005CE143 /* FileContentBuilder.swift */; };
 		E230BA2C1A113F8C00AE2054 /* FilePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E230BA2B1A113F8C00AE2054 /* FilePreviewCell.swift */; };
+		E24E443221AA12B800435FE7 /* Swift-Outlaw.json in Resources */ = {isa = PBXBuildFile; fileRef = E24E443021AA12B800435FE7 /* Swift-Outlaw.json */; };
+		E24E443321AA12B800435FE7 /* Swift3-Mappable.json in Resources */ = {isa = PBXBuildFile; fileRef = E24E443121AA12B800435FE7 /* Swift3-Mappable.json */; };
 		E278F9C61A2149AC00306EFC /* HeaderFileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E278F9C51A2149AC00306EFC /* HeaderFileData.swift */; };
 		E278F9CA1A2152D800306EFC /* HeaderFileRepresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E278F9C91A2152D800306EFC /* HeaderFileRepresenter.swift */; };
 		E28631521A158CFA0041B178 /* Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286314E1A158CFA0041B178 /* Constructor.swift */; };
@@ -72,6 +74,8 @@
 		E2197C5C1A0EAEB900549D03 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E22BA2C41A162B54005CE143 /* FileContentBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileContentBuilder.swift; sourceTree = "<group>"; };
 		E230BA2B1A113F8C00AE2054 /* FilePreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePreviewCell.swift; sourceTree = "<group>"; };
+		E24E443021AA12B800435FE7 /* Swift-Outlaw.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-Outlaw.json"; path = "Supported Languages/Swift-Outlaw.json"; sourceTree = "<group>"; };
+		E24E443121AA12B800435FE7 /* Swift3-Mappable.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift3-Mappable.json"; path = "Supported Languages/Swift3-Mappable.json"; sourceTree = "<group>"; };
 		E278F9C51A2149AC00306EFC /* HeaderFileData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFileData.swift; sourceTree = "<group>"; };
 		E278F9C91A2152D800306EFC /* HeaderFileRepresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFileRepresenter.swift; sourceTree = "<group>"; };
 		E286314E1A158CFA0041B178 /* Constructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constructor.swift; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 		E2F07E8A1A0B3192004A1DAA /* Supported Languages */ = {
 			isa = PBXGroup;
 			children = (
+				E24E443021AA12B800435FE7 /* Swift-Outlaw.json */,
+				E24E443121AA12B800435FE7 /* Swift3-Mappable.json */,
 				166AF5CD1CEF6C3600516EDD /* Swift-Struct-Gloss.json */,
 				60FB8FFA1B9B3F6400290979 /* ObjectiveC-Realm.json */,
 				A329A7EC1D5DA1ED00FB59E8 /* Java-Android Gson.json */,
@@ -294,6 +300,7 @@
 				60FB8FF31B9B361600290979 /* ObjectiveC-iOS.json in Resources */,
 				60FB8FFC1B9B3F6400290979 /* ObjectiveC-Realm.json in Resources */,
 				60FB8FF11B9B361600290979 /* Java-Android.json in Resources */,
+				E24E443321AA12B800435FE7 /* Swift3-Mappable.json in Resources */,
 				60FB8FF81B9B361600290979 /* Swift-Struct.json in Resources */,
 				E2FA87BF1A059AC100648EB6 /* Images.xcassets in Resources */,
 				98978FC11D5B6B19000C1846 /* Swift-Struct-Unbox.json in Resources */,
@@ -303,6 +310,7 @@
 				60FB8FF91B9B361600290979 /* SwiftyJSON-Class.json in Resources */,
 				60FB8FF21B9B361600290979 /* ObjectiveC-CoreData-iOS.json in Resources */,
 				E2FA87C21A059AC100648EB6 /* Main.storyboard in Resources */,
+				E24E443221AA12B800435FE7 /* Swift-Outlaw.json in Resources */,
 				166AF5CE1CEF6C3600516EDD /* Swift-Struct-Gloss.json in Resources */,
 				60FB8FF41B9B361600290979 /* ObjectiveC-Mac.json in Resources */,
 			);
