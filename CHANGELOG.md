@@ -1,3 +1,8 @@
+* Version 1.0.9
+- Merged PR #88 : Fix minor typo in the README.MD file. Thanks to @AlexxNica
+- Merged PR #93 Changed app icon and fix upside down text. Thanks to @narlei
+- Merged PR #96 Adding support for Swift 4 Codable. Thanks to @kashifshaikh
+
 * Version 1.0.8
 - Merged PR #72 App now remembers what language user selected last time. Thanks to @TParizek
 - Merged PR #75 Fix Error for Swift in Xcode 8.2.1 and replace NSDictionary. Thanks to @dimohamdy
