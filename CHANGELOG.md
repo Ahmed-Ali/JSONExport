@@ -1,3 +1,7 @@
+* Version 1.1.0
+- Merged PR #98 : fix a complier error in SwiftyJSON - Class. Thanks to @superk589
+
+
 * Version 1.0.9
 - Merged PR #88 : Fix minor typo in the README.MD file. Thanks to @AlexxNica
 - Merged PR #93 Changed app icon and fix upside down text. Thanks to @narlei
