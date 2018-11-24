@@ -1,7 +1,8 @@
 * Version 1.1.0
 - Merged PR #98 : fix a complier error in SwiftyJSON - Class. Thanks @superk589
 - Merged PR #99 : Migrate to Swift 4. Thanks @serhii-londar
-- Merged PR #101 Added Codable Option to make Codable Structs with forced up-wrapped properties. Thanks @mumer92
+- Merged PR #101 : Added Codable Option to make Codable Structs with forced up-wrapped properties. Thanks @mumer92
+- Merged PR #106 : Fix Xcode build-time error : Change generic type from 'AnyObject' to 'String' -> Fixes #105. Thanks @ankushkushwaha
 
 
 * Version 1.0.9
