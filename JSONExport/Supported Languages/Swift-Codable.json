@@ -99,7 +99,7 @@
                      }
                      ],
     "modelDefinition": "\nstruct <!ModelName!> : Codable ",
-    "genericType": "AnyObject",
+    "genericType": "String",
     "getter": "",
     "setter": "",
     "fileExtension": "swift",
