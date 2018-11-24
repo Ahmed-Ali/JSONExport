@@ -4,6 +4,7 @@
 - Merged PR #101 : Added Codable Option to make Codable Structs with forced up-wrapped properties. Thanks @mumer92
 - Merged PR #106 : Fix Xcode build-time error : Change generic type from 'AnyObject' to 'String' -> Fixes #105. Thanks @ankushkushwaha
 - Merged PR #108 : Java Gson for Android: Fix method name. Thanks @ty0521-fss
+- Merged PR #123 : Update to Swift 4.2. Thanks @BrychanOdlum
 
 
 * Version 1.0.9
