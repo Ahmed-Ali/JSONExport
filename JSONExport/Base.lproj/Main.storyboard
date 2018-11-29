@@ -743,7 +743,7 @@
                             </scrollView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="240" horizontalPageScroll="10" verticalLineScroll="240" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehr-4Y-V2c" userLabel="Preview Area">
                                 <rect key="frame" x="382" y="38" width="642" height="629"/>
-                                <clipView key="contentView" id="BGG-A0-qEq">
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="BGG-A0-qEq">
                                     <rect key="frame" x="1" y="1" width="640" height="627"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -751,7 +751,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="640" height="627"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="0.0" height="5"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn width="640.20993584722419" minWidth="40" maxWidth="1000" id="VGV-RO-QyP">
@@ -867,7 +867,7 @@
                                             </connections>
                                         </tableView>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
+                                    <nil key="backgroundColor"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="Fu7-ot-Mhx">
                                     <rect key="frame" x="1" y="612" width="603" height="16"/>
