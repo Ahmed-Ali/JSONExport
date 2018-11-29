@@ -963,7 +963,6 @@
                                 <rect key="frame" x="127" y="674" width="98" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="vkY-4K-sSo"/>
-                                    <constraint firstAttribute="width" constant="98" id="xqL-Qr-Dv1"/>
                                 </constraints>
                                 <buttonCell key="cell" type="roundRect" title="Open .json File" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XsJ-Wl-WPN">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1013,6 +1012,7 @@
                             <constraint firstItem="j8d-bQ-SWu" firstAttribute="leading" secondItem="gQY-cg-P65" secondAttribute="trailing" constant="8" id="k0d-ie-hU3"/>
                             <constraint firstItem="xw8-Mo-9li" firstAttribute="leading" secondItem="j8d-bQ-SWu" secondAttribute="trailing" constant="10" id="kER-hf-Mky"/>
                             <constraint firstItem="gQY-cg-P65" firstAttribute="bottom" secondItem="8j6-OX-npJ" secondAttribute="bottom" id="lpD-Kn-3k4"/>
+                            <constraint firstItem="ja7-oL-t8I" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="3Dy-yy-VdU" secondAttribute="trailing" constant="-8" id="m3e-8W-Y6O"/>
                             <constraint firstItem="xw8-Mo-9li" firstAttribute="height" secondItem="j8d-bQ-SWu" secondAttribute="height" id="pbt-7N-amS"/>
                             <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="JzR-I4-tfP" secondAttribute="trailing" constant="8" id="pzs-gp-1Rf"/>
                             <constraint firstAttribute="bottom" secondItem="8j6-OX-npJ" secondAttribute="bottom" constant="11" id="qw9-ZQ-Y03"/>
