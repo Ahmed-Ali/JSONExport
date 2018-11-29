@@ -786,7 +786,7 @@
                                                                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                         <size key="minSize" width="598" height="194"/>
-                                                                                        <size key="maxSize" width="599" height="10000000"/>
+                                                                                        <size key="maxSize" width="600" height="10000000"/>
                                                                                         <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textView>
                                                                                 </subviews>
@@ -870,7 +870,7 @@
                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="Fu7-ot-Mhx">
-                                    <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                    <rect key="frame" x="1" y="612" width="603" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="pCN-Pt-eWu">
@@ -975,6 +975,7 @@
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="Hvg-Hd-Ndn" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="kMM-hs-pvU" secondAttribute="leading" constant="-10" id="0yP-DK-ipl"/>
                             <constraint firstItem="JzR-I4-tfP" firstAttribute="leading" secondItem="Au9-Q1-2Pe" secondAttribute="trailing" constant="10" id="2kd-gY-f93"/>
                             <constraint firstItem="j8d-bQ-SWu" firstAttribute="top" secondItem="JzR-I4-tfP" secondAttribute="top" id="3R8-8f-6NK"/>
                             <constraint firstItem="xw8-Mo-9li" firstAttribute="width" secondItem="j8d-bQ-SWu" secondAttribute="width" id="85l-xg-cSf"/>
