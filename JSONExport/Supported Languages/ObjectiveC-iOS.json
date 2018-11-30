@@ -32,7 +32,7 @@
             "bodyStart": "{\n\tself = [super init];",
             "comment": "\n/**\n * Instantiate the instance using the passed dictionary values to set the properties values\n */\n",
             "fetchArrayOfCustomTypePropertyFromMap": "\n\tif(dictionary[<!ConstKeyName!>] != nil && [dictionary[<!ConstKeyName!>] isKindOfClass:[NSArray class]]){\n\t\tNSArray * <!VarName!>Dictionaries = dictionary[<!ConstKeyName!>];\n\t\tNSMutableArray * <!VarName!>Items = [NSMutableArray array];\n\t\tfor(NSDictionary * <!VarName!>Dictionary in <!VarName!>Dictionaries){\n\t\t\t<!ElementType!> * <!VarName!>Item = [[<!ElementType!> alloc] initWithDictionary:<!VarName!>Dictionary];\n\t\t\t[<!VarName!>Items addObject:<!VarName!>Item];\n\t\t}\n\t\tself.<!VarName!> = <!VarName!>Items;\n\t}",
-            "fetchBasicTypePropertyFromMap": "\n\tif(![dictionary[<!ConstKeyName!>] isKindOfClass:[NSNull class]]){\n\t\tself.<!VarName!> = dictionary[<!ConstKeyName!>];\n\t}\t",
+            "fetchBasicTypePropertyFromMap": "\n\tif(![dictionary[<!ConstKeyName!>] isKindOfClass:[NSNull class]]){\n\t\tself.<!VarName!> = dictionary[<!ConstKeyName!>];\n\t}\n",
             "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\n\tif(![dictionary[<!ConstKeyName!>] isKindOfClass:[NSNull class]]){\n\t\tself.<!VarName!> = [dictionary[<!ConstKeyName!>] <!VarBasicTypeReplacement!>];\n\t}\n",
             "fetchCustomTypePropertyFromMap": "\n\tif(![dictionary[<!ConstKeyName!>] isKindOfClass:[NSNull class]]){\n\t\tself.<!VarName!> = [[<!VarType!> alloc] initWithDictionary:dictionary[<!ConstKeyName!>]];\n\t}\n",
             "signature": "\n-(instancetype)initWithDictionary:(NSDictionary *)dictionary\n"
