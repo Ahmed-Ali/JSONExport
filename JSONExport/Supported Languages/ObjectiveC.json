@@ -25,7 +25,7 @@
         "long"
     ],
     "briefDescription": "Defines how your JSON objects can be mapped to Objective-c classes using the built-in NSJSONSerialization class",
-    "constVarDefinition": "NSString *const <!ConstKeyName!> = @\"<!JsonKeyName!>\";\n",
+    "constVarDefinition": "static NSString *const <!ConstKeyName!> = @\"<!JsonKeyName!>\";\n",
     "constructors": [
         {
             "bodyEnd": "\n\treturn self;\n}\n",
