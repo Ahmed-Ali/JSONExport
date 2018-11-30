@@ -47,7 +47,7 @@
         "longType": "long",
         "stringType": "NSString"
     },
-    "displayLangName": "ObjectiveC - Mac",
+    "displayLangName": "ObjectiveC",
     "fileExtension": "m",
     "genericType": "NSObject",
     "hasHeaderFile": true,
@@ -64,7 +64,7 @@
         "modelDefinitionWithParent": "\n@interface <!ModelName!> : <!ParentClass!>\n",
         "modelEnd": "@end",
         "modelStart": "",
-        "staticImports": "#import <AppKit/AppKit.h>",
+        "staticImports": "#import <Foundation/Foundation.h>",
         "typesNeedSpecialDefinition": [
             "NSInteger",
             "BOOL",
