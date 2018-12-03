@@ -64,7 +64,7 @@
         "modelDefinitionWithParent": "\n@interface <!ModelName!> : <!ParentClass!>\n",
         "modelEnd": "@end",
         "modelStart": "",
-        "staticImports": "#import <Foundation/Foundation.h>",
+        "staticImports": "#import <Foundation/Foundation.h>\n#import <CoreGraphics/CoreGraphics.h>",
         "typesNeedSpecialDefinition": [
             "NSInteger",
             "BOOL",
