@@ -83,9 +83,9 @@
             "fetchCustomTypePropertyFromMap": "",
             "bodyEnd": "\t}\n",
             "fetchBasicTypePropertyFromMap": "",
-            "signature": "\trequired init() {}",
+            "signature": "\trequired init()",
             "fetchArrayOfCustomTypePropertyFromMap": "",
-            "comment": "\t/**\n\t * Instantiate the instance using the passed dictionary values to set the properties values\n\t */\n",
+            "comment": "\t/**\n\t * implement an empty initializer. \n\t */\n",
             "bodyStart": "{\n"
         }
     ],
