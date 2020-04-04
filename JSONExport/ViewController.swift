@@ -131,8 +131,8 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         oPanel.canChooseDirectories = false
         oPanel.canChooseFiles = true
         oPanel.allowsMultipleSelection = false
-        oPanel.allowedFileTypes = ["plist","PLIST"]
-        oPanel.prompt = "Choose .plist file"
+        oPanel.allowedFileTypes = ["plist", "PLIST", "xml", "XML"]
+        oPanel.prompt = "Choose .plist or .xml file"
         
         oPanel.beginSheetModal(for: self.view.window!) { button in
             if button.rawValue == NSFileHandlingPanelOKButton {
