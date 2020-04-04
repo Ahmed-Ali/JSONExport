@@ -125,6 +125,30 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
             return ""
         }
     }
+    
+    @IBAction func OpenPlist(_ sender: Any) {
+        let oPanel: NSOpenPanel = NSOpenPanel()
+        oPanel.canChooseDirectories = false
+        oPanel.canChooseFiles = true
+        oPanel.allowsMultipleSelection = false
+        oPanel.allowedFileTypes = ["plist","PLIST"]
+        oPanel.prompt = "Choose .plist file"
+        
+        oPanel.beginSheetModal(for: self.view.window!) { button in
+            if button.rawValue == NSFileHandlingPanelOKButton {
+                let plistPath = oPanel.urls.first!
+                do {
+                let data = try Data(contentsOf: plistPath)
+                let dict = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as! [String:Any]
+                 let jsonData = try JSONSerialization.data(withJSONObject: dict , options: .prettyPrinted)
+                    let rawString = "\(try JSON(data: jsonData))"
+                    self.sourceText.string = rawString
+                  } catch {
+                 print(error)
+                }
+            }
+        }
+    }
     /**
      Sets the values of languagesPopup items' titles
      */

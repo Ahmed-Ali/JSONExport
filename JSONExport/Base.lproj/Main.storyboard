@@ -978,8 +978,23 @@
                                     <action selector="openJSONFilesWithSender:" target="XfG-lQ-9wD" id="JYj-bG-IyC"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xEw-wZ-6CV">
+                                <rect key="frame" x="233" y="672" width="98" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="98" id="oHq-rU-lb5"/>
+                                    <constraint firstAttribute="height" constant="18" id="xku-TN-oL3"/>
+                                </constraints>
+                                <buttonCell key="cell" type="roundRect" title="Open .plist File" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cbj-a8-XYI">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="label" size="12"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="OpenPlist:" target="XfG-lQ-9wD" id="dY1-Xi-flV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="xEw-wZ-6CV" firstAttribute="leading" secondItem="ja7-oL-t8I" secondAttribute="trailing" constant="8" symbolic="YES" id="2HD-sD-1r9"/>
                             <constraint firstItem="JzR-I4-tfP" firstAttribute="leading" secondItem="Au9-Q1-2Pe" secondAttribute="trailing" constant="10" id="2kd-gY-f93"/>
                             <constraint firstItem="j8d-bQ-SWu" firstAttribute="top" secondItem="JzR-I4-tfP" secondAttribute="top" id="3R8-8f-6NK"/>
                             <constraint firstItem="xw8-Mo-9li" firstAttribute="width" secondItem="j8d-bQ-SWu" secondAttribute="width" id="85l-xg-cSf"/>
@@ -998,6 +1013,7 @@
                             <constraint firstItem="s2t-kJ-BOU" firstAttribute="height" secondItem="kMM-hs-pvU" secondAttribute="height" id="PVs-Ix-NN1"/>
                             <constraint firstItem="77U-Y7-rpY" firstAttribute="top" secondItem="s2t-kJ-BOU" secondAttribute="bottom" constant="8" id="QOj-c3-CWn"/>
                             <constraint firstItem="j8d-bQ-SWu" firstAttribute="trailing" secondItem="77U-Y7-rpY" secondAttribute="trailing" id="R4s-Cq-1s2"/>
+                            <constraint firstItem="xEw-wZ-6CV" firstAttribute="baseline" secondItem="ja7-oL-t8I" secondAttribute="baseline" id="RCb-YP-il6"/>
                             <constraint firstItem="s2t-kJ-BOU" firstAttribute="leading" secondItem="77U-Y7-rpY" secondAttribute="leading" id="RyV-1g-5gH"/>
                             <constraint firstItem="xw8-Mo-9li" firstAttribute="height" secondItem="4lt-2I-gy6" secondAttribute="height" id="URz-Dy-R49"/>
                             <constraint firstItem="4lt-2I-gy6" firstAttribute="leading" secondItem="xw8-Mo-9li" secondAttribute="trailing" constant="10" id="VIN-Hd-PiM"/>

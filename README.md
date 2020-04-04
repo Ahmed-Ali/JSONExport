@@ -39,9 +39,7 @@ Currently you can convert your JSON object to one of the following languages:
 
 Screenshot shows JSONExport used for a snippet from Twitter timeline JSON and converting it to Swift-CoreData.
 ![alt tag](https://cloud.githubusercontent.com/assets/5157350/5228493/72693010-7713-11e4-9e42-625a8590424a.png)
-![alt tag2](https://github.com/BandarHL/JSONExport/blob/master/assets/1.png)
-![alt tag3](https://github.com/BandarHL/JSONExport/blob/master/assets/2.png)
-![alt tag4](https://github.com/BandarHL/JSONExport/blob/master/assets/3.png)
+
 Installation
 ========================
 Kindly clone the project, and build it using xCode 8 and above.
@@ -51,10 +49,10 @@ To Do
 * ~~Support Objective-C~~ Done
 * ~~Sync multible classes with the same name or have the same exact properties~~ Done
 * ~~Support to parse JSON arrays of objects~~ Done
-* ~~Load JSON data from web~~ Done
+* Load JSON data from web
 * ~~Open .json files from JSONExport~~
 * Supported languages management editor.
-* Beside raw JSON, load the model raw data from plist files as well.
+* ~~Beside raw JSON, load the model raw data from plist files as well.~~ Done
 
 
 Known Limitations:
