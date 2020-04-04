@@ -91,7 +91,7 @@ class FilesContentBuilder{
             let value : AnyObject = jsonObject[jsonPropertyName]! as AnyObject
             let property = propertyForValue(value, jsonKeyName: jsonPropertyName)
             //Avoid duplicated property names
-            if properties.map({$0.nativeName}).index(of: property.nativeName) != nil{
+            if properties.map({$0.nativeName}).firstIndex(of: property.nativeName) != nil{
                 continue
             }
             //recursively handle custom types
@@ -159,7 +159,7 @@ class FilesContentBuilder{
     func mergeProperties(fromFile: FileRepresenter, toFile: FileRepresenter)
     {
         for property in fromFile.properties{
-            if toFile.properties.index(of: property) == nil{
+            if toFile.properties.firstIndex(of: property) == nil{
                 toFile.properties.append(property)
             }
         }
@@ -202,7 +202,7 @@ class FilesContentBuilder{
         if file1.properties.count == file2.properties.count{
             //there is a propability they both has the same properties
             for property in file1.properties{
-                if file2.properties.index(of: property) == nil{
+                if file2.properties.firstIndex(of: property) == nil{
                     //property not found, no need to keep looking
                     bothHasSameProperties = false
                     break

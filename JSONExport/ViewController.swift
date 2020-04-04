@@ -32,6 +32,8 @@
 //
 
 import Cocoa
+import SwiftyJSON
+import Alamofire
 
 class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTableViewDelegate, NSTableViewDataSource, NSTextViewDelegate {
     
@@ -91,6 +93,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         saveButton.isEnabled = false
         sourceText.isAutomaticQuoteSubstitutionEnabled = false
         loadSupportedLanguages()
@@ -101,6 +104,27 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
 		self.tableView.backgroundColor = .clear
     }
     
+    @objc func loadJSON() {
+        Alamofire.request(self.newAlert(title: "Enter URL")).responseJSON { (res) in
+            let allAnime = try! JSON(data: res.data!)
+            self.sourceText.string = "\(allAnime)"
+        }
+    }
+    func newAlert(title: String) -> String {
+        let msg = NSAlert()
+        msg.addButton(withTitle: "Get json information")
+        msg.addButton(withTitle: "Cancel")
+        msg.messageText = title
+
+        let txt = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+        msg.accessoryView = txt
+        let response: NSApplication.ModalResponse = msg.runModal()
+        if (response == NSApplication.ModalResponse.alertFirstButtonReturn) {
+            return txt.stringValue
+        } else {
+            return ""
+        }
+    }
     /**
      Sets the values of languagesPopup items' titles
      */
@@ -483,3 +507,4 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     
 }
+
