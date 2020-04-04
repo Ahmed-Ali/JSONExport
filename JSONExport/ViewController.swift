@@ -106,8 +106,11 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     @objc func loadJSON() {
         Alamofire.request(self.newAlert(title: "Enter URL")).responseJSON { (res) in
-            let allAnime = try! JSON(data: res.data!)
-            self.sourceText.string = "\(allAnime)"
+           if res.error != nil {
+              print(res.error!)
+           } else {
+              let RawData = try! JSON(data: res.data!)
+              self.sourceText.string = "\(RawData)"
         }
     }
     func newAlert(title: String) -> String {
