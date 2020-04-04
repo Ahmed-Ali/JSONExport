@@ -39,7 +39,9 @@ Currently you can convert your JSON object to one of the following languages:
 
 Screenshot shows JSONExport used for a snippet from Twitter timeline JSON and converting it to Swift-CoreData.
 ![alt tag](https://cloud.githubusercontent.com/assets/5157350/5228493/72693010-7713-11e4-9e42-625a8590424a.png)
-
+![alt tag2](https://github.com/BandarHL/JSONExport/blob/master/assets/1.png)
+![alt tag3](https://github.com/BandarHL/JSONExport/blob/master/assets/2.png)
+![alt tag4](https://github.com/BandarHL/JSONExport/blob/master/assets/3.png)
 Installation
 ========================
 Kindly clone the project, and build it using xCode 8 and above.
