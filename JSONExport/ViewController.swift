@@ -108,6 +108,10 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         Alamofire.request(self.newAlert(title: "Enter URL")).responseJSON { (res) in
             if res.error != nil {
                 print(res.error!)
+                let msg = NSAlert()
+                msg.messageText = res.error!.localizedDescription
+                msg.addButton(withTitle: "OK")
+                msg.runModal()
             } else {
                 let RawData = try! JSON(data: res.data!)
                 self.sourceText.string = "\(RawData)"
