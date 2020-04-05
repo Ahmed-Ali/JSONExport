@@ -32,6 +32,8 @@
 //
 
 import Cocoa
+import SwiftyJSON
+import Alamofire
 
 class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTableViewDelegate, NSTableViewDataSource, NSTextViewDelegate {
     
@@ -91,6 +93,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         saveButton.isEnabled = false
         sourceText.isAutomaticQuoteSubstitutionEnabled = false
         loadSupportedLanguages()
@@ -101,6 +104,59 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
 		self.tableView.backgroundColor = .clear
     }
     
+    @objc func loadJSON() {
+        Alamofire.request(self.newAlert(title: "Enter URL")).responseJSON { (res) in
+            if res.error != nil {
+                print(res.error!)
+                let msg = NSAlert()
+                msg.messageText = res.error!.localizedDescription
+                msg.addButton(withTitle: "OK")
+                msg.runModal()
+            } else {
+                let RawData = try! JSON(data: res.data!)
+                self.sourceText.string = "\(RawData)"
+            }
+        }
+    }
+    func newAlert(title: String) -> String {
+        let msg = NSAlert()
+        msg.addButton(withTitle: "Get json information")
+        msg.addButton(withTitle: "Cancel")
+        msg.messageText = title
+
+        let txt = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+        msg.accessoryView = txt
+        let response: NSApplication.ModalResponse = msg.runModal()
+        if (response == NSApplication.ModalResponse.alertFirstButtonReturn) {
+            return txt.stringValue
+        } else {
+            return ""
+        }
+    }
+    
+    @IBAction func OpenPlist(_ sender: Any) {
+        let oPanel: NSOpenPanel = NSOpenPanel()
+        oPanel.canChooseDirectories = false
+        oPanel.canChooseFiles = true
+        oPanel.allowsMultipleSelection = false
+        oPanel.allowedFileTypes = ["plist", "PLIST", "xml", "XML"]
+        oPanel.prompt = "Choose .plist or .xml file"
+        
+        oPanel.beginSheetModal(for: self.view.window!) { button in
+            if button.rawValue == NSFileHandlingPanelOKButton {
+                let plistPath = oPanel.urls.first!
+                do {
+                let data = try Data(contentsOf: plistPath)
+                let dict = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as! [String:Any]
+                 let jsonData = try JSONSerialization.data(withJSONObject: dict , options: .prettyPrinted)
+                    let rawString = "\(try JSON(data: jsonData))"
+                    self.sourceText.string = rawString
+                  } catch {
+                 print(error)
+                }
+            }
+        }
+    }
     /**
      Sets the values of languagesPopup items' titles
      */
@@ -483,3 +539,4 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     
     
 }
+

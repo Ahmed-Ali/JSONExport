@@ -351,7 +351,7 @@ class FileRepresenter{
                     }
                     propertyHandlingStr = propertyHandlingStr.replacingOccurrences(of: elementType, with: property.elementsType)
                 }else{
-                    if lang.basicTypesWithSpecialStoringNeeds != nil && method.forEachPropertyWithSpecialStoringNeeds != nil && lang.basicTypesWithSpecialStoringNeeds.index(of: property.type) != nil{
+                    if lang.basicTypesWithSpecialStoringNeeds != nil && method.forEachPropertyWithSpecialStoringNeeds != nil && lang.basicTypesWithSpecialStoringNeeds.firstIndex(of: property.type) != nil{
                         propertyHandlingStr = method.forEachPropertyWithSpecialStoringNeeds
                     }else{
                         propertyHandlingStr = method.forEachProperty
@@ -369,7 +369,7 @@ class FileRepresenter{
                 
                 propertyHandlingStr = propertyHandlingStr.replacingOccurrences(of: additionalCustomTypeProperty, with:"")
                 if lang.basicTypesWithSpecialFetchingNeeds != nil{
-                    if let index = lang.basicTypesWithSpecialFetchingNeeds.index(of: property.type), let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements?[index]{
+                    if let index = lang.basicTypesWithSpecialFetchingNeeds.firstIndex(of: property.type), let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements?[index]{
                        propertyHandlingStr = propertyHandlingStr.replacingOccurrences(of: varTypeReplacement, with: replacement)
                         
                         var castString = String()
@@ -409,7 +409,7 @@ class FileRepresenter{
         }else{
             let basicTypes = lang.dataTypes.toDictionary().allValues as! [String]
             
-            if basicTypes.index(of: type) != nil{
+            if basicTypes.firstIndex(of: type) != nil{
                 isBasicType = true
             }
         }
@@ -475,7 +475,7 @@ class FileRepresenter{
         if(propertyTypeIsBasicType(property)){
             
             if constructor.fetchArrayOfBasicTypePropertyFromMap != nil{
-                if let index = lang.basicTypesWithSpecialFetchingNeeds.index(of: property.elementsType){
+                if let index = lang.basicTypesWithSpecialFetchingNeeds.firstIndex(of: property.elementsType){
                     propertyStr = constructor.fetchArrayOfBasicTypePropertyFromMap
                     let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements[index]
                     propertyStr = propertyStr.replacingOccurrences(of: varTypeReplacement, with: replacement)
@@ -514,7 +514,7 @@ class FileRepresenter{
     {
         var propertyStr = ""
         if lang.basicTypesWithSpecialFetchingNeeds != nil{
-            let index = lang.basicTypesWithSpecialFetchingNeeds.index(of: property.type)
+            let index = lang.basicTypesWithSpecialFetchingNeeds.firstIndex(of: property.type)
             if index != nil{
                 propertyStr = constructor.fetchBasicTypeWithSpecialNeedsPropertyFromMap
                 if let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements?[index!]{

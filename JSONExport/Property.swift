@@ -92,7 +92,7 @@ class Property : Equatable{
     {
         var string : String!
         if forHeaderFile{
-            if lang.headerFileData.instanceVarWithSpeicalDefinition != nil && lang.headerFileData.typesNeedSpecialDefinition.index(of: type) != nil{
+            if lang.headerFileData.instanceVarWithSpeicalDefinition != nil && lang.headerFileData.typesNeedSpecialDefinition.firstIndex(of: type) != nil{
                 string = lang.headerFileData.instanceVarWithSpeicalDefinition
             }else{
                 string = lang.headerFileData.instanceVarDefinition
@@ -100,7 +100,7 @@ class Property : Equatable{
             
             
         }else{
-            if lang.instanceVarWithSpeicalDefinition != nil && lang.typesNeedSpecialDefinition.index(of: type) != nil{
+            if lang.instanceVarWithSpeicalDefinition != nil && lang.typesNeedSpecialDefinition.firstIndex(of: type) != nil{
                 string = lang.instanceVarWithSpeicalDefinition
             }else{
                 string = lang.instanceVarDefinition

@@ -24,7 +24,7 @@ func propertyTypeName(_ value : AnyObject, lang: LangModel) -> String
         name = typeForNumber(value as! NSNumber, lang: lang)
     }else if value is NSString{
         let booleans : [String] = ["True", "true", "TRUE", "False", "false", "FALSE"]
-        if booleans.index(of: (value as! String)) != nil{
+        if booleans.firstIndex(of: (value as! String)) != nil{
             name = lang.dataTypes.boolType
         }else{
             name = lang.dataTypes.stringType

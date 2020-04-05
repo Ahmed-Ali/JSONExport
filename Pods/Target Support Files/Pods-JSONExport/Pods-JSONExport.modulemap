@@ -1,0 +1,6 @@
+framework module Pods_JSONExport {
+  umbrella header "Pods-JSONExport-umbrella.h"
+
+  export *
+  module * { export * }
+}
