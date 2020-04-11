@@ -7,47 +7,47 @@
 
 import Foundation
 
-class LangModel{
+class LangModel {
 
-	var arrayType : String!
-	var basicTypesWithSpecialFetchingNeeds : [String]!
-    var basicTypesWithSpecialFetchingNeedsReplacements : [String]!
-    var basicTypesWithSpecialFetchingNeedsTypeCast : [String]!
-    var basicTypesWithSpecialStoringNeeds : [String]!
-	var booleanGetter : String!
-    var briefDescription : String!
-    var constructors : [Constructor]!
-	var dataTypes : DataType!
-	var displayLangName : String!
-	var fileExtension : String = ""
-	var genericType : String!
-	var getter : String!
-	var importForEachCustomType : String!
-    var importHeaderFile : String!
-	var instanceVarDefinition : String!
-    var instanceVarWithSpeicalDefinition : String!
-    var typesNeedSpecialDefinition : [String]!
-	var langName : String = ""
-    var constVarDefinition : String!
-	var modelDefinition : String!
-    var modelDefinitionWithParent : String!
-    var defaultParentWithUtilityMethods : String!
-	var modelEnd : String!
-	var modelStart : String = ""
-	var setter : String!
-	var staticImports : String!
-	var supportsFirstLineStatement : Bool!
-    var firstLineHint : String!
-	var utilityMethods : [UtilityMethod]!
-    var reservedKeywords : [String]!
-	var wordsToRemoveToGetArrayElementsType : [String]!
-    var headerFileData : HeaderFileData!
-    var supportMutualRelationships : Bool!
-    var author : Author!
+	var arrayType: String!
+	var basicTypesWithSpecialFetchingNeeds: [String]!
+    var basicTypesWithSpecialFetchingNeedsReplacements: [String]!
+    var basicTypesWithSpecialFetchingNeedsTypeCast: [String]!
+    var basicTypesWithSpecialStoringNeeds: [String]!
+	var booleanGetter: String!
+    var briefDescription: String!
+    var constructors: [Constructor]!
+	var dataTypes: DataType!
+	var displayLangName: String!
+	var fileExtension: String = ""
+	var genericType: String!
+	var getter: String!
+	var importForEachCustomType: String!
+    var importHeaderFile: String!
+	var instanceVarDefinition: String!
+    var instanceVarWithSpeicalDefinition: String!
+    var typesNeedSpecialDefinition: [String]!
+	var langName: String = ""
+    var constVarDefinition: String!
+	var modelDefinition: String!
+    var modelDefinitionWithParent: String!
+    var defaultParentWithUtilityMethods: String!
+	var modelEnd: String!
+	var modelStart: String = ""
+	var setter: String!
+	var staticImports: String!
+	var supportsFirstLineStatement: Bool!
+    var firstLineHint: String!
+	var utilityMethods: [UtilityMethod]!
+    var reservedKeywords: [String]!
+	var wordsToRemoveToGetArrayElementsType: [String]!
+    var headerFileData: HeaderFileData!
+    var supportMutualRelationships: Bool!
+    var author: Author!
 	/**
 	 * Instantiate the instance using the passed dictionary values to set the properties values
 	 */
-	init(fromDictionary dictionary: NSDictionary){
+	init(fromDictionary dictionary: NSDictionary) {
 		arrayType = dictionary["arrayType"] as? String
 		basicTypesWithSpecialFetchingNeeds = dictionary["basicTypesWithSpecialFetchingNeeds"] as? [String]
         basicTypesWithSpecialFetchingNeedsReplacements = dictionary["basicTypesWithSpecialFetchingNeedsReplacements"] as? [String]
@@ -55,15 +55,15 @@ class LangModel{
         basicTypesWithSpecialStoringNeeds = dictionary["basicTypesWithSpecialStoringNeeds"] as? [String]
 		booleanGetter = dictionary["booleanGetter"] as? String
         briefDescription = dictionary["briefDescription"] as? String
-        
+
 		constructors = [Constructor]()
-		if let constructorsArray = dictionary["constructors"] as? [NSDictionary]{
-			 for dic in constructorsArray{
+		if let constructorsArray = dictionary["constructors"] as? [NSDictionary] {
+			 for dic in constructorsArray {
 				let value = Constructor(fromDictionary: dic)
 				constructors.append(value)
 			}
 		}
-		if let dataTypesData = dictionary["dataTypes"] as? NSDictionary{
+		if let dataTypesData = dictionary["dataTypes"] as? NSDictionary {
 				dataTypes = DataType(fromDictionary: dataTypesData)
 			}
         importHeaderFile = dictionary["importHeaderFile"] as? String
@@ -75,14 +75,14 @@ class LangModel{
 		instanceVarDefinition = dictionary["instanceVarDefinition"] as? String
         instanceVarWithSpeicalDefinition = dictionary["instanceVarWithSpeicalDefinition"] as? String
         typesNeedSpecialDefinition = dictionary["typesNeedSpecialDefinition"] as? [String]
-        
+
 		langName = dictionary["langName"] as! String
         constVarDefinition = dictionary["constVarDefinition"] as? String
 		modelDefinition = dictionary["modelDefinition"] as? String
         modelDefinitionWithParent = dictionary["modelDefinitionWithParent"] as? String
         defaultParentWithUtilityMethods = dictionary["defaultParentWithUtilityMethods"] as? String
 		modelEnd = dictionary["modelEnd"] as? String
-        if let mStart = dictionary["modelStart"] as? String{
+        if let mStart = dictionary["modelStart"] as? String {
             modelStart = mStart
         }
 
@@ -91,25 +91,23 @@ class LangModel{
 		supportsFirstLineStatement = (dictionary["supportsFirstLineStatement"] as? NSString)?.boolValue
         firstLineHint = dictionary["firstLineHint"] as? String
 		utilityMethods = [UtilityMethod]()
-		if let utilityMethodsArray = dictionary["utilityMethods"] as? [NSDictionary]{
-			 for dic in utilityMethodsArray{
+		if let utilityMethodsArray = dictionary["utilityMethods"] as? [NSDictionary] {
+			 for dic in utilityMethodsArray {
 				let value = UtilityMethod(fromDictionary: dic)
 				utilityMethods.append(value)
 			}
 		}
         reservedKeywords = dictionary["reservedKeywords"] as? [String]
 		wordsToRemoveToGetArrayElementsType = dictionary["wordsToRemoveToGetArrayElementsType"] as? [String]
-        
-        if let headerFileDataData = dictionary["headerFileData"] as? NSDictionary{
+
+        if let headerFileDataData = dictionary["headerFileData"] as? NSDictionary {
             headerFileData = HeaderFileData(fromDictionary: headerFileDataData)
         }
-        
+
         supportMutualRelationships = (dictionary["supportMutualRelationships"] as? NSString)?.boolValue
-        if let authorDictionary = dictionary["author"] as? NSDictionary{
+        if let authorDictionary = dictionary["author"] as? NSDictionary {
             author = Author(fromDictionary: authorDictionary)
         }
 	}
-
-	
 
 }
