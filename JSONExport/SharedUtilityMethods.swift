@@ -8,31 +8,29 @@
 
 import Foundation
 
-
 /**
 Creats and returns the type name for the passed value
 
 - parameter value: example value to figure out its type
 - returns: the type name
 */
-func propertyTypeName(_ value : AnyObject, lang: LangModel) -> String
-{
+func propertyTypeName(_ value: AnyObject, lang: LangModel) -> String {
     var name = ""
-    if value is NSArray{
-        name = typeNameForArrayOfElements(value as! NSArray, lang:lang)
-    }else if value is NSNumber{
+    if value is NSArray {
+        name = typeNameForArrayOfElements(value as! NSArray, lang: lang)
+    } else if value is NSNumber {
         name = typeForNumber(value as! NSNumber, lang: lang)
-    }else if value is NSString{
-        let booleans : [String] = ["True", "true", "TRUE", "False", "false", "FALSE"]
-        if booleans.index(of: (value as! String)) != nil{
+    } else if value is NSString {
+        let booleans: [String] = ["True", "true", "TRUE", "False", "false", "FALSE"]
+        if booleans.index(of: (value as! String)) != nil {
             name = lang.dataTypes.boolType
-        }else{
+        } else {
             name = lang.dataTypes.stringType
         }
-    }else if value is NSNull{
+    } else if value is NSNull {
         name = lang.genericType
     }
-    
+
     return name
 }
 
@@ -44,26 +42,26 @@ Tries to figur out the type of the elements of the passed array and returns the 
 - returns: typeName the type name as String
 */
 
-func typeNameForArrayElements(_ elements: NSArray, lang: LangModel) -> String{
-    var typeName : String!
+func typeNameForArrayElements(_ elements: NSArray, lang: LangModel) -> String {
+    var typeName: String!
     let genericType = lang.genericType
-    if elements.count == 0{
+    if elements.count == 0 {
         typeName = genericType
     }
-    for element in elements{
+    for element in elements {
         let currElementTypeName = propertyTypeName(element as AnyObject, lang: lang)
-        
-        if typeName == nil{
+
+        if typeName == nil {
             typeName = currElementTypeName
-            
-        }else{
-            if typeName != currElementTypeName{
+
+        } else {
+            if typeName != currElementTypeName {
                 typeName = genericType
                 break
             }
         }
     }
-    
+
     return typeName
 }
 
@@ -74,28 +72,28 @@ Tries to figur out the type of the elements of the passed array and returns the 
 
 - returns: the type name
 */
-func typeNameForArrayOfElements(_ elements: NSArray, lang: LangModel) -> String{
-    var typeName : String!
+func typeNameForArrayOfElements(_ elements: NSArray, lang: LangModel) -> String {
+    var typeName: String!
     let genericType = lang.arrayType.replacingOccurrences(of: elementType, with: lang.genericType)
-    if elements.count == 0{
+    if elements.count == 0 {
         typeName = genericType
     }
-    for element in elements{
+    for element in elements {
         let currElementTypeName = propertyTypeName(element as AnyObject, lang: lang)
-        
+
         let arrayTypeName = lang.arrayType.replacingOccurrences(of: elementType, with: currElementTypeName)
-        
-        if typeName == nil{
+
+        if typeName == nil {
             typeName = arrayTypeName
-            
-        }else{
-            if typeName != arrayTypeName{
+
+        } else {
+            if typeName != arrayTypeName {
                 typeName = genericType
                 break
             }
         }
     }
-    
+
     return typeName
 }
 
@@ -105,17 +103,16 @@ Returns one of the possible types for any numeric value (int, float, double, etc
 - parameter number: the numeric value
 - returns: the type name
 */
-func typeForNumber(_ number : NSNumber, lang: LangModel) -> String
-{
+func typeForNumber(_ number: NSNumber, lang: LangModel) -> String {
     let numberType = CFNumberGetType(number as CFNumber)
-    
-    var typeName : String!
-    switch numberType{
+
+    var typeName: String!
+    switch numberType {
     case .charType:
-        if (number.int32Value == 0 || number.int32Value == 1){
+        if (number.int32Value == 0 || number.int32Value == 1) {
             //it seems to be boolean
             typeName = lang.dataTypes.boolType
-        }else{
+        } else {
             typeName = lang.dataTypes.characterType
         }
     case .shortType, .intType:
@@ -129,10 +126,9 @@ func typeForNumber(_ number : NSNumber, lang: LangModel) -> String
     default:
         typeName = lang.dataTypes.intType
     }
-    
+
     return typeName
 }
-
 
 /**
 Creates and returns a dictionary who is built up by combining all the dictionary elements in the passed array.
@@ -140,22 +136,18 @@ Creates and returns a dictionary who is built up by combining all the dictionary
 - parameter array: array of dictionaries.
 - returns: dictionary that combines all the dictionary elements in the array.
 */
-func unionDictionaryFromArrayElements(_ array: NSArray) -> NSDictionary
-{
+func unionDictionaryFromArrayElements(_ array: NSArray) -> NSDictionary {
     let dictionary = NSMutableDictionary()
-    for item in array{
-        if let dic = item as? NSDictionary{
+    for item in array {
+        if let dic = item as? NSDictionary {
             //loop all over its keys
-            for key in dic.allKeys as! [String]{
+            for key in dic.allKeys as! [String] {
                 dictionary[key] = dic[key]
             }
         }
     }
     return dictionary
 }
-
-
-
 
 /**
 Cleans up the passed string from any control characters.
@@ -164,33 +156,27 @@ Cleans up the passed string from any control characters.
 - returns: a clean version of the passed string
 */
 
-func stringByRemovingControlCharacters(_ string: String) -> String
-{
+func stringByRemovingControlCharacters(_ string: String) -> String {
     let controlChars = CharacterSet.controlCharacters
     var range = string.rangeOfCharacter(from: controlChars)
-    var cleanString = string;
-    while range != nil && !range!.isEmpty{
+    var cleanString = string
+    while range != nil && !range!.isEmpty {
         cleanString = cleanString.replacingCharacters(in: range!, with: "")
         range = cleanString.rangeOfCharacter(from: controlChars)
     }
-    
+
     return cleanString
-    
+
 }
 
-
-
-func runOnBackground(_ task: @escaping () -> Void)
-{
+func runOnBackground(_ task: @escaping () -> Void) {
     DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-        task();
+        task()
     }
 }
 
-func runOnUiThread(_ task: @escaping () -> Void)
-{
+func runOnUiThread(_ task: @escaping () -> Void) {
     DispatchQueue.main.async(execute: { () -> Void in
-        task();
+        task()
     })
 }
-

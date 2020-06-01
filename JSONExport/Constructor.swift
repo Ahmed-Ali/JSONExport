@@ -7,23 +7,22 @@
 
 import Foundation
 
-class Constructor{
+class Constructor {
 
-	var bodyEnd : String!
-	var bodyStart : String!
-	var comment : String!
-	var fetchArrayOfCustomTypePropertyFromMap : String!
-    var fetchArrayOfBasicTypePropertyFromMap : String!
-	var fetchBasicTypePropertyFromMap : String!
-	var fetchBasicTypeWithSpecialNeedsPropertyFromMap : String!
-	var fetchCustomTypePropertyFromMap : String!
-	var signature : String!
-
+	var bodyEnd: String!
+	var bodyStart: String!
+	var comment: String!
+	var fetchArrayOfCustomTypePropertyFromMap: String!
+    var fetchArrayOfBasicTypePropertyFromMap: String!
+	var fetchBasicTypePropertyFromMap: String!
+	var fetchBasicTypeWithSpecialNeedsPropertyFromMap: String!
+	var fetchCustomTypePropertyFromMap: String!
+	var signature: String!
 
 	/**
 	 * Instantiate the instance using the passed dictionary values to set the properties values
 	 */
-	init(fromDictionary dictionary: NSDictionary){
+	init(fromDictionary dictionary: NSDictionary) {
 		bodyEnd = dictionary["bodyEnd"] as? String
 		bodyStart = dictionary["bodyStart"] as? String
 		comment = dictionary["comment"] as? String
@@ -34,6 +33,5 @@ class Constructor{
 		fetchCustomTypePropertyFromMap = dictionary["fetchCustomTypePropertyFromMap"] as? String
 		signature = dictionary["signature"] as? String
 	}
-
 
 }
