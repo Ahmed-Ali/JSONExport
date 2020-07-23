@@ -32,66 +32,70 @@
 
 import Foundation
 
-extension String {
+extension String{
     /**
-     Very simple method converts the last characters of a string to convert from plural to singular. For example "parties" will be changed to "party" and "stars" will be changed to "star"
-     The method does not handle any special cases, like uncountable name i.e "people" will not be converted to "person"
-     */
-    func toSingular() -> String {
+    Very simple method converts the last characters of a string to convert from plural to singular. For example "parties" will be changed to "party" and "stars" will be changed to "star"
+    The method does not handle any special cases, like uncountable name i.e "people" will not be converted to "person"
+    */
+    func toSingular() -> String
+    {
         var singular = self
-        let length = count
+        let length = self.count
         if length > 3 {
-            let range = index(endIndex, offsetBy: -3) ..< endIndex
-
+			let range = self.index(self.endIndex, offsetBy: -3)..<self.endIndex
+            
             let lastThreeChars = self[range]
             if lastThreeChars == "ies" {
-                singular = replacingOccurrences(of: lastThreeChars, with: "y", options: [], range: range)
+                singular = self.replacingOccurrences(of: lastThreeChars, with: "y", options: [], range: range)
                 return singular
             }
+                
         }
         if length > 2 {
-            let range = index(endIndex, offsetBy: -1) ..< endIndex
-
+			let range = self.index(self.endIndex, offsetBy: -1)..<self.endIndex
+			
             let lastChar = self[range]
             if lastChar == "s" {
-                singular = replacingOccurrences(of: lastChar, with: "", options: [], range: range)
+                singular = self.replacingOccurrences(of: lastChar, with: "", options: [], range: range)
                 return singular
             }
         }
         return singular
     }
-
+    
     /**
-     Converts the first character to its lower case version
-
-     - returns: the converted version
-     */
-    func lowercaseFirstChar() -> String {
-        if count > 0 {
-            let range = startIndex ..< index(startIndex, offsetBy: 1)
-
+    Converts the first character to its lower case version
+    
+    - returns: the converted version
+    */
+    func lowercaseFirstChar() -> String{
+        if self.count > 0 {
+			let range = self.startIndex..<self.index(self.startIndex, offsetBy: 1)
+			
             let firstLowerChar = self[range].lowercased()
-
-            return replacingCharacters(in: range, with: firstLowerChar)
-        } else {
+            
+            return self.replacingCharacters(in: range, with: firstLowerChar)
+        }else{
             return self
         }
+        
     }
-
+    
     /**
-     Converts the first character to its upper case version
-
-     - returns: the converted version
-     */
-    func uppercaseFirstChar() -> String {
-        if count > 0 {
-            let range = startIndex ..< index(startIndex, offsetBy: 1)
-
+    Converts the first character to its upper case version
+    
+    - returns: the converted version
+    */
+    func uppercaseFirstChar() -> String{
+        if self.count > 0 {
+			let range = startIndex..<self.index(startIndex, offsetBy: 1)
+			
             let firstUpperChar = self[range].uppercased()
-
-            return replacingCharacters(in: range, with: firstUpperChar)
-        } else {
+            
+            return self.replacingCharacters(in: range, with: firstUpperChar)
+        }else{
             return self
         }
+        
     }
 }

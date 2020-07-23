@@ -7,32 +7,34 @@
 
 import Foundation
 
-class HeaderFileData {
-    var constructorSignatures: [String]!
-    var headerFileExtension: String!
-    var importForEachCustomType: String!
-    var importParentHeaderFile: String!
-    var instanceVarDefinition: String!
-    var instanceVarWithSpeicalDefinition: String!
-    var modelDefinition: String!
-    var modelDefinitionWithParent: String!
-    var defaultParentWithUtilityMethods: String!
-    var modelEnd: String!
-    var modelStart: String!
-    var staticImports: String!
-    var typesNeedSpecialDefinition: [String]!
-    var utilityMethodSignatures: [String]!
-
+class HeaderFileData{
+    
+    var constructorSignatures : [String]!
+    var headerFileExtension : String!
+    var importForEachCustomType : String!
+    var importParentHeaderFile : String!
+    var instanceVarDefinition : String!
+    var instanceVarWithSpeicalDefinition : String!
+    var modelDefinition : String!
+    var modelDefinitionWithParent : String!
+    var defaultParentWithUtilityMethods : String!
+    var modelEnd : String!
+    var modelStart : String!
+    var staticImports : String!
+    var typesNeedSpecialDefinition : [String]!
+    var utilityMethodSignatures : [String]!
+    
+    
     /**
-     * Instantiate the instance using the passed dictionary values to set the properties values
-     */
-    init(fromDictionary dictionary: NSDictionary) {
+    * Instantiate the instance using the passed dictionary values to set the properties values
+    */
+    init(fromDictionary dictionary: NSDictionary){
         constructorSignatures = dictionary["constructorSignatures"] as? [String]
         headerFileExtension = dictionary["headerFileExtension"] as? String
         importForEachCustomType = dictionary["importForEachCustomType"] as? String
         importParentHeaderFile = dictionary["importParentHeaderFile"] as? String
         instanceVarDefinition = dictionary["instanceVarDefinition"] as? String
-
+        
         instanceVarWithSpeicalDefinition = dictionary["instanceVarWithSpeicalDefinition"] as? String
         modelDefinition = dictionary["modelDefinition"] as? String
         modelDefinitionWithParent = dictionary["modelDefinitionWithParent"] as? String
@@ -42,5 +44,7 @@ class HeaderFileData {
         staticImports = dictionary["staticImports"] as? String
         typesNeedSpecialDefinition = dictionary["typesNeedSpecialDefinition"] as? [String]
         utilityMethodSignatures = dictionary["utilityMethodSignatures"] as? [String]
+        
     }
+    
 }

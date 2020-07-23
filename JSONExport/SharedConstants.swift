@@ -46,3 +46,4 @@ let lowerCaseModelName = "<!LowerCaseModelName!>"
 let jsonKeyName = "<!JsonKeyName!>"
 let constKeyName = "<!ConstKeyName!>"
 let additionalCustomTypeProperty = "<!AdditionalForCustomTypeProperty!>"
+
