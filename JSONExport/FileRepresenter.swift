@@ -481,7 +481,12 @@ class FileRepresenter{
                     propertyStr = propertyStr.replacingOccurrences(of: varTypeReplacement, with: replacement)
                     
                     // if needs cast
-                    let cast = lang.basicTypesWithSpecialFetchingNeedsTypeCast[index]
+                    guard
+                        let casts = lang.basicTypesWithSpecialFetchingNeedsTypeCast,
+                        !casts.isEmpty
+                    else { return "" }
+                    
+                    let cast = casts[index]
                     if !cast.isEmpty {
                         propertyStr = propertyStr.replacingOccurrences(of: varTypeCast, with: "(\(cast)) ")
                     }
