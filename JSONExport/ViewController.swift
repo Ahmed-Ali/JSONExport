@@ -87,6 +87,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     //Holds list of the generated files
     var files: [FileRepresenter] = [FileRepresenter]()
 
+    // MARK: -lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         saveButton.isEnabled = false
@@ -96,6 +97,31 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         setLanguagesSelection()
         loadLastSelectedLanguage()
         updateUIFieldsForSelectedLanguage()
+        
+        let content =
+        """
+        {
+            "id": "123",
+            "name": " ",
+            "score": 95,
+            "teachers": [
+                {
+                    "name": " ",
+                    "age": 40
+                },
+                {
+                    "name": " ",
+                    "age": 45
+                }
+            ],
+            "classroom": {
+                    "id": 101,
+                    "name": "一年级一班"
+                }
+        }
+        """;
+        sourceText.string = content;
+        generateClasses()
     }
 
     /**
