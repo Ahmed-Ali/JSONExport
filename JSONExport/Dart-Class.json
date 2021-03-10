@@ -125,7 +125,7 @@
     "getter": "",
     "setter": "",
     "displayLangName": "Dart - Class",
-    "fileExtension": ".dart",
+    "fileExtension": "dart",
     "basicTypesWithSpecialFetchingNeeds": [
                                            "Int",
                                            "Bool",
