@@ -84,12 +84,12 @@
                        ],
     "dataTypes": {
         "stringType": "String",
-        "boolType": "Bool",
-        "floatType": "Float",
-        "doubleType": "Double",
+        "boolType": "bool",
+        "floatType": "double",
+        "doubleType": "double",
         "characterType": "Character",
-        "longType": "Double",
-        "intType": "Int"
+        "longType": "double",
+        "intType": "int"
     },
     "wordsToRemoveToGetArrayElementsType": [
                                             "[",
@@ -109,7 +109,7 @@
                      "fetchCustomTypePropertyFromMap": "\t\tlet <!VarName!>Json = json[\"<!JsonKeyName!>\"]\n\t\tif !<!VarName!>Json.isEmpty{\n\t\t\t<!VarName!> = <!VarType!>(fromJson: <!VarName!>Json)\n\t\t}\n"
                      },
                      {
-                     "fetchArrayOfBasicTypePropertyFromMap": "\t\t<!VarName!> = <!VarType!>()\n\t\tlet <!VarName!>Array = json[\"<!JsonKeyName!>\"].arrayValue\n\t\tfor <!VarName!>Json in <!VarName!>Array{\n\t\t\t<!VarName!>.append(<!VarName!>Json.<!VarBasicTypeReplacement!>)\n\t\t}\n",
+                     "fetchArrayOfBasicTypePropertyFromMap": "\t\t<!VarName!> = <!VarType!>()\n\t\tlet <!VarName!>Array = json[\"<!JsonKeyName!>\"].arrayValue\n\t\tfor <!VarName!>Json in <!VarName!>Array{\n\t\t\t<!VarName!>.add(<!VarName!>Json.<!VarBasicTypeReplacement!>)\n\t\t}\n",
                      "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\tjson[\"<!JsonKeyName!>\"] = <!VarName!>\n",
                      "bodyStart": "{\n\t\tvar json = Map<String, dynamic>();\n",
                      "bodyEnd": "\t\treturn json\n\t}\n}\n",
@@ -135,9 +135,9 @@
                                            "String",
                                            "AnyObject"
                                            ],
-    "arrayType": "[<!ElementType!>]",
-    "modelDefinitionWithParent": "\n\nclass <!ModelName!> extends <!ParentClass!>",
-    "instanceVarDefinition": "\t<!VarType!> <!VarName!>;\n",
+    "arrayType": "List<<!ElementType!>>",
+    "modelDefinitionWithParent": "\n\nclass <!ModelName!>",
+    "instanceVarDefinition": "\t<!VarType!>? <!VarName!><!VarTypeDefaultValue!>;\n",
     "supportsFirstLineStatement": "false",
     "modelEnd": "\n}",
     "staticImports": "",

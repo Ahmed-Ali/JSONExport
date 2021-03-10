@@ -64,8 +64,8 @@ class LangModel {
 			}
 		}
 		if let dataTypesData = dictionary["dataTypes"] as? NSDictionary {
-				dataTypes = DataType(fromDictionary: dataTypesData)
-			}
+            dataTypes = DataType(fromDictionary: dataTypesData)
+        } 
         importHeaderFile = dictionary["importHeaderFile"] as? String
 		displayLangName = dictionary["displayLangName"] as? String
 		fileExtension = dictionary["fileExtension"] as! String

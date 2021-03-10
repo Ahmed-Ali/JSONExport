@@ -109,7 +109,7 @@
     ],
     "arrayType": "[<!ElementType!>]",
     "modelDefinitionWithParent": "\n\nclass <!ModelName!> : <!ParentClass!>",
-    "instanceVarDefinition": "\tvar <!VarName!> : <!VarType!>?\n",
+    "instanceVarDefinition": "\tvar <!VarName!>: <!VarType!><!VarTypeDefaultValue!>\n",
     "supportsFirstLineStatement": "false",
     "modelEnd": "\n}",
     "staticImports": "import Foundation \nimport HandyJSON",

@@ -107,6 +107,37 @@ class Property: Equatable {
         string = string.replacingOccurrences(of: varType, with: type)
         string = string.replacingOccurrences(of: varName, with: nativeName)
         string = string.replacingOccurrences(of: jsonKeyName, with: jsonName)
+        
+        if isCustomClass {
+            string = string.replacingOccurrences(of: varTypeDefaultValue, with: "")
+
+        } else if isArray {
+            string = string.replacingOccurrences(of: varTypeDefaultValue, with: "")
+
+        } else {
+            var defaultValue = ""
+            switch type {
+            case "String", "string":
+                defaultValue = " = ''"
+
+            case "Bool", "bool":
+                defaultValue = " = false"
+
+            case "CGFloat", "Float", "float":
+                defaultValue = " = 0"
+
+            case "Double", "double":
+                defaultValue = " = 0"
+
+            case "Int", "int":
+                defaultValue = " = 0"
+
+            default:
+                break
+            }
+            string = string.replacingOccurrences(of: "?", with: "")
+            string = string.replacingOccurrences(of: varTypeDefaultValue, with: defaultValue)
+        }
         return string
     }
 
