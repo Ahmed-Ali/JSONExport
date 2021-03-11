@@ -107,7 +107,9 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
             "teachers": [
                 {
                     "name": " ",
-                    "age": 40
+                    "age": 40,
+                    "level": 9
+
                 },
                 {
                     "name": " ",

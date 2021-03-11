@@ -118,7 +118,7 @@ class Property: Equatable {
             var defaultValue = ""
             switch type {
             case "String", "string":
-                defaultValue = " = ''"
+                defaultValue = " = \"\""
 
             case "Bool", "bool":
                 defaultValue = " = false"

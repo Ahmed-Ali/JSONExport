@@ -70,16 +70,33 @@
     "booleanGetter": "",
     "briefDescription": "Defines how your JSON objects can be mapped to Dart classes using the Dart library",
     "utilityMethods": [
+                        {
+                          "comment": "\t/*\n\t * Instantiate the instance using the passed json values to set the properties values\n\t */\n",
+                          "signature": "\t<!ModelName!>.fromJson(Map json)",
+                          "bodyStart": "\n\t{\n",
+                          "body": "",
+                          "returnStatement": "\t\t\n",
+                          "bodyEnd": "\t}\n",
+                            
+                          "forEachProperty": "\t\t<!VarName!> = json[\"<!JsonKeyName!>\"];\n",
+                          "forEachPropertyWithSpecialStoringNeeds": "",
+                          
+                          "forEachArrayOfCustomTypeProperty": "\n\t\t<!VarName!> = <!VarType!>()\n\t\tfinal <!VarName!>Array = json[\"<!JsonKeyName!>\"].arrayValue;\n\t\tfor(var <!VarName!>Json in <!VarName!>Array){\n\t\t\tfinal value = <!ElementType!>.fromJson(<!VarName!>Json);\n\t\t\t<!VarName!>.add(value);\n\t\t}\n",
+                          
+                          "forEachCustomTypeProperty": "\n\t\tfinal <!VarName!>Json = json[\"<!JsonKeyName!>\"];\n\t\tif (!<!VarName!>Json.isEmpty){\n\t\t\t<!VarName!> = <!VarType!>.fromJson(<!VarName!>Json);\n\t\t}\n"
+                        },
                        {
-                        "comment": "\n    /*  required initializer.  */\n",
-                        "signature": "\t<!ModelName!>",
-                        "bodyStart": "({",
-                        "forEachProperty": "\n\t\tthis.<!VarName!>,",
-                        "forEachCustomTypeProperty": "\n\t\tthis.<!VarName!>,",
-                        "forEachArrayOfCustomTypeProperty": "\n\t\tthis.<!VarName!>,",
-                        "returnStatement": "",
-                        "body": "",
-                        "bodyEnd": "\n\t});\n",
+                         "comment": "\t/*\n\t * convert the instance properties values to json\n\t */\n",
+                         "signature": "\tMap<String, dynamic> toJson()",
+                         "bodyStart": "\n\t{\n",
+                         "body": "\t\tvar json = Map<String, dynamic>();\n",
+                         "returnStatement": "\t\treturn json;\n",
+                         "bodyEnd": "\t}\n",
+                           
+                         "forEachProperty": "\t\tjson[\"<!JsonKeyName!>\"] = this.<!VarName!>;\n",
+                         "forEachPropertyWithSpecialStoringNeeds": "",
+                         "forEachArrayOfCustomTypeProperty": "\n\t\tif (this.<!JsonKeyName!> != null) {\n\t\t\tjson[\"<!VarName!>\"] = this.<!VarName!>.map((v) => v.toJson()).toList();\n\t\t}\n",
+                         "forEachCustomTypeProperty": "\n\t\tif(this.<!VarName!> != nil){\n\t\t\tjson[\"<!JsonKeyName!>\"] = this.<!VarName!>.toJson();\n\t\t}\n"
                        },
                        ],
     "dataTypes": {
@@ -92,33 +109,10 @@
         "intType": "int"
     },
     "wordsToRemoveToGetArrayElementsType": [
-                                            "[",
-                                            "]"
                                             ],
     "defaultParentWithUtilityMethods": "Object",
     "constructors": [
-                     {
-                     "fetchArrayOfBasicTypePropertyFromMap": "\t\t<!VarName!> = <!VarType!>()\n\t\tfinal <!VarName!>Array = json[\"<!JsonKeyName!>\"].arrayValue;\n\t\tfor(var <!VarName!>Json in <!VarName!>Array){\n\t\t\t<!VarName!>.add(<!VarName!>Json.<!VarBasicTypeReplacement!>);\n\t\t}\n",
-                     "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\t<!VarName!> = json[\"<!JsonKeyName!>\"].<!VarBasicTypeReplacement!>;\n",
-                     "bodyStart": "{\n\t\tif(json.isEmpty){\n\t\t\treturn;\n\t\t}\n",
-                     "bodyEnd": "\t}\n",
-                     "fetchBasicTypePropertyFromMap": "",
-                     "signature": "\t<!ModelName!>.fromJson(Map json)",
-                     "fetchArrayOfCustomTypePropertyFromMap": "\t\t<!VarName!> = <!VarType!>()\n\t\tfinal <!VarName!>Array = json[\"<!JsonKeyName!>\"].arrayValue;\n\t\tfor(var <!VarName!>Json in <!VarName!>Array){\n\t\t\tfinal value = <!ElementType!>.fromJson(<!VarName!>Json);\n\t\t\t<!VarName!>.add(value);\n\t\t}\n",
-                     "comment": "\t/*\n\t * Instantiate the instance using the passed json values to set the properties values\n\t */\n",
-                     "fetchCustomTypePropertyFromMap": "\t\tfinal <!VarName!>Json = json[\"<!JsonKeyName!>\"];\n\t\tif (!<!VarName!>Json.isEmpty){\n\t\t\t<!VarName!> = <!VarType!>.fromJson(<!VarName!>Json);\n\t\t}\n"
-                     },
-                     {
-                     "fetchArrayOfBasicTypePropertyFromMap": "\t\t<!VarName!> = <!VarType!>()\n\t\tfinal <!VarName!>Array = json[\"<!JsonKeyName!>\"].arrayValue;\n\t\tfor(var <!VarName!>Json in <!VarName!>Array){\n\t\t\t<!VarName!>.add(<!VarName!>Json.<!VarBasicTypeReplacement!>);\n\t\t}\n",
-                     "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "\t\tjson[\"<!JsonKeyName!>\"] = <!VarName!>;\n",
-                     "bodyStart": "{\n\t\tvar json = Map<String, dynamic>();\n",
-                     "bodyEnd": "\t\treturn json;\n\t}\n",
-                     "fetchBasicTypePropertyFromMap": "",
-                     "signature": "\tMap<String, dynamic> toJson()",
-                     "fetchArrayOfCustomTypePropertyFromMap": "\t\tif (this.<!JsonKeyName!> != null) {\n\t\t\tjson['<!VarName!>'] = this.<!VarName!>.map((v) => v.toJson()).toList();\n\t\t}\n",
-                     "comment": "\t/*\n\t * convert the instance properties values to json\n\t */\n",
-                     "fetchCustomTypePropertyFromMap": "\t\tif (this.<!JsonKeyName!> != null) {\n\t\t\tjson['<!VarName!>'] = this.<!VarName!>.toJson();\n\t\t}\n"
-                     },
+
                      ],
     "modelDefinition": "\nclass <!ModelName!>",
     "genericType": "dynamic",
