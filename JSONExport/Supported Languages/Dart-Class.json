@@ -73,17 +73,17 @@
                         {
                           "comment": "\t/*\n\t * Instantiate the instance using the passed json values to set the properties values\n\t */\n",
                           "signature": "\t<!ModelName!>.fromJson(Map json)",
-                          "bodyStart": "{\n",
+                          "bodyStart": "{\n\t\t<!ModelName!> *model = <!ModelName!>();\n",
                           "body": "",
-                          "returnStatement": "\t\t\n",
+                          "returnStatement": "\t\treturn model;\n",
                           "bodyEnd": "\t}\n",
                             
-                          "forEachProperty": "\t\t<!VarName!> = json[\"<!JsonKeyName!>\"];\n",
+                          "forEachProperty": "\t\tmodel.<!VarName!> = json[\"<!JsonKeyName!>\"];\n",
                           "forEachPropertyWithSpecialStoringNeeds": "",
                           
-                          "forEachArrayOfCustomTypeProperty": "\t\t<!VarName!> = <!VarType!>()\n\t\tfinal <!VarName!>Array = json[\"<!JsonKeyName!>\"].arrayValue;\n\t\tfor(var <!VarName!>Json in <!VarName!>Array){\n\t\t\tfinal value = <!ElementType!>.fromJson(<!VarName!>Json);\n\t\t\t<!VarName!>.add(value);\n\t\t}\n",
+                          "forEachArrayOfCustomTypeProperty": "\t\tmodel.<!VarName!> = <!VarType!>()\n\t\tfinal <!VarName!>Array = json[\"<!JsonKeyName!>\"].arrayValue;\n\t\tfor(var <!VarName!>Json in <!VarName!>Array){\n\t\t\tfinal value = <!ElementType!>.fromJson(<!VarName!>Json);\n\t\t\t<!VarName!>.add(value);\n\t\t}\n",
                           
-                          "forEachCustomTypeProperty": "\t\tfinal <!VarName!>Json = json[\"<!JsonKeyName!>\"];\n\t\tif (!<!VarName!>Json.isEmpty){\n\t\t\t<!VarName!> = <!VarType!>.fromJson(<!VarName!>Json);\n\t\t}\n"
+                          "forEachCustomTypeProperty": "\n\t\tfinal <!VarName!>Json = json[\"<!JsonKeyName!>\"];\n\t\tif (!<!VarName!>Json.isEmpty){\n\t\t\tmodel.<!VarName!> = <!VarType!>.fromJson(<!VarName!>Json);\n\t\t}\n"
                         },
                        {
                          "comment": "\t/*\n\t * convert the instance properties values to json\n\t */\n",
