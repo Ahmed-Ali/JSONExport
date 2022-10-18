@@ -394,7 +394,6 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     private func loadJsonDataFromWeb(){
         
         if task != nil {
-            print("Entrou nessa porra do Task")
             task.cancel()
         }
         
@@ -415,12 +414,19 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                     print("The data received from the server was invalid.")
                     return
                 }
-                
-                let jsonString = String(data: data, encoding: .utf8)
-                                
+                               
                 DispatchQueue.main.async {
                     
-                    self.validateJsonDataInput(string: jsonString!)
+                    if let jsonString = String(data: data, encoding: .utf8){
+                    
+                        self.validateJsonDataInput(string: jsonString)
+                        
+                    }else{
+                        
+                        self.showErrorStatus("Invalid JSON Data from web.")
+                        
+                        print("Invalid JSON Data from web.")
+                    }
                 }
             }
             
@@ -505,15 +511,11 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
      Generate the model classes and view them in the preview panel
      */
     func generateClasses()
-    {
-        print(sourceText.string.isValidURL)
-        
+    {        
         if sourceText.string.isValidURL {
-            print("loadJsonDataFromWeb")
             loadJsonDataFromWeb()
             
         }else{
-            print("validateJsonDataInput")
             validateJsonDataInput(string: sourceText.string)
         }
     }
