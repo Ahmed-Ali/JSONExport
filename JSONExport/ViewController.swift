@@ -71,6 +71,8 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     //Connected to the languages pop up
     @IBOutlet weak var languagesPopup: NSPopUpButton!
     
+    //URLSessionDataTask to handle internet Conection
+    var task: URLSessionDataTask!
     
     //Holds the currently selected language
     var selectedLang : LangModel!
@@ -357,9 +359,10 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
      */
     func showErrorStatus(_ errorMessage: String)
     {
-        
-        statusTextField.textColor = NSColor.red
-        statusTextField.stringValue = errorMessage
+        DispatchQueue.main.async {
+            self.statusTextField.textColor = NSColor.red
+            self.statusTextField.stringValue = errorMessage
+        }
     }
     
     /**
@@ -367,21 +370,75 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
      */
     func showSuccessStatus(_ successMessage: String)
     {
-        
-        statusTextField.textColor = NSColor.green
-        statusTextField.stringValue = successMessage
+        DispatchQueue.main.async {
+            self.statusTextField.textColor = NSColor.green
+            self.statusTextField.stringValue = successMessage
+        }
     }
     
+    /**
+     Shows the loading status message
+     */
+    func showLoadingStatus(_ loadingMessage: String)
+    {
+        DispatchQueue.main.async {
+            self.statusTextField.textColor = NSColor.orange
+            self.statusTextField.stringValue = loadingMessage
+        }
+    }
     
+    //MARK: - Load json data from web
+    /**
+     Load a valid Json from the web
+     */
+    private func loadJsonDataFromWeb(){
+        
+        if task != nil {
+            print("Entrou nessa porra do Task")
+            task.cancel()
+        }
+        
+        if let url = URL(string: sourceText.string){
+                            
+            showLoadingStatus("Loading data from web...please wait!")
+            
+            self.task = URLSession.shared.dataTask(with: url) { data, response, error in
+                
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    self.showErrorStatus("Invalid response from the server. Please try again.")
+                    print("Invalid response from the server. Please try again.")
+                    return
+                }
+                
+                guard let data = data else {
+                    self.showErrorStatus("The data received from the server was invalid.")
+                    print("The data received from the server was invalid.")
+                    return
+                }
+                
+                let jsonString = String(data: data, encoding: .utf8)
+                                
+                DispatchQueue.main.async {
+                    
+                    self.validateJsonDataInput(string: jsonString!)
+                }
+            }
+            
+            task.resume()
+        }
+    }
     
-    //MARK: - Generate files content
+    //MARK: - Validate json data input
     /**
      Validates the sourceText string input, and takes any needed action to generate the model classes and view them in the preview panel
      */
-    func generateClasses()
-    {
+    private func validateJsonDataInput(string: String){
+        
+        print("\(string)")
+        
+        var str = string
+        
         saveButton.isEnabled = false
-        var str = sourceText.string
         
         if str.count == 0{
             runOnUiThread{
@@ -406,7 +463,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                     var json : NSDictionary!
                     if jsonData is NSDictionary{
                         //fine nothing to do
-						json = jsonData as? NSDictionary
+                        json = jsonData as? NSDictionary
                     }else{
                         json = unionDictionaryFromArrayElements(jsonData as! NSArray)
                     }
@@ -440,6 +497,24 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                     fatalError()
                 }
             }
+        }
+    }
+    
+    //MARK: - Generate files content
+    /**
+     Generate the model classes and view them in the preview panel
+     */
+    func generateClasses()
+    {
+        print(sourceText.string.isValidURL)
+        
+        if sourceText.string.isValidURL {
+            print("loadJsonDataFromWeb")
+            loadJsonDataFromWeb()
+            
+        }else{
+            print("validateJsonDataInput")
+            validateJsonDataInput(string: sourceText.string)
         }
     }
     
