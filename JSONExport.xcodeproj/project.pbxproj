@@ -24,6 +24,7 @@
 		60FB8FFD1B9B3F6400290979 /* Swift-Realm.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FB8FFB1B9B3F6400290979 /* Swift-Realm.json */; };
 		98978FC11D5B6B19000C1846 /* Swift-Struct-Unbox.json in Resources */ = {isa = PBXBuildFile; fileRef = 98978FC01D5B6B19000C1846 /* Swift-Struct-Unbox.json */; };
 		A329A7ED1D5DA1ED00FB59E8 /* Java-Android Gson.json in Resources */ = {isa = PBXBuildFile; fileRef = A329A7EC1D5DA1ED00FB59E8 /* Java-Android Gson.json */; };
+		CF2D51B528FD825B0075988E /* Swift-Apollo Realm.json in Resources */ = {isa = PBXBuildFile; fileRef = CF2D51B428FD825B0075988E /* Swift-Apollo Realm.json */; };
 		E20A0DAD1A1170F1003B3D62 /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = E20A0DAA1A1170F1003B3D62 /* NoodleLineNumberMarker.m */; };
 		E20A0DAE1A1170F1003B3D62 /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = E20A0DAC1A1170F1003B3D62 /* NoodleLineNumberView.m */; };
 		E21292581A0C58CF0015027D /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21292571A0C58CF0015027D /* SharedConstants.swift */; };
@@ -65,6 +66,7 @@
 		60FB8FFB1B9B3F6400290979 /* Swift-Realm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-Realm.json"; path = "Supported Languages/Swift-Realm.json"; sourceTree = "<group>"; };
 		98978FC01D5B6B19000C1846 /* Swift-Struct-Unbox.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swift-Struct-Unbox.json"; path = "Supported Languages/Swift-Struct-Unbox.json"; sourceTree = "<group>"; };
 		A329A7EC1D5DA1ED00FB59E8 /* Java-Android Gson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Java-Android Gson.json"; path = "Supported Languages/Java-Android Gson.json"; sourceTree = "<group>"; };
+		CF2D51B428FD825B0075988E /* Swift-Apollo Realm.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Swift-Apollo Realm.json"; sourceTree = "<group>"; };
 		E20A0DA81A1170F1003B3D62 /* JSONExport-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JSONExport-Bridging-Header.h"; sourceTree = "<group>"; };
 		E20A0DA91A1170F1003B3D62 /* NoodleLineNumberMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberMarker.h; sourceTree = "<group>"; };
 		E20A0DAA1A1170F1003B3D62 /* NoodleLineNumberMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoodleLineNumberMarker.m; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				60FB8FEE1B9B361600290979 /* Swift-Struct.json */,
 				98978FC01D5B6B19000C1846 /* Swift-Struct-Unbox.json */,
 				01ACC24A1FBB42E300C410C2 /* Swift-Codable.json */,
+				CF2D51B428FD825B0075988E /* Swift-Apollo Realm.json */,
 				60FB8FEF1B9B361600290979 /* SwiftyJSON-Class.json */,
 			);
 			name = "Supported Languages";
@@ -275,6 +278,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -312,6 +316,7 @@
 				E2FA87C21A059AC100648EB6 /* Main.storyboard in Resources */,
 				E24E443221AA12B800435FE7 /* Swift-Outlaw.json in Resources */,
 				166AF5CE1CEF6C3600516EDD /* Swift-Struct-Gloss.json in Resources */,
+				CF2D51B528FD825B0075988E /* Swift-Apollo Realm.json in Resources */,
 				60FB8FF41B9B361600290979 /* ObjectiveC-Mac.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
