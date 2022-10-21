@@ -96,7 +96,7 @@
                          "signature": "\n\n\trequired convenience init(from decoder: Decoder) throws ",
                          "fetchArrayOfCustomTypePropertyFromMap": "\n\t\tlet <!VarName!>Array = try? container.decode([<!ElementType!>].self, forKey: .<!VarName!>)\n\t\t<!VarName!>.append(objectsIn: <!VarName!>Array ?? [])\n",
                          "comment": "",
-                         "fetchCustomTypePropertyFromMap": "\t\t<!VarName!> = try? <!VarType!>(from: decoder)\n"
+                         "fetchCustomTypePropertyFromMap": "\t\t<!VarName!> = try? container.decode(<!VarType!>.self, forKey: .<!VarName!>)\n"
                          }
                      ],
     "modelDefinition": "\nclass <!ModelName!>: Object, ObjectKeyIdentifiable, Codable ",
