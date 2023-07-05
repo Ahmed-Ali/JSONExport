@@ -1,3 +1,28 @@
+# JSONExport is Seeking New Maintainers/Contributors
+
+Hello everyone,
+
+I've had a great time working on this project, I kicked it of with the support for few languages, and the amazing community added plenty more!
+However, I am currently unable to continue actively maintaining this project and attend to all incoming issues/requests. I would like to take this opportunity to express my gratitude to everyone who has contributed to the development of this project over the years.
+
+I'm hoping to find someone (or a group of people) who are interested in taking over as maintainers or contributors. If you are interested, here's how you can express your interest:
+
+1. Fork the repository and make some contributions. You can start with solving existing issues or adding new features.
+2. Send a pull request with your changes. I promise I will be more attentive to future PRs.
+3. After a few successful pull requests, create an issue titled "[Your Name] for maintainer" and in the description, reference your earlier contribution and any additional features/changes you would like to bring to the project, if any.
+
+The community will have a chance to voice their thoughts on the issue. If the feedback is neutral or positive, and there is no clear blocker on why you wouldn't be a good contributor, I will add you to the project as maintainer.
+
+I believe in the power of open source and the incredible community that drives it. I am confident that with your support, JSONExport can continue to grow and evolve.
+
+Thank you for your understanding and for your continued support of JSONExport.
+
+Best regards,
+
+Ahmed
+
+-----
+
 JSONExport
 ==========
 JSONExport is a desktop application for Mac OS X written in Swift. 
