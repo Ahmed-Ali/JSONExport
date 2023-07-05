@@ -479,14 +479,15 @@ class FileRepresenter{
                     propertyStr = constructor.fetchArrayOfBasicTypePropertyFromMap
                     let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements[index]
                     propertyStr = propertyStr.replacingOccurrences(of: varTypeReplacement, with: replacement)
-                    
                     // if needs cast
-                    let cast = lang.basicTypesWithSpecialFetchingNeedsTypeCast[index]
-                    if !cast.isEmpty {
-                        propertyStr = propertyStr.replacingOccurrences(of: varTypeCast, with: "(\(cast)) ")
-                    }
-                    else {
-                        propertyStr = propertyStr.replacingOccurrences(of: varTypeCast, with: cast)
+                    if (lang.basicTypesWithSpecialFetchingNeedsTypeCast != nil && lang.basicTypesWithSpecialFetchingNeedsTypeCast.count>index){
+                        let cast = lang.basicTypesWithSpecialFetchingNeedsTypeCast[index]
+                        if !cast.isEmpty {
+                            propertyStr = propertyStr.replacingOccurrences(of: varTypeCast, with: "(\(cast)) ")
+                        }
+                        else {
+                            propertyStr = propertyStr.replacingOccurrences(of: varTypeCast, with: cast)
+                        }
                     }
 
                 }else{
