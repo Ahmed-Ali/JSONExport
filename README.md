@@ -42,7 +42,7 @@ Screenshot shows JSONExport used for a snippet from Twitter timeline JSON and co
 
 Installation
 ========================
-Kindly clone the project, and build it using Xcode 8 and above.
+Kindly clone the project, and build it using xCode 8 and above.
 
 To Do
 ========================
