@@ -106,7 +106,8 @@ class Property : Equatable{
                 string = lang.instanceVarDefinition
             }
         }
-        
+        let typeName = isArray ? type : "\(type)?"
+        string = string.replacingOccurrences(of: optionalVarType, with: typeName)
         string = string.replacingOccurrences(of: varType, with: type)
         string = string.replacingOccurrences(of: varName, with: nativeName)
         string = string.replacingOccurrences(of: jsonKeyName, with: jsonName)
@@ -129,7 +130,7 @@ class Property : Equatable{
     }
     
     
-    /** 
+    /**
     The designated initializer for the class
     */
     init(jsonName: String, nativeName: String, type: String, isArray: Bool, isCustomClass: Bool, lang: LangModel)

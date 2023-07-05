@@ -134,7 +134,7 @@ class FileRepresenter{
         }
     }
     
-    /** 
+    /**
     Appends the lang.staticImports if any
     */
     func appendStaticImports()
@@ -268,6 +268,8 @@ class FileRepresenter{
                 set = set?.replacingOccurrences(of: capitalizedVarName, with: capVarName)
                 set = set?.replacingOccurrences(of: varName, with: property.nativeName)
                 set = set?.replacingOccurrences(of: varType, with: property.type)
+                let typeName = property.isArray ? property.type : "\(property.type)?"
+                set = set?.replacingOccurrences(of: optionalVarType, with: typeName)
                 fileContent += set!
             }
             
@@ -290,6 +292,8 @@ class FileRepresenter{
                 get = get.replacingOccurrences(of: capitalizedVarName, with: capVarName)
                 get = get.replacingOccurrences(of: varName, with: property.nativeName)
                 get = get.replacingOccurrences(of: varType, with: property.type)
+                let typeName = property.isArray ? property.type : "\(property.type)?"
+                get = get.replacingOccurrences(of: optionalVarType, with: typeName)
                 fileContent += get
             }
             
@@ -364,7 +368,8 @@ class FileRepresenter{
                 propertyHandlingStr = propertyHandlingStr.replacingOccurrences(of: varName, with:property.nativeName)
                 propertyHandlingStr = propertyHandlingStr.replacingOccurrences(of: constKeyName, with:property.constName!)
                 propertyHandlingStr = propertyHandlingStr.replacingOccurrences(of: varType, with:property.type)
-                
+                let typeName = property.isArray ? property.type : "\(property.type)?"
+                propertyHandlingStr = propertyHandlingStr.replacingOccurrences(of: optionalVarType, with: typeName)
                 propertyHandlingStr = propertyHandlingStr.replacingOccurrences(of: jsonKeyName, with:property.jsonName)
                 
                 propertyHandlingStr = propertyHandlingStr.replacingOccurrences(of: additionalCustomTypeProperty, with:"")
@@ -459,6 +464,8 @@ class FileRepresenter{
         propertyStr = propertyStr.replacingOccurrences(of: jsonKeyName, with: property.jsonName)
         propertyStr = propertyStr.replacingOccurrences(of: constKeyName, with: property.constName!)
         propertyStr = propertyStr.replacingOccurrences(of: varType, with: property.type)
+        let typeName = property.isArray ? property.type : "\(property.type)?"
+        propertyStr = propertyStr.replacingOccurrences(of: optionalVarType, with: typeName)
         let capVarName = property.nativeName.capitalized
         let capVarType = property.type.capitalized;
         propertyStr = propertyStr.replacingOccurrences(of: capitalizedVarName, with: capVarName)
