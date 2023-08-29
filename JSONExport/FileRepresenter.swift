@@ -472,42 +472,40 @@ class FileRepresenter{
     func fetchArrayFromJsonSyntaxForProperty(_ property: Property, constructor: Constructor) -> String
     {
         var propertyStr = ""
-        if(propertyTypeIsBasicType(property)){
-            
-            if constructor.fetchArrayOfBasicTypePropertyFromMap != nil{
-                if let index = lang.basicTypesWithSpecialFetchingNeeds.firstIndex(of: property.elementsType){
-                    propertyStr = constructor.fetchArrayOfBasicTypePropertyFromMap
-                    let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements[index]
-                    propertyStr = propertyStr.replacingOccurrences(of: varTypeReplacement, with: replacement)
+                if(propertyTypeIsBasicType(property)){
                     
-                    // if needs cast
-                    if let cast = lang.basicTypesWithSpecialFetchingNeedsTypeCast?[index]{
+                    if constructor.fetchArrayOfBasicTypePropertyFromMap != nil{
+                        if let index = lang.basicTypesWithSpecialFetchingNeeds.firstIndex(of: property.elementsType){
+                            propertyStr = constructor.fetchArrayOfBasicTypePropertyFromMap
+                            let replacement = lang.basicTypesWithSpecialFetchingNeedsReplacements[index]
+                            propertyStr = propertyStr.replacingOccurrences(of: varTypeReplacement, with: replacement)
+                            // if needs cast
+                            if (lang.basicTypesWithSpecialFetchingNeedsTypeCast != nil && lang.basicTypesWithSpecialFetchingNeedsTypeCast.count>index){
+                                let cast = lang.basicTypesWithSpecialFetchingNeedsTypeCast[index]
+                                if !cast.isEmpty {
+                                    propertyStr = propertyStr.replacingOccurrences(of: varTypeCast, with: "(\(cast)) ")
+                                }
+                                else {
+                                    propertyStr = propertyStr.replacingOccurrences(of: varTypeCast, with: cast)
+                                }
+                            }
 
-                        if !cast.isEmpty {
-                            
-                            propertyStr = propertyStr.replacingOccurrences(of: varTypeCast, with: "(\(cast)) ")
-                            
-                        }else {
-                            propertyStr = propertyStr.replacingOccurrences(of: varTypeCast, with: cast)
+                        }else{
+                            propertyStr = constructor.fetchBasicTypePropertyFromMap
                         }
+                    }else{
+                        propertyStr = constructor.fetchBasicTypePropertyFromMap
                     }
-
+                    
                 }else{
-                    propertyStr = constructor.fetchBasicTypePropertyFromMap
+                    //array of custom type
+                    propertyStr = constructor.fetchArrayOfCustomTypePropertyFromMap
+                    
+                   
+                    
                 }
-            }else{
-                propertyStr = constructor.fetchBasicTypePropertyFromMap
-            }
-            
-        }else{
-            //array of custom type
-            propertyStr = constructor.fetchArrayOfCustomTypePropertyFromMap
-            
-           
-            
-        }
-         propertyStr = propertyStr.replacingOccurrences(of: elementType, with: property.elementsType)
-        return propertyStr
+                 propertyStr = propertyStr.replacingOccurrences(of: elementType, with: property.elementsType)
+                return propertyStr
     }
     
     /**
