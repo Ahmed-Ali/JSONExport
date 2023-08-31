@@ -49,7 +49,7 @@ To Do
 * ~~Support Objective-C~~ Done
 * ~~Sync multible classes with the same name or have the same exact properties~~ Done
 * ~~Support to parse JSON arrays of objects~~ Done
-* Load JSON data from web
+* ~~Load JSON data from web~~ Done
 * ~~Open .json files from JSONExport~~
 * Supported languages management editor.
 * Beside raw JSON, load the model raw data from plist files as well.

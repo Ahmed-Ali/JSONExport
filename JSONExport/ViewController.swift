@@ -70,7 +70,10 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
 
     //Connected to the languages pop up
     @IBOutlet weak var languagesPopup: NSPopUpButton!
-
+    
+    //URLSessionDataTask to handle internet Conection
+    var task: URLSessionDataTask!
+    
     //Holds the currently selected language
     var selectedLang: LangModel!
 
@@ -96,6 +99,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         setLanguagesSelection()
         loadLastSelectedLanguage()
         updateUIFieldsForSelectedLanguage()
+		self.tableView.backgroundColor = .clear
     }
 
     /**
@@ -168,6 +172,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         }
     }
 
+    
     // MARK: - parse the json file
     func parseJSONData(jsonData: Data!) {
         let jsonString = String(data: jsonData, encoding: .utf8)
@@ -302,7 +307,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         notification.title = "Success!"
         notification.informativeText = "Your \(selectedLang.langName) model files have been generated successfully."
         notification.deliveryDate = Date()
-
+        
         let center = NSUserNotificationCenter.default
         center.delegate = self
         center.deliver(notification)
@@ -339,14 +344,77 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
 
     // MARK: - Generate files content
     /**
+     Shows the loading status message
+     */
+    func showLoadingStatus(_ loadingMessage: String)
+    {
+        DispatchQueue.main.async {
+            self.statusTextField.textColor = NSColor.orange
+            self.statusTextField.stringValue = loadingMessage
+        }
+    }
+    
+    //MARK: - Load json data from web
+    /**
+     Load a valid Json from the web
+     */
+    private func loadJsonDataFromWeb(){
+        
+        if task != nil {
+            task.cancel()
+        }
+        
+        if let url = URL(string: sourceText.string){
+                            
+            showLoadingStatus("Loading data from web...please wait!")
+            
+            self.task = URLSession.shared.dataTask(with: url) { data, response, error in
+                
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    self.showErrorStatus("Invalid response from the server. Please try again.")
+                    print("Invalid response from the server. Please try again.")
+                    return
+                }
+                
+                guard let data = data else {
+                    self.showErrorStatus("The data received from the server was invalid.")
+                    print("The data received from the server was invalid.")
+                    return
+                }
+                               
+                DispatchQueue.main.async {
+                    
+                    if let jsonString = String(data: data, encoding: .utf8){
+                    
+                        self.validateJsonDataInput(string: jsonString)
+                        
+                    }else{
+                        
+                        self.showErrorStatus("Invalid JSON Data from web.")
+                        
+                        print("Invalid JSON Data from web.")
+                    }
+                }
+            }
+            
+            task.resume()
+        }
+    }
+    
+    //MARK: - Validate json data input
+    /**
      Validates the sourceText string input, and takes any needed action to generate the model classes and view them in the preview panel
      */
-    func generateClasses() {
+    private func validateJsonDataInput(string: String){
+        
+        print("\(string)")
+        
+        var str = string
+        
         saveButton.isEnabled = false
-        var str = sourceText.string
-
-        if str.count == 0 {
-            runOnUiThread {
+        
+        if str.count == 0{
+            runOnUiThread{
                 //Nothing to do, just clear any generated files
                 self.files.removeAll(keepingCapacity: false)
                 self.tableView.reloadData()
@@ -354,7 +422,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
             return
         }
         var rootClassName = classNameField.stringValue
-        if rootClassName.count == 0 {
+        if rootClassName.count == 0{
             rootClassName = "RootClass"
         }
         sourceText.isEditable = false
@@ -368,12 +436,12 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
                     var json: NSDictionary!
                     if jsonData is NSDictionary {
                         //fine nothing to do
-						json = jsonData as? NSDictionary
-                    } else {
+                        json = jsonData as? NSDictionary
+                    }else{
                         json = unionDictionaryFromArrayElements(jsonData as! NSArray)
                     }
-
-                    runOnUiThread {
+                    
+                    runOnUiThread{
                         self.loadSelectedLanguageModel()
                         self.files.removeAll(keepingCapacity: false)
                         let fileGenerator = self.prepareAndGetFilesBuilder()
@@ -404,7 +472,21 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
             }
         }
     }
-
+    
+    //MARK: - Generate files content
+    /**
+     Generate the model classes and view them in the preview panel
+     */
+    func generateClasses()
+    {        
+        if sourceText.string.isValidURL {
+            loadJsonDataFromWeb()
+            
+        }else{
+            validateJsonDataInput(string: sourceText.string)
+        }
+    }
+    
     /**
      Creates and returns an instance of FilesContentBuilder. It also configure the values from the UI components to the instance. I.e includeConstructors
      
@@ -434,4 +516,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
 
         return cell
     }
+    
+    
+    
 }
