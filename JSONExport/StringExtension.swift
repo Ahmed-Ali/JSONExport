@@ -97,4 +97,18 @@ extension String {
         }
 
     }
+    
+    /**
+    A Boolean value indicating a valid url using a regular expression
+    */
+    var isValidURL: Bool {
+        
+        let regex = "http[s]?://(([^/:.[:space:]]+(.[^/:.[:space:]]+)*)|([0-9](.[0-9]{3})))(:[0-9]+)?((/[^?#[:space:]]+)([^#[:space:]]+)?(#.+)?)?"
+                
+        let test = NSPredicate(format:"SELF MATCHES %@", regex)
+       
+        let result = test.evaluate(with: self)
+        
+        return result
+    }
 }

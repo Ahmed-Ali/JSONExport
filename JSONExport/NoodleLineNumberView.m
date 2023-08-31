@@ -77,7 +77,7 @@
 
 - (NSFont *)defaultFont
 {
-    return [NSFont labelFontOfSize:[NSFont systemFontSizeForControlSize:NSMiniControlSize]];
+    return [NSFont labelFontOfSize:[NSFont systemFontSizeForControlSize:NSControlSizeMini]];
 }
 
 - (NSColor *)defaultTextColor
