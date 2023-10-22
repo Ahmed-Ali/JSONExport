@@ -358,7 +358,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     func showErrorStatus(_ errorMessage: String)
     {
         
-        statusTextField.textColor = NSColor.red
+        statusTextField.textColor = NSColor.systemRed
         statusTextField.stringValue = errorMessage
     }
     
@@ -368,7 +368,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
     func showSuccessStatus(_ successMessage: String)
     {
         
-        statusTextField.textColor = NSColor.green
+        statusTextField.textColor = NSColor.systemGreen
         statusTextField.stringValue = successMessage
     }
     
